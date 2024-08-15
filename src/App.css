@@ -1,0 +1,56 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@700&display=swap');
+
+body {
+  background-color: #282c34;
+}
+
+* {
+  font-family: 'Poppins';
+}
+
+.modern-sticky-header {
+  position: sticky;
+  top: 0;
+  width: 100%;
+  background: linear-gradient(135deg, #333, #666); /* Modern gradient background */
+  color: #ffffff; /* Light text color */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Subtle shadow for depth */
+  z-index: 1000; /* Ensure it stays on top */
+  transition: background 0.3s ease, box-shadow 0.3s ease; /* Smooth transitions */
+}
+
+.navbar {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px 0;
+}
+
+.nav-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+}
+
+.nav-list li {
+  margin: 0 20px;
+}
+
+.nav-list a {
+  color: #ffffff;
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 18px; /* Slightly larger font size for readability */
+  letter-spacing: 1px; /* Spacing between letters for a clean look */
+  transition: color 0.3s ease; /* Smooth color transition on hover */
+}
+
+.nav-list a:hover {
+  color: #ffcc00; /* Highlight color on hover */
+}
+
+.modern-sticky-header.scrolled {
+  background: #222; /* Darker background when scrolled */
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3); /* Enhanced shadow when scrolled */
+}
