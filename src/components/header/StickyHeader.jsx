@@ -3,12 +3,12 @@ import React, { useRef, useState } from 'react';
 const DropDownMenuTools = () => {
     return (
         <div className="dropdown-menu space-apart">
-                <div><a href="#ow-rng">Overwatch Random Character Selector</a></div>
+            <div><a href="overwatch-random-character-generator">Overwatch Random Character Selector</a></div>
         </div>
     );
 };
 
-const StickyHeader = () => {
+const StickyHeader = ({ children }) => {
     const [isDropdownVisible, setDropdownVisible] = useState(false);
     const timeoutRef = useRef(null);
     
@@ -42,6 +42,7 @@ const StickyHeader = () => {
                     <li><a href="#contact">Contact</a></li>
                 </ul>
             </nav>
+            {children}
         </header>
     );
 };

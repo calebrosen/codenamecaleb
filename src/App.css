@@ -93,3 +93,7 @@ body {
 .space-apart {
   justify-content: flex-start;
 }
+
+.centeredContainer {
+  text-align: center;
+}
