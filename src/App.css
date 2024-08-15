@@ -1,5 +1,11 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@700&display=swap');
 
+html, body {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
 body {
   background-color: #282c34;
 }
@@ -8,49 +14,82 @@ body {
   font-family: 'Poppins';
 }
 
-.modern-sticky-header {
+.sticky-header {
   position: sticky;
   top: 0;
   width: 100%;
-  background: linear-gradient(135deg, #333, #666); /* Modern gradient background */
-  color: #ffffff; /* Light text color */
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Subtle shadow for depth */
-  z-index: 1000; /* Ensure it stays on top */
-  transition: background 0.3s ease, box-shadow 0.3s ease; /* Smooth transitions */
+  z-index: 1000;
 }
 
 .navbar {
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 10px 0;
+  padding: 5px 0 9px 0;
+  background: #353434;
+  color: #ffffff;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  transition: background 0.3s ease, box-shadow 0.3s ease;
 }
 
 .nav-list {
   list-style: none;
-  padding: 0;
+  padding: 3px;
   margin: 0;
   display: flex;
 }
 
 .nav-list li {
-  margin: 0 20px;
+  margin: 0 30px;
 }
 
 .nav-list a {
   color: #ffffff;
   text-decoration: none;
   font-weight: 500;
-  font-size: 18px; /* Slightly larger font size for readability */
-  letter-spacing: 1px; /* Spacing between letters for a clean look */
-  transition: color 0.3s ease; /* Smooth color transition on hover */
+  font-size: 18px;
+  letter-spacing: 1px;
+  transition: color 0.25s ease;
 }
 
 .nav-list a:hover {
-  color: #ffcc00; /* Highlight color on hover */
+  color: #c5271c;
 }
 
-.modern-sticky-header.scrolled {
-  background: #222; /* Darker background when scrolled */
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3); /* Enhanced shadow when scrolled */
+.dropdown-menu {
+  background-color: #535353;
+  padding: 10px;
+  list-style: none;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  z-index: 1000;
+  position: absolute;
+  top: 100%; 
+  left: 0;
+  min-width: 100%;
+  display: flex;
+  justify-content: space-evenly; 
+  align-items: center;
+}
+
+.dropdown-menu div {
+  text-align: center;
+  flex: 1; 
+}
+
+.dropdown-menu a {
+  color: #ffffff;
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 16px;
+  transition: color 0.25s ease;
+  display: block;
+  padding: 5px 0;
+}
+
+.dropdown-menu a:hover {
+  color: #c5271c;
+}
+
+.space-apart {
+  justify-content: flex-start; 
 }
