@@ -27,7 +27,7 @@ const OverWatchRandomCharacterGenerator = () => {
     };
 
     const setBackground = (hero) => {
-        let imagePath = require(`../../img/ow-characters/${hero.toLowerCase().replace(/[: ]/g, '-')}.jpg`);
+        let imagePath = require(`../../img/ow-characters/${hero.toLowerCase().replace(/[: ]/g, '-')}.webp`);
         setBackgroundImage(imagePath);
     };
 
