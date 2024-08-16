@@ -1,4 +1,6 @@
 import React, { useRef, useState } from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faHome } from '@fortawesome/free-solid-svg-icons';
 
 const DropDownMenuTools = () => {
     return (
@@ -29,13 +31,16 @@ const StickyHeader = ({ children }) => {
         <div>
             <header className="sticky-header">
                 <nav className="navbar">
+                    <a href="/">
+                        <span className='homeButton'><FontAwesomeIcon icon={faHome} /></span>
+                    </a>
                     <ul className="nav-list">
                         <li 
                             onMouseEnter={handleMouseEnter}
                             onMouseLeave={handleMouseLeave}
                             onClick={() => setDropdownVisible(!isDropdownVisible)}
                         >
-                            <a href="#tools">Tools</a>
+                        <a href="#tools">Tools</a>
                             {isDropdownVisible && <DropDownMenuTools />}
                         </li>
                         <li><a href="#about">About</a></li>
