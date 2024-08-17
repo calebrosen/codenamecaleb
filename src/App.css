@@ -554,11 +554,25 @@ a:visited {
 
 .profile-picture img {
   border-radius: 50%;
-  width: 200px;
-  height: 200px;
+  width: 245px;
+  height: 245px;
   object-fit: cover;
+  border: 1px solid #4b4b4b inset;
+  background-color: #FFF;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
+
+@media screen and (max-width: 768px) {
+  .profile-picture img {
+    margin-top:3.25em;
+    border-radius: 50%;
+    width: 60%;
+    height: auto;
+    object-fit: cover;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+}
+
 
 .about-content {
   flex: 1 1 65%; 
@@ -627,7 +641,8 @@ h1.about-me:hover {
   padding-left:15px;
   width: 65%;
   height: 100vh;
-  background-color: #fff;
+  color: white;
+  background-color: #353434;
   box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
   transition: transform 0.3s ease-in-out;
   z-index: 1000;
@@ -693,3 +708,106 @@ h1.about-me:hover {
 .whiteText {
   color: #FFF;
 }
+
+/*easter egg avatar styling*/
+.magic-container {
+  position: absolute;
+  pointer-events: none;
+  animation: fadeOut 2s forwards;
+}
+
+.magic-particle {
+  position: absolute;
+  opacity: 0.9;
+  animation: sparkle 1.5s ease-out forwards, twinkle 2.5s infinite;
+  transform-origin: center;
+}
+
+.magic-particle.star-shape {
+  width: 9px; 
+  height: 9px;
+  clip-path: polygon(
+    50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 
+    50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%
+  );
+  background-color: inherit; 
+}
+
+@keyframes sparkle {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.5);
+    opacity: 0.8;
+  }
+  100% {
+    transform: translate(
+      calc(-50px + 100px * random()),
+      calc(-50px + 100px * random())
+    );
+    opacity: 0;
+  }
+}
+
+@keyframes twinkle {
+  0%, 100% {
+    opacity: 0.9;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
+@keyframes fadeOut {
+  to {
+    opacity: 0;
+  }
+}
+
+.easterEggAvatar {
+  opacity: 1;
+  transition: opacity 0.5s ease-in-out;
+}
+
+.fade-out {
+  opacity: 0;
+}
+
+.fade-in {
+  opacity: 1;
+}
+
+.easterEggPopupText {
+  position: fixed;
+  top: 50%; 
+  left: 50%; 
+  transform: translate(-50%, -50%); 
+  background-color: rgba(0, 0, 0, 0.8);
+  color: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  font-size: 2em;
+  text-align: center;
+  z-index: 1000;
+  animation: fade-in-out 3s ease-in-out;
+}
+
+@keyframes fade-in-out {
+  0% {
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  90% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+
+/* end easter egg avatar styling */
