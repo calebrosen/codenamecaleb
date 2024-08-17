@@ -104,8 +104,6 @@ const OverWatchRandomCharacterGenerator = () => {
         setBackgroundImage('');
     } 
     
-        
-
     return (
         <div className="backgroundContainer">
             <div 
@@ -125,7 +123,7 @@ const OverWatchRandomCharacterGenerator = () => {
                         </label>
                         {history.length > 0 && (
                             <div onClick={clearHistory}>
-                                <span className='pointer'>Clear History <FontAwesomeIcon icon={faEraser} /></span>
+                                <span className='pointer whiteText'>Clear History <FontAwesomeIcon icon={faEraser} /></span>
                             </div>
                         )}
                     </div>
