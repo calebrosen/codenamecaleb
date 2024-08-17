@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faEraser } from '@fortawesome/free-solid-svg-icons';
 
 const OverWatchRandomCharacterGenerator = () => {
     const [selectedRole, setSelectedRole] = useState('Tank');
@@ -95,50 +97,65 @@ const OverWatchRandomCharacterGenerator = () => {
             particlesContainer.remove();
         }, 1500);
     };
+
+    const clearHistory = (e) => {
+        setHistory([]);
+        setRandomHero('');
+        setBackgroundImage('');
+    } 
     
         
 
     return (
-        <div 
-            className="fullScreenContainer"
-            style={{
-                backgroundImage: `url(${backgroundImage})`,
-                backgroundSize: 'cover',
-                backgroundPosition: 'center',
-                overflow: 'hidden',
-                backgroundRepeat: 'no-repeat',
-            }}
-        >
-            <div className="contentWrapper">
-                <label className='smLabel'>Play audio?
-                    <input type="checkbox" onClick={handleCheckbox} />
-                </label>
-                <p className="marginTop4 largeHeader">Choose your role</p>
-                <select className="selectDropdown marginTop3" onChange={updateRole} value={selectedRole}>
-                    <option value="Tank">Tank</option>
-                    <option value="DPS">DPS</option>
-                    <option value="Support">Support</option>
-                </select>
-                <div className="marginTop2">
-                    <button className="generateButton" onClick={generateHero}>Generate</button>
-                </div>
-                {randomHero && (
-                    <div className={`generatedHero marginTop3 ${showGeneratedHero ? 'show' : ''}`}>
-                        <p className="generatedHeroP">{randomHero}</p>
+        <div className="backgroundContainer">
+            <div 
+                className="fullScreenContainer"
+                style={{
+                    backgroundImage: `url(${backgroundImage})`,
+                    backgroundSize: 'cover',
+                    backgroundPosition: 'center',
+                    overflow: 'hidden',
+                    backgroundRepeat: 'no-repeat',
+                }}
+            >
+                <div className="contentWrapper">
+                    <div className='space-between marginBottom1'>
+                        <label className='smLabel'>Play audio
+                            <input type="checkbox" onClick={handleCheckbox} />
+                        </label>
+                        {history.length > 0 && (
+                            <div onClick={clearHistory}>
+                                <span className='pointer'>Clear History <FontAwesomeIcon icon={faEraser} /></span>
+                            </div>
+                        )}
                     </div>
-                )}
-                {history.length > 0 && (
-                <div className="historyContainer marginTop4">
-                    <h3>History:</h3>
-                    <ul className="historyList">
-                        {history.map((entry, index) => (
-                            <li key={index} className="historyItem">
-                                <span className="role">{entry.role}:</span> {entry.hero}
-                            </li>
-                        ))}
-                    </ul>
+                    <p className="marginTop4 largeHeader">Choose your role</p>
+                    <select className="selectDropdown marginTop3" onChange={updateRole} value={selectedRole}>
+                        <option value="Tank">Tank</option>
+                        <option value="DPS">DPS</option>
+                        <option value="Support">Support</option>
+                    </select>
+                    <div className="marginTop2">
+                        <button className="generateButton" onClick={generateHero}>Generate</button>
+                    </div>
+                    {randomHero && (
+                        <div className={`generatedHero marginTop3 ${showGeneratedHero ? 'show' : ''}`}>
+                            <p className="generatedHeroP">{randomHero}</p>
+                        </div>
+                    )}
+                    {history.length > 0 && (
+                    <div className="historyContainer marginTop4">
+                        <h3>History:</h3>
+                        <ul className="historyList">
+                            {history.map((entry, index) => (
+                                <li key={index} className="historyItem">
+                                    <span className="role">{entry.role}:</span> {entry.hero}
+                                </li>
+                            ))}
+                        </ul>
+                    </div>
+                    )}
                 </div>
-                )}
             </div>
         </div>
     );
