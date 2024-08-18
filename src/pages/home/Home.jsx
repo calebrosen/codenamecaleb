@@ -3,6 +3,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faXTwitter, faDiscord, faSteam } from '@fortawesome/free-brands-svg-icons';
 import Swal from 'sweetalert2';
 import 'sweetalert2/dist/sweetalert2.min.css';
+import { motion } from 'framer-motion';
 
 const copyDiscUserNameToClipboard = () => {
         const textToCopy = "im.caleb";
@@ -34,17 +35,17 @@ const HomePage = () => {
 
             <div className="iconContainer">
                 <a href='https://www.x.com/calebisdead' target='_blank'>
-                    <div id="x_twitter" className='homeIcon pointer'>
+                    <div id="x_twitter" className='homeIcon pointer' alt='X/Twitter'>
                         <FontAwesomeIcon icon={faXTwitter} />
                     </div>
                 </a>
                 <a onClick={copyDiscUserNameToClipboard}>
-                    <div id="discord" className='homeIcon pointer'>
+                    <div id="discord" className='homeIcon pointer' alt='Discord username'>
                         <FontAwesomeIcon icon={faDiscord} />
                     </div>
                 </a>
                 <a href='http://steamcommunity.com/profiles/76561198258977132' target="_blank">
-                    <div id="steam" className='homeIcon pointer'>
+                    <div id="steam" className='homeIcon pointer' alt='Steam Link'>
                         <FontAwesomeIcon icon={faSteam} />
                     </div>
                 </a>

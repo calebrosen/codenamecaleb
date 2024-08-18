@@ -1,37 +1,87 @@
 import React, { useRef, useState, useEffect } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHome, faBars } from '@fortawesome/free-solid-svg-icons';
+import { motion } from 'framer-motion';
+import Box from "@mui/material/Box";
 
-const DropDownMenuTools = () => {
+const DropDownMenuToolsDesktop = () => {
+
+    // const CreateOverlay = () => {
+    //     return (
+    //         <div className='opacityScreenEffect'>
+    //         </div>
+    //     )
+    // }
+
     return (
-        <div className="dropdown-menu space-apart marginLeftMobile">
-            <div><a href="overwatch-random-character-generator">Overwatch Random Character Selector</a></div>
+        <div>
+            <div className="dropdown-container">
+                <motion.div
+                    initial={{ opacity: 0, y: -20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.15 }}
+                >
+                    <Box
+                        sx={{
+                            width: "100%",
+                            display: "flex",
+                            justifyContent: "center",
+                            alignItems: "center",
+                            fontSize: "30px",
+                            fontWeight: "600",
+                            padding: "10px",
+                            gap: "20px",
+                        }}
+                    >
+                        <a
+                            href="overwatch-random-character-generator"
+                            style={{ flex: "none", whiteSpace: "nowrap" }}
+                        >
+                            Overwatch Random Character Selector
+                        </a>
+
+                    </Box>
+                </motion.div>
+            </div>
+            {/* <CreateOverlay /> */}
         </div>
-    );
-};
-
-const MobileSideMenu = ({ onClose, showMobileMenu }) => {
-    const [isMobileDropdownVisible, setIsMobileDropdownVisible] = useState(false);
-
-    const handleMobileDropdownClick = () => {
-        setIsMobileDropdownVisible(!isMobileDropdownVisible);
+        );
     };
 
+  
+  const DropDownMenuToolsMobile = () => {
     return (
-        <div className={`mobile-side-menu ${showMobileMenu ? 'slide-in' : 'slide-out'}`}>
-            <ul>
-                <li><a href="/" onClick={onClose}>Home</a></li>
-                <li>
-                    <a href="#tools" onClick={handleMobileDropdownClick}>Tools</a>
-                    {isMobileDropdownVisible && <DropDownMenuTools />}
-                </li>
-                <li><a href="about" onClick={onClose}>About</a></li>
-                <li><a href="#services" onClick={onClose}>Services</a></li>
-                <li><a href="#contact" onClick={onClose}>Contact</a></li>
-            </ul>
-        </div>
-    );
-};
+    <div className="dropdown-menu space-apart marginLeftMobile">
+        <motion.div
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.15 }}
+            >
+        <a href="overwatch-random-character-generator">Overwatch Random Character Selector</a>
+        </motion.div>
+    </div>
+  )};
+  
+    const MobileSideMenu = ({ onClose, showMobileMenu }) => {
+        const [isMobileDropdownVisible, setIsMobileDropdownVisible] = useState(false);
+
+        const handleMobileDropdownClick = () => {
+            setIsMobileDropdownVisible(!isMobileDropdownVisible);
+        };
+
+        return (
+            <div className={`mobile-side-menu ${showMobileMenu ? 'slide-in' : 'slide-out'}`}>
+                <ul>
+                    <li><a href="/" onClick={onClose}>Home</a></li>
+                    <li>
+                        <a href="#" onClick={handleMobileDropdownClick}>Tools</a>
+                        {isMobileDropdownVisible && <DropDownMenuToolsMobile />}
+                    </li>
+                    <li><a href="about" onClick={onClose}>About</a></li>
+                </ul>
+            </div>
+        );
+    };
 
 const StickyHeader = ({ children }) => {
     const [showMobileMenu, setShowMobileMenu] = useState(false);
@@ -95,12 +145,10 @@ const StickyHeader = ({ children }) => {
                             onMouseLeave={handleMouseLeave}
                             onClick={() => setDropdownVisible(!isDropdownVisible)}
                         >
-                            <a href="#tools">Tools</a>
-                            {isDropdownVisible && <DropDownMenuTools />}
+                            <a href="#">Tools</a>
+                            {isDropdownVisible && <DropDownMenuToolsDesktop />}
                         </li>
                         <li><a href="about">About</a></li>
-                        <li><a href="#services">Services</a></li>
-                        <li><a href="#contact">Contact</a></li>
                     </ul>
                 </nav>
             </header>
