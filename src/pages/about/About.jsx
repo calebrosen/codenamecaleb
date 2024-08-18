@@ -9,6 +9,7 @@ const AboutMe = () => {
   const [fadeClass, setFadeClass] = useState('');
   const [showEasterEggPopup, setShowEasterEggPopup] = useState(false);
   const [easterEggTriggered, setEasterEggTriggered] = useState(false);
+  const [easterEggInProgress, setEasterEggInProgress] = useState(false);
 
   const getRandomColor = () => {
     const colors = ['#ff9ff3', '#feca57', '#ff6b6b', '#48dbfb', '#1dd1a1', '#f368e0', '#ff9f43', '#54a0ff'];
@@ -38,7 +39,7 @@ const AboutMe = () => {
   };
 
   const handleEasterEggClick = (e) => {
-    if (easterEggTriggered) return;
+    if (easterEggTriggered || easterEggInProgress) return; 
 
     setClicks((prevClicks) => {
       const newClicks = prevClicks + 1;
@@ -69,6 +70,7 @@ const AboutMe = () => {
   };
 
   const initiateEasterEgg = (e) => {
+    setEasterEggInProgress(true); 
     setEasterEggTriggered(true);
     setFadeClass('fade-out');
     setTimeout(() => {
@@ -79,6 +81,7 @@ const AboutMe = () => {
 
       setTimeout(() => {
         setShowEasterEggPopup(false);
+        setEasterEggInProgress(false); 
       }, 5500);
     }, 500);
   };

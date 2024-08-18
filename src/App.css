@@ -75,6 +75,7 @@ body {
     justify-content: space-evenly; 
     align-items: center;
     box-sizing: border-box;
+    transition: 0.5s ease-in-out;
   }
 
   .dropdown-menu div {
@@ -180,6 +181,11 @@ body {
   font-size: 16px;
   width: 100%;
   box-sizing: border-box;
+}
+
+.selectDropdown * {
+  background-color: #FAFBFC;
+  color:black;
 }
 
 .generateButton {
@@ -595,9 +601,8 @@ a:visited {
   padding-bottom: 25px;
 }
 
-
-
 @media screen and (min-width: 600px) {
+
   h1.about-me::before {
     content: "";
     position: absolute;
@@ -791,23 +796,182 @@ h1.about-me:hover {
   font-size: 2em;
   text-align: center;
   z-index: 1000;
-  animation: fade-in-out 3s ease-in-out;
 }
-
-@keyframes fade-in-out {
-  0% {
-    opacity: 0;
-  }
-  10% {
-    opacity: 1;
-  }
-  90% {
-    opacity: 1;
-  }
-  100% {
-    opacity: 0;
-  }
-}
-
 
 /* end easter egg avatar styling */
+
+.homeContainer {
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  vertical-align: center;
+  text-align: center;
+  overflow: hidden;
+}
+
+.homeGlitchText {
+  animation: glitch 1s linear infinite;
+  position: relative;
+  overflow: hidden;
+  font-size: 5em;
+  color: #fff; 
+  text-shadow: 
+    2px 2px red,
+    -2px -2px blue,
+    1px 1px green;
+}
+
+@media screen and (max-width: 768px) {
+  .homeGlitchText {
+    margin-top: 2em;
+    font-size: 2em;
+  }
+}
+
+@keyframes glitch {
+  2%, 64% {
+    transform: translate(2px, 0) skew(0deg);
+    text-shadow: 
+      2px 2px red,
+      -2px -2px blue,
+      1px 1px green;
+  }
+  4%, 60% {
+    transform: translate(-2px, 0) skew(0deg);
+    text-shadow: 
+      -2px -2px red,
+      2px 2px blue,
+      -1px -1px green;
+  }
+  62% {
+    transform: translate(0, 0) skew(5deg); 
+    text-shadow: 
+      5px 0px red,
+      -5px 0px blue,
+      0px 5px green;
+  }
+}
+
+.homeGlitchText:before,
+.homeGlitchText:after {
+  content: attr(title);
+  position: absolute;
+  overflow: hidden;
+  left: 0;
+  width: 100%;
+  color: #fff; 
+}
+
+.homeGlitchText:before {
+  animation: glitchTop 1s linear infinite;
+  overflow: hidden;
+  clip-path: polygon(0 0, 100% 0, 100% 33%, 0 33%);
+  -webkit-clip-path: polygon(0 0, 100% 0, 100% 33%, 0 33%);
+  text-shadow: 
+    2px -2px red,
+    -2px 2px rgb(35, 54, 228);
+}
+
+@keyframes glitchTop {
+  2%, 64% {
+    transform: translate(1px, -1px);
+    text-shadow: 
+      2px -2px red,
+      -2px 2px blue;
+  }
+  4%, 60% {
+    transform: translate(-1px, 1px);
+    text-shadow: 
+      -2px 2px red,
+      2px -2px blue;
+  }
+  62% {
+    transform: translate(10px, -1px) skew(-33deg); 
+    text-shadow: 
+      10px -1px red,
+      -10px 1px blue;
+  }
+}
+
+.homeGlitchText:after {
+  animation: glitchBottom 1.5s linear infinite;
+  clip-path: polygon(0 67%, 100% 67%, 100% 100%, 0 100%);
+  -webkit-clip-path: polygon(0 67%, 100% 67%, 100% 100%, 0 100%);
+  overflow: hidden;
+  text-shadow: 
+    -2px 2px red,
+    2px -2px blue;
+}
+
+@keyframes glitchBottom {
+  2%, 64% {
+    transform: translate(-2px, 0);
+    text-shadow: 
+      -2px 2px red,
+      2px -2px blue;
+  }
+  4%, 60% {
+    transform: translate(-2px, 0);
+    text-shadow: 
+      -2px 2px red,
+      2px -2px blue;
+  }
+  62% {
+    transform: translate(-22px, 5px) skew(21deg);
+    text-shadow: 
+      -22px 5px red,
+      22px -5px blue;
+  }
+}
+
+.homeContainer {
+  text-align: center;
+  margin-top: 5%; 
+}
+
+.iconContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10%; 
+  margin-top: 4%; 
+}
+
+.homeIcon {
+  font-size: 3.25rem;
+  transition: transform 0.5s;
+}
+
+.homeIcon:hover {
+  transform: scale(1.25)
+}
+
+.pointer {
+  cursor: pointer;
+}
+
+.custom-popup-container {
+  position: relative;
+  width: 100%;
+}
+
+.custom-popup {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background-color: #333;
+  color: #fff;
+  padding: 10px 20px;
+  border-radius: 5px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+  z-index: 1000;
+  animation: fadeInOut 2s forwards;
+  pointer-events: none; 
+}
+
+@keyframes fadeInOut {
+  0% { opacity: 0; transform: translateY(-10px); }
+  10% { opacity: 1; transform: translateY(0); }
+  90% { opacity: 1; }
+  100% { opacity: 0; transform: translateY(-10px); }
+}
