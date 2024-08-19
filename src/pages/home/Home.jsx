@@ -3,7 +3,6 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faXTwitter, faDiscord, faSteam } from '@fortawesome/free-brands-svg-icons';
 import Swal from 'sweetalert2';
 import 'sweetalert2/dist/sweetalert2.min.css';
-import { motion } from 'framer-motion';
 
 const copyDiscUserNameToClipboard = () => {
         const textToCopy = "im.caleb";

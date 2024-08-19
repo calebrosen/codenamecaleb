@@ -150,3 +150,15 @@
     outline: 1px solid #000;
     outline: -webkit-focus-ring-color auto 2px;
   }
+
+
+  .smallerScreensMessage {
+    display: none;
+  }
+
+  @media screen and (max-width: 1028px) {
+    .smallerScreensMessage {
+        margin: 1em;
+        display: block;
+      }
+  }
