@@ -6,6 +6,7 @@ import OverWatchRandomCharacterGenerator from './pages/overwatch-random-characte
 import InDevelopment from './components/inDevelopment';
 import About from './pages/about/About.jsx';
 import HomePage from './pages/home/Home.jsx';
+import Wasted from './pages/wasted/Wasted.jsx';
 
 const App = () => {
     return (
@@ -14,6 +15,7 @@ const App = () => {
                 <Route path="/" element={<StickyHeader><HomePage /></StickyHeader>} />
                 <Route path="/overwatch-random-character-generator" element={<StickyHeader><OverWatchRandomCharacterGenerator /></StickyHeader>} />
                 <Route path="/about" element={<StickyHeader><About /></StickyHeader>} />
+                <Route path="/gta-v-wasted-overlay-generator" element={<StickyHeader><Wasted /></StickyHeader>}></Route>
             </Routes>
         </Router>
     );

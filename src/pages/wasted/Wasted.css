@@ -1,0 +1,152 @@
+.wasted-main-container {
+    text-align: center;
+    margin-top: 3em;
+  }
+  
+  /* hiding default file input*/
+  .file {
+    opacity: 0;
+    width: 0.1px;
+    height: 0.1px;
+    position: absolute;
+  }
+  
+  .file-input {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+    gap:3em;
+  }
+  
+  .file-input label {
+    display: block;
+    position: relative;
+    width: auto;
+    padding: 0px 0.5em;
+    height: 50px;
+    border-radius: 15px;
+    background: linear-gradient(40deg, #222222, #c5271c);
+    box-shadow: 0 4px 7px rgba(0, 0, 0, 0.4);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    font-weight: bold;
+    cursor: pointer;
+    transition: transform 0.2s ease-out;
+  }
+  
+  input:hover + label,
+  input:focus + label {
+    transform: scale(1.05);
+  }
+  
+  input:focus + label {
+    outline: 1px solid #000;
+    outline: -webkit-focus-ring-color auto 2px;
+  }
+  
+  .wasted-overlay-effect {
+    position: absolute;
+    width: 150%;
+    height: 23%;
+    background: rgb(0, 0, 0, 0.6);
+    z-index: 1;
+    top: 50%;
+    left: 50%;
+    transform: translate(-45%, -50%);
+    pointer-events: none;
+    mask: url(#wasted-mask);
+    -webkit-mask: url(#wasted-mask); 
+  }
+  
+  .wasted-image-container {
+    position: relative;
+    display: inline-block;
+    margin: 0 auto;
+    border: 1px solid gray;
+    border-radius: 5px;
+    padding: 0;
+    max-width: 60%;
+    overflow: hidden;
+    background-color: transparent;
+  }
+  
+  .gtaVWastedImage {
+    max-width: 100%;
+    height: auto;
+    -webkit-filter: grayscale(100%);
+    filter: grayscale(100%);
+    margin: 0 auto;
+  }
+  
+  .wasted-text-container {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+    z-index: 101;
+    font-family: "Pricedown Bl", sans-serif;
+    pointer-events: none;
+    -webkit-text-stroke: 0.75px black;
+    color: rgb(212, 7, 7);
+  }
+  
+  .wasted-text {
+    display: block;
+    font-family: "Pricedown Bl", sans-serif;
+    z-index: 1;
+    font-weight: bold;
+    position: relative;
+    color: rgb(212, 7, 7);
+  }
+  
+  .wasted-about-text {
+    text-wrap: pretty;
+    font-size: 1.25em;
+  }
+  
+  .wasted-about-text-container {
+    max-width: 55%;
+    text-wrap: standard;
+    text-align: center;
+    background-color: rgba(0, 0, 0, 0.6); 
+    padding: 0.25em 1em 1.5em 1em;
+    border-radius: 6px;
+    margin: 2em auto;
+  }
+  
+  .download-button {
+    display: block;
+    position: relative;
+    width: auto;
+    height: 50px;
+    border-radius: 15px;
+    font-size: inherit;
+    border: none;
+    background: linear-gradient(40deg, #222222, #c5271c);
+    box-shadow: 0 4px 7px rgba(0, 0, 0, 0.4);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    font-weight: bold;
+    cursor: pointer;
+    transition: transform 0.2s ease-out;
+  }
+  
+  .download-button:hover {
+    transform: scale(1.05);
+  }
+  
+  .download-button-container {
+    display: flex;
+    justify-content: center;
+    margin: 20px 0px 20px 0px;
+  }
+  
+  .download-button-container:focus {
+    outline: 1px solid #000;
+    outline: -webkit-focus-ring-color auto 2px;
+  }
