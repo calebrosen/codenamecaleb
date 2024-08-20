@@ -205,16 +205,7 @@ const HomePage = () => {
       <div className="fsBackground">
         <h1 className='h1Home'>codenamecaleb.com</h1>
         <IconGroup />
-
-        <ScrollLink
-          to="aboutSection"
-          smooth={true}
-          duration={800}
-          className="scroll-arrow"
-        >
-          ↓
-        </ScrollLink>
-      </div>
+     </div>
       <AboutMe />
     </div>
   );
