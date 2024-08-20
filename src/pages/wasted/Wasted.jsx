@@ -25,7 +25,7 @@ function Wasted() {
             icon: "error",
             title: "Oops...",
             text: "Images must be at least 500x500 pixels!",
-            confirmButtonColor: "#c5271c",
+            confirmButtonColor: "#c8425b",
           });
         } else {
           let multiplier = 0.07;

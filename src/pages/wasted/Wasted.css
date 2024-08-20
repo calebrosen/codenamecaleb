@@ -1,3 +1,5 @@
+@import url('https://fonts.cdnfonts.com/css/pricedown');
+
 .wasted-main-container {
     text-align: center;
     margin-top: 3em;
@@ -25,7 +27,7 @@
     padding: 0px 0.5em;
     height: 50px;
     border-radius: 15px;
-    background: linear-gradient(40deg, #222222, #c5271c);
+    background: linear-gradient(40deg, #222222, #c8425b);
     box-shadow: 0 4px 7px rgba(0, 0, 0, 0.4);
     display: flex;
     align-items: center;
@@ -125,7 +127,7 @@
     border-radius: 15px;
     font-size: inherit;
     border: none;
-    background: linear-gradient(40deg, #222222, #c5271c);
+    background: linear-gradient(40deg, #222222, #c8425b);
     box-shadow: 0 4px 7px rgba(0, 0, 0, 0.4);
     display: flex;
     align-items: center;

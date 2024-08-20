@@ -1,0 +1,230 @@
+
+@media screen and (min-width: 600px) {
+    .sticky-header {
+      position: sticky;
+      top: 0;
+      width: 100%;
+      z-index: 1000;
+    }
+  
+    .navbar {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 5px 0 9px 0;
+      background: #353434;
+      color: #ffffff;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+      transition: background 0.3s ease, box-shadow 0.3s ease;
+    }
+  
+    .nav-list {
+      list-style: none;
+      padding: 3px;
+      margin: 0;
+      display: flex;
+    }
+  
+    .nav-list li {
+      margin: 0 30px;
+    }
+  
+    .nav-list a {
+      color: #ffffff;
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 18px;
+      letter-spacing: 1px;
+      transition: color 0.25s ease;
+    }
+  
+    .nav-list a:hover {
+      color: #c8425b;
+    }
+  
+    .dropdown-menu {
+      background-color: #535353;
+      padding: 10px;
+      list-style: none;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+      z-index: 1000;
+      position: absolute;
+      top: 100%; 
+      left: 0;
+      width: 100%;
+      overflow-x: hidden;
+      display: flex;
+      justify-content: space-evenly; 
+      align-items: center;
+      box-sizing: border-box;
+    }
+  
+    .dropdown-menu div {
+      text-align: center;
+      flex: 1;
+      box-sizing: border-box;
+    }
+  
+    .dropdown-menu a {
+      color: #ffffff;
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 16px;
+      transition: color 0.25s ease;
+      display: block;
+      padding: 5px 0;
+      box-sizing: border-box; 
+    }
+  
+    .dropdown-menu a:hover {
+      color: #c8425b;
+    }
+  }
+
+.homeButton {
+    position: fixed;
+    top:1.25%;
+    left: 1%;
+  }
+  
+  @media screen and (min-width:600px) and (max-width: 800px) {
+    .homeButton {
+      position: fixed;
+      top:3%;
+      left: 1%;
+    }
+  }
+  
+  .homeButton:hover {
+    color: #c8425b;
+  }
+  
+  a:visited {
+    color: white;
+  }
+
+  
+.mobileHamburger {
+    position: fixed;
+    top: 1%;
+    left: 1%;
+    cursor: pointer;
+    color: #fff;
+    font-size: 24px;
+    margin: 13px;
+    z-index: 10000000;
+  }
+  
+  @media (min-width: 600px) {
+    .mobileHamburger {
+      display: none;
+    }
+  }
+  
+  .mobile-side-menu {
+    position: fixed;
+    top: 0;
+    left: 3;
+    padding-left:15px;
+    width: 65%;
+    height: 100vh;
+    color: white;
+    background-color: #353434;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease-in-out;
+    z-index: 1000;
+    transform: translateX(-100%);
+  }
+  
+  .mobile-side-menu.slide-in {
+    transform: translateX(0);
+  }
+  
+  .slide-down {
+    opacity: 0;
+    transform: translateY(-70px);
+    transition: opacity 50ms ease, transform 50ms ease;
+  }
+  
+  .dropdownContainer {
+    position: relative;
+  }
+  
+  .dropdownContainer:hover .slide-down {
+    opacity: 1;
+    transform: translateY(70px);
+    pointer-events: auto;
+  }
+  
+  .slide-down:hover {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  
+  .slide-down:active {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  
+  .mobile-side-menu.slide-out {
+    transform: translateX(-100%);
+  }
+  
+  
+  .mobile-side-menu.open {
+    left: 0;
+  }
+  
+  .menu-header {
+    display: flex;
+    justify-content: flex-end;
+  }
+  
+  .close-icon {
+    cursor: pointer;
+    font-size: 24px;
+    color: #fff;
+  }
+  
+  .mobile-side-menu ul {
+    list-style: none;
+    padding: 0;
+    margin-top: 20px;
+  }
+  
+  .mobile-side-menu ul li {
+    margin: 10px 0;
+  }
+  
+  .mobile-side-menu ul li a {
+    color: #fff;
+    text-decoration: none;
+    font-size: 18px;
+  }
+  
+  .desktop-only {
+    display: flex;
+  }
+  
+  @media screen and (min-width: 768px) {
+    .mobile-side-menu {
+      display:none;
+    }
+  }
+  
+  @media screen and (max-width: 768px) {
+    .marginLeftMobile {
+        margin-left: 15px;
+    }
+  }
+
+  @media screen and (max-width: 599px) {
+    .navbar {
+      display: none; 
+    }
+  
+    .sticky-header {
+      display: none;
+    }
+  }
+  

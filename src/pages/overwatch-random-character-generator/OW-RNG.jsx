@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEraser } from '@fortawesome/free-solid-svg-icons';
+import './OW-RNG.css';
 
 const OverWatchRandomCharacterGenerator = () => {
     const [selectedRole, setSelectedRole] = useState('Tank');
@@ -56,7 +57,7 @@ const OverWatchRandomCharacterGenerator = () => {
     }
 
     const playVoiceLine = (hero) => {
-        //aivoicegenerator.com - [standard, male] matthew
+        // aivoicegenerator.com - [standard, male] matthew
         if (audioStatus) { 
             const voiceLinePath = require(`../../../public/audio/ow-voicelines/${hero.toLowerCase().replace(/[: ]/g, '-')}.mp3`);
             const audio = new Audio(voiceLinePath);

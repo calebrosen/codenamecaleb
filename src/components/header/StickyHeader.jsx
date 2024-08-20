@@ -3,6 +3,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHome, faBars } from "@fortawesome/free-solid-svg-icons";
 import { motion } from "framer-motion";
 import Box from "@mui/material/Box";
+import './StickyHeader.css';
 
 const DropDownMenuToolsDesktop = () => {
   return (
