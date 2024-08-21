@@ -1,16 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faXTwitter,
-  faDiscord,
-  faSteam,
-} from "@fortawesome/free-brands-svg-icons";
+import { faXTwitter, faDiscord, faSteam } from "@fortawesome/free-brands-svg-icons";
 import Swal from "sweetalert2";
 import "./Home.css";
 import "sweetalert2/dist/sweetalert2.min.css";
 import AvatarDrawing from "../../img/avatar/Avatar.png";
 import AvatarReal from "../../img/avatar/AvatarReal.png";
-import { Link as ScrollLink } from "react-scroll";
+import { Element, scroller } from "react-scroll";
 
 const HomePage = () => {
   const [imageSrc, setImageSrc] = useState(AvatarDrawing);
@@ -18,46 +14,77 @@ const HomePage = () => {
   const [particles, setParticles] = useState([]);
   const [fadeClass, setFadeClass] = useState("");
   const [showEasterEggPopup, setShowEasterEggPopup] = useState(false);
+  const [showSection, setShowSection] = useState(false);
   const [easterEggTriggered, setEasterEggTriggered] = useState(false);
   const [easterEggInProgress, setEasterEggInProgress] = useState(false);
+  const [scrollTriggeredByClick, setScrollTriggeredByClick] = useState(false);
 
   const AboutMe = () => {
     return (
-      <div className="about-container">
-        <div className="profile-picture" onClick={handleEasterEggClick}>
-          <img
-            src={imageSrc}
-            id="avatarImg"
-            className={`${fadeClass} easterEggAvatar`}
-            alt="Profile Picture"
-          />
-          {particles.map((p) => (
-            <MagicEffect key={p.id} x={p.x} y={p.y} />
-          ))}
+      <Element name="aboutMeSection">
+        <div className="about-container">
+          <div className="profile-picture" onClick={handleEasterEggClick}>
+            <img
+              src={imageSrc}
+              id="avatarImg"
+              className={`${fadeClass} easterEggAvatar`}
+              alt="Profile Picture"
+            />
+            {particles.map((p) => (
+              <MagicEffect key={p.id} x={p.x} y={p.y} />
+            ))}
+          </div>
+          <div className="about-content">
+            <h1 className="about-me">Hey there! I'm Caleb.</h1>
+            <p>
+              I’m a full-stack developer who loves turning ideas into real things - codenamecaleb is proof of that.
+              I'm adding new things as I think of them, so feel free to
+              look around.
+            </p>
+            <p>
+              By the way, you can view the entire source code of this website{" "}
+              <a
+                href="https://github.com/calebrosen/codenamecaleb"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                here
+              </a>
+              , if you're interested.
+            </p>
+          </div>
+          {showEasterEggPopup && <EasterEggPopup />}
         </div>
-        <div className="about-content">
-          <h1 className="about-me">Hey there! I'm Caleb.</h1>
-          <p>
-            I’m a full-stack developer who loves turning ideas into real things.
-            I'm constantly adding new things as I think of them, so feel free to
-            look around and stay a while.
-          </p>
-          <p>
-            By the way, you can view the entire source code of this website{" "}
-            <a
-              href="https://github.com/calebrosen/codenamecaleb"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              here
-            </a>
-            , if you're interested.
-          </p>
-        </div>
-        {showEasterEggPopup && <EasterEggPopup />}
-      </div>
+      </Element>
     );
   };
+
+  const handleArrowClick = () => {
+     setShowSection(true);
+     setScrollTriggeredByClick(true);
+     setTimeout(() => {
+      scroller.scrollTo("aboutMeSection", {
+        duration: 800,
+        delay: 0,
+        smooth: "easeInOutQuart",
+      });
+    }, 50);
+    setTimeout(() => {
+      setScrollTriggeredByClick(false);
+    }, 1000);
+  };
+
+  const handleScroll = () => {
+    if (scrollTriggeredByClick) return;
+    if (window.scrollY < 100) {
+      setShowSection(false); 
+    }
+  };
+  
+  useEffect(() => {
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, [scrollTriggeredByClick]);
 
   const getRandomColor = () => {
     const colors = [
@@ -203,10 +230,18 @@ const HomePage = () => {
   return (
     <div>
       <div className="fsBackground">
-        <h1 className='h1Home'>codenamecaleb.com</h1>
+        <h1 className="h1Home">codenamecaleb.com</h1>
         <IconGroup />
-     </div>
-      <AboutMe />
+        <div className="arrowContainer" onClick={handleArrowClick}>
+          <div className="styledArrow">▼</div>
+        </div>
+      </div>
+
+      {showSection && (
+        <div className="showOnArrowClick">
+          <AboutMe />
+        </div>
+      )}
     </div>
   );
 };

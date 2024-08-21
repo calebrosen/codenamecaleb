@@ -110,8 +110,8 @@
   }
   
   .wasted-about-text-container {
-    max-width: 55%;
-    text-wrap: standard;
+    max-width: 70%;
+    text-wrap: pretty;
     text-align: center;
     background-color: rgba(0, 0, 0, 0.6); 
     padding: 0.25em 1em 1.5em 1em;

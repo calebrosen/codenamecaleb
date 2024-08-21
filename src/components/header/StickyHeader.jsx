@@ -1,20 +1,8 @@
-import React from 'react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faBars, faHome } from '@fortawesome/free-solid-svg-icons';
-import { slide as Menu } from 'react-burger-menu';
-import './StickyHeader.css';
-
-const DropDownMenuTools = () => (
-  <div className="dropdown-menu">
-    <p>
-        <a href="overwatch-random-character-generator">OW2 RNG Character Selector</a>
-    </p>
-    <p>
-        <a href="gta-v-wasted-overlay-generator">Wasted Generator</a>
-    </p>
-  </div>
-);
-
+import React from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faBars, faHome } from "@fortawesome/free-solid-svg-icons";
+import { slide as Menu } from "react-burger-menu";
+import "./StickyHeader.css";
 
 const StickyHeader = ({ children }) => (
   <div>
@@ -22,13 +10,24 @@ const StickyHeader = ({ children }) => (
       <Menu
         left
         customBurgerIcon={<FontAwesomeIcon icon={faBars} size="2x" />}
-        burgerButtonClassName="custom-burger-button" // Custom class for positioning
+        burgerButtonClassName="custom-burger-button"
       >
-        <a className="menu-item" href="/">
-          <FontAwesomeIcon icon={faHome} />
-          &nbsp;Home
-        </a>
-        <DropDownMenuTools />
+        <div className="menu-items">
+          <div className="menu-item">
+            <a href="/">
+              <FontAwesomeIcon icon={faHome} />
+              <span>&nbsp;Home</span>
+            </a>
+          </div>
+          <div className="menu-item">
+            <a href="overwatch-random-character-generator">
+            <span>OW2 RNG Character Selector</span>
+            </a>
+          </div>
+          <div>
+            <span><a href="gta-v-wasted-overlay-generator">Wasted Generator</a></span>
+          </div>
+        </div>
       </Menu>
     </div>
     {children}

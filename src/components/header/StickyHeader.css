@@ -3,6 +3,31 @@
   z-index: 10001230;
 }
 
+.menu-items {
+  position: relative;
+  padding: 15px;
+}
+
+.menu-item {
+  margin: 1rem 0;
+}
+
+.menu-item a span {
+  display: inline-block;
+  text-indent: 0;
+}
+
+.menu-item a span::before {
+  content: "";
+  display: block;
+  height: 0;
+  width: 100%;
+}
+
+.menu-item a span {
+  text-indent: 15px;
+}
+
 .custom-burger-button {
   position: fixed;
   top: 20px;
@@ -20,7 +45,7 @@
 }
 
 .bm-menu {
-  background: #333; 
+  background: #333333e7; 
   
   font-size: 1.15rem;
 }
