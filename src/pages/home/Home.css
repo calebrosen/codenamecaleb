@@ -100,11 +100,10 @@
 
 .about-container { 
   border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(63, 60, 60, 0.25);
   display: flex;
   flex-wrap: wrap;
   /* transform: translateY(300%); */
-  margin: 5rem 5px;
+  padding: 5rem 5px;
 }
 
 .profile-picture {
