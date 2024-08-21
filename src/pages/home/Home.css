@@ -14,9 +14,9 @@
   font-size: 5em;
   position: relative;
   display: inline-block;
-  color: #000;
-  text-shadow: -2px -2px 0 #ffffff, -4px -4px 0 #fb00ff, -6px -6px 0 #06eb79,
-    -8px -8px 0 #003d5b;
+  color: #fffde4;
+  text-shadow: -2px -2px 0 #fff, -4px -4px 0 #fb00ff, -6px -6px 0 #06eb79,
+    -8px -8px 0 #ffffff;
   background: rgba(0, 0, 0, 0.5);
   border-radius: 15px; 
   box-shadow: 0 0 20px rgba(255, 255, 255, 0.4);
@@ -98,8 +98,7 @@
   border-radius: 50%;
 }
 
-.about-container {
-  background-color: #2b2b2b;
+.about-container { 
   border-radius: 10px;
   box-shadow: 0 4px 8px rgba(63, 60, 60, 0.25);
   display: flex;
