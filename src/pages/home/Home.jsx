@@ -128,9 +128,9 @@ const HomePage = () => {
     setClicks((prevClicks) => {
       const newClicks = prevClicks + 1;
 
-      if (newClicks === 50 && !easterEggTriggered) {
+      if (newClicks === 25 && !easterEggTriggered) {
         initiateEasterEgg(e);
-      } else if (newClicks < 50) {
+      } else if (newClicks < 25) {
         const numberOfParticles = Math.floor(Math.random() * 2) + 1;
         const newParticles = Array.from({ length: numberOfParticles }, () => {
           const offsetX = (Math.random() - 0.5) * 50;
