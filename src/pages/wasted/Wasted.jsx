@@ -1,13 +1,10 @@
 import React, { useState } from "react";
-import html2canvas from "html2canvas";
 import "./Wasted.css";
 import Swal from "sweetalert2";
 import "sweetalert2/dist/sweetalert2.min.css";
 
 function Wasted() {
   const [image, setImage] = useState(null);
-  const [overlayHeight, setOverlayHeight] = useState("23%");
-  const [fontSize, setFontSize] = useState("5em");
   const [uploadLabel, setUploadLabel] = useState("Upload an image");
 
   const handleImageUpload = (event) => {
@@ -28,21 +25,7 @@ function Wasted() {
             confirmButtonColor: "#c5271c",
           });
         } else {
-          let multiplier = 0.07;
-          if (imageWidth > 1700 || imageHeight > 1700) {
-            multiplier = 0.05;
-          } else if (imageWidth > 1300 || imageHeight > 1300) {
-            multiplier = 0.06;
-          }
-
-          // calculating font size based on image res
-          const dynamicFontSize =
-            Math.min(imageWidth, imageHeight) * multiplier;
-          const clampedFontSize = Math.max(16, Math.min(dynamicFontSize, 200));
-          setFontSize(`${clampedFontSize}px`);
-          const dynamicOverlayHeight = `${Math.min(imageHeight * 0.23, 150)}px`;
-          setOverlayHeight(dynamicOverlayHeight);
-          setImage(objectURL);
+                    setImage(objectURL);
         }
         setUploadLabel("Change Image");
       };
@@ -52,8 +35,6 @@ function Wasted() {
   };
 
   const handleDownload = async () => {
-    const container = document.querySelector(".wasted-image-container");
-    if (container) {
       const canvas = document.createElement("canvas");
       const ctx = canvas.getContext("2d");
 
@@ -62,6 +43,10 @@ function Wasted() {
       img.crossOrigin = "Anonymous";
 
       img.onload = async () => {
+
+        //making sure font is loaded
+        await document.fonts.load('bold 48px "Pricedown Bl"');
+
         canvas.width = img.width;
         canvas.height = img.height;
 
@@ -116,11 +101,11 @@ function Wasted() {
         link.download = "wasted-image.png";
         link.click();
       };
-    }
   };
 
   return (
     <div className="wasted-main-container">
+    <link href="https://fonts.cdnfonts.com/css/pricedown" rel="stylesheet"></link>
       <div className="wasted-about-text-container">
         <h1>GTA V Wasted Image Generator</h1>
         <span className="wasted-about-text">
@@ -143,14 +128,11 @@ function Wasted() {
         ></label>
         {image && (
           <button onClick={handleDownload} className="download-button">
-            Download
+            Process and Download
           </button>
         )}
       </div>
-      <div className='smallerScreensMessage'>
-        Since you're using a smaller device, the image may not visually render correctly. Although, when downloading the image, it will re-render and save as intended. 
-      </div>
-      {image && (
+        {image && (
         <>
           <div className="wasted-image-container">
             <img
@@ -158,13 +140,6 @@ function Wasted() {
               alt="Generated GTA V Wasted Image"
               className="gtaVWastedImage"
             />
-            <div
-              className="wasted-overlay-effect"
-              style={{ height: overlayHeight }}
-            ></div>
-            <div className="wasted-text-container" style={{ fontSize }}>
-              <span className="wasted-text">WASTED</span>
-            </div>
           </div>
           <svg width="0" height="0">
             <defs>

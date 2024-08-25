@@ -63,7 +63,11 @@
   }
   
   .wasted-image-container {
-    position: relative;
+    width: 0.1px;
+    height: 0.1px;
+    position: fixed;
+    top: 0;
+    left: 0;
     display: inline-block;
     margin: 0 auto;
     border: 1px solid gray;
@@ -77,9 +81,13 @@
   .gtaVWastedImage {
     max-width: 100%;
     height: auto;
-    -webkit-filter: grayscale(100%);
-    filter: grayscale(100%);
+    /* -webkit-filter: grayscale(100%);
+    filter: grayscale(100%); */
     margin: 0 auto;
+  }
+
+  h2 {
+    font-size: 3rem;
   }
   
   .wasted-text-container {
