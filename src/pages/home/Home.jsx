@@ -1,16 +1,16 @@
-import React, { useEffect, useState } from "react";
+import { faDiscord, faSteam, faXTwitter } from "@fortawesome/free-brands-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faXTwitter, faDiscord, faSteam } from "@fortawesome/free-brands-svg-icons";
+import React, { useEffect, useState } from "react";
+import { Element, scroller } from "react-scroll";
 import Swal from "sweetalert2";
-import "./Home.css";
 import "sweetalert2/dist/sweetalert2.min.css";
 import AvatarDrawing from "../../img/avatar/Avatar.png";
 import AvatarReal from "../../img/avatar/AvatarReal.png";
-import { Element, scroller } from "react-scroll";
+import "./Home.css";
 
 const HomePage = () => {
   const [imageSrc, setImageSrc] = useState(AvatarDrawing);
-  const [clicks, setClicks] = useState(0);
+  const [setClicks] = useState(0);
   const [particles, setParticles] = useState([]);
   const [fadeClass, setFadeClass] = useState("");
   const [showEasterEggPopup, setShowEasterEggPopup] = useState(false);
