@@ -21,11 +21,20 @@ const StickyHeader = ({ children }) => (
           </div>
           <div className="menu-item">
             <a href="overwatch-random-character-generator">
-            <span>OW2 RNG Character Selector</span>
+              <span>OW2 RNG Character Selector</span>
             </a>
           </div>
-          <div>
-            <span><a href="gta-v-wasted-overlay-generator">Wasted Generator</a></span>
+          <div className="menu-item">
+            <span>
+              <a href="gta-v-wasted-overlay-generator">Wasted Generator</a>
+            </span>
+          </div>
+          <div className="menu-item">
+          <a href="budget-calculator">
+            <span>
+              Budget Calculator
+            </span>
+          </a>
           </div>
         </div>
       </Menu>
