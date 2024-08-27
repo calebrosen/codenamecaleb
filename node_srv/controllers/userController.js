@@ -11,7 +11,7 @@ exports.addNewUser = async (req, res) => {
                   .status(500)
                   .json({ message: "Database error", error: err.message });
               }
-              const successMsg = results[0][0]; 
+              const successMsg = results[0][0];
         
               if (successMsg) {
                 return res.json({  successMsg });

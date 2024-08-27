@@ -62,7 +62,7 @@ const AccountComponent = ({ closeMenu }) => {
       localStorage.setItem("token", token);
       closeModal();
       checkLoginState();
-      
+
       Swal.fire({
         title: `Welcome back, ${name}.`,
         showConfirmButton: false,
@@ -89,14 +89,11 @@ const AccountComponent = ({ closeMenu }) => {
     e.preventDefault();
 
     try {
-      const response = await axios.post(
-        `${process.env.REACT_APP_API_URL}/node/users/addNew`,
-        {
-          registerName,
-          registerEmail,
-          registerPassword,
-        }
-      );
+      await axios.post(`${process.env.REACT_APP_API_URL}/node/users/addNew`, {
+        registerName,
+        registerEmail,
+        registerPassword,
+      });
 
       closeRegisterModal();
 
@@ -152,12 +149,12 @@ const AccountComponent = ({ closeMenu }) => {
   if (!loggedInState) {
     return (
       <div className="auth menu-item">
-        <a onClick={OpenModal}>
+        <div onClick={OpenModal}>
           <span className="pointer">
             <FontAwesomeIcon icon={faUserCircle} />
             &nbsp;Login/Register
           </span>
-        </a>
+        </div>
         <Modal
           isOpen={isModalOpen}
           onRequestClose={closeModal}
@@ -276,7 +273,7 @@ const AccountComponent = ({ closeMenu }) => {
   );
 };
 
-const Menu = ({ children }) => {
+const MenuComponent = ({ children }) => {
   const [menuOpen, setMenuOpen] = useState(false);
 
   const handleStateChange = (state) => {
@@ -333,4 +330,4 @@ const Menu = ({ children }) => {
   );
 };
 
-export default Menu;
+export default MenuComponent;
