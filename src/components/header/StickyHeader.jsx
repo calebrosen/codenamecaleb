@@ -19,8 +19,12 @@ Modal.setAppElement("#root");
 const AccountComponent = ({ closeMenu }) => {
   const [loggedInState, setLoggedInState] = useState(false);
   const [isModalOpen, setModalIsOpen] = useState(false);
+  const [isRegisterModalOpen, setRegisterModalIsOpen] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [registerEmail, setRegisterEmail] = useState("");
+  const [registerPassword, setRegisterPassword] = useState("");
+  const [registerName, setRegisterName] = useState("");
 
   const OpenModal = () => {
     closeMenu();
@@ -31,32 +35,43 @@ const AccountComponent = ({ closeMenu }) => {
     setModalIsOpen(false);
   };
 
+  const closeRegisterModal = () => {
+    setRegisterModalIsOpen(false);
+  };
+
+  const switchToRegisterModal = () => {
+    closeModal();
+    setRegisterModalIsOpen(true);
+  };
+
   const AttemptLogin = async (e) => {
     e.preventDefault();
 
     try {
-      const response = await axios.post(`${process.env.REACT_APP_API_URL}/node/auth/login`, {
-        email,
-        password,
-      });
-      
+      const response = await axios.post(
+        `${process.env.REACT_APP_API_URL}/node/auth/login`,
+        {
+          email,
+          password,
+        }
+      );
+
       const name = response.data.name;
       const token = response.data.token;
 
       localStorage.setItem("token", token);
       closeModal();
-
+      checkLoginState();
+      
       Swal.fire({
         title: `Welcome back, ${name}.`,
         showConfirmButton: false,
         icon: "success",
         background: "#333",
         color: "#fff",
-        timer: 3000
-      })
-      
+        timer: 3000,
+      });
     } catch (error) {
-      console.error("Login failed:", error.response.data.message);
       Swal.fire({
         title: "Oh no! Something happened.",
         showConfirmButton: true,
@@ -66,7 +81,45 @@ const AccountComponent = ({ closeMenu }) => {
         color: "#fff",
         confirmButtonText: "OK",
         confirmButtonColor: "#9e3c4e",
-      })
+      });
+    }
+  };
+
+  const AttemptRegister = async (e) => {
+    e.preventDefault();
+
+    try {
+      const response = await axios.post(
+        `${process.env.REACT_APP_API_URL}/node/users/addNew`,
+        {
+          registerName,
+          registerEmail,
+          registerPassword,
+        }
+      );
+
+      closeRegisterModal();
+
+      Swal.fire({
+        title: `Welcome, ${registerName}.`,
+        showConfirmButton: false,
+        icon: "success",
+        background: "#333",
+        color: "#fff",
+        timer: 3000,
+      });
+    } catch (error) {
+      console.error(error);
+      Swal.fire({
+        title: "Oh no! Something happened.",
+        showConfirmButton: true,
+        text: "We couldn't register you.",
+        icon: "error",
+        background: "#333",
+        color: "#fff",
+        confirmButtonText: "OK",
+        confirmButtonColor: "#9e3c4e",
+      });
     }
   };
 
@@ -90,7 +143,7 @@ const AccountComponent = ({ closeMenu }) => {
       console.error("Token decoding failed:", error);
       setLoggedInState(false);
     }
-  }
+  };
 
   useEffect(() => {
     checkLoginState();
@@ -145,6 +198,65 @@ const AccountComponent = ({ closeMenu }) => {
 
               <button type="submit" className="loginButton">
                 Login
+              </button>
+            </form>
+            <div className="registerText" onClick={switchToRegisterModal}>
+              Or register an account
+            </div>
+          </div>
+        </Modal>
+        <Modal
+          isOpen={isRegisterModalOpen}
+          onRequestClose={closeRegisterModal}
+          contentLabel="Register"
+          className="Modal"
+          overlayClassName="Overlay"
+        >
+          <div className="registerGroup">
+            <h3>Register an account</h3>
+            <form onSubmit={AttemptRegister}>
+              <div className="inputGroup">
+                <label htmlFor="name">Name</label>
+                <input
+                  type="text"
+                  name="name"
+                  id="name"
+                  className="inputText"
+                  autoComplete="name"
+                  value={registerName}
+                  onChange={(e) => setRegisterName(e.target.value)}
+                  placeholder="Enter your name"
+                />
+              </div>
+              <div className="inputGroup">
+                <label htmlFor="email">Email</label>
+                <input
+                  type="text"
+                  name="email"
+                  id="email"
+                  className="inputText"
+                  autoComplete="current-email"
+                  value={registerEmail}
+                  onChange={(e) => setRegisterEmail(e.target.value)}
+                  placeholder="Enter your email"
+                />
+              </div>
+              <div className="inputGroup">
+                <label htmlFor="password">Password</label>
+                <input
+                  type="password"
+                  name="password"
+                  id="password"
+                  className="inputText"
+                  autoComplete="current-password"
+                  value={registerPassword}
+                  onChange={(e) => setRegisterPassword(e.target.value)}
+                  placeholder="Enter your password"
+                />
+              </div>
+
+              <button type="submit" className="loginButton">
+                Register
               </button>
             </form>
           </div>

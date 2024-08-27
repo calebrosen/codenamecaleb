@@ -16,7 +16,6 @@ exports.login = async (req, res) => {
       const user = results[0][0]; 
 
       if (user) {
-        console.log('Login worked');
 
         //94 is admin groupID
         const name = user.name;

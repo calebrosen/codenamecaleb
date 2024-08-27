@@ -3,15 +3,21 @@ const connectToDB = require('../models/db');
 exports.addNewUser = async (req, res) => {
     try {
         const db = await connectToDB();
-        const { username, password } = req.body;
+        const { registerName, registerEmail, registerPassword } = req.body;
 
-        // Example query to add a new user
-        db.query('INSERT INTO users (username, password) VALUES (?, ?)', [username, password], (err, results) => {
+        db.query('CALL Register(?, ?, ?)', [registerName, registerEmail, registerPassword], (err, results) => {
             if (err) {
-                return res.status(500).json({ error: err.message });
-            }
-            res.json({ message: 'User added successfully', userId: results.insertId });
+                return res
+                  .status(500)
+                  .json({ message: "Database error", error: err.message });
+              }
+              const successMsg = results[0][0]; 
+        
+              if (successMsg) {
+                return res.json({  successMsg });
+              }
         });
+
     } catch (err) {
         res.status(500).json({ error: 'Database connection failed' });
     }
