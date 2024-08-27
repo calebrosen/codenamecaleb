@@ -7,12 +7,13 @@ import {
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import axios from "axios";
 import { jwtDecode } from "jwt-decode";
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { slide as Menu } from "react-burger-menu";
 import Modal from "react-modal";
 import Swal from "sweetalert2";
 import "sweetalert2/dist/sweetalert2.min.css";
 import "./Menu.css";
+import { UserContext } from "./UserContext";
 
 Modal.setAppElement("#root");
 
@@ -25,6 +26,7 @@ const AccountComponent = ({ closeMenu }) => {
   const [registerEmail, setRegisterEmail] = useState("");
   const [registerPassword, setRegisterPassword] = useState("");
   const [registerName, setRegisterName] = useState("");
+  const { userID, setUserID } = useContext(UserContext);
 
   const OpenModal = () => {
     closeMenu();
@@ -133,8 +135,10 @@ const AccountComponent = ({ closeMenu }) => {
       const currentTime = Date.now() / 1000;
       if (decoded.exp > currentTime) {
         setLoggedInState(true);
+        setUserID(decoded.id);
       } else {
         setLoggedInState(false);
+        localStorage.removeItem("token");
       }
     } catch (error) {
       console.error("Token decoding failed:", error);
@@ -150,10 +154,10 @@ const AccountComponent = ({ closeMenu }) => {
     return (
       <div className="auth menu-item">
         <div onClick={OpenModal}>
-          <span className="pointer">
+          <a className="pointer">
             <FontAwesomeIcon icon={faUserCircle} />
             &nbsp;Login/Register
-          </span>
+          </a>
         </div>
         <Modal
           isOpen={isModalOpen}
