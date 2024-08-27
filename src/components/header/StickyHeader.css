@@ -66,7 +66,7 @@
   padding: 20px;
   background-color: #353535;
   border-radius: 8px;
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
   margin: auto;
   color: white;
   position: relative;
@@ -113,10 +113,11 @@
 
 .inputText {
   color: #333;
+  border-radius:7px;
 }
 
 .inputGroup input:focus {
-  border-color: #007bff;
+  border-color: #fff;
   outline: none;
 }
 
@@ -127,8 +128,8 @@
   font-size: 1rem;
   font-weight: bold;
   color: #fff;
-  background-color: #007bff;
-  border: none;
+  background: linear-gradient(40deg, #222222, #c8425b);
+  border-color: #000000;
   border-radius: 4px;
   cursor: pointer;
   transition: background-color 0.3s ease;

@@ -10,6 +10,8 @@ import { jwtDecode } from "jwt-decode";
 import React, { useEffect, useState } from "react";
 import { slide as Menu } from "react-burger-menu";
 import Modal from "react-modal";
+import Swal from "sweetalert2";
+import "sweetalert2/dist/sweetalert2.min.css";
 import "./StickyHeader.css";
 
 Modal.setAppElement("#root");
@@ -38,14 +40,33 @@ const AccountComponent = ({ closeMenu }) => {
         password,
       });
       
+      const name = response.data.name;
       const token = response.data.token;
+
       localStorage.setItem("token", token);
       closeModal();
-      checkLoginState();
+
+      Swal.fire({
+        title: `Welcome back, ${name}.`,
+        showConfirmButton: false,
+        icon: "success",
+        background: "#333",
+        color: "#fff",
+        timer: 3000
+      })
       
     } catch (error) {
       console.error("Login failed:", error.response.data.message);
-      alert("Login failed. Please check your credentials.");
+      Swal.fire({
+        title: "Oh no! Something happened.",
+        showConfirmButton: true,
+        text: "We couldn't log you in. Check your email and password and make sure you entered them correctly.",
+        icon: "error",
+        background: "#333",
+        color: "#fff",
+        confirmButtonText: "OK",
+        confirmButtonColor: "#9e3c4e",
+      })
     }
   };
 

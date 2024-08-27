@@ -19,15 +19,16 @@ exports.login = async (req, res) => {
         console.log('Login worked');
 
         //94 is admin groupID
-        const role = user.group_id === 94 ? 'admin' : 'user';
-
+        const name = user.name;
+        const groupID = user.group_id;
+        
         const token = jwt.sign(
-          { id: user.id, username: user.username, role: role }, 
+          { id: user.id, username: user.username, groupID: user.group_id}, 
           process.env.JWT_SECRET,
           { expiresIn: "6h" }
         );
 
-        return res.json({ token });
+        return res.json({ token, name, groupID });
       } else {
         return res.status(401).json({ message: "Invalid credentials" });
       }
