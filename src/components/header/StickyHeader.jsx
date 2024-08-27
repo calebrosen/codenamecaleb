@@ -41,6 +41,7 @@ const AccountComponent = ({ closeMenu }) => {
       const token = response.data.token;
       localStorage.setItem("token", token);
       closeModal();
+      checkLoginState();
       
     } catch (error) {
       console.error("Login failed:", error.response.data.message);
@@ -48,7 +49,7 @@ const AccountComponent = ({ closeMenu }) => {
     }
   };
 
-  useEffect(() => {
+  const checkLoginState = () => {
     const token = localStorage.getItem("token");
 
     if (!token) {
@@ -68,6 +69,10 @@ const AccountComponent = ({ closeMenu }) => {
       console.error("Token decoding failed:", error);
       setLoggedInState(false);
     }
+  }
+
+  useEffect(() => {
+    checkLoginState();
   }, []);
 
   if (!loggedInState) {
