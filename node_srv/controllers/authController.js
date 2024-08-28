@@ -1,11 +1,11 @@
 const jwt = require("jsonwebtoken");
-const connectToDB = require("../models/db"); 
+const connectToDB = require("../models/db");
 
 exports.login = async (req, res) => {
   const { email, password } = req.body;
 
   try {
-    const db = await connectToDB(); 
+    const db = await connectToDB();
 
     db.query("CALL Login(?, ?)", [email, password], (err, results) => {
       if (err) {
@@ -13,10 +13,10 @@ exports.login = async (req, res) => {
           .status(500)
           .json({ message: "Database error", error: err.message });
       }
-      const user = results[0][0]; 
+      const user = results[0][0];
 
       if (user) {
-        
+
         const name = user.name;
         const groupID = user.group_id;
         

@@ -56,10 +56,6 @@
   text-decoration: none;
 }
 
-.bm-item-list a:hover {
-  color: #ccc;
-}
-
 .Modal {
   width: 100%;
   max-width: 600px;
@@ -72,7 +68,7 @@
   position: relative;
 }
 
-/* Overlay */
+
 .Overlay {
   background-color: rgba(0, 0, 0, 0.75);
   position: fixed;
@@ -121,22 +117,23 @@
   outline: none;
 }
 
-/* Login button */
 .loginButton {
   width: 100%;
-  padding: 10px;
-  font-size: 1rem;
+  padding: 8px 24px;
+  font-size: 1.35rem;
   font-weight: bold;
   color: #fff;
-  background: linear-gradient(40deg, #222222, #c8425b);
-  border-color: #000000;
-  border-radius: 4px;
+  background: linear-gradient(40deg, #444444, #c8425b);
+  border: 2px solid transparent;
+  border-radius: 6px;
   cursor: pointer;
-  transition: background-color 0.3s ease;
+  transition: border-color 0.3s ease, transform 0.3s ease;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
 .loginButton:hover {
-  background-color: #0056b3;
+  border-color: #fff;
+  transform: scale(1.03);
 }
 
 .registerText {

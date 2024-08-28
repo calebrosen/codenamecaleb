@@ -21,31 +21,28 @@
   }
   
   .file-input label {
-    display: block;
-    position: relative;
     width: auto;
-    padding: 0px 0.5em;
-    height: 50px;
-    border-radius: 15px;
-    background: linear-gradient(40deg, #222222, #c8425b);
-    box-shadow: 0 4px 7px rgba(0, 0, 0, 0.4);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: #fff;
+    padding: 12px 24px;
+    font-size: 1.5rem;
     font-weight: bold;
+    color: #fff;
+    background: linear-gradient(40deg, #444444, #c8425b);
+    border: 2px solid transparent;
+    border-radius: 6px;
     cursor: pointer;
-    transition: transform 0.2s ease-out;
+    transition: border-color 0.3s ease, transform 0.3s ease;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   }
   
   input:hover + label,
   input:focus + label {
+    border-color: #fff;
     transform: scale(1.05);
   }
   
   input:focus + label {
-    outline: 1px solid #000;
-    outline: -webkit-focus-ring-color auto 2px;
+    border-color: #fff;
+    transform: scale(1.05);
   }
   
   .wasted-overlay-effect {
@@ -131,22 +128,20 @@
     display: block;
     position: relative;
     width: auto;
-    height: 50px;
-    border-radius: 15px;
-    font-size: inherit;
-    border: none;
-    background: linear-gradient(40deg, #222222, #c8425b);
-    box-shadow: 0 4px 7px rgba(0, 0, 0, 0.4);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: #fff;
+    padding: 12px 24px;
+    font-size: 1.5rem;
     font-weight: bold;
+    color: #fff;
+    background: linear-gradient(40deg, #444444, #c8425b);
+    border: 2px solid transparent;
+    border-radius: 6px;
     cursor: pointer;
-    transition: transform 0.2s ease-out;
+    transition: border-color 0.3s ease, transform 0.3s ease;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   }
   
   .download-button:hover {
+    border-color: #fff;
     transform: scale(1.05);
   }
   
@@ -157,8 +152,8 @@
   }
   
   .download-button-container:focus {
-    outline: 1px solid #000;
-    outline: -webkit-focus-ring-color auto 2px;
+    border-color: #fff;
+    transform: scale(1.05);
   }
 
 

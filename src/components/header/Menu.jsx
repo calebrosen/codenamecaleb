@@ -153,7 +153,7 @@ const AccountComponent = ({ closeMenu }) => {
   if (!loggedInState) {
     return (
       <div className="auth menu-item">
-        <div onClick={OpenModal}>
+        <div onClick={OpenModal} id="loginOrRegister">
           <a className="pointer">
             <FontAwesomeIcon icon={faUserCircle} />
             &nbsp;Login/Register

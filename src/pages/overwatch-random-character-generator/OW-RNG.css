@@ -1,22 +1,19 @@
 .generateButton {
-    color: white;
-    padding: 10px 20px;
-    border: none;
-    height: 50px;
-    border-radius: 15px;
-    font-size: inherit;
-    border: none;
-    background: linear-gradient(40deg, #222222, #c8425b);
-    box-shadow: 0 4px 7px rgba(0, 0, 0, 0.4);
-    color: #fff;
-    font-weight: bold;
-    cursor: pointer;
-    font-size: 16px;
-    cursor: pointer;
-    transition: transform 0.25s ease-out;
+  width: auto;
+  padding: 12px 20px;
+  font-size: 1.25rem;
+  font-weight: bold;
+  color: #fff;
+  background: linear-gradient(40deg, #444444, #c8425b);
+  border: 2px solid transparent;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: border-color 0.3s ease, transform 0.3s ease;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   }
   
   .generateButton:hover {
+    border-color: #fff;
     transform: scale(1.05);
   }
   
