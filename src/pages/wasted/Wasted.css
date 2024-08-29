@@ -99,6 +99,11 @@
     -webkit-text-stroke: 0.75px black;
     color: rgb(212, 7, 7);
   }
+
+  h1.wastedh1 {
+    font-family: "Pricedown Bl", sans-serif;
+    font-size: 4.5rem;
+  }
   
   .wasted-text {
     display: block;

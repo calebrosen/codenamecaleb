@@ -1,8 +1,8 @@
 import {
-  faBars,
-  faHome,
-  faUser,
-  faUserCircle,
+    faBars,
+    faHome,
+    faUser,
+    faUserCircle,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import axios from "axios";
@@ -67,7 +67,7 @@ const AccountComponent = ({ closeMenu }) => {
         title: `Welcome back, ${name}.`,
         showConfirmButton: false,
         icon: "success",
-        background: "#333",
+        background: "#212529",
         color: "#fff",
         timer: 3000,
       });
@@ -77,7 +77,7 @@ const AccountComponent = ({ closeMenu }) => {
         showConfirmButton: true,
         text: "We couldn't log you in. Check your email and password and make sure you entered them correctly.",
         icon: "error",
-        background: "#333",
+        background: "#212529",
         color: "#fff",
         confirmButtonText: "OK",
         confirmButtonColor: "#9e3c4e",
@@ -104,7 +104,7 @@ const AccountComponent = ({ closeMenu }) => {
         title: `Welcome, ${registerName}.`,
         showConfirmButton: false,
         icon: "success",
-        background: "#333",
+        background: "#212529",
         color: "#fff",
         timer: 3000,
       });
@@ -115,7 +115,7 @@ const AccountComponent = ({ closeMenu }) => {
         showConfirmButton: true,
         text: "We couldn't register you.",
         icon: "error",
-        background: "#333",
+        background: "#212529",
         color: "#fff",
         confirmButtonText: "OK",
         confirmButtonColor: "#9e3c4e",

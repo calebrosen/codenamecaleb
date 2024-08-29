@@ -45,8 +45,7 @@
 }
 
 .bm-menu {
-  background: #333333e7; 
-  
+  background: #333; 
   font-size: 1.15rem;
 }
 
@@ -108,7 +107,7 @@
 }
 
 .inputText {
-  color: #333;
+  color: #212529;
   border-radius:7px;
 }
 

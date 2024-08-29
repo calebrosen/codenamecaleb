@@ -41,11 +41,25 @@
   padding: 10px;
 }
 
-h1 {
+h1.vacation-expense {
     font-family: 'Vacation', sans-serif;
     font-size: 4rem;
 }
 
-h2 {
-    font-size:0.2rem;
-}
+.inputVacationName {
+    position: relative;
+    padding: 8px 14px;
+    font-size: 2.1rem;
+    border: 2px solid #ccc;
+    border-radius: 20px;
+    outline: none;
+    color: #212529;
+    transition: all 0.3s ease;
+    background-color: #f0f0f0;
+  }
+  
+  .vacationNameLabel {
+    font-size: 2rem;
+    margin: 2rem;
+    display: block;
+  }

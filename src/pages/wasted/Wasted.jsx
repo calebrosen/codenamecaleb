@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import "./Wasted.css";
 import Swal from "sweetalert2";
 import "sweetalert2/dist/sweetalert2.min.css";
+import "./Wasted.css";
 
 function Wasted() {
   const [image, setImage] = useState(null);
@@ -107,7 +107,7 @@ function Wasted() {
     <div className="wasted-main-container">
     <link href="https://fonts.cdnfonts.com/css/pricedown" rel="stylesheet"></link>
       <div className="wasted-about-text-container">
-        <h1>GTA V Wasted Image Generator</h1>
+        <h1 className='wastedh1'>GTA V Wasted Image Generator</h1>
         <span className="wasted-about-text">
           Want to get that perfect 'wasted' text overlayed onto your image, but
           don't have the time? No problem! Just upload your image, and we'll
