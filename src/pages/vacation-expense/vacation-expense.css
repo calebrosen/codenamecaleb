@@ -49,6 +49,23 @@
   padding-top: 2rem;
 }
 
+.previousVacations {
+  font-size: 1.25rem;
+  margin-top: 2rem;
+}
+
+.previousVacations:before {
+  content:'⤹';
+  position: fixed;
+  margin-top:1.1rem;
+  margin-left:1rem;
+  font-size: 1.75rem;
+}
+
+.loadedVacationsText {
+  margin-top:1.3rem;
+}
+
 .mainInfoText {
   font-size: 1.8rem;
   padding: 15px;

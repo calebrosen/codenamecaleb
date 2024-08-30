@@ -92,10 +92,10 @@ const VacationExpenseCalculator = () => {
           Start a new vacation expense calculator
         </button>
         <div className='previousVacations'>
-          or choose a previous one:
+          &nbsp;or choose a previous one:
           {vacations.length > 0 ? (
           vacations.map((vacation, index) => (
-            <div key={index}>
+            <div key={index} data-custom-vacation-id={vacation.id} className='loadedVacationsText'>
               {vacation.vacation_name}
             </div>
           ))
