@@ -11,6 +11,14 @@
   transition: border-color 0.3s ease, transform 0.3s ease;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   }
+
+  html, body {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    background-color: #212529;
+  }
+  
   
   .generateButton:hover {
     border-color: #fff;
