@@ -11,10 +11,12 @@ exports.createName = async (req, res) => {
                   .status(500)
                   .json({ message: "Database error", error: err.message });
               }
-              const successMsg = results[0][0];
-        
-              if (successMsg) {
-                return res.json({  successMsg });
+              const result = results[0][0];
+
+              if (result) {
+                const vacationID = result.vacationID;
+
+                return res.json({  vacationID });
               }
         });
 
@@ -38,6 +40,28 @@ exports.fetchVacations = async (req, res) => {
         
               if (vacations) {
                 return res.json({  vacations });
+              }
+        });
+
+    } catch (err) {
+        res.status(500).json({ error: 'Database connection failed' });
+    }
+};
+
+exports.insertToFromAndDates = async (req, res) => {
+    try {
+        const db = await connectToDB();
+        const { vacationID, departDate, returnDate, from, to } = req.body;
+        db.query('CALL InsertUpdateVacationsInfo(?, ?, ?, ?, ?)', [vacationID, departDate, returnDate, from, to], (err, results) => {
+            if (err) {
+                return res
+                  .status(500)
+                  .json({ message: "Database error", error: err.message });
+              }
+              const result = results[0];
+        
+              if (result) {
+                return res.json({  result });
               }
         });
 

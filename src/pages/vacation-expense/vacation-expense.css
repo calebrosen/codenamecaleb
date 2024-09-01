@@ -39,6 +39,10 @@
   transform: scale(1.05);
 }
 
+.vacationDate {
+  margin-top: 1rem;
+}
+
 .centeredContainer {
   display: flex;
   flex-direction: column;
@@ -64,6 +68,7 @@
 
 .loadedVacationsText {
   margin-top:1.3rem;
+  cursor: pointer;
 }
 
 .mainInfoText {
@@ -83,7 +88,19 @@ h1.vacation-expense {
     font-size: 4rem;
 }
 
-.inputVacationName {
+.flyingFrom {
+  margin: 0px 1rem 0px 1rem;
+}
+
+.flyingTo {
+  margin: 0px 1rem 0px 1rem;
+}
+
+.proceedButton {
+
+}
+
+.inputVacation1 {
     position: relative;
     padding: 8px 14px;
     font-size: 2.1rem;
@@ -96,6 +113,12 @@ h1.vacation-expense {
   }
   
   .vacationNameLabel {
+    font-size: 2rem;
+    margin: 2rem;
+    display: block;
+  }
+
+  .label1 {
     font-size: 2rem;
     margin: 2rem;
     display: block;
