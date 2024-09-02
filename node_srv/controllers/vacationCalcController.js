@@ -69,3 +69,24 @@ exports.insertToFromAndDates = async (req, res) => {
         res.status(500).json({ error: 'Database connection failed' });
     }
 };
+
+exports.fetchPreviousVacation = async (req, res) => {
+    try { 
+        const db = await connectToDB();
+        const { vacationID } = req.body;
+        db.query('Call FetchPreviousVacations(?)', [vacationID], (err,results) => {
+            if (err) {
+                return res
+                  .status(500)
+                  .json({ message: "Database error", error: err.message });
+              }
+              const result = results[0];
+        
+              if (result) {
+                return res.json({  result });
+              }
+        });
+    } catch (err) {
+        res.status(500).json({ error: 'Database connection failed' });
+    }
+};

@@ -105,7 +105,7 @@ const VacationExpenseCalculator = () => {
           const createVacation = await axios.post(
             `${process.env.REACT_APP_API_URL}/node/vacationCalc/createVacationName`,
             {
-              userID,
+              userID, 
               vacationName,
             }
           );
