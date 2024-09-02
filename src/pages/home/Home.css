@@ -348,3 +348,13 @@ h1.about-me:hover {
   display: flex;
   flex-direction: column;
 }
+
+.timeSinceCreation {
+  font-size: 2rem;
+  text-align: center;
+  padding: 0.5rem 1rem 3.5rem 1rem;
+}
+
+.daysDev {
+  color:#00ffb3 !important;
+}

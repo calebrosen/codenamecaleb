@@ -321,11 +321,11 @@ const MenuComponent = ({ children }) => {
                 <a href="gta-v-wasted-overlay-generator">Wasted Generator</a>
               </span>
             </div>
-            <div className="menu-item">
+            {/* <div className="menu-item">
               <a href="vacation-expense-calculator">
                 <span>Vacation Expense Calculator</span>
               </a>
-            </div>
+            </div> */}
           </div>
         </Menu>
       </div>

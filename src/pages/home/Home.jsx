@@ -10,7 +10,7 @@ import "./Home.css";
 
 const HomePage = () => {
   const [imageSrc, setImageSrc] = useState(AvatarDrawing);
-  const [setClicks] = useState(0);
+  const [clicks, setClicks] = useState(0);
   const [particles, setParticles] = useState([]);
   const [fadeClass, setFadeClass] = useState("");
   const [showEasterEggPopup, setShowEasterEggPopup] = useState(false);
@@ -20,42 +20,75 @@ const HomePage = () => {
   const [scrollTriggeredByClick, setScrollTriggeredByClick] = useState(false);
 
   const AboutMe = () => {
+    const [timeDifference, setTimeDifference] = useState('');
+
+    useEffect(() => {
+      const originDate = new Date('2024-08-15T12:10');
+  
+      const updateTimeDifference = () => {
+        const now = new Date();
+        const diff = now - originDate;
+  
+        const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+        const minutes = Math.floor((diff / 1000 / 60) % 60);
+        const seconds = Math.floor((diff / 1000) % 60);
+  
+        setTimeDifference(
+          `<span style="color: #FF2A6D; text-shadow: 1px 1px 2px #000;">${days} days</span>, 
+           <span style="color: #FF8C42; text-shadow: 1px 1px 2px #000;">${hours} hours</span>, 
+           <span style="color: #5C1A73; text-shadow: 1px 1px 2px #000;">${minutes} minutes</span>, 
+           <span style='color: #007A7F; text-shadow: 1px 1px 2px #000;'>${seconds} seconds</span>`
+        );
+      };
+
+      updateTimeDifference(); 
+  
+      const intervalId = setInterval(updateTimeDifference, 1000); // updating date every second
+  
+      return () => clearInterval(intervalId);
+    }, []);
+
     return (
-      <Element name="aboutMeSection">
-        <div className="about-container">
-          <div className="profile-picture" onClick={handleEasterEggClick}>
-            <img
-              src={imageSrc}
-              id="avatarImg"
-              className={`${fadeClass} easterEggAvatar`}
-              alt="Profile Picture"
-            />
-            {particles.map((p) => (
-              <MagicEffect key={p.id} x={p.x} y={p.y} />
-            ))}
+      <div>
+        <Element name="aboutMeSection">
+          <div className="about-container">
+            <div className="profile-picture" onClick={handleEasterEggClick}>
+              <img
+                src={imageSrc}
+                id="avatarImg"
+                className={`${fadeClass} easterEggAvatar`}
+                alt="Profile Picture"
+              />
+              {particles.map((p) => (
+                <MagicEffect key={p.id} x={p.x} y={p.y} />
+              ))}
+            </div>
+            <div className="about-content">
+              <h1 className="about-me">Hey there! I'm Caleb.</h1>
+              <p>
+                I’m a full-stack developer who loves turning ideas into real things - codenamecaleb is proof of that.
+                I'm adding new things as I think of them, so feel free to
+                look around.
+              </p>
+              
+              <p>
+                By the way, you can view the entire source code of this website{" "}
+                <a
+                  href="https://github.com/calebrosen/codenamecaleb"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  here
+                </a>
+                , if you're interested.
+              </p>
+            </div>
+            {showEasterEggPopup && <EasterEggPopup />}
           </div>
-          <div className="about-content">
-            <h1 className="about-me">Hey there! I'm Caleb.</h1>
-            <p>
-              I’m a full-stack developer who loves turning ideas into real things - codenamecaleb is proof of that.
-              I'm adding new things as I think of them, so feel free to
-              look around.
-            </p>
-            <p>
-              By the way, you can view the entire source code of this website{" "}
-              <a
-                href="https://github.com/calebrosen/codenamecaleb"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                here
-              </a>
-              , if you're interested.
-            </p>
-          </div>
-          {showEasterEggPopup && <EasterEggPopup />}
-        </div>
-      </Element>
+        </Element>
+        <div className='timeSinceCreation'>This website has been in development for <span dangerouslySetInnerHTML={{ __html: timeDifference }} />.</div>
+      </div>
     );
   };
 
