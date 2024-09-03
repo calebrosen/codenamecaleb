@@ -112,6 +112,13 @@ html, body {
     font-family: "Pricedown Bl", sans-serif;
     font-size: 4.5rem;
   }
+
+  @media screen and (max-width: 800px) {
+    h1.wastedh1 {
+      font-family: "Pricedown Bl", sans-serif;
+      font-size: 3rem;
+    }
+  }
   
   .wasted-text {
     display: block;

@@ -11,4 +11,7 @@ router.post('/fetchVacations', vacationCalcController.fetchVacations);
 // import/update vacation start/end and from/to
 router.post('/insertToFromAndDates', vacationCalcController.insertToFromAndDates);
 
+// loading previous vacation
+router.post('/loadPreviousVacation', vacationCalcController.loadPreviousVacation);
+
 module.exports = router;

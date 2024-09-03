@@ -70,11 +70,11 @@ exports.insertToFromAndDates = async (req, res) => {
     }
 };
 
-exports.fetchPreviousVacation = async (req, res) => {
-    try { 
+exports.loadPreviousVacation = async (req, res) => {
+    try {
         const db = await connectToDB();
         const { vacationID } = req.body;
-        db.query('Call FetchPreviousVacations(?)', [vacationID], (err,results) => {
+        db.query('Call RetrieveVacation(?)', [vacationID], (err,results) => {
             if (err) {
                 return res
                   .status(500)

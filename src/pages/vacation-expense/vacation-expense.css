@@ -96,9 +96,6 @@ h1.vacation-expense {
   margin: 0px 1rem 0px 1rem;
 }
 
-.proceedButton {
-
-}
 
 .inputVacation1 {
     position: relative;
@@ -123,3 +120,8 @@ h1.vacation-expense {
     margin: 2rem;
     display: block;
   }
+
+  input {
+    color: #333;
+  }
+  

@@ -1,7 +1,7 @@
 import {
-  faUmbrellaBeach,
-  faPlaneDeparture,
   faPlaneArrival,
+  faPlaneDeparture,
+  faUmbrellaBeach,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import axios from "axios";
@@ -21,13 +21,20 @@ const VacationExpenseCalculator = () => {
   const [returnDate, setReturnDate] = useState("");
   const [from, setFrom] = useState("");
   const [to, setTo] = useState("");
-  const [vacationID, setVacationID] = useState('');
+  const [vacationID, setVacationID] = useState("");
+  const [vacationState, setVacationState] = useState("");
 
   useEffect(() => {
     if (userID) {
       fetchVacations();
     }
   }, [userID]);
+
+  useEffect(() => {
+    if (vacationState) {
+      RestorePreviousVacation();
+    }
+  }, [vacationState]);
 
   const fetchVacations = useCallback(() => {
     axios
@@ -55,6 +62,53 @@ const VacationExpenseCalculator = () => {
       });
   }, [userID]);
 
+  const LoadPreviousVacation = async (e) => {
+    const element = e.target;
+    const vacationIDTemp = element.getAttribute("data-custom-vacation-id");
+    setVacationID(vacationIDTemp);
+    try {
+      const response = await axios.post(
+        `${process.env.REACT_APP_API_URL}/node/vacationCalc/loadPreviousVacation`,
+        {
+          vacationID: vacationIDTemp,
+        }
+      );
+
+      const result = response.data.result;
+  
+      if (result && result[0] && result[0].hasOwnProperty('state')) {
+        const stateToSet = result[0].state;
+        setVacationState(stateToSet);
+      } else {
+        throw new Error('Invalid vacation data received.');
+      }
+    } catch (error) {
+      console.error("Error loading vacation:", error);
+      Swal.fire({
+        title: "Oh no! Something happened.",
+        showConfirmButton: true,
+        text: "We weren't able to load the vacation.",
+        icon: "error",
+        background: "#212529",
+        color: "#fff",
+        confirmButtonText: "OK",
+        confirmButtonColor: "#9e3c4e",
+      });
+    }
+  };
+  
+  const RestorePreviousVacation = () => {
+    switch (vacationState) {
+      case "name":
+        setShowToAndFrom(true);
+        break;
+      case "toAndFrom":
+
+        break;
+      default:
+    }
+  };
+
   const openLoginOrRegisterMenu = useCallback(() => {
     document.getElementById("loginOrRegister").click();
   }, []);
@@ -74,8 +128,8 @@ const VacationExpenseCalculator = () => {
   const formatDateForSQL = (dateString) => {
     const date = new Date(dateString);
     const year = date.getFullYear();
-    const month = String(date.getMonth() + 1).padStart(2, '0');
-    const day = String(date.getDate()).padStart(2, '0');
+    const month = String(date.getMonth() + 1).padStart(2, "0");
+    const day = String(date.getDate()).padStart(2, "0");
     return `${year}-${month}-${day}`;
   };
 
@@ -105,7 +159,7 @@ const VacationExpenseCalculator = () => {
           const createVacation = await axios.post(
             `${process.env.REACT_APP_API_URL}/node/vacationCalc/createVacationName`,
             {
-              userID, 
+              userID,
               vacationName,
             }
           );
@@ -239,6 +293,7 @@ const VacationExpenseCalculator = () => {
                 key={vacation.id}
                 data-custom-vacation-id={vacation.id}
                 className="loadedVacationsText"
+                onClick={LoadPreviousVacation}
               >
                 {vacation.vacation_name}
               </div>
@@ -289,11 +344,8 @@ const VacationExpenseCalculator = () => {
                   <span className="label1">
                     Enter where you're traveling from
                   </span>
-                  <FontAwesomeIcon
-                    icon={faPlaneDeparture}
-                    flip="horizontal"
-                    size="3x"
-                  />
+
+                  <FontAwesomeIcon icon={faPlaneDeparture} size="3x" />
                   <input
                     type="text"
                     className="inputVacation1 flyingFrom"
@@ -301,11 +353,7 @@ const VacationExpenseCalculator = () => {
                     value={from}
                     onChange={handleFromChange}
                   />
-                  <FontAwesomeIcon
-                    icon={faPlaneArrival}
-                    flip="horizontal"
-                    size="3x"
-                  />
+                  <FontAwesomeIcon icon={faPlaneArrival} size="3x" />
                 </label>
                 <div className="vacationDate">
                   When are you leaving?&nbsp;
@@ -319,7 +367,11 @@ const VacationExpenseCalculator = () => {
                   <span className="label1">
                     Enter where you're traveling to
                   </span>
-                  <FontAwesomeIcon icon={faPlaneDeparture} size="3x" />
+                  <FontAwesomeIcon
+                    icon={faPlaneDeparture}
+                    flip="horizontal"
+                    size="3x"
+                  />
                   <input
                     type="text"
                     className="inputVacation1 flyingTo"
@@ -327,7 +379,11 @@ const VacationExpenseCalculator = () => {
                     value={to}
                     onChange={handleToChange}
                   />
-                  <FontAwesomeIcon icon={faPlaneArrival} size="3x" />
+                  <FontAwesomeIcon
+                    icon={faPlaneArrival}
+                    flip="horizontal"
+                    size="3x"
+                  />
                 </label>
                 <div className="vacationDate">
                   When are you returning?&nbsp;
@@ -338,7 +394,10 @@ const VacationExpenseCalculator = () => {
                   />
                 </div>
               </div>
-              <div className="primaryButton" onClick={ProceedFromTravelToAndFrom}>
+              <div
+                className="primaryButton"
+                onClick={ProceedFromTravelToAndFrom}
+              >
                 Proceed
               </div>
             </div>
