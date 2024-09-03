@@ -113,11 +113,19 @@
   animation: vaporwaveGlow 2s infinite;
 }
 
-.about-container { 
+.about-container {
   border-radius: 10px;
   display: flex;
   flex-wrap: wrap;
   padding: 5rem 5px;
+  flex-direction: row;
+}
+
+@media (max-width: 800px) {
+  .about-container {
+    flex-direction: column;
+    text-align: center;
+  }
 }
 
 .arrowContainer {
