@@ -1,11 +1,23 @@
+import FileDownloadIcon from '@mui/icons-material/FileDownload';
+import FileUploadIcon from '@mui/icons-material/FileUpload';
 import React, { useState } from "react";
+import { ReactCompareSlider, ReactCompareSliderImage } from 'react-compare-slider';
 import Swal from "sweetalert2";
 import "sweetalert2/dist/sweetalert2.min.css";
+import Biker from "../../img/wasted/biker.jpg";
+import BikerWasted from "../../img/wasted/biker_wasted.jpg";
+import Skateboarder from "../../img/wasted/skateboarder.jpg";
+import SkateboarderWasted from "../../img/wasted/skateboarder_wasted.jpg";
 import "./Wasted.css";
 
 function Wasted() {
   const [image, setImage] = useState(null);
-  const [uploadLabel, setUploadLabel] = useState("Upload an image");
+  const [uploadLabel, setUploadLabel] = useState(
+    <span>
+      <FileUploadIcon style={{ marginRight: "8px" }} />
+      Upload an Image
+    </span>
+  );
 
   const handleImageUpload = (event) => {
     const file = event.target.files[0];
@@ -27,7 +39,12 @@ function Wasted() {
         } else {
                     setImage(objectURL);
         }
-        setUploadLabel("Change Image");
+        setUploadLabel(
+          <span>
+          <FileUploadIcon style={{ marginRight: "8px" }} />
+            Change Image
+          </span>
+        );
       };
 
       image.src = objectURL;
@@ -104,33 +121,45 @@ function Wasted() {
   };
 
   return (
-    <div className="wasted-main-container">
+    <div className="wasted-main-container fade-in">
     <link href="https://fonts.cdnfonts.com/css/pricedown" rel="stylesheet"></link>
-      <div className="wasted-about-text-container">
+      <div className="wasted-about-text-container glass-effect shadow">
         <h1 className='wastedh1'>GTA V Wasted Image Generator</h1>
         <span className="wasted-about-text">
-          Want to get that perfect 'wasted' text overlayed onto your image, but
-          don't have the time? No problem! Just upload your image, and we'll
-          take care of the rest.
+          Just upload your image and get the perfect <span className='wasted-text'>Wasted</span> text overlayed everytime.
         </span>
       </div>
       <div className="file-input">
         <input
           type="file"
           id="file"
-          className="file"
+          className="file shadow"
           accept="image/*"
           onChange={handleImageUpload}
         />
-        <label
-          htmlFor="file"
-          dangerouslySetInnerHTML={{ __html: uploadLabel }}
-        ></label>
+      <label htmlFor="file">
+        {typeof uploadLabel === 'string' ? uploadLabel : uploadLabel}
+      </label>
         {image && (
           <button onClick={handleDownload} className="download-button">
-            Process and Download
+          <FileDownloadIcon /> Process and Download
           </button>
         )}
+      </div>
+      <div className='flexboxWasted'>
+        <div className='wastedExample shadow' id='example1'>
+        <ReactCompareSlider style={{borderRadius: "8px"}}
+          itemOne={<ReactCompareSliderImage src={Biker} alt="Biker that is faceplanted onto a street sign" />}
+          itemTwo={<ReactCompareSliderImage src={BikerWasted} alt="Biker with 'Wasted' displayed over the top" />}
+        />
+        </div>
+        <div className='wastedExample shadow' id='example2'>
+        <ReactCompareSlider style={{borderRadius: "8px"}}
+          itemOne={<ReactCompareSliderImage src={Skateboarder} alt="Skateboarder that is about to fall" />}
+          itemTwo={<ReactCompareSliderImage src={SkateboarderWasted} alt="Skateboarder with 'Wasted' displayed over the top" />}
+
+        />
+        </div>
       </div>
         {image && (
         <>
