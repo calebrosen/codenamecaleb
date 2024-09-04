@@ -129,6 +129,15 @@ function Wasted() {
           Just upload your image and get the perfect <span className='wasted-text'>Wasted</span> text overlayed everytime.
         </span>
       </div>
+      <div className="instructions-container">
+      <h2>How to Create Your Wasted Image</h2>
+      <ol className="instructions-list">
+        <li><strong>Step 1:</strong> Click on the "Upload an Image" button to choose a photo from your device.</li>
+        <li><strong>Step 2:</strong> Make sure your image is at least <strong>500x500 pixels</strong> so the result looks amazing!</li>
+        <li><strong>Step 3:</strong> Once you upload the image, hit "Process and Download" to create your customized image.</li>
+        <li><strong>Step 4:</strong> Download your awesome GTA-style image and share it with your friends!</li>
+      </ol>
+    </div>
       <div className="file-input">
         <input
           type="file"
