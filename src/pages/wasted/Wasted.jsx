@@ -175,29 +175,27 @@ function Wasted() {
               loop={true}
               centeredSlides={true}
               pagination={{ clickable: false }}
+              autoplay={true}
               navigation={true}
               allowTouchMove={false}
               modules={[Navigation]}
-              style={{maxHeight:"425px"}}
             >
               <SwiperSlide className="wastedExample shadow">
                 <div className="slider-container">
-                  <ReactCompareSlider style={{maxHeight:"425px"}}
-                    itemOne={
-                      <ReactCompareSliderImage
-                        src={Biker}
-                        style={{maxHeight:"425px"}}
-                        alt="Biker faceplanted onto a street sign"
-                      />
-                    }
-                    itemTwo={
-                      <ReactCompareSliderImage
-                        src={BikerWasted}
-                        style={{maxHeight:"425px"}}
-                        alt="Biker with 'Wasted' text overlay"
-                      />
-                    }
-                  />
+                <ReactCompareSlider
+                  itemOne={
+                    <ReactCompareSliderImage
+                      src={Biker}
+                      alt="Biker faceplanted onto a street sign"
+                    />
+                  }
+                  itemTwo={
+                    <ReactCompareSliderImage
+                      src={BikerWasted}
+                      alt="Biker with 'Wasted' text overlay"
+                    />
+                  }
+                />
                 </div>
               </SwiperSlide>
 
