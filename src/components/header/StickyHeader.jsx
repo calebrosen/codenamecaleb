@@ -1,8 +1,8 @@
 import {
-    faBars,
-    faHome,
-    faUser,
-    faUserCircle,
+  faBars,
+  faHome,
+  faUser,
+  faUserCircle,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import axios from "axios";

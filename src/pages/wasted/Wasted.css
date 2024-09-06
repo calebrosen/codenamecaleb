@@ -1,198 +1,208 @@
-@import url('https://fonts.cdnfonts.com/css/pricedown');
+@import url("https://fonts.cdnfonts.com/css/pricedown");
 
-html, body {
+html,
+body {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
   background-color: #212529;
+  scroll-behavior: smooth;
+  overflow-x: hidden;
 }
 
-
 .wasted-main-container {
-    text-align: center;
-    padding-top: 3em;
-  }
-  
-  /* hiding default file input*/
-  .file {
-    opacity: 0;
-    width: 0.1px;
-    height: 0.1px;
-    position: absolute;
-  }
+  text-align: center;
+  padding-top: 3em;
+}
 
-  
-  .file-input {
-    display: flex;
-    justify-content: center;
-    margin-bottom: 20px;
-    gap:3em;
-  }
-  
-  .file-input label {
-    width: auto;
-    padding: 12px 24px;
-    font-size: 1.5rem;
-    font-weight: bold;
-    color: #fff;
-    background: linear-gradient(40deg, #444444, #c8425b);
-    border: 2px solid transparent;
-    border-radius: 6px;
-    cursor: pointer;
-    transition: border-color 0.3s ease, transform 0.3s ease;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  }
-  
-  input:hover + label,
-  input:focus + label {
-    border-color: #fff;
-    transform: scale(1.05);
-  }
-  
-  input:focus + label {
-    border-color: #fff;
-    transform: scale(1.05);
-  }
-  
-  .wasted-overlay-effect {
-    position: absolute;
-    width: 150%;
-    height: 23%;
-    background: rgb(0, 0, 0, 0.6);
-    z-index: 1;
-    top: 50%;
-    left: 50%;
-    transform: translate(-45%, -50%);
-    pointer-events: none;
-    mask: url(#wasted-mask);
-    -webkit-mask: url(#wasted-mask); 
-  }
-  
-  .wasted-image-container {
-    width: 0.1px;
-    height: 0.1px;
-    position: fixed;
-    top: 0;
-    left: 0;
-    display: inline-block;
-    margin: 0 auto;
-    border: 1px solid gray;
-    border-radius: 5px;
-    padding: 0;
-    max-width: 60%;
-    overflow: hidden;
-    background-color: transparent;
-  }
-  
-  .gtaVWastedImage {
-    max-width: 100%;
-    height: auto;
-    /* -webkit-filter: grayscale(100%);
+/* hiding default file input*/
+.file {
+  opacity: 0;
+  width: 0.1px;
+  height: 0.1px;
+  position: absolute;
+}
+
+.file-input {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+  gap: 3em;
+}
+
+.file-input label {
+  display: block;
+  position: relative;
+  width: auto;
+  padding: 12px 24px;
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #fff;
+  background: linear-gradient(40deg, #444444, rgb(212, 7, 7));
+  border: 2px solid transparent;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: border-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+input:hover + label,
+input:focus + label {
+  border-color: #fff;
+  transform: scale(1.1);
+  box-shadow: 0 8px 16px rgba(212, 7, 7, 0.5);
+}
+
+input:focus + label {
+  border-color: #fff;
+  transform: scale(1.1);
+  box-shadow: 0 8px 16px rgba(212, 7, 7, 0.5);
+}
+
+.wasted-overlay-effect {
+  position: absolute;
+  width: 150%;
+  height: 23%;
+  background: rgb(0, 0, 0, 0.6);
+  z-index: 1;
+  top: 50%;
+  left: 50%;
+  transform: translate(-45%, -50%);
+  pointer-events: none;
+  mask: url(#wasted-mask);
+  -webkit-mask: url(#wasted-mask);
+}
+
+.wasted-image-container {
+  width: 0.1px;
+  height: 0.1px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  display: inline-block;
+  margin: 0 auto;
+  border: 1px solid gray;
+  border-radius: 5px;
+  padding: 0;
+  max-width: 60%;
+  overflow: hidden;
+  background-color: transparent;
+}
+
+.gtaVWastedImage {
+  max-width: 100%;
+  height: auto;
+  /* -webkit-filter: grayscale(100%);
     filter: grayscale(100%); */
-    margin: 0 auto;
-  }
+  margin: 0 auto;
+}
 
-  h2 {
-    font-size: 3rem;
-  }
-  
-  .wasted-text-container {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
-    z-index: 101;
-    font-family: "Pricedown Bl", sans-serif;
-    pointer-events: none;
-    -webkit-text-stroke: 0.75px black;
-    color: rgb(212, 7, 7);
-  }
+h2 {
+  font-size: 3rem;
+}
 
+.wasted-text-container {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+  z-index: 101;
+  font-family: "Pricedown Bl", sans-serif;
+  pointer-events: none;
+  -webkit-text-stroke: 0.75px black;
+  color: rgb(212, 7, 7);
+}
+
+h1.wastedh1 {
+  font-family: "Pricedown Bl", sans-serif;
+  font-size: 4.5rem;
+}
+
+@media screen and (max-width: 800px) {
   h1.wastedh1 {
     font-family: "Pricedown Bl", sans-serif;
-    font-size: 4.5rem;
+    font-size: 3rem;
   }
+}
 
-  @media screen and (max-width: 800px) {
-    h1.wastedh1 {
-      font-family: "Pricedown Bl", sans-serif;
-      font-size: 3rem;
-    }
-  }
-  
-  .wasted-text {
-    font-family: "Pricedown Bl", sans-serif;
-    z-index: 1;
-    font-size: larger;
-    font-weight: bold;
-    color: rgb(212, 7, 7);
-  }
-  
-  .wasted-about-text {
-    text-wrap: pretty;
-    font-size: 1.25em;
-  }
-  
-  .wasted-about-text-container {
-    max-width: 70%;
-    text-wrap: pretty;
-    text-align: center;
-    background-color: rgba(0, 0, 0, 0.6); 
-    padding: 0.25em 1em 1.5em 1em;
-    border-radius: 6px;
-    margin: 2rem auto;
-  }
-  
-  .download-button {
-    display: block;
-    position: relative;
-    width: auto;
-    padding: 12px 24px;
-    font-size: 1.5rem;
-    font-weight: bold;
-    color: #fff;
-    background: linear-gradient(40deg, #444444, #c8425b);
-    border: 2px solid transparent;
-    border-radius: 6px;
-    cursor: pointer;
-    transition: border-color 0.3s ease, transform 0.3s ease;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  }
-  
-  .download-button:hover {
-    border-color: #fff;
-    transform: scale(1.05);
-  }
-  
-  .download-button-container {
-    display: flex;
-    justify-content: center;
-    margin: 20px 0px 20px 0px;
-  }
-  
-  .download-button-container:focus {
-    border-color: #fff;
-    transform: scale(1.05);
-  }
+.wasted-text {
+  font-family: "Pricedown Bl", sans-serif;
+  z-index: 1;
+  font-size: larger;
+  font-weight: bold;
+  color: rgb(212, 7, 7);
+}
 
-  .glass-effect {
-    background: rgba(255, 255, 255, 0.1);
-    border-radius: 16px;
-    backdrop-filter: blur(10px);
-    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-    border: 1px solid rgba(255, 255, 255, 0.3);
+.wasted-about-text {
+  text-wrap: pretty;
+  font-size: 1.25em;
+}
+
+.wasted-about-text-container {
+  max-width: 70%;
+  text-wrap: pretty;
+  text-align: center;
+  background-color: rgba(0, 0, 0, 0.6);
+  padding: 0.25em 1em 1em 1em;
+  border-radius: 6px;
+  justify-content: center;
+  margin: 0.5rem auto 0 auto;
+}
+
+.download-button {
+  display: block;
+  position: relative;
+  width: auto;
+  padding: 12px 24px;
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #fff;
+  background: linear-gradient(40deg, #444444, rgb(212, 7, 7));
+  border: 2px solid transparent;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: border-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.download-button:hover {
+  border-color: #fff;
+  transform: scale(1.1);
+  box-shadow: 0 8px 16px rgba(212, 7, 7, 0.5);
+}
+
+.download-button-container {
+  display: flex;
+  justify-content: center;
+  margin: 20px 0px 20px 0px;
+}
+
+.download-button-container:focus {
+  border-color: #fff;
+  transform: scale(1.05);
+}
+
+.glass-effect {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 16px;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.3);
 }
 
 @keyframes fadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
 
 .fade-in {
   animation: fadeIn 0.3s ease-in-out;
 }
-
 
 .flexboxWasted {
   margin-top: 3rem;
@@ -201,16 +211,12 @@ html, body {
   gap: 3rem;
 }
 
-.wastedExample {
-  position: relative;
-  background: rgba(255, 255, 255, 0.1);
-  border-radius: 16px;
-  backdrop-filter: blur(10px);
-  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-  border: 1px solid rgba(255, 255, 255, 0.37);
-  padding: 0.08rem;
-  overflow: hidden;
-  max-width: 30%;
+.swiper-button-prev,.swiper-button-next {
+  z-index: 100;
+  border-radius: 7px;
+  color: red;
+  transform: scale(0.5);
+  font-weight: 800;
 }
 
 .shadow {
@@ -218,10 +224,10 @@ html, body {
 }
 
 .instructions-container {
-  text-align: center; 
-  border-radius: 16px; 
-  padding: 2rem; 
-  margin: 2rem auto; 
+  text-align: center;
+  border-radius: 16px;
+  padding: 2rem;
+  margin: 2rem auto;
   background: rgba(255, 255, 255, 0.1);
   backdrop-filter: blur(10px);
   box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
@@ -231,7 +237,7 @@ html, body {
 }
 
 .instructions-list {
-  list-style-type: none; 
+  list-style-type: none;
   padding: 0;
   margin-top: 1rem;
 }
@@ -240,24 +246,133 @@ html, body {
   font-size: 1.2rem;
   line-height: 1.5;
   margin-bottom: 1rem;
-  text-align: left; 
+  text-align: left;
 }
 
 .instructions-list strong {
-  color: #ff6b6b; 
+  color: rgb(255, 40, 40);
 }
 
 .instructions-container h2 {
-  font-size: 2rem; 
-  margin-bottom: 0.5rem; 
+  font-size: 2rem;
+  margin-bottom: 0.5rem;
 }
 
 .instructions-container p {
   font-size: 1.1rem;
-  margin-bottom: 1.5rem; 
+  margin-bottom: 1.5rem;
   color: #f0f0f0;
 }
 
+.carousel-container {
+  margin: 1rem;
+}
+
+.iconsGroup {
+  margin: 2.5rem;
+  display: flex;
+  gap: 10%;
+  justify-content: center;
+}
+
+.iconGroup {
+  text-align: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.centeredContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-bottom: 1rem;
+}
+
+.instructionsAndCarousel {
+  display: flex;
+  gap: 20px;
+  padding: 1rem;
+}
+
+.instructions-container {
+  flex: 1;
+  height: 425px;
+  max-width: 800px;
+}
+
+.carousel-container {
+  flex: 1;
+  object-fit: contain;
+  max-width: 600px;
+  max-height: 425px;
+}
+
+.wastedExample {
+  margin-top: 1rem;
+  padding-bottom: 1rem;
+  object-fit: contain;
+  border-radius: 16px;
+  max-width: 600px;
+  max-height: 425px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.slider-container {
+  width: 100%;
+  max-width: 600px;
+  max-height: 425px;
+  margin: 0 auto;
+  object-fit: contain;
+  height: auto;
+}
+
+img, image {
+  max-height: 425px !important;
+  height: 425px !important;
+  object-fit: contain;
+  aspect-ratio: 600 / 425;
+}
+
+.icon {
+  padding: 1.25rem;
+  background-color: #444;
+  border-radius: 50%;
+  color: white;
+  transition: transform 0.3s ease, background-color 0.3s ease,
+  box-shadow 0.3s ease;
+  display: inline-block;
+}
+
+.iconGroup:hover .icon {
+  background-color: rgb(212, 7, 7);
+  box-shadow: 0 6px 15px rgba(212, 7, 7, 0.5);
+  transform: scale(1.1);
+}
+
+.iconGroup:hover {
+  transform: translateY(-5px);
+}
+
+.iconSubText {
+  font-size: 0.85rem;
+  color: white;
+  margin-top: 0.5rem;
+}
+
+.iconGroup:hover .icon {
+  animation: pulse 1s infinite;
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
 
 @media screen and (max-width: 800px) {
   .wastedExample {
@@ -270,7 +385,9 @@ html, body {
   }
 
   .instructions-container {
-    max-width: 90%;
+    max-width: 100%;
+    height: auto;
+    max-height: auto;
   }
 
   .flexboxWasted {
@@ -282,4 +399,34 @@ html, body {
     content: "Before and After's";
     font-size: 3rem;
   }
+
+  .iconsGroup {
+    display: block;
+    margin: 1rem;
+  }
+
+  .centeredContainer {
+    display: block;
+    justify-content: center;
+    align-items: center;
+    padding: 1rem;
+    margin: 0;
+  }
+
+  .instructionsAndCarousel {
+    display: block;
+    max-width: 100%;
+    height: 100%;
+  }
+}
+.slider-container {
+  width: 100%;
+  max-width: 600px;
+  height: auto;
+  margin: 0 auto;
+}
+
+.react-compare-slider {
+  width: 100%;
+  height: 100%;
 }
