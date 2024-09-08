@@ -24,6 +24,20 @@ const VacationExpenseCalculator = () => {
   const [vacationID, setVacationID] = useState("");
   const [vacationState, setVacationState] = useState("");
   const [mainScreenVar, setMainScreenVar] = useState(false);
+  const [vacationMainData, setVacationMainData] = useState([]);
+
+  const SwalError = (message) => {
+    Swal.fire({
+      title: "Oh no! Something happened.",
+      showConfirmButton: true,
+      text: message,
+      icon: "error",
+      background: "#212529",
+      color: "#fff",
+      confirmButtonText: "OK",
+      confirmButtonColor: "#9e3c4e",
+    });
+  }
 
   useEffect(() => {
     if (userID) {
@@ -49,17 +63,8 @@ const VacationExpenseCalculator = () => {
         setVacations(response.data.vacations);
       })
       .catch((error) => {
-        console.error("Error fetching vacations:", error);
-        Swal.fire({
-          title: "Oh no! Something happened.",
-          showConfirmButton: true,
-          text: "We weren't able to fetch your vacations.",
-          icon: "error",
-          background: "#212529",
-          color: "#fff",
-          confirmButtonText: "OK",
-          confirmButtonColor: "#9e3c4e",
-        });
+        console.error(error);
+        SwalError("We weren't able to load your vacations.");
       });
   }, [userID]);
 
@@ -85,16 +90,7 @@ const VacationExpenseCalculator = () => {
       }
     } catch (error) {
       console.error("Error loading vacation:", error);
-      Swal.fire({
-        title: "Oh no! Something happened.",
-        showConfirmButton: true,
-        text: "We weren't able to load the vacation.",
-        icon: "error",
-        background: "#212529",
-        color: "#fff",
-        confirmButtonText: "OK",
-        confirmButtonColor: "#9e3c4e",
-      });
+      SwalError("We weren't able to load this vacation.");
     }
   };
 
@@ -176,16 +172,7 @@ const VacationExpenseCalculator = () => {
           setShowNameVacation(false);
           setShowToAndFrom(true);
         } catch (error) {
-          Swal.fire({
-            title: "Oh no! Something happened.",
-            showConfirmButton: true,
-            text: "We weren't able to create your vacation. Please try again.",
-            icon: "error",
-            background: "#212529",
-            color: "#fff",
-            confirmButtonText: "OK",
-            confirmButtonColor: "#9e3c4e",
-          });
+          SwalError("We weren't able to create your vacation. Please try again.");
         }
       }
     });
@@ -219,16 +206,7 @@ const VacationExpenseCalculator = () => {
         })
         .catch((error) => {
           console.error("Error saving travel details:", error);
-          Swal.fire({
-            title: "Oh no! Something happened.",
-            showConfirmButton: true,
-            text: "We weren't able to save your changes.",
-            icon: "error",
-            background: "#212529",
-            color: "#fff",
-            confirmButtonText: "OK",
-            confirmButtonColor: "#9e3c4e",
-          });
+          SwalError("We weren't able to save your changes. Please try again.");
         });
     } else {
       Swal.fire({
@@ -274,44 +252,32 @@ const VacationExpenseCalculator = () => {
   const MainScreen = () => {
     axios
         .post(
-          `${process.env.REACT_APP_API_URL}/node/vacationCalc/insertToFromAndDates`,
+          `${process.env.REACT_APP_API_URL}/node/vacationCalc/loadPreviousVacation`,
           {
-            vacationID,
-            departDate,
-            returnDate,
-            from,
-            to,
+            vacationID
           }
         )
         .then((response) => {
-          Swal.fire({
-            title: "Got it.",
-            showConfirmButton: false,
-            text: "Your travel details have been saved.",
-            icon: "success",
-            background: "#212529",
-            color: "#fff",
-            timer: 3000,
-          });
+          setShowNameVacation(false);
           setShowToAndFrom(false);
           setMainScreenVar(true);
+          setVacationMainData(response.data.result);
         })
         .catch((error) => {
-          console.error("Error saving travel details:", error);
-          Swal.fire({
-            title: "Oh no! Something happened.",
-            showConfirmButton: true,
-            text: "We weren't able to save your changes.",
-            icon: "error",
-            background: "#212529",
-            color: "#fff",
-            confirmButtonText: "OK",
-            confirmButtonColor: "#9e3c4e",
-          });
+          console.error("Error loading main screen:", error);
+          SwalError("We weren't able to load the main screen.");
         });
-    return (
-      <div> tester123</div>
-    )
+        return (
+          <div>
+            {vacationMainData && 
+              vacationMainData.map((v, i) => (
+                <div key={i}>
+                  <h1>{v.vacation_name}</h1>
+                </div>
+              ))
+            }
+          </div>
+        );
   }
   
   const LoggedInOptions = () => (

@@ -282,11 +282,6 @@ const MenuComponent = ({ children }) => {
 
   const handleStateChange = (state) => {
     setMenuOpen(state.isOpen);
-    if (state.isOpen) {
-      document.body.style.overflow = 'hidden';
-    } else {
-      document.body.style.overflow = 'auto';
-    }
   };
 
   const closeMenu = () => {
