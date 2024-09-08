@@ -119,7 +119,7 @@ const OverWatchRandomCharacterGenerator = () => {
             >
                 <div className="contentWrapper">
                     <div className='space-between marginBottom1'>
-                        <label className='smLabel'>Play audio
+                        <label className='smLabel'>Play audio&nbsp;
                             <input type="checkbox" onClick={handleCheckbox} />
                         </label>
                         {history.length > 0 && (

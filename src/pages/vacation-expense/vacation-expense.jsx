@@ -23,6 +23,7 @@ const VacationExpenseCalculator = () => {
   const [to, setTo] = useState("");
   const [vacationID, setVacationID] = useState("");
   const [vacationState, setVacationState] = useState("");
+  const [mainScreenVar, setMainScreenVar] = useState(false);
 
   useEffect(() => {
     if (userID) {
@@ -63,7 +64,7 @@ const VacationExpenseCalculator = () => {
   }, [userID]);
 
   const LoadPreviousVacation = async (e) => {
-    const element = e.target;
+    const element = e.currentTarget;
     const vacationIDTemp = element.getAttribute("data-custom-vacation-id");
     setVacationID(vacationIDTemp);
     try {
@@ -75,12 +76,12 @@ const VacationExpenseCalculator = () => {
       );
 
       const result = response.data.result;
-  
-      if (result && result[0] && result[0].hasOwnProperty('state')) {
+
+      if (result && result[0] && result[0].hasOwnProperty("state")) {
         const stateToSet = result[0].state;
         setVacationState(stateToSet);
       } else {
-        throw new Error('Invalid vacation data received.');
+        throw new Error("Invalid vacation data received.");
       }
     } catch (error) {
       console.error("Error loading vacation:", error);
@@ -96,14 +97,14 @@ const VacationExpenseCalculator = () => {
       });
     }
   };
-  
+
   const RestorePreviousVacation = () => {
     switch (vacationState) {
       case "name":
         setShowToAndFrom(true);
         break;
       case "toAndFrom":
-
+        setMainScreenVar(true);
         break;
       default:
     }
@@ -211,8 +212,10 @@ const VacationExpenseCalculator = () => {
             icon: "success",
             background: "#212529",
             color: "#fff",
-            timer: "3000",
+            timer: 3000,
           });
+          setShowToAndFrom(false);
+          setMainScreenVar(true);
         })
         .catch((error) => {
           console.error("Error saving travel details:", error);
@@ -238,7 +241,7 @@ const VacationExpenseCalculator = () => {
         confirmButtonColor: "#9e3c4e",
       });
     }
-  }, [returnDate, departDate, to, from, vacationID]);
+  }, [returnDate, departDate, to, from, vacationID]);  
 
   const StartNew = () => (
     <div className="centeredContainer">
@@ -268,6 +271,49 @@ const VacationExpenseCalculator = () => {
     </div>
   );
 
+  const MainScreen = () => {
+    axios
+        .post(
+          `${process.env.REACT_APP_API_URL}/node/vacationCalc/insertToFromAndDates`,
+          {
+            vacationID,
+            departDate,
+            returnDate,
+            from,
+            to,
+          }
+        )
+        .then((response) => {
+          Swal.fire({
+            title: "Got it.",
+            showConfirmButton: false,
+            text: "Your travel details have been saved.",
+            icon: "success",
+            background: "#212529",
+            color: "#fff",
+            timer: 3000,
+          });
+          setShowToAndFrom(false);
+          setMainScreenVar(true);
+        })
+        .catch((error) => {
+          console.error("Error saving travel details:", error);
+          Swal.fire({
+            title: "Oh no! Something happened.",
+            showConfirmButton: true,
+            text: "We weren't able to save your changes.",
+            icon: "error",
+            background: "#212529",
+            color: "#fff",
+            confirmButtonText: "OK",
+            confirmButtonColor: "#9e3c4e",
+          });
+        });
+    return (
+      <div> tester123</div>
+    )
+  }
+  
   const LoggedInOptions = () => (
     <div className="centeredContainer">
       <h1 className="vacation-expense">
@@ -289,13 +335,15 @@ const VacationExpenseCalculator = () => {
           or choose a previous one:
           {vacations.length > 0 ? (
             vacations.map((vacation) => (
-              <div
-                key={vacation.id}
-                data-custom-vacation-id={vacation.id}
-                className="loadedVacationsText"
-                onClick={LoadPreviousVacation}
-              >
-                {vacation.vacation_name}
+              <div key={vacation.id}>
+                <button
+                  onClick={LoadPreviousVacation}
+                  data-custom-vacation-id={vacation.id}
+                  key={vacation.id}
+                  className="loadedVacationsText"
+                >
+                  {vacation.vacation_name}
+                </button>
               </div>
             ))
           ) : (
@@ -394,14 +442,18 @@ const VacationExpenseCalculator = () => {
                   />
                 </div>
               </div>
-              <div
-                className="primaryButton"
-                onClick={ProceedFromTravelToAndFrom}
-              >
+              <div>
+                <button
+                  className="primaryButton"
+                  onClick={ProceedFromTravelToAndFrom}
+                >
                 Proceed
+                </button>
               </div>
-            </div>
+              </div>
           </div>
+        ) : mainScreenVar ? (
+          <MainScreen />
         ) : (
           <LoggedInOptions />
         )

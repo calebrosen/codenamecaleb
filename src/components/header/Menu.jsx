@@ -282,6 +282,11 @@ const MenuComponent = ({ children }) => {
 
   const handleStateChange = (state) => {
     setMenuOpen(state.isOpen);
+    if (state.isOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'auto';
+    }
   };
 
   const closeMenu = () => {
@@ -312,20 +317,20 @@ const MenuComponent = ({ children }) => {
               </a>
             </div>
             <div className="menu-item">
-              <a href="overwatch-random-character-generator">
-                <span>OW2 RNG Character Selector</span>
-              </a>
-            </div>
-            <div className="menu-item">
               <span>
                 <a href="gta-v-wasted-overlay-generator">Wasted Generator</a>
               </span>
             </div>
-            {/* <div className="menu-item">
-              <a href="vacation-expense-calculator">
-                <span>Vacation Expense Calculator</span>
+            <div className="menu-item">
+              <a href="overwatch-random-character-generator">
+                <span>OW2 RNG Character Selector</span>
               </a>
-            </div> */}
+            </div>
+            <div className="menu-item coffee-button">
+              <a href="https://buymeacoffee.com/calebrosen" target="_blank" rel="noopener noreferrer">
+                Buy Me a Coffee ☕
+              </a>
+            </div>
           </div>
         </Menu>
       </div>
