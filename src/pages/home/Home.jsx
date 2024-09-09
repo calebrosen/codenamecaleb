@@ -1,4 +1,8 @@
-import { faDiscord, faSteam, faXTwitter } from "@fortawesome/free-brands-svg-icons";
+import {
+  faDiscord,
+  faSteam,
+  faXTwitter,
+} from "@fortawesome/free-brands-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useEffect, useState } from "react";
 import { Element, scroller } from "react-scroll";
@@ -18,34 +22,58 @@ const HomePage = () => {
   const [easterEggTriggered, setEasterEggTriggered] = useState(false);
   const [easterEggInProgress, setEasterEggInProgress] = useState(false);
   const [scrollTriggeredByClick, setScrollTriggeredByClick] = useState(false);
+  const wordsToShow = ["Websites", "Solutions", "Projects", "Tools"];
+  const [wordToShow, setWordToShow] = useState(wordsToShow[0]);
+  const [isEntering, setIsEntering] = useState(true);
+  const [isExiting, setIsExiting] = useState(false);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setIsExiting(true);
+      setTimeout(() => {
+        setIsExiting(false);
+        setWordToShow((prevWord) => {
+          const currentIndex = wordsToShow.indexOf(prevWord);
+          const nextIndex = (currentIndex + 1) % wordsToShow.length;
+          return wordsToShow[nextIndex];
+        });
+        setIsEntering(true);
+        setTimeout(() => {
+          setIsEntering(false);
+        }, 1000);
+      }, 1000);
+    }, 3500);
+
+    return () => clearInterval(interval);
+  }, []);
 
   const AboutMe = () => {
-    const [timeDifference, setTimeDifference] = useState('');
+    const [timeDifference, setTimeDifference] = useState("");
 
     useEffect(() => {
-      const originDate = new Date('2024-08-15T12:10');
-  
+      const originDate = new Date("2024-08-15T12:10");
+
       const updateTimeDifference = () => {
         const now = new Date();
         const diff = now - originDate;
-  
+
         const days = Math.floor(diff / (1000 * 60 * 60 * 24));
         const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
         const minutes = Math.floor((diff / 1000 / 60) % 60);
         const seconds = Math.floor((diff / 1000) % 60);
-  
+
         setTimeDifference(
-          `<span style="color: #FF2A6D; text-shadow: 1px 1px 2px #000;">${days} days</span>, 
-           <span style="color: #FF8C42; text-shadow: 1px 1px 2px #000;">${hours} hours</span>, 
-           <span style="color: #5C1A73; text-shadow: 1px 1px 2px #000;">${minutes} minutes</span>, 
+          `<span style="color: #FF2A6D; text-shadow: 1px 1px 2px #000;">${days} days</span>,
+           <span style="color: #FF8C42; text-shadow: 1px 1px 2px #000;">${hours} hours</span>,
+           <span style="color: #5C1A73; text-shadow: 1px 1px 2px #000;">${minutes} minutes</span>,
            <span style='color: #007A7F; text-shadow: 1px 1px 2px #000;'>${seconds} seconds</span>`
         );
       };
 
-      updateTimeDifference(); 
-  
+      updateTimeDifference();
+
       const intervalId = setInterval(updateTimeDifference, 1000); // updating date every second
-  
+
       return () => clearInterval(intervalId);
     }, []);
 
@@ -67,11 +95,11 @@ const HomePage = () => {
             <div className="about-content">
               <h1 className="about-me">Hey there! I'm Caleb.</h1>
               <p>
-                I’m a full-stack developer who loves turning ideas into real things - codenamecaleb is proof of that.
-                I'm adding new things as I think of them, so feel free to
-                look around.
+                I’m a full-stack developer who loves turning ideas into real
+                things - codenamecaleb is proof of that. I'm adding new things
+                as I think of them, so feel free to look around.
               </p>
-              
+
               <p>
                 By the way, you can view the entire source code of this website{" "}
                 <a
@@ -87,15 +115,18 @@ const HomePage = () => {
             {showEasterEggPopup && <EasterEggPopup />}
           </div>
         </Element>
-        <div className='timeSinceCreation'>This website has been in development for <span dangerouslySetInnerHTML={{ __html: timeDifference }} />.</div>
+        <div className="timeSinceCreation">
+          This website has been in development for{" "}
+          <span dangerouslySetInnerHTML={{ __html: timeDifference }} />.
+        </div>
       </div>
     );
   };
 
   const handleArrowClick = () => {
-     setShowSection(true);
-     setScrollTriggeredByClick(true);
-     setTimeout(() => {
+    setShowSection(true);
+    setScrollTriggeredByClick(true);
+    setTimeout(() => {
       scroller.scrollTo("aboutMeSection", {
         duration: 800,
         delay: 0,
@@ -110,10 +141,10 @@ const HomePage = () => {
   const handleScroll = () => {
     if (scrollTriggeredByClick) return;
     if (window.scrollY < 100) {
-      setShowSection(false); 
+      setShowSection(false);
     }
   };
-  
+
   useEffect(() => {
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
@@ -207,7 +238,7 @@ const HomePage = () => {
               className="homeIcon pointer"
               alt="Discord username"
             >
-              <FontAwesomeIcon icon={faDiscord} />
+              <FontAwesomeIcon icon={faDiscord} className="homeIcon" />
             </div>
           </a>
         </div>
@@ -264,6 +295,17 @@ const HomePage = () => {
     <div>
       <div className="fsBackground">
         <h1 className="h1Home">codenamecaleb.com</h1>
+        <div className="rotating-text">
+          <p className='rotatedTextInner'>Developing
+            <span
+              className={`rotating-text ${isEntering ? "enter" : ""} ${
+                isExiting ? "exit" : ""
+              }`}
+            >
+              {wordToShow}
+            </span>
+          </p>
+        </div>
         <IconGroup />
         <div className="arrowContainer" onClick={handleArrowClick}>
           <div className="styledArrow">▼</div>

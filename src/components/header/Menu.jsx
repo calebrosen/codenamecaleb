@@ -79,8 +79,8 @@ const AccountComponent = ({ closeMenu }) => {
         showConfirmButton: true,
         text: "We couldn't log you in. Check your email and password and make sure you entered them correctly.",
         icon: "error",
-        background: "#212529",
-        color: "#fff",
+        background: "#f9f9f9",
+        color: "#000",
         confirmButtonText: "OK",
         confirmButtonColor: "#9e3c4e",
       });
@@ -103,8 +103,8 @@ const AccountComponent = ({ closeMenu }) => {
         title: `Welcome, ${registerName}.`,
         showConfirmButton: false,
         icon: "success",
-        background: "#212529",
-        color: "#fff",
+        background: "#f9f9f9",
+        color: "#000",
         timer: 3000,
       });
     } catch (error) {
@@ -114,8 +114,8 @@ const AccountComponent = ({ closeMenu }) => {
         showConfirmButton: true,
         text: "We couldn't register you.",
         icon: "error",
-        background: "#212529",
-        color: "#fff",
+        background: "#f9f9f9",
+        color: "#000",
         confirmButtonText: "OK",
         confirmButtonColor: "#9e3c4e",
       });
@@ -295,7 +295,7 @@ const MenuComponent = ({ children }) => {
           isOpen={menuOpen}
           onStateChange={handleStateChange}
           left
-          customBurgerIcon={<FontAwesomeIcon icon={faBars} size="3x" />}
+          customBurgerIcon={<FontAwesomeIcon icon={faBars} className='burgerButton' style={{color: "#ffffff"}} size="3x"/>}
           burgerButtonClassName="custom-burger-button"
         >
           <div className="menu-items">
@@ -307,7 +307,7 @@ const MenuComponent = ({ children }) => {
               }}
             >
               <a href="/">
-                <FontAwesomeIcon icon={faHome} />
+                <FontAwesomeIcon icon={faHome}/>
                 <span>&nbsp;Home</span>
               </a>
             </div>

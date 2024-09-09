@@ -25,6 +25,9 @@ const VacationExpenseCalculator = () => {
   const [vacationState, setVacationState] = useState("");
   const [mainScreenVar, setMainScreenVar] = useState(false);
   const [vacationMainData, setVacationMainData] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [dateStart, setDateStart] = useState(null);
+  const [dateEnd, setDateEnd] = useState(null);
 
   const SwalError = (message) => {
     Swal.fire({
@@ -37,7 +40,7 @@ const VacationExpenseCalculator = () => {
       confirmButtonText: "OK",
       confirmButtonColor: "#9e3c4e",
     });
-  }
+  };
 
   useEffect(() => {
     if (userID) {
@@ -68,30 +71,25 @@ const VacationExpenseCalculator = () => {
       });
   }, [userID]);
 
-  const LoadPreviousVacation = async (e) => {
+  const LoadPreviousVacation =  (e) => {
     const element = e.currentTarget;
     const vacationIDTemp = element.getAttribute("data-custom-vacation-id");
     setVacationID(vacationIDTemp);
-    try {
-      const response = await axios.post(
-        `${process.env.REACT_APP_API_URL}/node/vacationCalc/loadPreviousVacation`,
+
+    axios
+    .post(
+      `${process.env.REACT_APP_API_URL}/node/vacationCalc/loadPreviousVacation`,
         {
           vacationID: vacationIDTemp,
         }
-      );
-
-      const result = response.data.result;
-
-      if (result && result[0] && result[0].hasOwnProperty("state")) {
-        const stateToSet = result[0].state;
-        setVacationState(stateToSet);
-      } else {
-        throw new Error("Invalid vacation data received.");
-      }
-    } catch (error) {
-      console.error("Error loading vacation:", error);
-      SwalError("We weren't able to load this vacation.");
-    }
+      )
+      .then((response) => {
+        setVacationState(response.data.result);
+      })
+      .catch((error) => {
+        console.error(error);
+        SwalError("We weren't able to load this vacation.");
+      });
   };
 
   const RestorePreviousVacation = () => {
@@ -172,7 +170,9 @@ const VacationExpenseCalculator = () => {
           setShowNameVacation(false);
           setShowToAndFrom(true);
         } catch (error) {
-          SwalError("We weren't able to create your vacation. Please try again.");
+          SwalError(
+            "We weren't able to create your vacation. Please try again."
+          );
         }
       }
     });
@@ -219,7 +219,7 @@ const VacationExpenseCalculator = () => {
         confirmButtonColor: "#9e3c4e",
       });
     }
-  }, [returnDate, departDate, to, from, vacationID]);  
+  }, [returnDate, departDate, to, from, vacationID]);
 
   const StartNew = () => (
     <div className="centeredContainer">
@@ -249,37 +249,58 @@ const VacationExpenseCalculator = () => {
     </div>
   );
 
-  const MainScreen = () => {
-    axios
-        .post(
-          `${process.env.REACT_APP_API_URL}/node/vacationCalc/loadPreviousVacation`,
-          {
-            vacationID
-          }
-        )
-        .then((response) => {
-          setShowNameVacation(false);
-          setShowToAndFrom(false);
-          setMainScreenVar(true);
-          setVacationMainData(response.data.result);
-        })
-        .catch((error) => {
-          console.error("Error loading main screen:", error);
-          SwalError("We weren't able to load the main screen.");
-        });
-        return (
-          <div>
-            {vacationMainData && 
-              vacationMainData.map((v, i) => (
-                <div key={i}>
-                  <h1>{v.vacation_name}</h1>
-                </div>
-              ))
-            }
-          </div>
-        );
+  function convertSQLDateToDate(dateString) {
+    const tempDate = dateString.substring(0, 10);
+    const [year, month, day] = tempDate.split('-').map(Number);
+    return new Date(year, month - 1, day);
   }
   
+
+  const MainScreen = () => {
+    useEffect(() => {
+      if (vacationID && vacationMainData.length === 0 && !loading) {
+        setLoading(true);
+        axios
+          .post(`${process.env.REACT_APP_API_URL}/node/vacationCalc/RetrieveVacation`, { vacationID })
+          .then((response) => {
+            setVacationMainData(response.data.result);
+            console.log(response.data.result);
+            setDateStart(convertSQLDateToDate(response.data.result[0].date_start));
+            setDateEnd(convertSQLDateToDate(response.data.result[0].date_end))
+            setShowNameVacation(false);
+            setShowToAndFrom(false);
+            setMainScreenVar(true);
+          })
+          .catch((error) => {
+            console.error("Error loading main screen:", error);
+            SwalError("We weren't able to load the main screen.");
+          })
+          .finally(() => setLoading(false));
+      }
+    }, [vacationID, vacationMainData, loading]);
+
+    return (
+      <div>
+        {vacationMainData &&
+          vacationMainData.map((v, i) => (
+            <div key={i}>
+            <div className='centeredContainer'>
+              <p className="vacationNameMain glass-effect">{v.vacation_name}</p>
+            </div>
+              <div className="vacationDateGroupMain">
+                <div className='vacationDatesMain'>
+                  From: {dateStart ? dateStart.toDateString() : "Loading..."}
+                </div>
+                <div className='vacationDatesMain'>
+                To: {dateEnd ? dateEnd.toDateString() : "Loading..."}
+                </div>
+              </div>
+            </div>
+          ))}
+      </div>
+    );
+  };
+
   const LoggedInOptions = () => (
     <div className="centeredContainer">
       <h1 className="vacation-expense">
@@ -413,10 +434,10 @@ const VacationExpenseCalculator = () => {
                   className="primaryButton"
                   onClick={ProceedFromTravelToAndFrom}
                 >
-                Proceed
+                  Proceed
                 </button>
               </div>
-              </div>
+            </div>
           </div>
         ) : mainScreenVar ? (
           <MainScreen />

@@ -96,7 +96,6 @@ h1.vacation-expense {
   margin: 0px 1rem 0px 1rem;
 }
 
-
 .inputVacation1 {
     position: relative;
     padding: 8px 14px;
@@ -115,13 +114,37 @@ h1.vacation-expense {
     display: block;
   }
 
+  input {
+    color: #333;
+  }
+
   .label1 {
     font-size: 2rem;
     margin: 2rem;
     display: block;
   }
 
-  input {
-    color: #333;
+  .vacationNameMain {
+    text-align: center;
+    font-size: 3rem;
+    display: inline-block;
+    padding: 0px 8px;
   }
-  
+
+  .vacationDateGroupMain {
+    display: flex;
+    justify-content: center;
+    gap: 5%;
+  }
+
+  .vacationDatesMain {
+    color: red;
+  }
+
+  .glass-effect {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 16px;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+  }

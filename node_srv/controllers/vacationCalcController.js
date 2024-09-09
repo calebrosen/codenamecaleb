@@ -74,6 +74,28 @@ exports.loadPreviousVacation = async (req, res) => {
     try {
         const db = await connectToDB();
         const { vacationID } = req.body;
+        db.query('Call GetVacationState(?)', [vacationID], (err,results) => {
+            if (err) {
+                return res
+                  .status(500)
+                  .json({ message: "Database error", error: err.message });
+              }
+              
+              const result = results[0][0].state;
+        
+              if (result) {
+                return res.json({  result });
+              }
+        });
+    } catch (err) {
+        res.status(500).json({ error: 'Database connection failed' });
+    }
+};
+
+exports.retrieveVacation = async (req, res) => {
+    try {
+        const db = await connectToDB();
+        const { vacationID } = req.body;
         db.query('Call RetrieveVacation(?)', [vacationID], (err,results) => {
             if (err) {
                 return res

@@ -14,4 +14,7 @@ router.post('/insertToFromAndDates', vacationCalcController.insertToFromAndDates
 // loading previous vacation
 router.post('/loadPreviousVacation', vacationCalcController.loadPreviousVacation);
 
+// getting all vacation info for main screen
+router.post('/retrieveVacation', vacationCalcController.retrieveVacation);
+
 module.exports = router;

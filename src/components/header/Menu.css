@@ -1,5 +1,6 @@
 .hamburgerMenu {
   position: fixed;
+  color: #000;
   overflow: hidden;
   z-index: 1000;
 }
@@ -8,6 +9,7 @@
   position: relative;
   padding: 15px;
   overflow: hidden;
+  color: #000;
 }
 
 .menu-item {
@@ -43,19 +45,15 @@
   height: 30px;
 }
 
-.bm-burger-bars {
-  background: #fff; 
-}
-
 .bm-menu {
-  background: #333; 
+  background: #f9f9f9;
   font-size: 1.15rem;
 }
 
 .bm-item-list a {
   overflow: hidden;
   padding: 0.5rem;
-  color: white;
+  color: #000;
   text-decoration: none;
 }
 
@@ -63,11 +61,11 @@
   width: 100%;
   max-width: 600px;
   padding: 20px;
-  background-color: #353535;
+  background-color: #f9f9f9;
   border-radius: 8px;
   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
   margin: auto;
-  color: white;
+  color: #000;
   position: relative;
 }
 
@@ -110,12 +108,12 @@
 }
 
 .inputText {
-  color: #212529;
+  color: #000;
   border-radius:7px;
 }
 
 .inputGroup input:focus {
-  border-color: #fff;
+  border-color: #000;
   outline: none;
 }
 
@@ -159,15 +157,38 @@
 
 .menu-item.coffee-button a {
   display: inline-block;
-  background-color: #3b210a;
-  color: #333;
+  background-image: linear-gradient(135deg, #ff5f6d, #e98f29, #5c2bb8, #21238f);
+  background-size: 300% 300%;
+  color: #fff;
   font-weight: bold;
   padding: 12px 24px;
   border-radius: 8px;
-  transition: background-color 0.3s ease;
   text-decoration: none;
+  border: 2px solid transparent;
+  background-clip: padding-box;
+  -webkit-background-clip: text;
+  background-clip: border-box;
+  box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2);
+  animation: vaporwaveButtonGradient 4s ease infinite;
 }
 
+@keyframes vaporwaveButtonGradient {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+
 .menu-item.coffee-button a:hover {
-  background-color: #2e1905;
+  cursor: pointer;
+}
+
+span {
+  color: #000;
 }
