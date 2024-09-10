@@ -5,7 +5,7 @@ body {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  background-color: #212529;
+  background-color: #fff;
   scroll-behavior: smooth;
   overflow-x: hidden;
 }
@@ -37,8 +37,8 @@ body {
   padding: 12px 24px;
   font-size: 1.5rem;
   font-weight: bold;
-  color: #fff;
-  background: linear-gradient(40deg, #444444, rgb(212, 7, 7));
+  color: #000;
+  background: linear-gradient(40deg, #dddddd, rgb(212, 7, 7));
   border: 2px solid transparent;
   border-radius: 6px;
   cursor: pointer;
@@ -157,8 +157,8 @@ h1.wastedh1 {
   padding: 12px 24px;
   font-size: 1.5rem;
   font-weight: bold;
-  color: #fff;
-  background: linear-gradient(40deg, #444444, rgb(212, 7, 7));
+  color: #000;
+  background: linear-gradient(40deg, #c2c2c2, rgb(212, 7, 7));
   border: 2px solid transparent;
   border-radius: 6px;
   cursor: pointer;
@@ -234,6 +234,7 @@ h1.wastedh1 {
   line-height: 1.5;
   margin-bottom: 1rem;
   text-align: left;
+  color: #000;
 }
 
 .instructions-list strong {
@@ -248,7 +249,7 @@ h1.wastedh1 {
 .instructions-container p {
   font-size: 1.1rem;
   margin-bottom: 1.5rem;
-  color: #f0f0f0;
+  color: #000;
 }
 
 .carousel-container {
@@ -329,7 +330,7 @@ h1.wastedh1 {
 
 .icon {
   padding: 1.25rem;
-  background-color: #444;
+  background-color: #000000;
   border-radius: 50%;
   color: white;
   transition: transform 0.3s ease, background-color 0.3s ease,
@@ -393,7 +394,6 @@ h1.wastedh1 {
   .carousel-container, .wastedExample, .slider-container {
     max-width: none;
   }
-
 
   .flexboxWasted:before {
     content: "Before and After's";

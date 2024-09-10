@@ -264,7 +264,6 @@ function Wasted() {
             <FontAwesomeIcon
               icon={faBolt}
               className="icon"
-              style={{ color: "#FFD43B" }}
               size="3x"
             />
           </div>
@@ -277,7 +276,6 @@ function Wasted() {
             <FontAwesomeIcon
               icon={faMobileScreen}
               className="icon"
-              style={{ color: "#FFD43B" }}
               size="3x"
             />
           </div>

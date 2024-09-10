@@ -295,7 +295,7 @@ const HomePage = () => {
     <div>
       <div className="fsBackground">
         <h1 className="h1Home">codenamecaleb.com</h1>
-        <div className="rotating-text">
+        {/* <div className="rotating-text">
           <p className='rotatedTextInner'>Developing
             <span
               className={`rotating-text ${isEntering ? "enter" : ""} ${
@@ -305,7 +305,7 @@ const HomePage = () => {
               {wordToShow}
             </span>
           </p>
-        </div>
+        </div> */}
         <IconGroup />
         <div className="arrowContainer" onClick={handleArrowClick}>
           <div className="styledArrow">▼</div>
