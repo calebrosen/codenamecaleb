@@ -21,7 +21,7 @@ exports.login = async (req, res) => {
         const groupID = user.group_id;
         
         const token = jwt.sign(
-          { id: user.id, username: user.username, groupID: user.group_id}, 
+          { id: user.id, username: user.name, groupID: user.group_id},
           process.env.JWT_SECRET,
           { expiresIn: "6h" }
         );

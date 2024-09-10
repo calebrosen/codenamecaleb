@@ -1,4 +1,5 @@
 import {
+  faPlane,
   faPlaneArrival,
   faPlaneDeparture,
   faUmbrellaBeach,
@@ -12,7 +13,7 @@ import { UserContext } from "../../components/header/UserContext";
 import "./vacation-expense.css";
 
 const VacationExpenseCalculator = () => {
-  const { userID } = useContext(UserContext);
+  const { userID, userName } = useContext(UserContext);
   const [showNameVacation, setShowNameVacation] = useState(false);
   const [vacationName, setVacationName] = useState("");
   const [vacations, setVacations] = useState([]);
@@ -71,14 +72,14 @@ const VacationExpenseCalculator = () => {
       });
   }, [userID]);
 
-  const LoadPreviousVacation =  (e) => {
+  const LoadPreviousVacation = (e) => {
     const element = e.currentTarget;
     const vacationIDTemp = element.getAttribute("data-custom-vacation-id");
     setVacationID(vacationIDTemp);
 
     axios
-    .post(
-      `${process.env.REACT_APP_API_URL}/node/vacationCalc/loadPreviousVacation`,
+      .post(
+        `${process.env.REACT_APP_API_URL}/node/vacationCalc/loadPreviousVacation`,
         {
           vacationID: vacationIDTemp,
         }
@@ -251,12 +252,37 @@ const VacationExpenseCalculator = () => {
 
   function convertSQLDateToDate(dateString) {
     const tempDate = dateString.substring(0, 10);
-    const [year, month, day] = tempDate.split('-').map(Number);
+    const [year, month, day] = tempDate.split("-").map(Number);
     return new Date(year, month - 1, day);
   }
-  
 
   const MainScreen = () => {
+    const handleAddTravelers = useCallback(() => {
+      Swal.fire({
+        title: "Add a Traveler",
+        input: "text",
+        inputAttributes: {
+          autocapitalize: "on",
+        },
+        showCancelButton: true,
+        confirmButtonText: "Add",
+        customClass: {
+          confirmButton: "gradient",
+        },
+        showLoaderOnConfirm: true,
+        preConfirm: async (travelerName) => {
+          try {
+            const response = await axios.post(
+              `${process.env.REACT_APP_API_URL}/node/vacationCalc/addTraveler`,
+              { vacationID, travelerName }
+            );
+          } catch (error) {
+            console.error("Error adding traveler:", error);
+            SwalError("We weren't able to add this traveler.");
+          }
+        },
+      })
+    });
     useEffect(() => {
       if (vacationID && vacationMainData.length === 0 && !loading) {
         setLoading(true);
@@ -264,9 +290,8 @@ const VacationExpenseCalculator = () => {
           .post(`${process.env.REACT_APP_API_URL}/node/vacationCalc/RetrieveVacation`, { vacationID })
           .then((response) => {
             setVacationMainData(response.data.result);
-            console.log(response.data.result);
             setDateStart(convertSQLDateToDate(response.data.result[0].date_start));
-            setDateEnd(convertSQLDateToDate(response.data.result[0].date_end))
+            setDateEnd(convertSQLDateToDate(response.data.result[0].date_end));
             setShowNameVacation(false);
             setShowToAndFrom(false);
             setMainScreenVar(true);
@@ -274,32 +299,48 @@ const VacationExpenseCalculator = () => {
           .catch((error) => {
             console.error("Error loading main screen:", error);
             SwalError("We weren't able to load the main screen.");
+            setLoading(false)
           })
           .finally(() => setLoading(false));
       }
     }, [vacationID, vacationMainData, loading]);
-
+  
     return (
       <div>
         {vacationMainData &&
           vacationMainData.map((v, i) => (
             <div key={i}>
-            <div className='centeredContainer'>
-              <p className="vacationNameMain glass-effect">{v.vacation_name}</p>
-            </div>
+              <div className="centeredContainer">
+                <p className="vacationNameMain glass-effect">{v.vacation_name}</p>
+              </div>
               <div className="vacationDateGroupMain">
-                <div className='vacationDatesMain'>
-                  From: {dateStart ? dateStart.toDateString() : "Loading..."}
+                <div className="vacationDatesMain">
+                  From: {v.from} (
+                  {dateStart ? dateStart.toDateString() : "Loading..."})
                 </div>
-                <div className='vacationDatesMain'>
-                To: {dateEnd ? dateEnd.toDateString() : "Loading..."}
+                <div>
+                  <FontAwesomeIcon icon={faPlane} size="2x" />
                 </div>
+                <div className="vacationDatesMain">
+                  To: {v.to} ({dateEnd ? dateEnd.toDateString() : "Loading..."})
+                </div>
+              </div>
+              <div className="travelers">
+                {v.travelers ? (
+                  v.travelers
+                ) : (
+                  <button className="travelersButton" onClick={handleAddTravelers}>
+                    Add Travelers
+                  </button>
+                )}
               </div>
             </div>
           ))}
       </div>
     );
   };
+  
+  
 
   const LoggedInOptions = () => (
     <div className="centeredContainer">

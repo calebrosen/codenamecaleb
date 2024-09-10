@@ -6,7 +6,7 @@
   font-size: 1.5rem;
   font-weight: bold;
   color: #fff;
-  background: linear-gradient(40deg, #444444, #c8425b);
+  background: linear-gradient(45deg, #ff00ea, #00eef7);
   border: 2px solid transparent;
   border-radius: 6px;
   cursor: pointer;
@@ -26,7 +26,7 @@
   margin-top:3rem;
   font-weight: bold;
   color: #fff;
-  background: linear-gradient(40deg, #444444, #c8425b);
+  background: linear-gradient(45deg, #ff00ea, #00eef7);
   border: 2px solid transparent;
   border-radius: 6px;
   cursor: pointer;
@@ -74,8 +74,8 @@
 .mainInfoText {
   font-size: 1.8rem;
   padding: 15px;
-  color: #eee;
-  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
+  color: #000;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
 }
 
 .space {
@@ -134,11 +134,13 @@ h1.vacation-expense {
   .vacationDateGroupMain {
     display: flex;
     justify-content: center;
-    gap: 5%;
+    gap: 2%;
   }
 
   .vacationDatesMain {
-    color: red;
+    background: rgba(187, 187, 187, 0.356);
+    padding: 0.5rem;
+    border-radius: 12px;
   }
 
   .glass-effect {
@@ -147,4 +149,28 @@ h1.vacation-expense {
     backdrop-filter: blur(10px);
     box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
     border: 1px solid rgba(255, 255, 255, 0.3);
+  }
+
+  .travelersButton {
+    width: auto;
+    padding: 0.38rem 0.75rem;
+    font-size: 1.5rem;
+    margin: 2rem;
+    font-weight: bold;
+    color: #fff;
+    background: linear-gradient(45deg, #ff00ea, #00eef7);
+    border: 2px solid transparent;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: border-color 0.3s ease, transform 0.3s ease;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  }
+
+  .travelersButton:hover {
+    border-color: #fff;
+    transform: scale(1.03);
+  }
+
+  .gradient {
+    background: linear-gradient(45deg, #ff00ea, #00eef7);
   }

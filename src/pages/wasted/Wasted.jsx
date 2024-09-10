@@ -145,7 +145,7 @@ function Wasted() {
       <div className="centeredContainer">
         <div className="instructionsAndCarousel">
           {/* instructions */}
-          <div className="instructions-container">
+          <div className="instructions-container shadow">
             <h2>How to Create Your Wasted Image</h2>
             <ol className="instructions-list">
               <li>
@@ -168,7 +168,7 @@ function Wasted() {
           </div>
 
           {/* swiper carousel */}
-          <div className="carousel-container">
+          <div className="carousel-container shadow">
             <Swiper
               spaceBetween={0}
               slidesPerView={1}

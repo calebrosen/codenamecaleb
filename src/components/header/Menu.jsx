@@ -69,8 +69,8 @@ const AccountComponent = ({ closeMenu }) => {
         title: `Welcome back, ${name}.`,
         showConfirmButton: false,
         icon: "success",
-        background: "#212529",
-        color: "#fff",
+        background: "#f9f9f9",
+        color: "#000",
         timer: 3000,
       });
     } catch (error) {
@@ -295,7 +295,7 @@ const MenuComponent = ({ children }) => {
           isOpen={menuOpen}
           onStateChange={handleStateChange}
           left
-          customBurgerIcon={<FontAwesomeIcon icon={faBars} className='burgerButton' style={{color: "#ffffff"}} size="3x"/>}
+          customBurgerIcon={<FontAwesomeIcon icon={faBars} className='burgerButton' style={{color: "#000"}} size="3x"/>}
           burgerButtonClassName="custom-burger-button"
         >
           <div className="menu-items">

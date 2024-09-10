@@ -95,7 +95,7 @@
   display: block;
   margin-bottom: 5px;
   font-weight: bold;
-  color: white;
+  color: #000;
 }
 
 .inputGroup input {
@@ -123,12 +123,11 @@
   font-size: 1.35rem;
   font-weight: bold;
   color: #fff;
-  background: linear-gradient(40deg, #444444, #c8425b);
+  background: linear-gradient(45deg, #ff00ea, #00eef7);
   border: 2px solid transparent;
   border-radius: 6px;
   cursor: pointer;
   transition: border-color 0.3s ease, transform 0.3s ease;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
 .loginButton:hover {

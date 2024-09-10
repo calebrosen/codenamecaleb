@@ -6,16 +6,27 @@
 
 .h1Home {
   font-family: "Pacifico", cursive;
-  margin: 5rem 3rem;
+  margin: 5rem auto;
   font-size: 8rem;
   position: relative;
   display: inline-block;
-  color: #ffffff;
-  text-shadow: -3px -3px 0 #fff, -4px -4px 0 #fb00ff, -6px -6px 0 #06eb79,
+  color: #fcfbee;
+  text-shadow: -3px -3px 0 #000000, -4px -4px 0 #fb00ff, -6px -6px 0 #03f7ff,
     -8px -8px 0 #ffffff;
   border-radius: 15px;
   animation: vaporwave-negative 2s infinite alternate;
-  text-align: left;
+  text-align: center;
+}
+
+@keyframes vaporwave-negative {
+  0% {
+    text-shadow: -2px -2px 0 #000000, -4px -4px 0 #e98952, -6px -6px 0 #dd00ff,
+      -8px -8px 0 #ff00f2;
+  }
+  100% {
+    text-shadow: -2px -2px 2px #000000, -4px -4px 2px #9e85d0,
+      -6px -6px 2px #00ccff, -8px -8px 2px #00ffb3;
+  }
 }
 
 @media screen and (max-width: 768px) {
@@ -73,17 +84,6 @@
   animation-fill-mode: forwards;
 }
 
-@keyframes vaporwave-negative {
-  0% {
-    text-shadow: -2px -2px 0 #ffffff, -4px -4px 0 #ffcc00, -6px -6px 0 #dd00ff,
-      -8px -8px 0 #f4dbbd;
-  }
-  100% {
-    text-shadow: -2px -2px 2px #ffffff, -4px -4px 2px #9e85d0,
-      -6px -6px 2px #00ccff, -8px -8px 2px #00ffb3;
-  }
-}
-
 .iconContainer {
   display: flex;
   justify-content: center;
@@ -139,7 +139,7 @@
 }
 
 .homeIcon:hover {
-  transform: scale(1.25);
+  transform: scale(1.04);
 }
 
 .iconBackground {
