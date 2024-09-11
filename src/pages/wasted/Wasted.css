@@ -305,7 +305,7 @@ h1.wastedh1 {
 }
 
 .carousel-container {
-  padding: 1rem 0rem 0rem 0rem;
+  margin: 2rem 0rem 0rem 0rem;
   max-width: 600px;
   height: 100%;
   overflow: hidden; 

@@ -155,7 +155,6 @@ h1.vacation-expense {
     width: auto;
     padding: 0.38rem 0.75rem;
     font-size: 1.5rem;
-    margin: 2rem;
     font-weight: bold;
     color: #fff;
     background: linear-gradient(45deg, #ff00ea, #00eef7);
@@ -173,4 +172,12 @@ h1.vacation-expense {
 
   .gradient {
     background: linear-gradient(45deg, #ff00ea, #00eef7);
+  }
+
+  .travelers {
+    margin: 2rem;
+  }
+
+  .travelersContent {
+    font-size: 1.5rem;
   }

@@ -307,10 +307,10 @@ const HomePage = () => {
           </p>
         </div> */}
         <div class="building-section-wrapper">
-  <div class="building-section-content">
-    <b>Under construction!<br />This website is still being developed.</b>
-  </div>
-</div>
+          <div class="building-section-content">
+            <b>Under construction!<br />This website is still being developed.</b>
+          </div>
+        </div>
         <IconGroup />
         <div className="arrowContainer" onClick={handleArrowClick}>
           <div className="styledArrow">▼</div>

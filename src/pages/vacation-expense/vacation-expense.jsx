@@ -1,4 +1,5 @@
 import {
+  faPencil,
   faPlane,
   faPlaneArrival,
   faPlaneDeparture,
@@ -7,10 +8,13 @@ import {
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import axios from "axios";
 import React, { useCallback, useContext, useEffect, useState } from "react";
+import Modal from "react-modal";
 import Swal from "sweetalert2";
 import "sweetalert2/dist/sweetalert2.min.css";
 import { UserContext } from "../../components/header/UserContext";
 import "./vacation-expense.css";
+
+Modal.setAppElement("#root");
 
 const VacationExpenseCalculator = () => {
   const { userID, userName } = useContext(UserContext);
@@ -29,6 +33,7 @@ const VacationExpenseCalculator = () => {
   const [loading, setLoading] = useState(false);
   const [dateStart, setDateStart] = useState(null);
   const [dateEnd, setDateEnd] = useState(null);
+  const [travelersModal, setTravelersModal] = useState(false);
 
   const SwalError = (message) => {
     Swal.fire({
@@ -257,6 +262,19 @@ const VacationExpenseCalculator = () => {
   }
 
   const MainScreen = () => {
+    
+    const TravelersModal = () => {
+      if (travelersModal) {
+        return (
+          <Modal>
+            <div>Test</div>
+          </Modal>
+        );
+      } else {
+        return;
+      }
+    };
+
     const handleAddTravelers = useCallback(() => {
       Swal.fire({
         title: "Add a Traveler",
@@ -278,19 +296,29 @@ const VacationExpenseCalculator = () => {
             );
           } catch (error) {
             console.error("Error adding traveler:", error);
-            SwalError("We weren't able to add this traveler.");
+            Swal.fire(
+              "Error",
+              "We weren't able to add this traveler.",
+              "error"
+            );
           }
         },
-      })
-    });
+      });
+    }, [vacationID]);
+
     useEffect(() => {
       if (vacationID && vacationMainData.length === 0 && !loading) {
         setLoading(true);
         axios
-          .post(`${process.env.REACT_APP_API_URL}/node/vacationCalc/RetrieveVacation`, { vacationID })
+          .post(
+            `${process.env.REACT_APP_API_URL}/node/vacationCalc/RetrieveVacation`,
+            { vacationID }
+          )
           .then((response) => {
             setVacationMainData(response.data.result);
-            setDateStart(convertSQLDateToDate(response.data.result[0].date_start));
+            setDateStart(
+              convertSQLDateToDate(response.data.result[0].date_start)
+            );
             setDateEnd(convertSQLDateToDate(response.data.result[0].date_end));
             setShowNameVacation(false);
             setShowToAndFrom(false);
@@ -298,49 +326,89 @@ const VacationExpenseCalculator = () => {
           })
           .catch((error) => {
             console.error("Error loading main screen:", error);
-            SwalError("We weren't able to load the main screen.");
-            setLoading(false)
+            Swal.fire(
+              "Error",
+              "We weren't able to load the main screen.",
+              "error"
+            );
+            setLoading(false);
           })
           .finally(() => setLoading(false));
       }
     }, [vacationID, vacationMainData, loading]);
-  
+
     return (
       <div>
         {vacationMainData &&
-          vacationMainData.map((v, i) => (
-            <div key={i}>
-              <div className="centeredContainer">
-                <p className="vacationNameMain glass-effect">{v.vacation_name}</p>
-              </div>
-              <div className="vacationDateGroupMain">
-                <div className="vacationDatesMain">
-                  From: {v.from} (
-                  {dateStart ? dateStart.toDateString() : "Loading..."})
+          vacationMainData.map((v, i) => {
+            let travelersArray = [];
+            try {
+              travelersArray = v.travelers
+                .slice(1, -1)
+                .split(",")
+                .map((name) => name.trim().replace(/^['"]|['"]$/g, ""));
+            } catch (e) {
+              console.error("Failed to parse travelers", e);
+            }
+
+            return (
+              <div key={i}>
+                <div className="centeredContainer">
+                  <p className="vacationNameMain glass-effect">
+                    {v.vacation_name}
+                  </p>
                 </div>
-                <div>
-                  <FontAwesomeIcon icon={faPlane} size="2x" />
+                <div className="vacationDateGroupMain">
+                  <div className="vacationDatesMain">
+                    From: {v.from} (
+                    {dateStart ? dateStart.toDateString() : "Loading..."})
+                  </div>
+                  <div>
+                    <FontAwesomeIcon icon={faPlane} size="2x" />
+                  </div>
+                  <div className="vacationDatesMain">
+                    To: {v.to} (
+                    {dateEnd ? dateEnd.toDateString() : "Loading..."})
+                  </div>
                 </div>
-                <div className="vacationDatesMain">
-                  To: {v.to} ({dateEnd ? dateEnd.toDateString() : "Loading..."})
+                <div className="travelers">
+                  <h2>
+                    Travelers
+                    <FontAwesomeIcon
+                      icon={faPencil}
+                      style={{ transform: "scale(0.65)" }}
+                    />
+                  </h2>
+                  {Array.isArray(travelersArray) &&
+                  travelersArray.length > 0 ? (
+                    <div>
+                      {travelersArray.map((vt, i) => (
+                        <div key={i} className="travelersContent">
+                          {vt}
+                        </div>
+                      ))}
+                      <button
+                        className="travelersButton"
+                        onClick={handleAddTravelers}
+                      >
+                        Add More
+                      </button>
+                    </div>
+                  ) : (
+                    <button
+                      className="travelersButton"
+                      onClick={handleAddTravelers}
+                    >
+                      Add Travelers
+                    </button>
+                  )}
                 </div>
               </div>
-              <div className="travelers">
-                {v.travelers ? (
-                  v.travelers
-                ) : (
-                  <button className="travelersButton" onClick={handleAddTravelers}>
-                    Add Travelers
-                  </button>
-                )}
-              </div>
-            </div>
-          ))}
+            );
+          })}
       </div>
     );
   };
-  
-  
 
   const LoggedInOptions = () => (
     <div className="centeredContainer">
