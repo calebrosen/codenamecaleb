@@ -116,9 +116,8 @@ exports.retrieveVacation = async (req, res) => {
 exports.addTraveler = async (req, res) => {
     try {
         const db = await connectToDB();
-        const { vacationID, travelerName } = req.body;
-
-        db.query('Call AddTravelerToVacation(?, ?)', [vacationID, travelerName], (err,results) => {
+        const { vacationID, travelersArray } = req.body;
+        db.query('Call AddTravelerToVacation(?, ?)', [vacationID, travelersArray], (err,results) => {
             if (err) {
                 return res
                   .status(500)

@@ -181,3 +181,53 @@ h1.vacation-expense {
   .travelersContent {
     font-size: 1.5rem;
   }
+
+  .vacationInput1 {
+    position:relative;
+    background: #fff;
+    box-shadow: rgba(99, 99, 99, 0.1) 0px 2px 8px 0px;
+    display: inline-block;
+    border: 1px solid #333;
+    padding: 0.25rem;
+    border-radius: 7px;
+    font-size: 1.5rem;
+  }
+
+  .vacationInput1:active, .vacationInput1:focus {
+    border-color: red;
+  }
+
+  .saveButton {
+    border-radius: 6px;
+    padding: 0.4rem 0.85rem;
+    color: #fff;
+    font-size: 1.35rem;
+    background: rgb(20, 206, 45);
+    border: none;
+  }
+
+  .addNewButton {
+    border-radius: 6px;
+    padding: 0.4rem 0.85rem;
+    color: #fff;
+    font-size: 1.35rem;
+    border: none;
+    background: #128cfd;
+  }
+
+  .saveBorder {
+    border: 1px solid;
+    background: rgb(20, 206, 45);
+  }
+
+  .spanForForm {
+    margin: 1rem 0;
+    font-size: 1.25rem;
+    display: block;
+    border-radius: 7px;
+  }
+
+  .flexButtons {
+    display: flex;
+    gap: 2rem;
+  }

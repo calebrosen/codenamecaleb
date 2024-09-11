@@ -3,7 +3,9 @@ import {
   faPlane,
   faPlaneArrival,
   faPlaneDeparture,
-  faUmbrellaBeach,
+  faPlus,
+  faTrash,
+  faUmbrellaBeach
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import axios from "axios";
@@ -33,7 +35,9 @@ const VacationExpenseCalculator = () => {
   const [loading, setLoading] = useState(false);
   const [dateStart, setDateStart] = useState(null);
   const [dateEnd, setDateEnd] = useState(null);
+  const [travelersArray, setTravelersArray] = useState([]);
   const [travelersModal, setTravelersModal] = useState(false);
+  const [newTravelersArray, setNewTravelersArray] = useState([]);
 
   const SwalError = (message) => {
     Swal.fire({
@@ -81,7 +85,6 @@ const VacationExpenseCalculator = () => {
     const element = e.currentTarget;
     const vacationIDTemp = element.getAttribute("data-custom-vacation-id");
     setVacationID(vacationIDTemp);
-
     axios
       .post(
         `${process.env.REACT_APP_API_URL}/node/vacationCalc/loadPreviousVacation`,
@@ -261,51 +264,151 @@ const VacationExpenseCalculator = () => {
     return new Date(year, month - 1, day);
   }
 
-  const MainScreen = () => {
-    
-    const TravelersModal = () => {
-      if (travelersModal) {
-        return (
-          <Modal>
-            <div>Test</div>
-          </Modal>
-        );
-      } else {
-        return;
-      }
+  const TravelersModal = () => {
+    const handleCloseTravelersModal = () => {
+      setTravelersModal(false);
+      setNewTravelersArray(travelersArray);
     };
 
-    const handleAddTravelers = useCallback(() => {
-      Swal.fire({
-        title: "Add a Traveler",
-        input: "text",
-        inputAttributes: {
-          autocapitalize: "on",
-        },
-        showCancelButton: true,
-        confirmButtonText: "Add",
-        customClass: {
-          confirmButton: "gradient",
-        },
-        showLoaderOnConfirm: true,
-        preConfirm: async (travelerName) => {
-          try {
-            const response = await axios.post(
+    const handleSaveTravelers = (e) => {
+      e.preventDefault();
+      //need to implement logic
+    };
+
+    const handleDeleteTraveler = (e) => {
+      const tempData = e.currentTarget.getAttribute("data-custom-value");
+
+      setNewTravelersArray((prevTravelersArray) =>
+        prevTravelersArray.filter((traveler) => traveler !== tempData)
+      );
+    };
+
+    if (travelersModal) {
+      return (
+        <Modal
+          isOpen={travelersModal}
+          onRequestClose={handleCloseTravelersModal}
+          contentLabel="Travelers"
+          className="Modal"
+          overlayClassName="Overlay"
+        >
+          <div>
+            <h2 style={{ fontSize: "2rem" }}>Edit or Add Travelers</h2>
+            <form>
+              {newTravelersArray && newTravelersArray.length > 0 ? (
+                <>
+                  {newTravelersArray.map((t, i) => (
+                    <p key={i} data-custom-id={t}>
+                      <input
+                        type="text"
+                        className="vacationInput1"
+                        defaultValue={t}
+                      />
+                      <span
+                        className="pointer"
+                        data-custom-value={t}
+                        onClick={handleDeleteTraveler}
+                      >
+                        <FontAwesomeIcon
+                          icon={faTrash}
+                          style={{ color: "#e21212", marginLeft: "0.5rem" }}
+                          size="2x"
+                        />
+                      </span>
+                    </p>
+                  ))}
+                  <div className="flexButtons">
+                    <button
+                      className="saveButton"
+                      onClick={handleSaveTravelers}
+                      type="submit"
+                    >
+                      Save
+                    </button>
+                    <button
+                      className="addNewButton"
+                      onClick={handleAddNewTravelerClick}
+                    >
+                      Add new <FontAwesomeIcon icon={faPlus} />
+                    </button>
+                  </div>
+                </>
+              ) : (
+                <button
+                  className="addNewButton"
+                  onClick={handleAddNewTravelerClick}
+                >
+                  Add new <FontAwesomeIcon icon={faPlus} />
+                </button>
+              )}
+            </form>
+          </div>
+        </Modal>
+      );
+    } else {
+      return;
+    }
+  };
+
+  const handleAddNewTravelerClick = (e) => {
+    e.preventDefault();
+    handleAddTravelers();
+  };
+
+  const handleAddTravelers = useCallback(() => {
+    Swal.fire({
+      title: "Add a Traveler",
+      input: "text",
+      inputAttributes: {
+        autocapitalize: "on",
+      },
+      showCancelButton: true,
+      confirmButtonText: "Add",
+      customClass: {
+        confirmButton: "saveBorder",
+      },
+      showLoaderOnConfirm: true,
+      preConfirm: (travelerName) => {
+        if (!travelerName) {
+          Swal.showValidationMessage("Traveler name is required");
+          return false;
+        }
+        return travelerName;
+      },
+      }).then((result) => {
+        if (result.isConfirmed) {
+          const newTravelerName = result.value;
+  
+          setTravelersArray(prevTravelersArray => {
+            if (!Array.isArray(prevTravelersArray)) {
+              let tmpArr = [];
+              newTravelersArray(tmpArr);
+            }
+            
+            const updatedArray = [...prevTravelersArray, newTravelerName];
+            const arrayForUpdate = JSON.stringify(updatedArray);
+            console.log(arrayForUpdate);
+            axios.post(
               `${process.env.REACT_APP_API_URL}/node/vacationCalc/addTraveler`,
-              { vacationID, travelerName }
-            );
-          } catch (error) {
-            console.error("Error adding traveler:", error);
-            Swal.fire(
-              "Error",
-              "We weren't able to add this traveler.",
-              "error"
-            );
-          }
-        },
+              { vacationID, travelersArray: arrayForUpdate }
+            ).catch(error => {
+              console.error("Error adding traveler:", error);
+              Swal.fire("Error", "We weren't able to add this traveler.", "error");
+            });
+  
+            return updatedArray;
+          });
+  
+          Swal.fire("Added!", "The traveler has been added.", "success");
+        }
       });
     }, [vacationID]);
 
+  const handleOpenTravelersModal = () => {
+    setTravelersModal(true);
+  };
+
+  const MainScreen = () => {
     useEffect(() => {
       if (vacationID && vacationMainData.length === 0 && !loading) {
         setLoading(true);
@@ -320,6 +423,8 @@ const VacationExpenseCalculator = () => {
               convertSQLDateToDate(response.data.result[0].date_start)
             );
             setDateEnd(convertSQLDateToDate(response.data.result[0].date_end));
+            setTravelersArray(JSON.parse(response.data.result[0].travelers));
+            setNewTravelersArray(JSON.parse(response.data.result[0].travelers));
             setShowNameVacation(false);
             setShowToAndFrom(false);
             setMainScreenVar(true);
@@ -341,16 +446,6 @@ const VacationExpenseCalculator = () => {
       <div>
         {vacationMainData &&
           vacationMainData.map((v, i) => {
-            let travelersArray = [];
-            try {
-              travelersArray = v.travelers
-                .slice(1, -1)
-                .split(",")
-                .map((name) => name.trim().replace(/^['"]|['"]$/g, ""));
-            } catch (e) {
-              console.error("Failed to parse travelers", e);
-            }
-
             return (
               <div key={i}>
                 <div className="centeredContainer">
@@ -374,38 +469,27 @@ const VacationExpenseCalculator = () => {
                 <div className="travelers">
                   <h2>
                     Travelers
-                    <FontAwesomeIcon
-                      icon={faPencil}
-                      style={{ transform: "scale(0.65)" }}
-                    />
+                    <span onClick={handleOpenTravelersModal}>
+                      <FontAwesomeIcon
+                        icon={faPencil}
+                        style={{ transform: "scale(0.65)" }}
+                        className="pointer"
+                      />
+                    </span>
                   </h2>
-                  {Array.isArray(travelersArray) &&
-                  travelersArray.length > 0 ? (
-                    <div>
-                      {travelersArray.map((vt, i) => (
-                        <div key={i} className="travelersContent">
-                          {vt}
-                        </div>
-                      ))}
-                      <button
-                        className="travelersButton"
-                        onClick={handleAddTravelers}
-                      >
-                        Add More
-                      </button>
-                    </div>
-                  ) : (
-                    <button
-                      className="travelersButton"
-                      onClick={handleAddTravelers}
-                    >
-                      Add Travelers
-                    </button>
-                  )}
+                  {travelersArray && travelersArray.length > 0 && (
+                  <div>
+                    {travelersArray.map((t, i) => (
+                      <div key={i}>{t}</div>
+                    ))}
+                  </div>
+                )}
+
                 </div>
               </div>
             );
           })}
+        <TravelersModal />
       </div>
     );
   };
