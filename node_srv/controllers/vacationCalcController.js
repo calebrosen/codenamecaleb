@@ -133,3 +133,24 @@ exports.addTraveler = async (req, res) => {
         res.status(500).json({ error: 'Database connection failed' });
     }
 };
+
+exports.saveTravelers = async (req, res) => {
+    try {
+        const db = await connectToDB();
+        const { vacationID, tempTravelersArr } = req.body;
+        db.query('Call SaveTravelers(?, ?)', [vacationID, tempTravelersArr], (err,results) => {
+            if (err) {
+                return res
+                  .status(500)
+                  .json({ message: "Database error", error: err.message });
+              }
+              const result = results[0];
+        
+              if (result) {
+                return res.json({  result });
+              }
+        });
+    } catch (err) {
+        res.status(500).json({ error: 'Database connection failed' });
+    }
+};

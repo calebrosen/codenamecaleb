@@ -1,11 +1,11 @@
 import {
-  faPencil,
+  faPeopleGroup,
   faPlane,
   faPlaneArrival,
   faPlaneDeparture,
-  faPlus,
   faTrash,
-  faUmbrellaBeach
+  faUmbrellaBeach,
+  faUserPlus,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import axios from "axios";
@@ -38,6 +38,7 @@ const VacationExpenseCalculator = () => {
   const [travelersArray, setTravelersArray] = useState([]);
   const [travelersModal, setTravelersModal] = useState(false);
   const [newTravelersArray, setNewTravelersArray] = useState([]);
+  const [vacationDates, setVacationDates] = useState([]);
 
   const SwalError = (message) => {
     Swal.fire({
@@ -45,8 +46,8 @@ const VacationExpenseCalculator = () => {
       showConfirmButton: true,
       text: message,
       icon: "error",
-      background: "#212529",
-      color: "#fff",
+      background: "#fff",
+      color: "#000",
       confirmButtonText: "OK",
       confirmButtonColor: "#9e3c4e",
     });
@@ -148,46 +149,54 @@ const VacationExpenseCalculator = () => {
   }, []);
 
   const ConfirmName = useCallback(() => {
-    Swal.fire({
-      title: `Create vacation with name "${vacationName}"?`,
-      text: "You will be able to change this later.",
-      showCancelButton: true,
-      confirmButtonColor: "#3085d6",
-      cancelButtonColor: "#d33",
-      color: "#FFF",
-      background: "#212529",
-      confirmButtonText: "Yes, create it!",
-    }).then(async (result) => {
-      if (result.isConfirmed) {
-        try {
-          const createVacation = await axios.post(
-            `${process.env.REACT_APP_API_URL}/node/vacationCalc/createVacationName`,
-            {
-              userID,
-              vacationName,
-            }
-          );
-          Swal.fire({
-            title: "Created!",
-            text: `Your vacation "${vacationName}" has been created.`,
-            icon: "success",
-            color: "#FFF",
-            background: "#212529",
-            timer: "3000",
-          });
-          setVacationID(createVacation.data.vacationID);
-          setShowNameVacation(false);
-          setShowToAndFrom(true);
-        } catch (error) {
-          SwalError(
-            "We weren't able to create your vacation. Please try again."
-          );
+    if (vacationName) {
+      Swal.fire({
+        title: `Create vacation with name "${vacationName}"?`,
+        text: "You will be able to change this later.",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        color: "#000",
+        background: "#fff",
+        confirmButtonText: "Yes, create it!",
+      }).then(async (result) => {
+        if (result.isConfirmed) {
+          try {
+            const createVacation = await axios.post(
+              `${process.env.REACT_APP_API_URL}/node/vacationCalc/createVacationName`,
+              {
+                userID,
+                vacationName,
+              }
+            );
+            Swal.fire({
+              title: "Created!",
+              text: `Your vacation "${vacationName}" has been created.`,
+              icon: "success",
+              color: "#000",
+              background: "#fff",
+              timer: "3000",
+            });
+            setVacationID(createVacation.data.vacationID);
+            setShowNameVacation(false);
+            setShowToAndFrom(true);
+          } catch (error) {
+            SwalError(
+              "We weren't able to create your vacation. Please try again."
+            );
+          }
         }
-      }
-    });
+      });
+    }
   }, [vacationName, userID]);
 
   const ProceedFromTravelToAndFrom = useCallback(() => {
+    if (departDate > returnDate) {
+      SwalError(
+        "Please make sure your return date is after your leaving date."
+      );
+      return;
+    }
     if (returnDate && departDate && to && from) {
       axios
         .post(
@@ -206,8 +215,8 @@ const VacationExpenseCalculator = () => {
             showConfirmButton: false,
             text: "Your travel details have been saved.",
             icon: "success",
-            background: "#212529",
-            color: "#fff",
+            background: "#fff",
+            color: "#000",
             timer: 3000,
           });
           setShowToAndFrom(false);
@@ -222,8 +231,8 @@ const VacationExpenseCalculator = () => {
         title: "Incomplete Information",
         text: "Please fill in all the fields before proceeding.",
         icon: "warning",
-        background: "#212529",
-        color: "#fff",
+        background: "#fff",
+        color: "#000",
         confirmButtonText: "OK",
         confirmButtonColor: "#9e3c4e",
       });
@@ -273,20 +282,40 @@ const VacationExpenseCalculator = () => {
     const handleSaveTravelers = (e) => {
       e.preventDefault();
 
-      const allTravelers = document.querySelectorAll('.travelersForValue');
-      let arr = [];
-    
-      allTravelers.forEach((element) => {
-        const value = element.getAttribute("value");
+      const allTravelers = document.querySelectorAll(".travelersForValue");
+      let tempTravelersArr = [];
 
+      allTravelers.forEach((element) => {
+        const value = element.value;
         if (value) {
-          arr.push(value);
+          tempTravelersArr.push(value);
         }
       });
-      console.log(arr);
-      setNewTravelersArray(arr);
+
+      setNewTravelersArray(tempTravelersArr);
       setTravelersModal(false);
-      // NEED TO SEND TO DB
+      const newArr = [...tempTravelersArr];
+      //newArr for updating state on page
+      tempTravelersArr = JSON.stringify(tempTravelersArr);
+      axios
+        .post(
+          `${process.env.REACT_APP_API_URL}/node/vacationCalc/SaveTravelers`,
+          { vacationID, tempTravelersArr }
+        )
+        .then((response) => {
+          console.log(response);
+          setTravelersArray(newArr);
+          // ^ just updating visual state on page
+          Swal.fire("Saved!", "Your travelers have been saved.", "success");
+        })
+        .catch((error) => {
+          console.error("Error saving travelers:", error);
+          Swal.fire(
+            "Error",
+            "We weren't able to save your travelers.",
+            "error"
+          );
+        });
     };
 
     const handleDeleteTraveler = (e) => {
@@ -343,7 +372,7 @@ const VacationExpenseCalculator = () => {
                       className="addNewButton"
                       onClick={handleAddNewTravelerClick}
                     >
-                      Add new <FontAwesomeIcon icon={faPlus} />
+                      Add new <FontAwesomeIcon icon={faUserPlus} />
                     </button>
                   </div>
                 </>
@@ -352,7 +381,7 @@ const VacationExpenseCalculator = () => {
                   className="addNewButton"
                   onClick={handleAddNewTravelerClick}
                 >
-                  Add new <FontAwesomeIcon icon={faPlus} />
+                  Add new <FontAwesomeIcon icon={faUserPlus} />
                 </button>
               )}
             </form>
@@ -392,27 +421,33 @@ const VacationExpenseCalculator = () => {
     }).then((result) => {
       if (result.isConfirmed) {
         const newTravelerName = result.value;
-  
-        setTravelersArray(prevTravelersArray => {
+
+        setTravelersArray((prevTravelersArray) => {
           const updatedArray = Array.isArray(prevTravelersArray)
             ? [...prevTravelersArray, newTravelerName]
             : [newTravelerName];
-  
-          axios.post(
-            `${process.env.REACT_APP_API_URL}/node/vacationCalc/addTraveler`,
-            { vacationID, travelersArray: JSON.stringify(updatedArray) }
-          ).catch(error => {
-            console.error("Error adding traveler:", error);
-            Swal.fire("Error", "We weren't able to add this traveler.", "error");
-          });
-  
-          return updatedArray; 
+
+          axios
+            .post(
+              `${process.env.REACT_APP_API_URL}/node/vacationCalc/addTraveler`,
+              { vacationID, travelersArray: JSON.stringify(updatedArray) }
+            )
+            .catch((error) => {
+              console.error("Error adding traveler:", error);
+              Swal.fire(
+                "Error",
+                "We weren't able to add this traveler.",
+                "error"
+              );
+            });
+
+          return updatedArray;
         });
-  
+
         Swal.fire("Added!", "The traveler has been added.", "success");
       }
     });
-  }, [vacationID]);  
+  }, [vacationID]);
 
   const handleOpenTravelersModal = () => {
     setTravelersModal(true);
@@ -429,10 +464,12 @@ const VacationExpenseCalculator = () => {
           )
           .then((response) => {
             setVacationMainData(response.data.result);
-            setDateStart(
-              convertSQLDateToDate(response.data.result[0].date_start)
-            );
-            setDateEnd(convertSQLDateToDate(response.data.result[0].date_end));
+            //need to define beforehand due to async
+            const dStart = convertSQLDateToDate(response.data.result[0].date_start)
+            const dEnd = convertSQLDateToDate(response.data.result[0].date_end);
+            setDateStart(dStart);
+            setDateEnd(dEnd);
+            getDatesForVacation(dStart, dEnd);
             setTravelersArray(JSON.parse(response.data.result[0].travelers));
             setNewTravelersArray(JSON.parse(response.data.result[0].travelers));
             setShowNameVacation(false);
@@ -452,12 +489,25 @@ const VacationExpenseCalculator = () => {
       }
     }, [vacationID, vacationMainData, loading]);
 
+    const getDatesForVacation = (dateStart, dateEnd) => {
+      const dateArr = [];
+      for (
+        const dt = new Date(dateStart);
+        dt <= new Date(dateEnd);
+        dt.setDate(dt.getDate() + 1)
+      ) {
+        dateArr.push(new Date(dt));
+      }
+      console.log(dateArr);
+      setVacationDates([...dateArr]);
+    };
+
     return (
       <div>
         {vacationMainData &&
           vacationMainData.map((v, i) => {
             return (
-              <div key={i}>
+              <div key={i} className="vacationGroupMain">
                 <div className="centeredContainer">
                   <p className="vacationNameMain glass-effect">
                     {v.vacation_name}
@@ -468,7 +518,7 @@ const VacationExpenseCalculator = () => {
                     From: {v.from} (
                     {dateStart ? dateStart.toDateString() : "Loading..."})
                   </div>
-                  <div>
+                  <div className="planeIconFromTo">
                     <FontAwesomeIcon icon={faPlane} size="2x" />
                   </div>
                   <div className="vacationDatesMain">
@@ -477,24 +527,42 @@ const VacationExpenseCalculator = () => {
                   </div>
                 </div>
                 <div className="travelers">
-                  <h2>
+                  <h2 onClick={handleOpenTravelersModal} className="pointer">
+                    <FontAwesomeIcon
+                      icon={faPeopleGroup}
+                      style={{ paddingRight: "0.5rem" }}
+                    />
                     Travelers
-                    <span onClick={handleOpenTravelersModal}>
-                      <FontAwesomeIcon
-                        icon={faPencil}
-                        style={{ transform: "scale(0.65)" }}
-                        className="pointer"
-                      />
-                    </span>
                   </h2>
                   {travelersArray && travelersArray.length > 0 && (
-                  <div>
-                    {travelersArray.map((t, i) => (
-                      <div key={i}>{t}</div>
-                    ))}
+                    <div className="travelersNames">
+                      {travelersArray.map((traveler, i) => (
+                        <div key={i} className="individualTravelerNames">
+                          {traveler}
+                        </div>
+                      ))}
+                    </div>
+                  )}
+                </div>
+                <div className="mainVacationData">
+                  <div className="lodging">
+                    <h2 onClick={handleOpenTravelersModal} className="pointer">
+                      <FontAwesomeIcon
+                        icon={faPeopleGroup}
+                        style={{ paddingRight: "0.5rem" }}
+                      />
+                      Lodging
+                    </h2>
+                    {travelersArray && travelersArray.length > 0 && (
+                      <div style={{ textAlign: "center" }}>
+                        {travelersArray.map((traveler, i) => (
+                          <p key={i} className="individualTravelerNames">
+                            {traveler}
+                          </p>
+                        ))}
+                      </div>
+                    )}
                   </div>
-                )}
-
                 </div>
               </div>
             );
@@ -524,18 +592,20 @@ const VacationExpenseCalculator = () => {
         <div className="previousVacations">
           or choose a previous one:
           {vacations.length > 0 ? (
-            vacations.map((vacation) => (
-              <div key={vacation.id}>
-                <button
-                  onClick={LoadPreviousVacation}
-                  data-custom-vacation-id={vacation.id}
-                  key={vacation.id}
-                  className="loadedVacationsText"
-                >
-                  {vacation.vacation_name}
-                </button>
-              </div>
-            ))
+            <div className="prevVacationsListParent">
+              <ul className="prevVacationsList">
+                {vacations.map((vacation) => (
+                  <li
+                    key={vacation.id}
+                    onClick={LoadPreviousVacation}
+                    data-custom-vacation-id={vacation.id}
+                    className="loadedVacationsText"
+                  >
+                    {vacation.vacation_name}
+                  </li>
+                ))}
+              </ul>
+            </div>
           ) : (
             <p>No vacations found.</p>
           )}
