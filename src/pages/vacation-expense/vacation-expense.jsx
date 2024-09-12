@@ -272,7 +272,21 @@ const VacationExpenseCalculator = () => {
 
     const handleSaveTravelers = (e) => {
       e.preventDefault();
-      //need to implement logic
+
+      const allTravelers = document.querySelectorAll('.travelersForValue');
+      let arr = [];
+    
+      allTravelers.forEach((element) => {
+        const value = element.getAttribute("value");
+
+        if (value) {
+          arr.push(value);
+        }
+      });
+      console.log(arr);
+      setNewTravelersArray(arr);
+      setTravelersModal(false);
+      // NEED TO SEND TO DB
     };
 
     const handleDeleteTraveler = (e) => {
@@ -301,7 +315,7 @@ const VacationExpenseCalculator = () => {
                     <p key={i} data-custom-id={t}>
                       <input
                         type="text"
-                        className="vacationInput1"
+                        className="vacationInput1 travelersForValue"
                         defaultValue={t}
                       />
                       <span
@@ -375,34 +389,30 @@ const VacationExpenseCalculator = () => {
         }
         return travelerName;
       },
-      }).then((result) => {
-        if (result.isConfirmed) {
-          const newTravelerName = result.value;
+    }).then((result) => {
+      if (result.isConfirmed) {
+        const newTravelerName = result.value;
   
-          setTravelersArray(prevTravelersArray => {
-            if (!Array.isArray(prevTravelersArray)) {
-              let tmpArr = [];
-              newTravelersArray(tmpArr);
-            }
-            
-            const updatedArray = [...prevTravelersArray, newTravelerName];
-            const arrayForUpdate = JSON.stringify(updatedArray);
-            console.log(arrayForUpdate);
-            axios.post(
-              `${process.env.REACT_APP_API_URL}/node/vacationCalc/addTraveler`,
-              { vacationID, travelersArray: arrayForUpdate }
-            ).catch(error => {
-              console.error("Error adding traveler:", error);
-              Swal.fire("Error", "We weren't able to add this traveler.", "error");
-            });
+        setTravelersArray(prevTravelersArray => {
+          const updatedArray = Array.isArray(prevTravelersArray)
+            ? [...prevTravelersArray, newTravelerName]
+            : [newTravelerName];
   
-            return updatedArray;
+          axios.post(
+            `${process.env.REACT_APP_API_URL}/node/vacationCalc/addTraveler`,
+            { vacationID, travelersArray: JSON.stringify(updatedArray) }
+          ).catch(error => {
+            console.error("Error adding traveler:", error);
+            Swal.fire("Error", "We weren't able to add this traveler.", "error");
           });
   
-          Swal.fire("Added!", "The traveler has been added.", "success");
-        }
-      });
-    }, [vacationID]);
+          return updatedArray; 
+        });
+  
+        Swal.fire("Added!", "The traveler has been added.", "success");
+      }
+    });
+  }, [vacationID]);  
 
   const handleOpenTravelersModal = () => {
     setTravelersModal(true);
