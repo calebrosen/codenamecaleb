@@ -40,7 +40,12 @@ const VacationExpenseCalculator = () => {
   const [newTravelersArray, setNewTravelersArray] = useState([]);
   const [vacationDates, setVacationDates] = useState([]);
   const [vacationNameModal, setVacationNameModal] = useState(false);
-  const [vacationNameForModal, setVacationNameForModal] = useState('');
+  const [vacationNameForModal, setVacationNameForModal] = useState("");
+  const [vacationEditDateModal, setVacationEditDateModal] = useState(false);
+  const [fromLocationModal, setFromLocationModal] = useState("");
+  const [toLocationModal, setToLocationModal] = useState("");
+  const [fromDateModal, setFromDateModal] = useState("");
+  const [toDateModal, setToDateModal] = useState("");
 
   const SwalError = (message) => {
     Swal.fire({
@@ -331,8 +336,8 @@ const VacationExpenseCalculator = () => {
           className="Modal"
           overlayClassName="Overlay"
         >
-          <div>
-            <h2 style={{ fontSize: "2rem" }}>Edit or Add Travelers</h2>
+          <div className='centered'>
+            <h2 style={{ fontSize: "2.8rem", marginBottom: "1.25rem" }}>Edit or Add Travelers</h2>
             <form>
               {newTravelersArray && newTravelersArray.length > 0 ? (
                 <>
@@ -462,6 +467,10 @@ const VacationExpenseCalculator = () => {
             const dEnd = convertSQLDateToDate(response.data.result[0].date_end);
             setDateStart(dStart);
             setDateEnd(dEnd);
+            setFromDateModal(dStart.toISOString().split('T')[0]);
+            setToDateModal(dEnd.toISOString().split('T')[0]);
+            setFromLocationModal(response.data.result[0].from)
+            setToLocationModal(response.data.result[0].to)
             getDatesForVacation(dStart, dEnd);
             setVacationNameForModal(response.data.result[0].vacation_name);
             setTravelersArray(JSON.parse(response.data.result[0].travelers));
@@ -501,32 +510,28 @@ const VacationExpenseCalculator = () => {
     };
 
     const UpdateVacationName = () => {
-
-      // const CaptureNewVacationName = (e) => {
-      //   setNewVacationName(e.currentTarget.value);
-      // }
-
       const handleSaveVacationName = (e) => {
         e.preventDefault();
         const newVacationName = e.target.form[0].value;
         axios
-        .post(
-          `${process.env.REACT_APP_API_URL}/node/vacationCalc/editVacationName`,
-          { vacationID, newVacationName }
-        )
-        .then((response) => {
-          const tmpArrForUpdateName = [...vacationMainData];
-          if (tmpArrForUpdateName.length > 0) {
-            tmpArrForUpdateName[0].vacation_name = newVacationName; 
-            SwalSuccess("Your vacation name has been edited.");
-            setVacationNameForModal(newVacationName);
-          }
-        })
-        .catch((error) => {
-          console.error("Error editing vacation name:", error);
-          SwalError("We weren't able to edit your vacation name.");
-        });
-      }
+          .post(
+            `${process.env.REACT_APP_API_URL}/node/vacationCalc/editVacationName`,
+            { vacationID, newVacationName }
+          )
+          .then((response) => {
+            const tmpArrForUpdateName = [...vacationMainData];
+            if (tmpArrForUpdateName.length > 0) {
+              tmpArrForUpdateName[0].vacation_name = newVacationName;
+              SwalSuccess("Your vacation name has been edited.");
+              setVacationNameForModal(newVacationName);
+              setVacationNameModal(false);
+            }
+          })
+          .catch((error) => {
+            console.error("Error editing vacation name:", error);
+            SwalError("We weren't able to edit your vacation name.");
+          });
+      };
 
       const CloseVacationNameModal = () => {
         setVacationNameModal(false);
@@ -541,12 +546,10 @@ const VacationExpenseCalculator = () => {
             className="Modal"
             overlayClassName="Overlay"
           >
-          <div>
-            <h2 style={{ fontSize: "2rem" }}>
-              Edit Vacation Name
-            </h2>
-            <form>
-                <p>
+            <div className='centered'>
+              <h2 style={{ fontSize: "2.8rem" }}>Edit Vacation Name</h2>
+              <form>
+                <p className='marginTop1 marginBottom1'>
                   <input
                     type="text"
                     className="vacationInput1"
@@ -556,20 +559,88 @@ const VacationExpenseCalculator = () => {
                 </p>
                 <div>
                   <button
-                    className="saveButton"
+                    className="saveButtonWider"
                     onClick={handleSaveVacationName}
                     type="submit"
                   >
                     Save
                   </button>
                 </div>
-            </form>
-          </div>
+              </form>
+            </div>
           </Modal>
         );
       } else {
         return;
       }
+    };
+
+    const EditVacationDateModal = () => {
+      const HandleCloseVacationDateModal = () => {
+        setVacationEditDateModal(false);
+      };
+
+      if (vacationEditDateModal) {
+        return (
+          <Modal
+            isOpen={vacationEditDateModal}
+            onRequestClose={HandleCloseVacationDateModal}
+            contentLabel="Edit Vacation Dates and To/From"
+            className="WiderModal"
+            overlayClassName="Overlay"
+          >
+            <h2 style={{ fontSize: "2.75rem" }}>
+              Edit Vacation Dates & Location
+            </h2>
+            <form>
+              <div className="flexGroup" style={{textAlign: "center"}}>
+                <div>
+                  <p className="toAndFromPModal">From</p>
+                  <p>
+                    <input
+                      defaultValue={fromLocationModal}
+                      type="text"
+                      className="inputVacation2"
+                    ></input>
+                  </p>
+                  <input
+                    type="date"
+                    defaultValue={fromDateModal}
+                    className="inputVacation2"
+                  ></input>
+                </div>
+                <div>
+                  <p className="toAndFromPModal">To</p>
+                  <p>
+                    <input
+                      defaultValue={toLocationModal}
+                      type="text"
+                      className="inputVacation2"
+                    ></input>
+                  </p>
+                  <input
+                    type="date"
+                    defaultValue={toDateModal}
+                    className="inputVacation2"
+                  ></input>
+                </div>
+              </div>
+              <div className="centeredSaveButtonContainer">
+                  <button
+                    className="saveButtonWider"
+                    type="submit"
+                  >
+                    Save
+                  </button>
+                </div>
+            </form>
+          </Modal>
+        );
+      } else return;
+    };
+
+    const OpenVacationDatesModal = () => {
+      setVacationEditDateModal(true);
     };
 
     return (
@@ -580,21 +651,27 @@ const VacationExpenseCalculator = () => {
               <div key={i} className="vacationGroupMain">
                 <div className="centeredContainer">
                   <p
-                    className="vacationNameMain glass-effect"
+                    className="vacationNameMain glass-effect pointer"
                     onClick={OpenVacationNameModal}
                   >
                     {v.vacation_name}
                   </p>
                 </div>
                 <div className="vacationDateGroupMain">
-                  <div className="vacationDatesMain">
+                  <div
+                    className="vacationDatesMain pointer"
+                    onClick={OpenVacationDatesModal}
+                  >
                     From: {v.from} (
                     {dateStart ? dateStart.toDateString() : "Loading..."})
                   </div>
                   <div className="planeIconFromTo">
                     <FontAwesomeIcon icon={faPlane} size="2x" />
                   </div>
-                  <div className="vacationDatesMain">
+                  <div
+                    className="vacationDatesMain pointer"
+                    onClick={OpenVacationDatesModal}
+                  >
                     To: {v.to} (
                     {dateEnd ? dateEnd.toDateString() : "Loading..."})
                   </div>
@@ -616,22 +693,23 @@ const VacationExpenseCalculator = () => {
                       ))}
                     </div>
                   )}
-                  <hr className='travelersBreak' />
+                  <hr className="travelersBreak" />
                 </div>
-                  <div className="vacationDatesInOrder">
-                    {vacationDates &&
-                      vacationDates.length > 0 &&
-                      vacationDates.map((date, i) => (
-                        <div key={i} className="vacationDayGroup">
-                          {date}
-                        </div>
-                      ))}
-                  </div>
+                <div className="vacationDatesInOrder">
+                  {vacationDates &&
+                    vacationDates.length > 0 &&
+                    vacationDates.map((date, i) => (
+                      <div key={i} className="vacationDayGroup">
+                        {date}
+                      </div>
+                    ))}
+                </div>
               </div>
             );
           })}
         <TravelersModal />
         <UpdateVacationName />
+        <EditVacationDateModal />
       </div>
     );
   };

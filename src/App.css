@@ -146,6 +146,18 @@ body {
   position: relative;
 }
 
+.WiderModal {
+  width: fit-content;
+  max-width: 1200px;
+  padding: 20px;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+  margin: auto;
+  color: #000;
+  position: relative;
+}
+
 .Overlay {
   background-color: rgba(0, 0, 0, 0.75);
   position: fixed;
@@ -160,4 +172,8 @@ body {
 
 .pointer:hover {
   cursor: pointer;
+}
+
+.centered {
+  text-align: center;
 }
