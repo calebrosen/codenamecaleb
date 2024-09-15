@@ -580,6 +580,43 @@ const VacationExpenseCalculator = () => {
         setVacationEditDateModal(false);
       };
 
+      const HandleSaveEditVacationDate = (e) => {
+        e.preventDefault();
+        const form = e.target.form;
+        //maybe improve logic here later
+        let fromLocationUpdate;
+        let fromDateUpdate;
+        let toLocationUpdate;
+        let toDateUpdate;
+        if (form) {
+          Array.from(form.elements).forEach((input) => {
+            if (input.id == "fromLocationModal") {
+              fromLocationUpdate = input.value;
+            } else if (input.id == "fromDateModal") {
+              fromDateUpdate = formatDateForSQL(input.value);
+            } else if (input.id == "toLocationModal") {
+              toLocationUpdate = input.value;
+            } else if (input.id == "toDateModal") {
+              toDateUpdate = formatDateForSQL(input.value);
+            }
+          });
+          axios
+          .post(
+            `${process.env.REACT_APP_API_URL}/node/vacationCalc/updateVacationToFrom`,
+            { vacationID, fromLocationUpdate, fromDateUpdate, toLocationUpdate, toDateUpdate }
+          )
+          .then((response) => {
+              SwalSuccess("Your vacation name has been edited.");
+              console.log(response);
+          })
+          .catch((error) => {
+            console.error("Error updating vacation to/from information:", error);
+            SwalError("We weren't able to edit your vacation's to/from information.");
+          });
+          console.log(1);
+        }
+      };
+
       if (vacationEditDateModal) {
         return (
           <Modal
@@ -601,12 +638,14 @@ const VacationExpenseCalculator = () => {
                       defaultValue={fromLocationModal}
                       type="text"
                       className="inputVacation2"
+                      id="fromLocationModal"
                     ></input>
                   </p>
                   <input
                     type="date"
                     defaultValue={fromDateModal}
                     className="inputVacation2"
+                    id="fromDateModal"
                   ></input>
                 </div>
                 <div>
@@ -616,18 +655,21 @@ const VacationExpenseCalculator = () => {
                       defaultValue={toLocationModal}
                       type="text"
                       className="inputVacation2"
+                      id="toLocationModal"
                     ></input>
                   </p>
                   <input
                     type="date"
                     defaultValue={toDateModal}
                     className="inputVacation2"
+                    id="toDateModal"
                   ></input>
                 </div>
               </div>
               <div className="centeredSaveButtonContainer">
                   <button
                     className="saveButtonWider"
+                    onClick={HandleSaveEditVacationDate}
                     type="submit"
                   >
                     Save

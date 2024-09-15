@@ -26,4 +26,6 @@ router.post('/saveTravelers', vacationCalcController.saveTravelers);
 // editing vacation name
 router.post('/editVacationName', vacationCalcController.editVacationName);
 
+router.post('/updateVacationToFrom', vacationCalcController.updateVacationToFrom);
+
 module.exports = router;
