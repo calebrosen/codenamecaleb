@@ -116,7 +116,7 @@ body {
   padding: 10px;
 }
 
-h1.vacation-expense {
+h1.vacation-planner {
   font-family: "Vacation", sans-serif;
   font-size: 4rem;
 }
@@ -330,9 +330,8 @@ hr.travelersBreak {
   box-sizing: border-box;
   justify-content: center;
   text-align: center;
-  padding: 1rem;
   max-width: 75%;
-  margin: 0 auto;
+  margin: 0 auto 2rem auto;
 }
 
 .vacationDatesInOrder > div {

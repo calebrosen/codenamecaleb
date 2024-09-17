@@ -1,8 +1,8 @@
 import {
-  faBars,
-  faHome,
-  faUser,
-  faUserCircle,
+    faBars,
+    faHome,
+    faUser,
+    faUserCircle,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import axios from "axios";
@@ -321,7 +321,7 @@ const Menu = ({ children }) => {
               </span>
             </div>
             <div className="menu-item">
-              <a href="vacation-expense-calculator">
+              <a href="vacation-planner">
                 <span>Vacation Expense Calculator</span>
               </a>
             </div>

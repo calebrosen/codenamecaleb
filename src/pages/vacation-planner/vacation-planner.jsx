@@ -14,11 +14,11 @@ import Modal from "react-modal";
 import Swal from "sweetalert2";
 import "sweetalert2/dist/sweetalert2.min.css";
 import { UserContext } from "../../components/header/UserContext";
-import "./vacation-expense.css";
+import "./vacation-planner.css";
 
 Modal.setAppElement("#root");
 
-const VacationExpenseCalculator = () => {
+const VacationPlanner = () => {
   const { userID, userName } = useContext(UserContext);
   const [showNameVacation, setShowNameVacation] = useState(false);
   const [vacationName, setVacationName] = useState("");
@@ -46,6 +46,9 @@ const VacationExpenseCalculator = () => {
   const [toLocationModal, setToLocationModal] = useState("");
   const [fromDateModal, setFromDateModal] = useState("");
   const [toDateModal, setToDateModal] = useState("");
+  const [vacationDayModal, setVacationDayModal] = useState(false);
+  const [vacationDateEdit, setVacationDateEdit] = useState('');
+  const [vacationDaySubject, setVacationDaySubject] = useState('');
 
   const SwalError = (message) => {
     Swal.fire({
@@ -575,6 +578,12 @@ const VacationExpenseCalculator = () => {
       }
     };
 
+    function addDaysToDate(dateString, addDayAmount) {
+      const date = new Date(dateString);
+      date.setDate(date.getDate() + addDayAmount);
+      return date.toISOString().split('T')[0];
+    }
+
     const EditVacationDateModal = () => {
       const HandleCloseVacationDateModal = () => {
         setVacationEditDateModal(false);
@@ -608,12 +617,27 @@ const VacationExpenseCalculator = () => {
           .then((response) => {
               SwalSuccess("Your vacation name has been edited.");
               console.log(response);
+              const newVacationDataTemp = [...vacationMainData];
+
+              for (let vacation of newVacationDataTemp) {
+                vacation.from = fromLocationUpdate;
+                vacation.to = toLocationUpdate;
+              }
+              const fromDate = addDaysToDate(fromDateUpdate, 1);
+              const toDate = addDaysToDate(toDateUpdate, 1);
+              setVacationMainData(newVacationDataTemp);
+              setDateStart(convertSQLDateToDate(fromDate));
+              setDateEnd(convertSQLDateToDate(toDate));
+              setFromLocationModal(fromLocationUpdate);
+              setToLocationModal(toLocationUpdate);
+              setFromDateModal(fromDate)
+              setToDateModal(toDate);
+              getDatesForVacation(addDaysToDate(fromDate, 1), addDaysToDate(toDate,1));
           })
           .catch((error) => {
             console.error("Error updating vacation to/from information:", error);
             SwalError("We weren't able to edit your vacation's to/from information.");
           });
-          console.log(1);
         }
       };
 
@@ -684,6 +708,29 @@ const VacationExpenseCalculator = () => {
     const OpenVacationDatesModal = () => {
       setVacationEditDateModal(true);
     };
+
+    const EditVacationDay = () => {
+
+      const HandleVacationDayModalClose = () => {
+        setVacationDayModal(false);
+      }
+
+      return (
+        <Modal
+        isOpen={vacationEditDateModal}
+        onRequestClose={HandleVacationDayModalClose}
+        contentLabel="Edit Vacation Dates and To/From"
+        className="WiderModal"
+        overlayClassName="Overlay"
+        >
+
+        </Modal>
+      )
+    }
+
+    const HandleVacationDateClick = () => {
+
+    }
 
     return (
       <div>
@@ -758,7 +805,7 @@ const VacationExpenseCalculator = () => {
 
   const LoggedInOptions = () => (
     <div className="centeredContainer">
-      <h1 className="vacation-expense">
+      <h1 className="vacation-planner">
         <FontAwesomeIcon icon={faUmbrellaBeach} /> Vacation Expense Calculator
       </h1>
       <h2 style={{ fontSize: "1.5rem" }}>
@@ -801,7 +848,7 @@ const VacationExpenseCalculator = () => {
 
   const NotLoggedIn = ({ onLogin }) => (
     <div className="centeredContainer">
-      <h1 className="vacation-expense">
+      <h1 className="vacation-planner">
         <FontAwesomeIcon icon={faUmbrellaBeach} /> Vacation Expense Calculator
       </h1>
       <h2 style={{ fontSize: "1.5rem" }}>
@@ -908,4 +955,4 @@ const VacationExpenseCalculator = () => {
   );
 };
 
-export default VacationExpenseCalculator;
+export default VacationPlanner;
