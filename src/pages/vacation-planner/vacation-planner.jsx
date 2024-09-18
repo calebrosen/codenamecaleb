@@ -715,21 +715,49 @@ const VacationPlanner = () => {
         setVacationDayModal(false);
       }
 
-      return (
-        <Modal
-        isOpen={vacationEditDateModal}
-        onRequestClose={HandleVacationDayModalClose}
-        contentLabel="Edit Vacation Dates and To/From"
-        className="WiderModal"
-        overlayClassName="Overlay"
-        >
-
-        </Modal>
-      )
+      if (vacationDayModal) {
+        return (
+          <Modal
+          isOpen={vacationDayModal}
+          onRequestClose={HandleVacationDayModalClose}
+          contentLabel="Edit Vacation Dates and To/From"
+          className="WidestModal"
+          overlayClassName="Overlay"
+          >
+            <div>
+              <h2>{vacationDateEdit}</h2>
+              <div>
+                <input className='vacationInput1'></input>
+              </div>
+            </div>
+          </Modal>
+        )
+      }
+      else {
+        return;
+      }
     }
 
-    const HandleVacationDateClick = () => {
-
+    const HandleVacationDateClick = (e) => {
+      setVacationDayModal(true);
+      const tempVacationToFormat = e.currentTarget.getAttribute("data-custom-date");
+      const dateObject = new Date(tempVacationToFormat);
+      const options = { year: 'numeric', month: 'long', day: 'numeric' };
+      let formattedDate = dateObject.toLocaleDateString('en-US', options);
+      // adding date suffix
+      const day = dateObject.getDate();
+      const daySuffix = (day) => {
+        if (day > 3 && day < 21) return 'th';
+        switch (day % 10) {
+          case 1: return 'st';
+          case 2: return 'nd';
+          case 3: return 'rd';
+          default: return 'th';
+        }
+      };
+      formattedDate = formattedDate.replace(/\d+/, day + daySuffix(day));
+      setVacationDateEdit(formattedDate);
+      setVacationDaySubject();
     }
 
     return (
@@ -788,7 +816,7 @@ const VacationPlanner = () => {
                   {vacationDates &&
                     vacationDates.length > 0 &&
                     vacationDates.map((date, i) => (
-                      <div key={i} className="vacationDayGroup">
+                      <div key={i} onClick={HandleVacationDateClick} data-custom-date={date} className="vacationDayGroup pointer">
                         {date}
                       </div>
                     ))}
@@ -799,6 +827,7 @@ const VacationPlanner = () => {
         <TravelersModal />
         <UpdateVacationName />
         <EditVacationDateModal />
+        <EditVacationDay />
       </div>
     );
   };
