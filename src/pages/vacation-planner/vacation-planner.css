@@ -258,11 +258,6 @@ hr.travelersBreak {
   border-radius: 7px;
 }
 
-.vacationInput1:active,
-.vacationInput1:focus {
-  border-color: red;
-}
-
 .saveButton {
   border-radius: 6px;
   padding: 0.4rem 0.85rem;
@@ -362,15 +357,47 @@ hr.travelersBreak {
   border: 2px solid #ccc;
   border-radius: 20px;
   outline: none;
-  color: #212529;
+  color: #000;
   transition: all 0.3s ease;
   background-color: #ffffff;
+}
+
+.inputVacation3 {
+  position: relative;
+  padding: 4px 12px;
+  font-size: 3rem;
+  width: 100%;
+  border-radius: 20px;
+  border: 1px solid #d1d1d1;
+  text-align: center;
+  outline: none;
+  color: #000;
+  transition: all 0.3s ease;
+  background-color: #f9f9f9;
+}
+
+.daySummary {
+  font-size: 3rem;
+  margin: 1rem;
+  text-align: center;
 }
 
 .centeredSaveButtonContainer {
   text-align: center;
   margin-top: 1.25rem;
 }
+
+
+
+
+
+
+
+
+
+
+
+
 
 @media screen and (max-width: 768px) {
 
@@ -395,4 +422,4 @@ hr.travelersBreak {
     padding: 0.5rem;
     font-size: calc(3.25rem + 1vw);
   }
-}
+}   
