@@ -170,6 +170,18 @@ body {
   position: relative;
 }
 
+.WideModalPadding {
+  width: fit-content;
+  max-width: 90%;
+  padding: 2rem 2.25rem;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+  margin: auto;
+  color: #000;
+  position: relative;
+}
+
 
 .Overlay {
   background-color: rgba(0, 0, 0, 0.75);

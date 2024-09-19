@@ -26,6 +26,13 @@ router.post('/saveTravelers', vacationCalcController.saveTravelers);
 // editing vacation name
 router.post('/editVacationName', vacationCalcController.editVacationName);
 
+//editing vacation dates and to/from
 router.post('/updateVacationToFrom', vacationCalcController.updateVacationToFrom);
+
+//saving day summary
+router.post('/saveDaySummary', vacationCalcController.saveDaySummary);
+
+router.post('/getVacationDaySummary', vacationCalcController.getVacationDaySummary);
+
 
 module.exports = router;

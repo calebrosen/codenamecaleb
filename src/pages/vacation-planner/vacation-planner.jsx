@@ -5,8 +5,7 @@ import {
   faPlaneDeparture,
   faTrash,
   faUmbrellaBeach,
-  faUserPlus,
-  faQuoteLeft
+  faUserPlus
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import axios from "axios";
@@ -48,9 +47,11 @@ const VacationPlanner = () => {
   const [fromDateModal, setFromDateModal] = useState("");
   const [toDateModal, setToDateModal] = useState("");
   const [vacationDayModal, setVacationDayModal] = useState(false);
-  const [vacationDateEdit, setVacationDateEdit] = useState('');
-  const [vacationDaySummary, setvacationDaySummary] = useState('');
-  const [showSetVacationDaySummary, setShowSetVacationDaySummary] = useState(false);
+  const [vacationDateEdit, setVacationDateEdit] = useState("");
+  const [vacationDaySummary, setVacationDaySummary] = useState("");
+  const [showSetVacationDaySummary, setShowSetVacationDaySummary] =
+    useState(false);
+  const [loadingSummary, setLoadingSummary] = useState(false);
 
   const SwalError = (message) => {
     Swal.fire({
@@ -326,7 +327,6 @@ const VacationPlanner = () => {
 
     const handleDeleteTraveler = (e) => {
       const tempData = e.currentTarget.getAttribute("data-custom-value");
-
       setNewTravelersArray((prevTravelersArray) =>
         prevTravelersArray.filter((traveler) => traveler !== tempData)
       );
@@ -338,11 +338,13 @@ const VacationPlanner = () => {
           isOpen={travelersModal}
           onRequestClose={handleCloseTravelersModal}
           contentLabel="Travelers"
-          className="Modal"
+          className="WideModalPadding"
           overlayClassName="Overlay"
         >
-          <div className='centered'>
-            <h2 style={{ fontSize: "2.8rem", marginBottom: "1.25rem" }}>Edit or Add Travelers</h2>
+          <div className="centered">
+            <h2 style={{ fontSize: "3rem", padding: "1rem" }}>
+              Edit or Add Travelers
+            </h2>
             <form>
               {newTravelersArray && newTravelersArray.length > 0 ? (
                 <>
@@ -368,7 +370,7 @@ const VacationPlanner = () => {
                   ))}
                   <div className="flexButtons">
                     <button
-                      className="saveButton"
+                      className="saveButtonWider"
                       onClick={handleSaveTravelers}
                       type="submit"
                     >
@@ -442,7 +444,7 @@ const VacationPlanner = () => {
               console.error("Error adding traveler:", error);
               SwalError("We weren't able to add this traveler.");
             });
-
+          setNewTravelersArray(updatedArray);
           return updatedArray;
         });
         SwalSuccess("The traveler has been added.");
@@ -472,10 +474,10 @@ const VacationPlanner = () => {
             const dEnd = convertSQLDateToDate(response.data.result[0].date_end);
             setDateStart(dStart);
             setDateEnd(dEnd);
-            setFromDateModal(dStart.toISOString().split('T')[0]);
-            setToDateModal(dEnd.toISOString().split('T')[0]);
-            setFromLocationModal(response.data.result[0].from)
-            setToLocationModal(response.data.result[0].to)
+            setFromDateModal(dStart.toISOString().split("T")[0]);
+            setToDateModal(dEnd.toISOString().split("T")[0]);
+            setFromLocationModal(response.data.result[0].from);
+            setToLocationModal(response.data.result[0].to);
             getDatesForVacation(dStart, dEnd);
             setVacationNameForModal(response.data.result[0].vacation_name);
             setTravelersArray(JSON.parse(response.data.result[0].travelers));
@@ -548,13 +550,13 @@ const VacationPlanner = () => {
             isOpen={vacationNameModal}
             onRequestClose={CloseVacationNameModal}
             contentLabel="Vacation Name"
-            className="Modal"
+            className="WideModalPadding"
             overlayClassName="Overlay"
           >
-            <div className='centered'>
+            <div className="centered">
               <h2 style={{ fontSize: "2.8rem" }}>Edit Vacation Name</h2>
               <form>
-                <p className='marginTop1 marginBottom1'>
+                <p className="marginTop1 marginBottom1">
                   <input
                     type="text"
                     className="vacationInput1"
@@ -583,7 +585,7 @@ const VacationPlanner = () => {
     function addDaysToDate(dateString, addDayAmount) {
       const date = new Date(dateString);
       date.setDate(date.getDate() + addDayAmount);
-      return date.toISOString().split('T')[0];
+      return date.toISOString().split("T")[0];
     }
 
     const EditVacationDateModal = () => {
@@ -612,15 +614,23 @@ const VacationPlanner = () => {
             }
           });
           if (new Date(fromDateUpdate) > new Date(toDateUpdate)) {
-            SwalError("Please make sure that your 'from' date is before your 'to' date.")
+            SwalError(
+              "Please make sure that your 'from' date is before your 'to' date."
+            );
             return;
-          } 
+          }
           axios
-          .post(
-            `${process.env.REACT_APP_API_URL}/node/vacationCalc/updateVacationToFrom`,
-            { vacationID, fromLocationUpdate, fromDateUpdate, toLocationUpdate, toDateUpdate }
-          )
-          .then((response) => {
+            .post(
+              `${process.env.REACT_APP_API_URL}/node/vacationCalc/updateVacationToFrom`,
+              {
+                vacationID,
+                fromLocationUpdate,
+                fromDateUpdate,
+                toLocationUpdate,
+                toDateUpdate,
+              }
+            )
+            .then((response) => {
               SwalSuccess("Your vacation dates and location have been edited.");
               const newVacationDataTemp = [...vacationMainData];
 
@@ -635,14 +645,22 @@ const VacationPlanner = () => {
               setDateEnd(convertSQLDateToDate(toDate));
               setFromLocationModal(fromLocationUpdate);
               setToLocationModal(toLocationUpdate);
-              setFromDateModal(fromDate)
+              setFromDateModal(fromDate);
               setToDateModal(toDate);
-              getDatesForVacation(addDaysToDate(fromDate, 1), addDaysToDate(toDate,1));
-          })
-          .catch((error) => {
-            console.error("Error updating vacation to/from information:", error);
-            SwalError("We weren't able to edit your vacation's to/from information.");
-          });
+              getDatesForVacation(
+                addDaysToDate(fromDate, 1),
+                addDaysToDate(toDate, 1)
+              );
+            })
+            .catch((error) => {
+              console.error(
+                "Error updating vacation to/from information:",
+                error
+              );
+              SwalError(
+                "We weren't able to edit your vacation's to/from information."
+              );
+            });
         }
       };
 
@@ -652,14 +670,14 @@ const VacationPlanner = () => {
             isOpen={vacationEditDateModal}
             onRequestClose={HandleCloseVacationDateModal}
             contentLabel="Edit Vacation Dates and To/From"
-            className="WiderModal"
+            className="WideModalPadding"
             overlayClassName="Overlay"
           >
             <h2 style={{ fontSize: "2.75rem" }}>
               Edit Vacation Dates & Location
             </h2>
             <form>
-              <div className="flexGroup" style={{textAlign: "center"}}>
+              <div className="flexGroup" style={{ textAlign: "center" }}>
                 <div>
                   <p className="toAndFromPModal">From</p>
                   <p>
@@ -696,14 +714,14 @@ const VacationPlanner = () => {
                 </div>
               </div>
               <div className="centeredSaveButtonContainer">
-                  <button
-                    className="saveButtonWider"
-                    onClick={HandleSaveEditVacationDate}
-                    type="submit"
-                  >
-                    Save
-                  </button>
-                </div>
+                <button
+                  className="saveButtonWider"
+                  onClick={HandleSaveEditVacationDate}
+                  type="submit"
+                >
+                  Save
+                </button>
+              </div>
             </form>
           </Modal>
         );
@@ -714,18 +732,15 @@ const VacationPlanner = () => {
       setVacationEditDateModal(true);
     };
 
-
-
-
     const EditVacationDay = () => {
-
       const HandleVacationDayModalClose = () => {
         setVacationDayModal(false);
-      }
+        setVacationDaySummary(null);
+      };
 
       const OpenVacationDaySummary = () => {
         setShowSetVacationDaySummary(true);
-      }
+      };
 
       if (vacationDayModal) {
         return (
@@ -733,39 +748,106 @@ const VacationPlanner = () => {
             isOpen={vacationDayModal}
             onRequestClose={HandleVacationDayModalClose}
             contentLabel="Edit Vacation Dates and To/From"
-            className="WidestModal"
+            className="WideModalPadding"
             overlayClassName="Overlay"
           >
             <div>
-              <div style={{textAlign: "center"}}>
-              <p className='daySummary pointer' onClick={OpenVacationDaySummary}>
-                {vacationDaySummary ? vacationDaySummary : (
-                  <>
-                    Summarize this date
-                  </>
+              <p
+                className="daySummary pointer"
+                style={{ textAlign: "center" }}
+                onClick={OpenVacationDaySummary}
+              >
+                {vacationDaySummary ? (
+                  vacationDaySummary
+                ) : (
+                  <>Summarize this date</>
                 )}
               </p>
+              <div>
+                <h2 style={{ fontSize: "2.35rem", textAlign: "center" }}>
+                  {vacationDateEdit}
+                </h2>
               </div>
               <div>
-                <h2>{vacationDateEdit}</h2>
+                <input className="vacationInput1"></input>
+              </div>              <div>
+                <input className="vacationInput1"></input>
+              </div>              <div>
+                <input className="vacationInput1"></input>
+              </div>              <div>
+                <input className="vacationInput1"></input>
+              </div>              <div>
+                <input className="vacationInput1"></input>
+              </div>              <div>
+                <input className="vacationInput1"></input>
               </div>
-                <div>
-                  <input className='vacationInput1'></input>
+              <div className="flexButtons">
+                    <button
+                      className="saveButtonWider"
+                      type="submit"
+                    >
+                      Save
+                    </button>
+                    <button
+                      className="addNewButton"
+                    >
+                      Add New Activity<FontAwesomeIcon icon={faUserPlus} />
+                    </button>
                 </div>
             </div>
-          </Modal> 
-        )
-      }
-      else {
+          </Modal>
+        );
+      } else {
         return;
       }
+    };
+
+    function stripDateSuffixAndConvertToSQLDate(dateStr) {
+      let cleanDateStr = dateStr.replace(/(\d+)(st|nd|rd|th)/, "$1");
+
+      let date = new Date(cleanDateStr);
+
+      let year = date.getFullYear();
+      let month = (date.getMonth() + 1).toString().padStart(2, "0");
+      let day = date.getDate().toString().padStart(2, "0");
+
+      return `${year}-${month}-${day}`;
     }
 
-    const VacationDaySummary = () => {
-
+    const VacationDaySummaryModal = () => {
       const CloseVacationDaySummary = () => {
         setShowSetVacationDaySummary(false);
-      }
+      };
+
+      const saveVacationDaySummary = (e) => {
+        e.preventDefault();
+        const summary = e.target.form[0].value;
+        if (summary) {
+          const tempDateObj =
+            stripDateSuffixAndConvertToSQLDate(vacationDateEdit);
+          axios
+            .post(
+              `${process.env.REACT_APP_API_URL}/node/vacationCalc/saveDaySummary`,
+              {
+                vacationID,
+                tempDateObj,
+                summary,
+              }
+            )
+            .then((response) => {
+              SwalSuccess("Your summary has been saved.");
+              setVacationDaySummary(summary.trim());
+            })
+            .catch((error) => {
+              console.error("Error saving summary:", error);
+              SwalError(
+                "We weren't able to save your summary. Please try again."
+              );
+            });
+        }
+      };
+
+      if (!showSetVacationDaySummary) return null;
 
       if (showSetVacationDaySummary) {
         return (
@@ -773,57 +855,90 @@ const VacationPlanner = () => {
             isOpen={showSetVacationDaySummary}
             onRequestClose={CloseVacationDaySummary}
             contentLabel="Vacation Name"
-            className="WiderModal"
+            className="WideModalPadding"
             overlayClassName="Overlay"
           >
-            <div className='centered'>
-              <h2 style={{ fontSize: "2.8rem" }}>Summary for <br />{vacationDateEdit}</h2>
-              <form>
-                <p className='marginTop1 marginBottom1'>
-                  <input
-                    type="text"
-                    className="vacationInput1"
-                    name="newVacationName"
-                  />
-                </p>
-                <div>
-                  <button
-                    className="saveButtonWider"
-                    type="submit"
-                  >
-                    Save
-                  </button>
-                </div>
-              </form>
+            <div className="centered">
+              <h2 style={{ fontSize: "2.8rem" }}>
+                Summary for <br />
+                {vacationDateEdit}
+              </h2>
+              {loadingSummary ? (
+                <p>Loading summary...</p>
+              ) : (
+                <form>
+                  <p className="marginTop1 marginBottom1">
+                    <input
+                      type="text"
+                      className="vacationInput1"
+                      name="newVacationName"
+                      defaultValue={vacationDaySummary}
+                    />
+                  </p>
+                  <div>
+                    <button
+                      className="saveButtonWider"
+                      type="submit"
+                      onClick={saveVacationDaySummary}
+                    >
+                      Save
+                    </button>
+                  </div>
+                </form>
+              )}
             </div>
           </Modal>
         );
-      } else {
-        return;
       }
-    }
+    };
 
-    const HandleVacationDateClick = (e) => {
-      setVacationDayModal(true);
-      const tempVacationToFormat = e.currentTarget.getAttribute("data-custom-date");
+    const HandleVacationDateClick = useCallback((e) => {
+      setLoadingSummary(true);
+      const tempVacationToFormat =
+        e.currentTarget.getAttribute("data-custom-date");
       const dateObject = new Date(tempVacationToFormat);
-      const options = { year: 'numeric', month: 'long', day: 'numeric' };
-      let formattedDate = dateObject.toLocaleDateString('en-US', options);
-      // adding date suffix
+      const options = { year: "numeric", month: "long", day: "numeric" };
+      let tempDateForFetchingSummary = dateObject.toISOString().split("T")[0];
+      let formattedDate = dateObject.toLocaleDateString("en-US", options);
+
       const day = dateObject.getDate();
       const daySuffix = (day) => {
-        if (day > 3 && day < 21) return 'th';
+        if (day > 3 && day < 21) return "th";
         switch (day % 10) {
-          case 1: return 'st';
-          case 2: return 'nd';
-          case 3: return 'rd';
-          default: return 'th';
+          case 1:
+            return "st";
+          case 2:
+            return "nd";
+          case 3:
+            return "rd";
+          default:
+            return "th";
         }
       };
       formattedDate = formattedDate.replace(/\d+/, day + daySuffix(day));
       setVacationDateEdit(formattedDate);
-      setvacationDaySummary();
-    }
+      axios
+        .post(
+          `${process.env.REACT_APP_API_URL}/node/vacationCalc/getVacationDaySummary`,
+          { vacationID, tempDateForFetchingSummary }
+        )
+        .then((response) => {
+          if (response.data.result[0]) {
+            let temp = response.data.result[0];
+            if (temp.hasOwnProperty("summary") && temp.summary != null) {
+              setVacationDaySummary(temp.summary);
+            }
+          }
+        })
+        .catch((error) => {
+          console.error("Error getting day summary:", error);
+          SwalError("We weren't able get the summary for this date.");
+        })
+        .finally(() => {
+          setVacationDayModal(true);
+          setLoadingSummary(false);
+        });
+    });
 
     return (
       <div>
@@ -881,7 +996,12 @@ const VacationPlanner = () => {
                   {vacationDates &&
                     vacationDates.length > 0 &&
                     vacationDates.map((date, i) => (
-                      <div key={i} onClick={HandleVacationDateClick} data-custom-date={date} className="vacationDayGroup pointer">
+                      <div
+                        key={i}
+                        onClick={HandleVacationDateClick}
+                        data-custom-date={date}
+                        className="vacationDayGroup pointer"
+                      >
                         {date}
                       </div>
                     ))}
@@ -893,7 +1013,7 @@ const VacationPlanner = () => {
         <UpdateVacationName />
         <EditVacationDateModal />
         <EditVacationDay />
-        <VacationDaySummary />
+        <VacationDaySummaryModal />
       </div>
     );
   };

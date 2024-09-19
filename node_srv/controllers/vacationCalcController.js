@@ -196,3 +196,47 @@ exports.updateVacationToFrom = async (req, res) => {
         res.status(500).json({ error: 'Database connection failed' });
     }
 };
+
+
+exports.saveDaySummary = async (req, res) => {
+    try {
+        const db = await connectToDB();
+        const { vacationID, tempDateObj, summary } = req.body;
+        console.log(vacationID, tempDateObj, summary);
+        db.query('Call SaveVacationDaySummary(?, ?, ?)', [vacationID, tempDateObj, summary], (err,results) => {
+            if (err) {
+                return res
+                  .status(500)
+                  .json({ message: "Database error", error: err.message });
+              }
+              const result = results[0];
+        
+              if (result) {
+                return res.json({  result });
+              }
+        });
+    } catch (err) {
+        res.status(500).json({ error: 'Database connection failed' });
+    }
+};
+
+exports.getVacationDaySummary = async (req, res) => {
+    try {
+        const db = await connectToDB();
+        const { vacationID, tempDateForFetchingSummary } = req.body;
+        db.query('Call GetVacationDateSummary(?, ?)', [vacationID, tempDateForFetchingSummary], (err,results) => {
+            if (err) {
+                return res
+                  .status(500)
+                  .json({ message: "Database error", error: err.message });
+              }
+              const result = results[0];
+        
+              if (result) {
+                return res.json({  result });
+              }
+        });
+    } catch (err) {
+        res.status(500).json({ error: 'Database connection failed' });
+    }
+};

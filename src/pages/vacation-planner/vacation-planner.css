@@ -282,7 +282,7 @@ hr.travelersBreak {
   border-radius: 6px;
   padding: 0.4rem 0.85rem;
   color: #fff;
-  font-size: 1.35rem;
+  font-size: 1.75rem;
   border: none;
   background: #1aacd8;;
 }
@@ -307,6 +307,7 @@ hr.travelersBreak {
 
 .flexButtons {
   display: flex;
+  margin: 1.5rem 0 0 0;
   justify-content: center;
   gap: 2rem;
 }
