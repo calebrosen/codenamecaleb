@@ -5,7 +5,7 @@ import {
   faPlaneDeparture,
   faTrash,
   faUmbrellaBeach,
-  faUserPlus
+  faUserPlus,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import axios from "axios";
@@ -754,7 +754,11 @@ const VacationPlanner = () => {
             <div>
               <p
                 className="daySummary pointer"
-                style={{ textAlign: "center" }}
+                style={{
+                  textAlign: "center",
+                  fontSize: "3.5rem",
+                  marginTop: "-0.15rem",
+                }}
                 onClick={OpenVacationDaySummary}
               >
                 {vacationDaySummary ? (
@@ -764,36 +768,30 @@ const VacationPlanner = () => {
                 )}
               </p>
               <div>
-                <h2 style={{ fontSize: "2.35rem", textAlign: "center" }}>
+                <h2 style={{ fontSize: "2.55rem", textAlign: "center" }}>
                   {vacationDateEdit}
                 </h2>
               </div>
-              <div>
-                <input className="vacationInput1"></input>
-              </div>              <div>
-                <input className="vacationInput1"></input>
-              </div>              <div>
-                <input className="vacationInput1"></input>
-              </div>              <div>
-                <input className="vacationInput1"></input>
-              </div>              <div>
-                <input className="vacationInput1"></input>
-              </div>              <div>
-                <input className="vacationInput1"></input>
+              <div className="flexButtons marginTop2">
+                <input
+                  className="vacationInput1"
+                  type="text"
+                  placeholder="Enter an Activity and Time"
+                ></input>
+                  <input
+                  className="vacationInput1"
+                  type="time"
+                ></input>
               </div>
               <div className="flexButtons">
-                    <button
-                      className="saveButtonWider"
-                      type="submit"
-                    >
-                      Save
-                    </button>
-                    <button
-                      className="addNewButton"
-                    >
-                      Add New Activity<FontAwesomeIcon icon={faUserPlus} />
-                    </button>
-                </div>
+                <button className="saveButtonWider" type="submit">
+                  Save
+                </button>
+                <button className="addNewButton">
+                  Add New Activity
+                  <FontAwesomeIcon icon={faUserPlus} />
+                </button>
+              </div>
             </div>
           </Modal>
         );
