@@ -52,6 +52,7 @@ const VacationPlanner = () => {
   const [showSetVacationDaySummary, setShowSetVacationDaySummary] =
     useState(false);
   const [loadingSummary, setLoadingSummary] = useState(false);
+  const [activities, setActivities] = useState([{ activity: "", time: "" }]);
 
   const SwalError = (message) => {
     Swal.fire({
@@ -735,6 +736,7 @@ const VacationPlanner = () => {
     const EditVacationDay = () => {
       const HandleVacationDayModalClose = () => {
         setVacationDayModal(false);
+        setActivities([]);
         setVacationDaySummary(null);
       };
 
@@ -742,6 +744,45 @@ const VacationPlanner = () => {
         setShowSetVacationDaySummary(true);
       };
 
+      const handleAddActivity = () => {
+        setActivities([...activities, { activity: "", time: "" }]);
+      };
+    
+      const handleSubmitActivties = (event) => {
+        event.preventDefault();
+        const formData = new FormData(event.target);
+        const activityData = activities.map((_, index) => ({
+          activity: formData.get(`activity-${index}`),
+          time: formData.get(`time-${index}`),
+        }));
+      
+        let jsonActivityData = {
+          activities: activityData,
+        };
+        jsonActivityData = JSON.stringify(jsonActivityData);
+        const tempDateForSQL = stripDateSuffixAndConvertToSQLDate(vacationDateEdit);
+        
+        axios.post(
+          `${process.env.REACT_APP_API_URL}/node/vacationCalc/saveVacationDayActivities`,
+          {
+            vacationID,
+            tempDateForSQL,
+            jsonActivityData,
+          },
+          {
+            headers: {
+              'Content-Type': 'application/json',
+            },
+          }
+        )
+        .then((response) => {
+          SwalSuccess("This days' activites have been saved.");
+        })
+        .catch((error) => {
+          console.error('Error saving activities:', error);
+        });
+      }
+      
       if (vacationDayModal) {
         return (
           <Modal
@@ -751,52 +792,54 @@ const VacationPlanner = () => {
             className="WideModalPadding"
             overlayClassName="Overlay"
           >
-            <div>
-              <p
-                className="daySummary pointer"
-                style={{
-                  textAlign: "center",
-                  fontSize: "3.5rem",
-                  marginTop: "-0.15rem",
-                }}
-                onClick={OpenVacationDaySummary}
-              >
-                {vacationDaySummary ? (
-                  vacationDaySummary
-                ) : (
-                  <>Summarize this date</>
-                )}
-              </p>
+            <form onSubmit={handleSubmitActivties}>
               <div>
-                <h2 style={{ fontSize: "2.55rem", textAlign: "center" }}>
-                  {vacationDateEdit}
-                </h2>
+                <p
+                  className="daySummary pointer"
+                  style={{ textAlign: "center", fontSize: "3.5rem", marginTop: "-0.15rem" }}
+                  onClick={OpenVacationDaySummary}
+                >
+                  {vacationDaySummary ? vacationDaySummary : <>Summarize this date</>}
+                </p>
+                <div>
+                  <h2 style={{ fontSize: "2.55rem", textAlign: "center" }}>
+                    {vacationDateEdit}
+                  </h2>
+                </div>
+                {activities.map((_, index) => (
+                  <div key={index} className="flexButtons marginTop2">
+                    <input
+                      className="vacationInput1"
+                      type="text"
+                      name={`activity-${index}`}
+                      placeholder="Enter an Activity"
+                    />
+                    <input
+                      className="vacationInput1"
+                      type="time"
+                      name={`time-${index}`}
+                    />
+                  </div>
+                ))}
+                <div className="flexButtons">
+                  <button className="saveButtonWider" type="submit">
+                    Save
+                  </button>
+                  <button
+                    className="addNewButton"
+                    type="button"
+                    onClick={handleAddActivity}
+                  >
+                    Add New Activity
+                    <FontAwesomeIcon style={{paddingLeft: "0.4rem"}} icon={faUserPlus} />
+                  </button>
+                </div>
               </div>
-              <div className="flexButtons marginTop2">
-                <input
-                  className="vacationInput1"
-                  type="text"
-                  placeholder="Enter an Activity and Time"
-                ></input>
-                  <input
-                  className="vacationInput1"
-                  type="time"
-                ></input>
-              </div>
-              <div className="flexButtons">
-                <button className="saveButtonWider" type="submit">
-                  Save
-                </button>
-                <button className="addNewButton">
-                  Add New Activity
-                  <FontAwesomeIcon icon={faUserPlus} />
-                </button>
-              </div>
-            </div>
+            </form>
           </Modal>
         );
       } else {
-        return;
+        return null;
       }
     };
 

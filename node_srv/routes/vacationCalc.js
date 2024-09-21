@@ -34,5 +34,7 @@ router.post('/saveDaySummary', vacationCalcController.saveDaySummary);
 
 router.post('/getVacationDaySummary', vacationCalcController.getVacationDaySummary);
 
+router.post('/saveVacationDayActivities', vacationCalcController.saveVacationDayActivities);
+
 
 module.exports = router;
