@@ -180,8 +180,17 @@ body {
   margin: auto;
   color: #000;
   position: relative;
+  max-height: 90vh;
+  overflow-y: auto;
 }
 
+@media screen and (max-width: 768px) {
+  .WideModalPadding {
+    height: auto;
+    max-height: 80vh;
+    overflow-y: auto;
+  }
+}
 
 .Overlay {
   background-color: rgba(0, 0, 0, 0.75);

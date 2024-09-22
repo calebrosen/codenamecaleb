@@ -363,7 +363,7 @@ const VacationPlanner = () => {
                       >
                         <FontAwesomeIcon
                           icon={faTrash}
-                          style={{ color: "#e21212", marginLeft: "0.5rem" }}
+                          className='trashIconTravelers'
                           size="2x"
                         />
                       </span>
@@ -552,7 +552,7 @@ const VacationPlanner = () => {
             onRequestClose={CloseVacationNameModal}
             contentLabel="Vacation Name"
             className="WideModalPadding"
-            overlayClassName="Overlay"
+             overlayClassName="Overlay"
           >
             <div className="centered">
               <h2 style={{ fontSize: "2.8rem" }}>Edit Vacation Name</h2>
@@ -674,12 +674,12 @@ const VacationPlanner = () => {
             className="WideModalPadding"
             overlayClassName="Overlay"
           >
-            <h2 style={{ fontSize: "2.75rem" }}>
+            <h2 className='vacationDatesAndLocation'>
               Edit Vacation Dates & Location
             </h2>
             <form>
-              <div className="flexGroup" style={{ textAlign: "center" }}>
-                <div>
+              <div className="flexGroup">
+                <div className='vacationDateGroup'>
                   <p className="toAndFromPModal">From</p>
                   <p>
                     <input
@@ -822,11 +822,6 @@ const VacationPlanner = () => {
               <div>
                 <p
                   className="daySummary pointer"
-                  style={{
-                    textAlign: "center",
-                    fontSize: "3.5rem",
-                    marginTop: "-0.15rem",
-                  }}
                   onClick={OpenVacationDaySummary}
                 >
                   {vacationDaySummary ? (
@@ -841,17 +836,17 @@ const VacationPlanner = () => {
                   </h2>
                 </div>
 
-                              {activities.map((activityData, index) => (
+                {activities.map((activityData, index) => (
                 <div
                   key={index}
                   data-custom-id={`activity-index-${index}`}
-                  className="flexButtons marginTop2"
+                  className="flexButtons gridMobile marginTop2"
                 >
                   <input
                     className="vacationInput1"
                     type="text"
                     name={`activity-${index}`}
-                    placeholder="Enter an Activity"
+                    placeholder="Enter an Activity & Time"
                     defaultValue={activityData.activity || ''}
                   />
                   <input
@@ -863,10 +858,9 @@ const VacationPlanner = () => {
                   <FontAwesomeIcon
                     icon={faTrash}
                     data-custom-activity-index={`activity-index-${index}`}
-                    style={{ color: "#e21212", marginTop: "0.5rem" }}
+                    className='trashIconMobile pointer'
                     size="2x"
                     onClick={HandleDeleteActivity}
-                    className="pointer"
                   />
                 </div>
               ))}
