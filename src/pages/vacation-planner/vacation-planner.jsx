@@ -12,6 +12,7 @@ import axios from "axios";
 import React, { useCallback, useContext, useEffect, useState } from "react";
 import Modal from "react-modal";
 import Swal from "sweetalert2";
+import ClipLoader from 'react-spinners/ClipLoader';
 import "sweetalert2/dist/sweetalert2.min.css";
 import { UserContext } from "../../components/header/UserContext";
 import "./vacation-planner.css";
@@ -315,7 +316,6 @@ const VacationPlanner = () => {
           { vacationID, tempTravelersArr }
         )
         .then((response) => {
-          console.log(response);
           setTravelersArray(newArr);
           // ^ just updating visual state on page
           SwalSuccess("Your travelers have been saved.");
@@ -729,11 +729,14 @@ const VacationPlanner = () => {
       } else return;
     };
 
+
     const OpenVacationDatesModal = () => {
       setVacationEditDateModal(true);
     };
 
+
     const EditVacationDay = () => {
+
       const HandleVacationDayModalClose = () => {
         setVacationDayModal(false);
         setActivities([]);
@@ -747,42 +750,65 @@ const VacationPlanner = () => {
       const handleAddActivity = () => {
         setActivities([...activities, { activity: "", time: "" }]);
       };
-    
+
       const handleSubmitActivties = (event) => {
         event.preventDefault();
         const formData = new FormData(event.target);
+
+        for (let index = 0; index < activities.length; index++) {
+          const activity = formData.get(`activity-${index}`);
+          const time = formData.get(`time-${index}`);
+
+          if (!activity || !time) {
+            console.error(`Activity or time is empty for entry ${index}`);
+            SwalError("Please fill in all fields for each activity.");
+            return;
+          }
+        }
+
         const activityData = activities.map((_, index) => ({
           activity: formData.get(`activity-${index}`),
           time: formData.get(`time-${index}`),
         }));
-      
+
         let jsonActivityData = {
           activities: activityData,
         };
+
         jsonActivityData = JSON.stringify(jsonActivityData);
-        const tempDateForSQL = stripDateSuffixAndConvertToSQLDate(vacationDateEdit);
-        
-        axios.post(
-          `${process.env.REACT_APP_API_URL}/node/vacationCalc/saveVacationDayActivities`,
-          {
-            vacationID,
-            tempDateForSQL,
-            jsonActivityData,
-          },
-          {
-            headers: {
-              'Content-Type': 'application/json',
+        const tempDateForSQL =
+          stripDateSuffixAndConvertToSQLDate(vacationDateEdit);
+
+        axios
+          .post(
+            `${process.env.REACT_APP_API_URL}/node/vacationCalc/saveVacationDayActivities`,
+            {
+              vacationID,
+              tempDateForSQL,
+              jsonActivityData,
             },
-          }
-        )
-        .then((response) => {
-          SwalSuccess("This days' activites have been saved.");
-        })
-        .catch((error) => {
-          console.error('Error saving activities:', error);
-        });
-      }
-      
+            {
+              headers: {
+                "Content-Type": "application/json",
+              },
+            }
+          )
+          .then((response) => {
+            SwalSuccess("This day's activites have been saved.");
+          })
+          .catch((error) => {
+            console.error("Error saving activities:", error);
+          });
+      };
+
+      const HandleDeleteActivity = (e) => {
+        const activityIndex = parseInt(e.currentTarget.getAttribute("data-custom-activity-index").split('-')[2], 10);
+        
+        const updatedActivities = activities.filter((_, index) => index !== activityIndex);
+        
+        setActivities(updatedActivities);
+      };
+
       if (vacationDayModal) {
         return (
           <Modal
@@ -796,31 +822,56 @@ const VacationPlanner = () => {
               <div>
                 <p
                   className="daySummary pointer"
-                  style={{ textAlign: "center", fontSize: "3.5rem", marginTop: "-0.15rem" }}
+                  style={{
+                    textAlign: "center",
+                    fontSize: "3.5rem",
+                    marginTop: "-0.15rem",
+                  }}
                   onClick={OpenVacationDaySummary}
                 >
-                  {vacationDaySummary ? vacationDaySummary : <>Summarize this date</>}
+                  {vacationDaySummary ? (
+                    vacationDaySummary
+                  ) : (
+                    <>Summarize this date</>
+                  )}
                 </p>
                 <div>
                   <h2 style={{ fontSize: "2.55rem", textAlign: "center" }}>
                     {vacationDateEdit}
                   </h2>
                 </div>
-                {activities.map((_, index) => (
-                  <div key={index} className="flexButtons marginTop2">
-                    <input
-                      className="vacationInput1"
-                      type="text"
-                      name={`activity-${index}`}
-                      placeholder="Enter an Activity"
-                    />
-                    <input
-                      className="vacationInput1"
-                      type="time"
-                      name={`time-${index}`}
-                    />
-                  </div>
-                ))}
+
+                              {activities.map((activityData, index) => (
+                <div
+                  key={index}
+                  data-custom-id={`activity-index-${index}`}
+                  className="flexButtons marginTop2"
+                >
+                  <input
+                    className="vacationInput1"
+                    type="text"
+                    name={`activity-${index}`}
+                    placeholder="Enter an Activity"
+                    defaultValue={activityData.activity || ''}
+                  />
+                  <input
+                    className="vacationInput1"
+                    type="time"
+                    name={`time-${index}`}
+                    defaultValue={activityData.time || ''}
+                  />
+                  <FontAwesomeIcon
+                    icon={faTrash}
+                    data-custom-activity-index={`activity-index-${index}`}
+                    style={{ color: "#e21212", marginTop: "0.5rem" }}
+                    size="2x"
+                    onClick={HandleDeleteActivity}
+                    className="pointer"
+                  />
+                </div>
+              ))}
+
+
                 <div className="flexButtons">
                   <button className="saveButtonWider" type="submit">
                     Save
@@ -831,7 +882,10 @@ const VacationPlanner = () => {
                     onClick={handleAddActivity}
                   >
                     Add New Activity
-                    <FontAwesomeIcon style={{paddingLeft: "0.4rem"}} icon={faUserPlus} />
+                    <FontAwesomeIcon
+                      style={{ paddingLeft: "0.4rem" }}
+                      icon={faUserPlus}
+                    />
                   </button>
                 </div>
               </div>
@@ -958,6 +1012,9 @@ const VacationPlanner = () => {
       };
       formattedDate = formattedDate.replace(/\d+/, day + daySuffix(day));
       setVacationDateEdit(formattedDate);
+      //
+      // getting summary  if exists
+      //
       axios
         .post(
           `${process.env.REACT_APP_API_URL}/node/vacationCalc/getVacationDaySummary`,
@@ -975,10 +1032,48 @@ const VacationPlanner = () => {
           console.error("Error getting day summary:", error);
           SwalError("We weren't able get the summary for this date.");
         })
-        .finally(() => {
-          setVacationDayModal(true);
-          setLoadingSummary(false);
-        });
+        //
+        // getting activites if exists
+        //
+        
+        axios
+          .post(
+            `${process.env.REACT_APP_API_URL}/node/vacationCalc/getVacationDateActivities`,
+            { vacationID, tempDateForFetchingSummary }
+          )
+          .then((response) => {
+            if (response.data.result[0]) {
+              let temp = response.data.result[0];
+              if (temp.hasOwnProperty("activity_time") && temp.activity_time != null) {
+                try {
+                  const parsedActivityTime = JSON.parse(temp.activity_time);
+              
+                  if (Array.isArray(parsedActivityTime.activities)) {
+                    const parsedActivities = parsedActivityTime.activities.map(activity => ({
+                      activity: activity.activity,
+                      time: activity.time,
+                    }));
+              
+                    setActivities(parsedActivities);
+                  } else {
+                    console.error("activity_time.activities is not an array or is undefined");
+                  }
+                } catch (error) {
+                  console.error("Error parsing activity_time:", error);
+                }
+              }
+              
+            }
+          })
+          .catch((error) => {
+            console.error("Error getting activities:", error);
+            SwalError("We weren't able get the activites for this date.");
+          })
+          .finally(() => {
+            setVacationDayModal(true);
+            setLoadingSummary(false);
+          });
+        
     });
 
     return (
@@ -989,7 +1084,7 @@ const VacationPlanner = () => {
               <div key={i} className="vacationGroupMain">
                 <div className="centeredContainer">
                   <p
-                    className="vacationNameMain glass-effect pointer"
+                    className="vacationNameMain pointer"
                     onClick={OpenVacationNameModal}
                   >
                     {v.vacation_name}
@@ -1057,6 +1152,24 @@ const VacationPlanner = () => {
         <VacationDaySummaryModal />
       </div>
     );
+  };
+
+  const Loader = () => {
+
+    if (loading || loadingSummary) {
+      return (
+        <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh' }}>
+          {loading ? (
+            <ClipLoader color="#1ad2d8" size={150} />
+          ) : (
+            <div>Your content goes here</div>
+          )}
+        </div>
+      );
+    }
+    else {
+      return;
+    }
   };
 
   const LoggedInOptions = () => (
@@ -1155,6 +1268,7 @@ const VacationPlanner = () => {
                   <input
                     type="date"
                     value={departDate}
+                    className="inputVacation1Date"
                     onChange={handleDepartDateChange}
                   />
                 </div>
@@ -1185,6 +1299,7 @@ const VacationPlanner = () => {
                   <input
                     type="date"
                     value={returnDate}
+                    className="inputVacation1Date"
                     onChange={handleReturnDateChange}
                   />
                 </div>
