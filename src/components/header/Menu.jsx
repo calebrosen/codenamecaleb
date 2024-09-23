@@ -317,6 +317,11 @@ const MenuComponent = ({ children }) => {
               </span>
             </div>
             <div className="menu-item">
+              <a href="vacation-planner">
+                <span>Vacation Planner</span>
+              </a>
+            </div>
+            <div className="menu-item">
               <a href="overwatch-random-character-generator">
                 <span>OW2 RNG Character Selector</span>
               </a>

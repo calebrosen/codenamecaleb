@@ -222,7 +222,7 @@ const HomePage = () => {
       <nav className="iconContainer">
         <div className="iconBackground">
           <a
-            href="https://www.x.com/calebisdead"
+            href="https://www.x.com/caleberosen"
             target="_blank"
             rel="noopener noreferrer"
           >

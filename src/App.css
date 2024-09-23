@@ -11,7 +11,7 @@ html, body {
 body {
   font-family: 'Poppins';
   height: 100%;
-  font-weight: 'Norma'
+  font-weight: 'Normal'
 }
 
 * {
@@ -43,11 +43,11 @@ body {
   margin-top: 1rem;
 }
 
-.marginTop2 { 
+.marginTop2 {
   margin-top: 2rem;
 }
 
-.marginTop3 { 
+.marginTop3 {
   margin-top: 3rem;
 }
 
@@ -81,7 +81,7 @@ body {
   top: 100%;
   left: 50%;
   transform: translateX(-50%);
-  z-index: 101; 
+  z-index: 101;
 }
 
 .selectDropdown {
@@ -89,7 +89,7 @@ body {
   appearance: none;
   background-color: #FAFBFC;
   color:black;
-  border: 1px solid rgba(27, 31, 35, 0.15); 
+  border: 1px solid rgba(27, 31, 35, 0.15);
   border-radius: 6px;
   padding: 10px;
   font-size: 16px;
@@ -105,7 +105,7 @@ body {
 .largeHeader {
   font-size: 2.5rem;
   color: #ffffff;
-  margin: 0; 
+  margin: 0;
 }
 
 .smLabel {
@@ -187,7 +187,7 @@ body {
 @media screen and (max-width: 768px) {
   .WideModalPadding {
     height: auto;
-    max-height: 80vh;
+    max-height: 87vh;
     overflow-y: auto;
   }
 }

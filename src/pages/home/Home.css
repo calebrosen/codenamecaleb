@@ -203,16 +203,16 @@
 
 @keyframes vaporwaveGlow {
   0% {
-    box-shadow: 0 0 15px rgba(255, 0, 150, 0.8), 0 0 30px rgba(0, 255, 255, 0.8),
-      0 0 45px rgba(255, 0, 150, 0.8), 0 0 60px rgba(0, 255, 255, 0.8);
+    box-shadow: 0 0 15px rgba(255, 0, 150, 0.8), 0 0 30px #00eef7,
+      0 0 45px rgba(255, 0, 150, 0.8), 0 0 60px #00eef7;
   }
   50% {
-    box-shadow: 0 0 25px rgba(0, 255, 255, 0.8), 0 0 50px rgba(255, 0, 150, 0.8),
-      0 0 75px rgba(0, 255, 255, 0.8), 0 0 100px rgba(255, 0, 150, 0.8);
+    box-shadow: 0 0 25px #00eef7, 0 0 50px rgba(255, 0, 150, 0.8),
+      0 0 75px #00eef7, 0 0 100px rgba(255, 0, 150, 0.8);
   }
   100% {
-    box-shadow: 0 0 15px rgba(255, 0, 150, 0.8), 0 0 30px rgba(0, 255, 255, 0.8),
-      0 0 45px rgba(255, 0, 150, 0.8), 0 0 60px rgba(0, 255, 255, 0.8);
+    box-shadow: 0 0 15px rgba(255, 0, 150, 0.8), 0 0 30px #00eef7,
+      0 0 45px rgba(255, 0, 150, 0.8), 0 0 60px #00eef7;
   }
 }
 

@@ -1,8 +1,8 @@
 import {
-    faBars,
-    faHome,
-    faUser,
-    faUserCircle,
+  faBars,
+  faHome,
+  faUser,
+  faUserCircle,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import axios from "axios";
@@ -25,6 +25,7 @@ const AccountComponent = ({ closeMenu }) => {
   const [registerEmail, setRegisterEmail] = useState("");
   const [registerPassword, setRegisterPassword] = useState("");
   const [registerName, setRegisterName] = useState("");
+  const [buttonState, setButtonState] = useState(true);
 
   const OpenModal = () => {
     closeMenu();
@@ -46,6 +47,12 @@ const AccountComponent = ({ closeMenu }) => {
 
   const AttemptLogin = async (e) => {
     e.preventDefault();
+    
+    if (!buttonState) {
+      return;
+    }
+
+    setButtonState(false);
 
     try {
       const response = await axios.post(
@@ -83,10 +90,17 @@ const AccountComponent = ({ closeMenu }) => {
         confirmButtonColor: "#9e3c4e",
       });
     }
+    setButtonState(true);
   };
 
   const AttemptRegister = async (e) => {
     e.preventDefault();
+
+    if (!buttonState) {
+      return;
+    }
+
+    setButtonState(false);
 
     try {
       const response = await axios.post(
@@ -121,6 +135,9 @@ const AccountComponent = ({ closeMenu }) => {
         confirmButtonColor: "#9e3c4e",
       });
     }
+
+    setButtonState(true);
+
   };
 
   const checkLoginState = () => {

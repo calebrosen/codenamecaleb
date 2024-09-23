@@ -70,7 +70,7 @@ body {
 }
 
 .previousVacations {
-  font-size: 1.25rem;
+  font-size: 1.4rem;
   margin-top: 2rem;
 }
 
@@ -87,6 +87,7 @@ body {
   list-style-position: inside;
   display: inline-block;
   margin: 0 auto;
+  font-size: 1.35rem;
   text-align: left;
 }
 
@@ -337,7 +338,6 @@ hr.travelersBreak {
 
 .individualTravelerNames {
   font-size: 1.5rem;
-  list-style: none;
 }
 
 .vacationDatesInOrder {
@@ -420,10 +420,75 @@ hr.travelersBreak {
   color: #e21212;
 }
 
+.infoTextBelowTitle {
+  max-width: 900px;
+  font-size: 1.5rem;
+  margin: 2rem auto;
+}
 
+.iconVP {
+  padding: 1.15rem;
+  background-color: #1f1f1f;
+  border-radius: 50%;
+  color: white;
+  transition: transform 0.3s ease, background-color 0.3s ease,
+  box-shadow 0.3s ease;
+  display: inline-block;
+  animation: glow 3s infinite;
+}
 
+.iconGroupVP:hover .iconVP {
+  background: linear-gradient(45deg, #ff00ea, #00eef7);
+  box-shadow: 0 6px 15px rgba(172, 172, 172, 0.52);
+  transform: scale(1.1);
+}
 
+.iconGroupVP:hover {
+  transform: translateY(-5px);
+}
 
+.iconSubTextVP {
+  color: #000;
+  max-width: 85%;
+  display: inline-block;
+}
+
+.iconGroupVP:hover .icon {
+  animation: pulse 1s infinite;
+}
+
+.iconDivVP {
+  margin: 0.5rem auto;
+  font-size: 1.5rem;
+  display: block;
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+@keyframes glow {
+  0% {
+    box-shadow: 0 0 3px #ff00ea, 0 0 3px #00eef7,
+      0 0 3px #ff00ea, 0 0 3px #00eef7;
+  }
+  50% {
+    box-shadow: 0 0 7px #00eef7, 0 0 7px #ff00ea,
+      0 0 7px #00eef7, 0 0 7px #ff00ea;
+  }
+  100% {
+    box-shadow: 0 0 3px #ff00ea, 0 0 3px #00eef7,
+      0 0 3px #ff00ea, 0 0 3px #00eef7;
+  }
+}
 
 
 
@@ -432,6 +497,15 @@ hr.travelersBreak {
 
 
 @media screen and (max-width: 768px) {
+
+  .infoTextBelowTitle {
+    max-width: 90%;
+    margin: 1rem auto;
+  }
+
+  .travelersNames {
+    display: block;
+  }
 
   .previousVacations:before {
     display: none;
@@ -443,6 +517,8 @@ hr.travelersBreak {
   
   .vacationDatesMain {
     margin: 1rem;
+    overflow-wrap: break-word;
+    word-break: break-all;
   }
   
   hr.travelersBreak {
@@ -490,4 +566,4 @@ hr.travelersBreak {
     margin: 0 auto;
   }
   
-}   
+}

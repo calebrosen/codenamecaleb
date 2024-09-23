@@ -1,18 +1,21 @@
 import {
+  faCalendarDays,
+  faMoneyBillWave,
+  faPencil,
   faPeopleGroup,
   faPlane,
   faPlaneArrival,
   faPlaneDeparture,
+  faPlus,
   faTrash,
   faUmbrellaBeach,
-  faUserPlus,
+  faUserPlus
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import axios from "axios";
 import React, { useCallback, useContext, useEffect, useState } from "react";
 import Modal from "react-modal";
 import Swal from "sweetalert2";
-import ClipLoader from 'react-spinners/ClipLoader';
 import "sweetalert2/dist/sweetalert2.min.css";
 import { UserContext } from "../../components/header/UserContext";
 import "./vacation-planner.css";
@@ -363,7 +366,7 @@ const VacationPlanner = () => {
                       >
                         <FontAwesomeIcon
                           icon={faTrash}
-                          className='trashIconTravelers'
+                          className="trashIconTravelers"
                           size="2x"
                         />
                       </span>
@@ -552,7 +555,7 @@ const VacationPlanner = () => {
             onRequestClose={CloseVacationNameModal}
             contentLabel="Vacation Name"
             className="WideModalPadding"
-             overlayClassName="Overlay"
+            overlayClassName="Overlay"
           >
             <div className="centered">
               <h2 style={{ fontSize: "2.8rem" }}>Edit Vacation Name</h2>
@@ -674,12 +677,12 @@ const VacationPlanner = () => {
             className="WideModalPadding"
             overlayClassName="Overlay"
           >
-            <h2 className='vacationDatesAndLocation'>
+            <h2 className="vacationDatesAndLocation">
               Edit Vacation Dates & Location
             </h2>
             <form>
               <div className="flexGroup">
-                <div className='vacationDateGroup'>
+                <div className="vacationDateGroup">
                   <p className="toAndFromPModal">From</p>
                   <p>
                     <input
@@ -729,14 +732,11 @@ const VacationPlanner = () => {
       } else return;
     };
 
-
     const OpenVacationDatesModal = () => {
       setVacationEditDateModal(true);
     };
 
-
     const EditVacationDay = () => {
-
       const HandleVacationDayModalClose = () => {
         setVacationDayModal(false);
         setActivities([]);
@@ -802,10 +802,17 @@ const VacationPlanner = () => {
       };
 
       const HandleDeleteActivity = (e) => {
-        const activityIndex = parseInt(e.currentTarget.getAttribute("data-custom-activity-index").split('-')[2], 10);
-        
-        const updatedActivities = activities.filter((_, index) => index !== activityIndex);
-        
+        const activityIndex = parseInt(
+          e.currentTarget
+            .getAttribute("data-custom-activity-index")
+            .split("-")[2],
+          10
+        );
+
+        const updatedActivities = activities.filter(
+          (_, index) => index !== activityIndex
+        );
+
         setActivities(updatedActivities);
       };
 
@@ -837,34 +844,33 @@ const VacationPlanner = () => {
                 </div>
 
                 {activities.map((activityData, index) => (
-                <div
-                  key={index}
-                  data-custom-id={`activity-index-${index}`}
-                  className="flexButtons gridMobile marginTop2"
-                >
-                  <input
-                    className="vacationInput1"
-                    type="text"
-                    name={`activity-${index}`}
-                    placeholder="Enter an Activity & Time"
-                    defaultValue={activityData.activity || ''}
-                  />
-                  <input
-                    className="vacationInput1"
-                    type="time"
-                    name={`time-${index}`}
-                    defaultValue={activityData.time || ''}
-                  />
-                  <FontAwesomeIcon
-                    icon={faTrash}
-                    data-custom-activity-index={`activity-index-${index}`}
-                    className='trashIconMobile pointer'
-                    size="2x"
-                    onClick={HandleDeleteActivity}
-                  />
-                </div>
-              ))}
-
+                  <div
+                    key={index}
+                    data-custom-id={`activity-index-${index}`}
+                    className="flexButtons gridMobile marginTop2"
+                  >
+                    <input
+                      className="vacationInput1"
+                      type="text"
+                      name={`activity-${index}`}
+                      placeholder="Enter an Activity & Time"
+                      defaultValue={activityData.activity || ""}
+                    />
+                    <input
+                      className="vacationInput1"
+                      type="time"
+                      name={`time-${index}`}
+                      defaultValue={activityData.time || ""}
+                    />
+                    <FontAwesomeIcon
+                      icon={faTrash}
+                      data-custom-activity-index={`activity-index-${index}`}
+                      className="trashIconMobile pointer"
+                      size="2x"
+                      onClick={HandleDeleteActivity}
+                    />
+                  </div>
+                ))}
 
                 <div className="flexButtons">
                   <button className="saveButtonWider" type="submit">
@@ -875,10 +881,10 @@ const VacationPlanner = () => {
                     type="button"
                     onClick={handleAddActivity}
                   >
-                    Add New Activity
+                    Add Another
                     <FontAwesomeIcon
                       style={{ paddingLeft: "0.4rem" }}
-                      icon={faUserPlus}
+                      icon={faPlus}
                     />
                   </button>
                 </div>
@@ -1025,49 +1031,54 @@ const VacationPlanner = () => {
         .catch((error) => {
           console.error("Error getting day summary:", error);
           SwalError("We weren't able get the summary for this date.");
-        })
-        //
-        // getting activites if exists
-        //
-        
-        axios
-          .post(
-            `${process.env.REACT_APP_API_URL}/node/vacationCalc/getVacationDateActivities`,
-            { vacationID, tempDateForFetchingSummary }
-          )
-          .then((response) => {
-            if (response.data.result[0]) {
-              let temp = response.data.result[0];
-              if (temp.hasOwnProperty("activity_time") && temp.activity_time != null) {
-                try {
-                  const parsedActivityTime = JSON.parse(temp.activity_time);
-              
-                  if (Array.isArray(parsedActivityTime.activities)) {
-                    const parsedActivities = parsedActivityTime.activities.map(activity => ({
+        });
+      //
+      // getting activites if exists
+      //
+
+      axios
+        .post(
+          `${process.env.REACT_APP_API_URL}/node/vacationCalc/getVacationDateActivities`,
+          { vacationID, tempDateForFetchingSummary }
+        )
+        .then((response) => {
+          if (response.data.result[0]) {
+            let temp = response.data.result[0];
+            if (
+              temp.hasOwnProperty("activity_time") &&
+              temp.activity_time != null
+            ) {
+              try {
+                const parsedActivityTime = JSON.parse(temp.activity_time);
+
+                if (Array.isArray(parsedActivityTime.activities)) {
+                  const parsedActivities = parsedActivityTime.activities.map(
+                    (activity) => ({
                       activity: activity.activity,
                       time: activity.time,
-                    }));
-              
-                    setActivities(parsedActivities);
-                  } else {
-                    console.error("activity_time.activities is not an array or is undefined");
-                  }
-                } catch (error) {
-                  console.error("Error parsing activity_time:", error);
+                    })
+                  );
+
+                  setActivities(parsedActivities);
+                } else {
+                  console.error(
+                    "activity_time.activities is not an array or is undefined"
+                  );
                 }
+              } catch (error) {
+                console.error("Error parsing activity_time:", error);
               }
-              
             }
-          })
-          .catch((error) => {
-            console.error("Error getting activities:", error);
-            SwalError("We weren't able get the activites for this date.");
-          })
-          .finally(() => {
-            setVacationDayModal(true);
-            setLoadingSummary(false);
-          });
-        
+          }
+        })
+        .catch((error) => {
+          console.error("Error getting activities:", error);
+          SwalError("We weren't able get the activites for this date.");
+        })
+        .finally(() => {
+          setVacationDayModal(true);
+          setLoadingSummary(false);
+        });
     });
 
     return (
@@ -1148,28 +1159,47 @@ const VacationPlanner = () => {
     );
   };
 
-  const Loader = () => {
-
-    if (loading || loadingSummary) {
-      return (
-        <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh' }}>
-          {loading ? (
-            <ClipLoader color="#1ad2d8" size={150} />
-          ) : (
-            <div>Your content goes here</div>
-          )}
+  const IconsGroup = () => {
+    return (
+      <div className="iconsGroup">
+        <div className="iconGroupVP">
+          <div>
+            <FontAwesomeIcon className="iconVP" icon={faCalendarDays} size="3x" />
+          </div>
+          <div className='iconDivVP'>Itinerary</div>
+          <p className="iconSubTextVP">Save an itinerary for every day.</p>
         </div>
-      );
-    }
-    else {
-      return;
-    }
+        <div className="iconGroupVP">
+          <div>
+            <FontAwesomeIcon icon={faPeopleGroup} className="iconVP" size="3x" />
+          </div>
+          <div className='iconDivVP'>Travelers</div>
+          <p className="iconSubTextVP">Add as many travelers as you'd like.</p>
+        </div>
+
+        <div className="iconGroupVP">
+          <div>
+            <FontAwesomeIcon icon={faPencil} className="iconVP" size="3x" />
+          </div>
+          <div className='iconDivVP'>Editable</div>
+          <p className="iconSubTextVP">Change anything at any time.</p>
+        </div>
+
+        <div className="iconGroupVP">
+          <div>
+            <FontAwesomeIcon icon={faMoneyBillWave} className="iconVP" size="3x" />
+          </div>
+          <div className='iconDivVP'>Free</div>
+          <p className="iconSubTextVP">Free to use, forever.</p>
+        </div>
+      </div>
+    );
   };
 
   const LoggedInOptions = () => (
     <div className="centeredContainer">
       <h1 className="vacation-planner">
-        <FontAwesomeIcon icon={faUmbrellaBeach} /> Vacation Expense Calculator
+        <FontAwesomeIcon icon={faUmbrellaBeach} /> Vacation Planner
       </h1>
       <h2 style={{ fontSize: "1.5rem" }}>
         Planning a trip soon but don't know how much you might be spending?
@@ -1179,9 +1209,9 @@ const VacationPlanner = () => {
         <button
           className="buttonLoadOrCreate"
           onClick={() => setShowNameVacation(true)}
-          aria-label="Start a new vacation expense calculator"
+          aria-label="Start a new vacation"
         >
-          Start a new vacation expense calculator
+          Start a new vacation
         </button>
         <div className="previousVacations">
           or choose a previous one:
@@ -1206,21 +1236,19 @@ const VacationPlanner = () => {
         </div>
       </div>
       <div className="space"></div>
+      <IconsGroup />
     </div>
   );
 
   const NotLoggedIn = ({ onLogin }) => (
     <div className="centeredContainer">
       <h1 className="vacation-planner">
-        <FontAwesomeIcon icon={faUmbrellaBeach} /> Vacation Expense Calculator
+        <FontAwesomeIcon icon={faUmbrellaBeach} /> Vacation Planner
       </h1>
-      <h2 style={{ fontSize: "1.5rem" }}>
-        Planning a trip soon but don't know how much you might be spending?
-        You've come to the right place.
+      <h2 className="infoTextBelowTitle">
+        Planning a trip, but unsure of how to keep it all organized? Look no
+        further, you've come to the right place.
       </h2>
-      <p className="mainInfoText">
-        Please login or create an account so you can save your progress.
-      </p>
       <div className="space">
         <button
           className="buttonLoadOrCreate"
@@ -1230,6 +1258,7 @@ const VacationPlanner = () => {
           Login or Create an account
         </button>
       </div>
+      <IconsGroup />
     </div>
   );
 
