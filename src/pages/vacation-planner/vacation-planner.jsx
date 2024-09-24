@@ -9,7 +9,7 @@ import {
   faPlus,
   faTrash,
   faUmbrellaBeach,
-  faUserPlus
+  faUserPlus,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import axios from "axios";
@@ -842,35 +842,39 @@ const VacationPlanner = () => {
                     {vacationDateEdit}
                   </h2>
                 </div>
-
-                {activities.map((activityData, index) => (
-                  <div
-                    key={index}
-                    data-custom-id={`activity-index-${index}`}
-                    className="flexButtons gridMobile marginTop2"
-                  >
-                    <input
-                      className="vacationInput1"
-                      type="text"
-                      name={`activity-${index}`}
-                      placeholder="Enter an Activity & Time"
-                      defaultValue={activityData.activity || ""}
-                    />
-                    <input
-                      className="vacationInput1"
-                      type="time"
-                      name={`time-${index}`}
-                      defaultValue={activityData.time || ""}
-                    />
-                    <FontAwesomeIcon
-                      icon={faTrash}
-                      data-custom-activity-index={`activity-index-${index}`}
-                      className="trashIconMobile pointer"
-                      size="2x"
-                      onClick={HandleDeleteActivity}
-                    />
-                  </div>
-                ))}
+                {activities
+                  .slice()
+                  .sort((a, b) => {
+                    return a.time.localeCompare(b.time); // sorting by time ascending
+                  })
+                  .map((activityData, index) => (
+                    <div
+                      key={index}
+                      data-custom-id={`activity-index-${index}`}
+                      className="flexButtons gridMobile marginTop2"
+                    >
+                      <input
+                        className="vacationInput1"
+                        type="text"
+                        name={`activity-${index}`}
+                        placeholder="Enter an Activity & Time"
+                        defaultValue={activityData.activity || ""}
+                      />
+                      <input
+                        className="vacationInput1"
+                        type="time"
+                        name={`time-${index}`}
+                        defaultValue={activityData.time || ""}
+                      />
+                      <FontAwesomeIcon
+                        icon={faTrash}
+                        data-custom-activity-index={`activity-index-${index}`}
+                        className="trashIconMobile pointer"
+                        size="2x"
+                        onClick={HandleDeleteActivity}
+                      />
+                    </div>
+                  ))}
 
                 <div className="flexButtons">
                   <button className="saveButtonWider" type="submit">
@@ -1032,10 +1036,10 @@ const VacationPlanner = () => {
           console.error("Error getting day summary:", error);
           SwalError("We weren't able get the summary for this date.");
         });
+
       //
       // getting activites if exists
       //
-
       axios
         .post(
           `${process.env.REACT_APP_API_URL}/node/vacationCalc/getVacationDateActivities`,
@@ -1082,7 +1086,7 @@ const VacationPlanner = () => {
     });
 
     return (
-      <div>
+      <div className='mainContainer'>
         {vacationMainData &&
           vacationMainData.map((v, i) => {
             return (
@@ -1143,7 +1147,8 @@ const VacationPlanner = () => {
                         data-custom-date={date}
                         className="vacationDayGroup pointer"
                       >
-                        {date}
+                        <div className='vacationDayText'>Day {i + 1}</div>
+                        <div className='individualVacationDates'>{date}</div>
                       </div>
                     ))}
                 </div>
@@ -1164,16 +1169,24 @@ const VacationPlanner = () => {
       <div className="iconsGroup">
         <div className="iconGroupVP">
           <div>
-            <FontAwesomeIcon className="iconVP" icon={faCalendarDays} size="3x" />
+            <FontAwesomeIcon
+              className="iconVP"
+              icon={faCalendarDays}
+              size="3x"
+            />
           </div>
-          <div className='iconDivVP'>Itinerary</div>
+          <div className="iconDivVP">Itinerary</div>
           <p className="iconSubTextVP">Save an itinerary for every day.</p>
         </div>
         <div className="iconGroupVP">
           <div>
-            <FontAwesomeIcon icon={faPeopleGroup} className="iconVP" size="3x" />
+            <FontAwesomeIcon
+              icon={faPeopleGroup}
+              className="iconVP"
+              size="3x"
+            />
           </div>
-          <div className='iconDivVP'>Travelers</div>
+          <div className="iconDivVP">Travelers</div>
           <p className="iconSubTextVP">Add as many travelers as you'd like.</p>
         </div>
 
@@ -1181,15 +1194,19 @@ const VacationPlanner = () => {
           <div>
             <FontAwesomeIcon icon={faPencil} className="iconVP" size="3x" />
           </div>
-          <div className='iconDivVP'>Editable</div>
+          <div className="iconDivVP">Editable</div>
           <p className="iconSubTextVP">Change anything at any time.</p>
         </div>
 
         <div className="iconGroupVP">
           <div>
-            <FontAwesomeIcon icon={faMoneyBillWave} className="iconVP" size="3x" />
+            <FontAwesomeIcon
+              icon={faMoneyBillWave}
+              className="iconVP"
+              size="3x"
+            />
           </div>
-          <div className='iconDivVP'>Free</div>
+          <div className="iconDivVP">Free</div>
           <p className="iconSubTextVP">Free to use, forever.</p>
         </div>
       </div>

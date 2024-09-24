@@ -294,24 +294,9 @@ const HomePage = () => {
   return (
     <div>
       <div className="fsBackground">
-        <h1 className="h1Home">codenamecaleb.com</h1>
-        {/* <div className="rotating-text">
-          <p className='rotatedTextInner'>Developing
-            <span
-              className={`rotating-text ${isEntering ? "enter" : ""} ${
-                isExiting ? "exit" : ""
-              }`}
-            >
-              {wordToShow}
-            </span>
-          </p>
-        </div> */}
-        <div class="building-section-wrapper">
-          <div class="building-section-content">
-            <b>Under construction!<br />This website is still being developed.</b>
-          </div>
-        </div>
-        <IconGroup />
+        <h1 className="h1Home">Hi! I'm Caleb.</h1>
+        <h2 className="h2Home">I'm a full stack web developer.</h2>
+        {/* <IconGroup /> */}
         <div className="arrowContainer" onClick={handleArrowClick}>
           <div className="styledArrow">▼</div>
         </div>

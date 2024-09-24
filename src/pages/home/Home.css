@@ -2,30 +2,41 @@
   overflow: hidden;
 }
 
-@import url("https://fonts.googleapis.com/css2?family=Pacifico&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100..900;1,100..900&display=swap');
 
 .h1Home {
-  font-family: "Pacifico", cursive;
-  margin: 5rem auto;
-  font-size: 8rem;
+  line-height: normal;
+  font-weight: lighter;
+  margin: 8rem auto;
+  font-size: 7em;
+  padding: 0.5rem 2rem;
+  background: rgba( 255, 255, 255, 0.25 );
+  box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
+  backdrop-filter: blur( 4.5px );
+  -webkit-backdrop-filter: blur( 4.5px );
+  border-radius: 10px;
+  border: 1px solid rgba( 255, 255, 255, 0.18 );
   position: relative;
   display: inline-block;
-  color: #fcfbee;
-  text-shadow: -3px -3px 0 #000000, -4px -4px 0 #fb00ff, -6px -6px 0 #03f7ff,
-    -8px -8px 0 #ffffff;
-  border-radius: 15px;
+  color: #291d36;
+  border-radius: 2.8rem;
   animation: vaporwave-negative 2s infinite alternate;
   text-align: center;
 }
 
+.h2Home {
+  font-size: 4rem;
+  color: #291d36;
+}
+
 @keyframes vaporwave-negative {
   0% {
-    text-shadow: -2px -2px 0 #000000, -4px -4px 0 #e98952, -6px -6px 0 #dd00ff,
-      -8px -8px 0 #ff00f2;
+    text-shadow: -1px -1px 1px #000000, -2px -2px 1px #e98952, -3px -3px 1px #dd00ff,
+    -4px -4px 1px #ff00f2;
   }
   100% {
-    text-shadow: -2px -2px 2px #000000, -4px -4px 2px #9e85d0,
-      -6px -6px 2px #00ccff, -8px -8px 2px #00ffb3;
+    text-shadow: -1px -1px 1px #000000, -2px -2px 1px #9e85d0,
+      -3px -3px 1px #00ccff, -4px -4px 1px #00ffb3;
   }
 }
 
@@ -88,7 +99,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  position: absolute;
+  position: fixed;
   bottom: 15%;
   left: 0;
   right: 0;
@@ -118,10 +129,10 @@
 }
 
 .fsBackground {
-  background: linear-gradient(-45deg, #e66943, #e769cc, #23a6d5, #23d5ab);
-  filter: blur(10%);
+  background: linear-gradient(-45deg, #11c4db, #9ae7f1, #f0a6e0, #df46b1);
+  filter: blur(50%);
   background-size: 250% 250%;
-  animation: homeGradient 15s ease infinite;
+  animation: homeGradient 10s ease infinite;
   z-index: 0;
   width: 100%;
   height: 100vh;
@@ -143,7 +154,10 @@
 }
 
 .iconBackground {
-  background-color: rgba(255, 255, 255, 0.767);
+  background: rgba(255, 255, 255, 0.45);
+  box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
+  backdrop-filter: blur( 4.5px );
+  -webkit-backdrop-filter: blur( 4.5px );
   padding: 5px 15px;
   box-shadow: rgba(0, 0, 0, 0.07) 0px 1px 1px, rgba(0, 0, 0, 0.07) 0px 2px 2px, rgba(0, 0, 0, 0.07) 0px 4px 4px, rgba(0, 0, 0, 0.07) 0px 8px 8px, rgba(0, 0, 0, 0.07) 0px 16px 16px;
   border-radius: 50%;
@@ -180,15 +194,18 @@
     position: absolute;
     bottom: 4%;
     left: 50%;
-    background-color: rgba(255, 255, 255, 0.767);
+    background: rgba(255, 255, 255, 0.45);
+    box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
+    backdrop-filter: blur( 4.5px );
+    -webkit-backdrop-filter: blur( 4.5px );
     border-radius: 50%;
     transform: translateX(-50%);
-    padding: 0.15rem 0.5rem;
+    padding: 0.13rem 0.5rem;
 }
 
-
 .styledArrow {
-  color: #000;
+  color: #291d36;
+  margin-top: 5px;
   transition: 1s;
 }
 

@@ -6,6 +6,12 @@ html, body {
   margin: 0;
 }
 
+.vacationGroupMain {
+  color: #292128 !important;
+  background-color: #00eef7;
+  background-position: 100% 100%; /* Corrected the background-position */
+}
+
 body {
   display: flex;
   flex-direction: column;
@@ -194,10 +200,11 @@ input {
 }
 
 .vacationDatesMain {
-  background: rgba(187, 187, 187, 0.356);
+  background: rgba(233, 233, 233, 0.356);
   padding: 0.5rem;
   font-size: larger;
   border-radius: 12px;
+  box-shadow: 1px 1px 1px rgba(17,17,26,0.2);
 }
 
 .planeIconFromTo {
@@ -358,8 +365,12 @@ hr.travelersBreak {
 }
 
 .vacationDayGroup {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   padding: 2rem;
 }
+
 
 .icon-container {
   position: relative;
@@ -490,8 +501,18 @@ hr.travelersBreak {
   }
 }
 
+.vacationDayText {
+  font-size: 2.2rem;
+  box-shadow: inset 0 -0.1em 0 #ff00ea;
+  display: block;
+  width: fit-content;
+  margin-bottom: 0.5rem;
+  text-align: center;
+}
 
-
+.individualVacationDates {
+  font-size: 1.15rem;
+}
 
 
 
