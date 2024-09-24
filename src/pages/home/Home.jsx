@@ -1,11 +1,4 @@
-import {
-  faDiscord,
-  faSteam,
-  faXTwitter,
-} from "@fortawesome/free-brands-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useEffect, useState } from "react";
-import { Element, scroller } from "react-scroll";
 import Swal from "sweetalert2";
 import "sweetalert2/dist/sweetalert2.min.css";
 import AvatarDrawing from "../../img/avatar/Avatar.png";
@@ -79,7 +72,7 @@ const HomePage = () => {
 
     return (
       <div>
-        <Element name="aboutMeSection">
+        <div className="aboutMeSection" name="aboutMeSection">
           <div className="about-container">
             <div className="profile-picture" onClick={handleEasterEggClick}>
               <img
@@ -93,11 +86,8 @@ const HomePage = () => {
               ))}
             </div>
             <div className="about-content">
-              <h1 className="about-me">Hey there! I'm Caleb.</h1>
               <p>
-                I’m a full-stack developer who loves turning ideas into real
-                things - codenamecaleb is proof of that. I'm adding new things
-                as I think of them, so feel free to look around.
+                Welcome to my website. This is a place where I can turn my crazy ideas into real things. It's still in development, and I'm adding things as I think of them, so feel free to look around.
               </p>
 
               <p>
@@ -114,7 +104,7 @@ const HomePage = () => {
             </div>
             {showEasterEggPopup && <EasterEggPopup />}
           </div>
-        </Element>
+        </div>
         <div className="timeSinceCreation">
           This website has been in development for{" "}
           <span dangerouslySetInnerHTML={{ __html: timeDifference }} />.
@@ -122,33 +112,6 @@ const HomePage = () => {
       </div>
     );
   };
-
-  const handleArrowClick = () => {
-    setShowSection(true);
-    setScrollTriggeredByClick(true);
-    setTimeout(() => {
-      scroller.scrollTo("aboutMeSection", {
-        duration: 800,
-        delay: 0,
-        smooth: "easeInOutQuart",
-      });
-    }, 50);
-    setTimeout(() => {
-      setScrollTriggeredByClick(false);
-    }, 1000);
-  };
-
-  const handleScroll = () => {
-    if (scrollTriggeredByClick) return;
-    if (window.scrollY < 100) {
-      setShowSection(false);
-    }
-  };
-
-  useEffect(() => {
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, [scrollTriggeredByClick]);
 
   const getRandomColor = () => {
     const colors = [
@@ -217,45 +180,45 @@ const HomePage = () => {
     });
   };
 
-  const IconGroup = () => {
-    return (
-      <nav className="iconContainer">
-        <div className="iconBackground">
-          <a
-            href="https://www.x.com/caleberosen"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <div id="x_twitter" className="homeIcon pointer" alt="X/Twitter">
-              <FontAwesomeIcon icon={faXTwitter} />
-            </div>
-          </a>
-        </div>
-        <div className="iconBackground">
-          <a onClick={copyDiscUserNameToClipboard}>
-            <div
-              id="discord"
-              className="homeIcon pointer"
-              alt="Discord username"
-            >
-              <FontAwesomeIcon icon={faDiscord} className="homeIcon" />
-            </div>
-          </a>
-        </div>
-        <div className="iconBackground">
-          <a
-            href="http://steamcommunity.com/profiles/76561198258977132"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <div id="steam" className="homeIcon pointer" alt="Steam Link">
-              <FontAwesomeIcon icon={faSteam} />
-            </div>
-          </a>
-        </div>
-      </nav>
-    );
-  };
+  // const IconGroup = () => {
+  //   return (
+  //     <nav className="iconContainer">
+  //       <div className="iconBackground">
+  //         <a
+  //           href="https://www.x.com/caleberosen"
+  //           target="_blank"
+  //           rel="noopener noreferrer"
+  //         >
+  //           <div id="x_twitter" className="homeIcon pointer" alt="X/Twitter">
+  //             <FontAwesomeIcon icon={faXTwitter} />
+  //           </div>
+  //         </a>
+  //       </div>
+  //       <div className="iconBackground">
+  //         <a onClick={copyDiscUserNameToClipboard}>
+  //           <div
+  //             id="discord"
+  //             className="homeIcon pointer"
+  //             alt="Discord username"
+  //           >
+  //             <FontAwesomeIcon icon={faDiscord} className="homeIcon" />
+  //           </div>
+  //         </a>
+  //       </div>
+  //       <div className="iconBackground">
+  //         <a
+  //           href="http://steamcommunity.com/profiles/76561198258977132"
+  //           target="_blank"
+  //           rel="noopener noreferrer"
+  //         >
+  //           <div id="steam" className="homeIcon pointer" alt="Steam Link">
+  //             <FontAwesomeIcon icon={faSteam} />
+  //           </div>
+  //         </a>
+  //       </div>
+  //     </nav>
+  //   );
+  // };
 
   const initiateEasterEgg = (e) => {
     setEasterEggInProgress(true);
@@ -297,16 +260,16 @@ const HomePage = () => {
         <h1 className="h1Home">Hi! I'm Caleb.</h1>
         <h2 className="h2Home">I'm a full stack web developer.</h2>
         {/* <IconGroup /> */}
-        <div className="arrowContainer" onClick={handleArrowClick}>
+        {/* <div className="arrowContainer" onClick={handleArrowClick}>
           <div className="styledArrow">▼</div>
-        </div>
+        </div> */}
       </div>
 
-      {showSection && (
+      {/* {showSection && ( */}
         <div className="showOnArrowClick">
           <AboutMe />
         </div>
-      )}
+      {/* )} */}
     </div>
   );
 };

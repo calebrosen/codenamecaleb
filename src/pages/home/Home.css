@@ -1,8 +1,5 @@
-.homeContainer {
-  overflow: hidden;
-}
-
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100..900;1,100..900&display=swap');
+
 
 .h1Home {
   line-height: normal;
@@ -42,7 +39,12 @@
 
 @media screen and (max-width: 768px) {
     .h1Home {
-    font-size: 2.75rem;
+    font-size: 3rem;
+    padding: 1rem;
+  }
+
+  .h2Home {
+    font-size:2rem;
   }
 }
 
@@ -133,9 +135,10 @@
   filter: blur(50%);
   background-size: 250% 250%;
   animation: homeGradient 10s ease infinite;
-  z-index: 0;
   width: 100%;
   height: 100vh;
+  top: 0;
+  left: 0;
   text-align: center;
 }
 
@@ -191,7 +194,7 @@
 .arrowContainer {
     z-index: 5;
     font-size: 2rem;
-    position: absolute;
+    position: fixed;
     bottom: 4%;
     left: 50%;
     background: rgba(255, 255, 255, 0.45);
@@ -268,7 +271,7 @@
 }
 
 .about-content p {
-  font-size: 1.2rem;
+  font-size: 1.7rem;
   line-height: 1.6;
   margin-bottom: 15px;
 }
@@ -431,7 +434,7 @@ h1.about-me:hover {
   color:#00ffb3 !important;
 }
 
-.building-section-wrapper {
+/* .building-section-wrapper {
   width: 110%;
   margin-top: 30px;
   margin-left: -5%;
@@ -470,4 +473,4 @@ h1.about-me:hover {
     width: 100%;
     border: 3px transparent;
   }
-}
+} */
