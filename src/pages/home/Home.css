@@ -266,7 +266,7 @@
 
 .about-content {
   flex: 1 1 65%;
-  color: #000;
+  color: #291d36;
   padding: 20px;
 }
 
@@ -278,7 +278,7 @@
 
 .about-content h1.about-me {
   font-size: 2.5rem;
-  color: #000;
+  color: #291d36;
   margin-bottom: 15px;
   z-index: 10;
   position: relative;
@@ -425,52 +425,8 @@ h1.about-me:hover {
 
 .timeSinceCreation {
   font-size: 2rem;
+  color: #291d36;
   background-color: #fff;
   text-align: center;
   padding: 0.25rem 1rem 2rem 1rem;
 }
-
-.daysDev {
-  color:#00ffb3 !important;
-}
-
-/* .building-section-wrapper {
-  width: 110%;
-  margin-top: 30px;
-  margin-left: -5%;
-  padding-top: 15px;
-  padding-bottom: 15px;
-
-  background-image: repeating-linear-gradient(
-    -55deg,
-    #000,
-    #000 20px,
-    #ffb101 20px,
-    #ffb101 40px
-  );
-  background-color: #ffb101;
-  transform: rotate(-1deg);
-}
-
-.building-section-content {
-  width: fit-content;
-  margin: auto;
-  padding: 7px;
-  padding-left: 20px;
-  padding-right: 20px;
-
-  background-color: #ffb101;
-  border: 3px solid black;
-
-  text-align: center;
-  text-transform: uppercase;
-  font-family: Stardos Stencil;
-  font-size: 1.3em;
-}
-
-@media only screen and (max-width: 768px) {
-  .building-section-content {
-    width: 100%;
-    border: 3px transparent;
-  }
-} */

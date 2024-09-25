@@ -321,11 +321,11 @@ const MenuComponent = ({ children }) => {
                 <span>Vacation Planner</span>
               </a>
             </div>
-            <div className="menu-item">
+            {/* <div className="menu-item">
               <a href="overwatch-random-character-generator">
                 <span>OW2 RNG Character Selector</span>
               </a>
-            </div>
+            </div> */}
             <div className="menu-item coffee-button">
               <a href="https://buymeacoffee.com/calebrosen" target="_blank" rel="noopener noreferrer">
                 Buy Me a Coffee ☕

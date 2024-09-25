@@ -2,8 +2,8 @@
 
 
 html, body {
-  height: 100%;
-  margin: 0;
+  height: 100vh;
+  margin: 0;;
 }
 
 .vacationGroupMain {
@@ -513,6 +513,30 @@ hr.travelersBreak {
 .individualVacationDates {
   font-size: 1.15rem;
 }
+
+.whyYouNeedAccount {
+  font-size: 1.05rem;
+  margin: 1rem;
+  transition: 0.2s ease;
+}
+
+.questionCircleNeedAccount {
+  padding-right: 3px;
+}
+
+.whyYouNeedAccount:hover {
+  transform: scale(1.035);
+  animation: pulse 1s infinite;
+}
+
+
+
+
+
+
+
+
+
 
 
 

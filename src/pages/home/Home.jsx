@@ -56,10 +56,10 @@ const HomePage = () => {
         const seconds = Math.floor((diff / 1000) % 60);
 
         setTimeDifference(
-          `<span style="color: #FF2A6D; text-shadow: 1px 1px 2px #000;">${days} days</span>,
-           <span style="color: #FF8C42; text-shadow: 1px 1px 2px #000;">${hours} hours</span>,
-           <span style="color: #5C1A73; text-shadow: 1px 1px 2px #000;">${minutes} minutes</span>,
-           <span style='color: #007A7F; text-shadow: 1px 1px 2px #000;'>${seconds} seconds</span>`
+          `<span style="color: #11c4db; text-shadow: 1px 1px 2px #000;">${days} days</span>,
+           <span style="color: #9ae7f1; text-shadow: 1px 1px 2px #000;">${hours} hours</span>,
+           <span style="color: #f0a6e0; text-shadow: 1px 1px 2px #000;">${minutes} minutes</span>,
+           <span style='color: #df46b1; text-shadow: 1px 1px 2px #000;'>${seconds} seconds</span>`
         );
       };
 

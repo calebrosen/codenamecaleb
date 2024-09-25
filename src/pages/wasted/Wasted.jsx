@@ -142,7 +142,7 @@ function Wasted() {
           <span className="wasted-text">Wasted</span> text overlayed everytime.
         </span>
       </div>
-      <div className="centeredContainer">
+      <div className="centeredContainerWasted">
         <div className="instructionsAndCarousel">
           {/* instructions */}
           <div className="instructions-container shadow">

@@ -5,13 +5,13 @@ html,body {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  background-color: #f7f7f7;
   scroll-behavior: smooth;
   overflow-x: hidden;
 }
 
 .wasted-main-container {
   text-align: center;
+
   padding-top: 3em;
 }
 
@@ -117,6 +117,7 @@ h2 {
 h1.wastedh1 {
   font-family: "Pricedown Bl", sans-serif;
   font-size: 4.5rem;
+  color: #d40707;
 }
 
 @media screen and (max-width: 800px) {
@@ -143,7 +144,6 @@ h1.wastedh1 {
   max-width: 70%;
   text-wrap: pretty;
   text-align: center;
-  background: #fff !important;
   padding: 0.25em 1em 1em 1em;
   border-radius: 6px;
   justify-content: center;
@@ -184,11 +184,11 @@ h1.wastedh1 {
 }
 
 .glass-effect {
-  background: rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.2);
   border-radius: 16px;
   backdrop-filter: blur(10px);
   box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-  border: 1px solid rgba(255, 255, 255, 0.3);
+  border: 1px solid rgba(255, 0, 0, 0.3);
 }
 
 @keyframes fadeIn {
@@ -268,7 +268,7 @@ h1.wastedh1 {
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-.centeredContainer {
+.centeredContainerWasted {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -286,11 +286,7 @@ h1.wastedh1 {
   border-radius: 16px;
   padding: 2rem;
   margin: 2rem auto;
-  background-color: #fff !important;
-  backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.3);
   max-width: 40%;
-  color: white;
   flex: 1;
   height: 425px;
   max-width: 800px;
@@ -308,7 +304,7 @@ h1.wastedh1 {
   margin: 2rem 0rem 0rem 0rem;
   max-width: 600px;
   height: 100%;
-  overflow: hidden; 
+  overflow: hidden;
   position: relative;
   border-radius: 2%;
 }
@@ -333,9 +329,10 @@ h1.wastedh1 {
 
 .icon {
   padding: 1.25rem;
-  background-color: #000000;
+  background: radial-gradient(circle, rgba(255, 0, 0, 0.8), rgba(0, 0, 0, 0.7));
   border-radius: 50%;
   color: white;
+  box-shadow: 0 6px 15px rgba(212, 7, 7, 0.8);
   transition: transform 0.3s ease, background-color 0.3s ease,
   box-shadow 0.3s ease;
   display: inline-block;

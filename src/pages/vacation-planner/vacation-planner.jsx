@@ -7,6 +7,7 @@ import {
   faPlaneArrival,
   faPlaneDeparture,
   faPlus,
+  faQuestionCircle,
   faTrash,
   faUmbrellaBeach,
   faUserPlus,
@@ -67,7 +68,7 @@ const VacationPlanner = () => {
       background: "#fff",
       color: "#000",
       confirmButtonText: "OK",
-      confirmButtonColor: "#9e3c4e",
+      confirmButtonColor: "#00c6f7",
     });
   };
 
@@ -1274,10 +1275,26 @@ const VacationPlanner = () => {
         >
           Login or Create an account
         </button>
+        <div className='whyYouNeedAccount' onClick={WhyYouNeedAccountPopup}>
+          <FontAwesomeIcon icon={faQuestionCircle} className='questionCircleNeedAccount'/>Why do I need an account?
+        </div>
       </div>
       <IconsGroup />
     </div>
   );
+
+  const WhyYouNeedAccountPopup = () => {
+    Swal.fire({
+      title: "Why You Need an Account",
+      showConfirmButton: true,
+      text: "In order to save your vacation, I need you to create an account. This is so I can identify you from all of the other people creating vacations. Otherwise, I'd have no idea who you are!",
+      background: "#fff",
+      color: "#000",
+      confirmButtonText: "Got it!",
+      confirmButtonColor: "#00c6f7",
+    });
+  };
+
 
   return (
     <div>
