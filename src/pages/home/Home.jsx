@@ -71,7 +71,7 @@ const HomePage = () => {
     }, []);
 
     return (
-      <div>
+      <div className='aboutMeBorder'>
         <div className="aboutMeSection" name="aboutMeSection">
           <div className="about-container">
             <div className="profile-picture" onClick={handleEasterEggClick}>

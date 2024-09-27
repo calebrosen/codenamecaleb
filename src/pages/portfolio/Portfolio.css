@@ -1,0 +1,57 @@
+.portfolio-container {
+    display: flex;
+    justify-content: center;
+    padding: 20px;
+    background-color: #fff5ff !important;
+}
+
+.timeline-wrapper {
+    width: 90%;
+    max-width: 12000; /* Ensure it doesn't exceed large screen sizes */
+    height: auto;
+    padding: 20px;
+    background-color: #fff;
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+}
+
+h2.vertical-timeline-element-title {
+    font-size: 2.25rem;
+    width: 100%;
+}
+
+.languagesUsed {
+    padding-top: 0.4rem;
+    color: #06c5ff;
+    font-size: 1.25rem;
+    -webkit-text-stroke: 0.15px rgb(0, 0, 0);
+}
+
+a {
+    color: inherit;
+
+}
+
+span.vertical-timeline-element-icon > img {
+    width: 60px;
+    height: 60px;
+    border-radius: 40%;
+}
+
+.linkAndCode {
+    display: inline-block;
+}
+
+.linkAndCodeContainer {
+    display: flex;
+    gap: 10%;
+    justify-content: start;
+    padding: 0.15rem 0;
+}
+
+@media (max-width: 768px) {
+    .timeline-wrapper {
+        width: 100%;
+        height: auto;
+    }
+}

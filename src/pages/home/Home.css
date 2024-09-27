@@ -262,6 +262,11 @@
     object-fit: cover;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   }
+
+  .about-content {
+    text-align: center;
+    max-width: %;
+  }
 }
 
 .about-content {
@@ -429,4 +434,8 @@ h1.about-me:hover {
   background-color: #fff;
   text-align: center;
   padding: 0.25rem 1rem 2rem 1rem;
+}
+
+.aboutMeBorder {
+  border-top: 2px solid #291d36;
 }
