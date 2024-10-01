@@ -18,9 +18,9 @@ const Portfolio = () => {
   return (
     <div className="portfolio-container">
       <div className="timeline-wrapper">
-      <div className='portfolioH1Wrapper'>
+      {/* <div className='portfolioH1Wrapper'>
         <h1 className='portfolioH1'>Portfolio</h1>
-      </div>
+      </div> */}
         <VerticalTimeline lineColor={"#dedcdc"}>
           <VerticalTimelineElement
             className="vertical-timeline-element--work"
