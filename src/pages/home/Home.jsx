@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import Swal from "sweetalert2";
 import "sweetalert2/dist/sweetalert2.min.css";
 import AvatarDrawing from "../../img/avatar/Avatar.png";
 import AvatarReal from "../../img/avatar/AvatarReal.png";
@@ -180,45 +179,47 @@ const HomePage = () => {
     });
   };
 
-  // const IconGroup = () => {
-  //   return (
-  //     <nav className="iconContainer">
-  //       <div className="iconBackground">
-  //         <a
-  //           href="https://www.x.com/caleberosen"
-  //           target="_blank"
-  //           rel="noopener noreferrer"
-  //         >
-  //           <div id="x_twitter" className="homeIcon pointer" alt="X/Twitter">
-  //             <FontAwesomeIcon icon={faXTwitter} />
-  //           </div>
-  //         </a>
-  //       </div>
-  //       <div className="iconBackground">
-  //         <a onClick={copyDiscUserNameToClipboard}>
-  //           <div
-  //             id="discord"
-  //             className="homeIcon pointer"
-  //             alt="Discord username"
-  //           >
-  //             <FontAwesomeIcon icon={faDiscord} className="homeIcon" />
-  //           </div>
-  //         </a>
-  //       </div>
-  //       <div className="iconBackground">
-  //         <a
-  //           href="http://steamcommunity.com/profiles/76561198258977132"
-  //           target="_blank"
-  //           rel="noopener noreferrer"
-  //         >
-  //           <div id="steam" className="homeIcon pointer" alt="Steam Link">
-  //             <FontAwesomeIcon icon={faSteam} />
-  //           </div>
-  //         </a>
-  //       </div>
-  //     </nav>
-  //   );
-  // };
+/*
+  const IconGroup = () => {
+    return (
+      <nav className="iconContainer">
+        <div className="iconBackground">
+          <a
+            href="https://www.x.com/caleberosen"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <div id="x_twitter" className="homeIcon pointer" alt="X/Twitter">
+              <FontAwesomeIcon icon={faXTwitter} />
+            </div>
+          </a>
+        </div>
+        <div className="iconBackground">
+          <a onClick={copyDiscUserNameToClipboard}>
+            <div
+              id="discord"
+              className="homeIcon pointer"
+              alt="Discord username"
+            >
+              <FontAwesomeIcon icon={faDiscord} className="homeIcon" />
+            </div>
+          </a>
+        </div>
+        <div className="iconBackground">
+          <a
+            href="http://steamcommunity.com/profiles/76561198258977132"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <div id="steam" className="homeIcon pointer" alt="Steam Link">
+              <FontAwesomeIcon icon={faSteam} />
+            </div>
+          </a>
+        </div>
+      </nav>
+    );
+  };
+*/
 
   const initiateEasterEgg = (e) => {
     setEasterEggInProgress(true);
@@ -236,7 +237,8 @@ const HomePage = () => {
       }, 5500);
     }, 500);
   };
-
+  
+/*
   const copyDiscUserNameToClipboard = () => {
     const textToCopy = "im.caleb";
     navigator.clipboard.writeText(textToCopy).then(() => {
@@ -253,6 +255,7 @@ const HomePage = () => {
       });
     });
   };
+*/
 
   return (
     <div>
