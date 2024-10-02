@@ -288,7 +288,7 @@ function Wasted() {
         <div className="wasted-image-container">
           <img
             src={image}
-            alt="Generated GTA V Wasted Image"
+            alt="Generated Output"
             className="gtaVWastedImage"
           />
         </div>
