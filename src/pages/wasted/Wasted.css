@@ -11,7 +11,7 @@ html,body {
 
 .wasted-main-container {
   text-align: center;
-
+  background-image: url("../../img/wasted/wastedBG.jpg");
   padding-top: 3em;
 }
 
@@ -43,7 +43,8 @@ html,body {
   border-radius: 6px;
   cursor: pointer;
   transition: border-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 4px 16px 0 rgba(255, 255, 255, 0.699)  !important;
+  -webkit-text-stroke: 0.17px rgb(185, 185, 185);
 }
 
 input:hover + label,
@@ -142,6 +143,12 @@ h1.wastedh1 {
 
 .wasted-about-text-container {
   max-width: 70%;
+  background: rgba(255, 255, 255, 0.726) !important;
+  box-shadow: 0 8px 32px 0 rgba(135, 31, 31, 0.37)  !important;
+  backdrop-filter: blur( 11px )  !important;
+  -webkit-backdrop-filter: blur( 11px )  !important;
+  border-radius: 10px  !important;
+  border: 1px solid rgba( 255, 255, 255, 0.18 )  !important;
   text-wrap: pretty;
   text-align: center;
   padding: 0.25em 1em 1em 1em;
@@ -257,7 +264,7 @@ h1.wastedh1 {
 }
 
 .iconsGroup {
-  margin: 2.5rem;
+  padding: 2.5rem;
   display: flex;
   gap: 10%;
   justify-content: center;
@@ -290,6 +297,12 @@ h1.wastedh1 {
   flex: 1;
   height: 425px;
   max-width: 800px;
+  background: rgba(255, 255, 255, 0.726) !important;
+  box-shadow: 0 4px 16px 0 rgba(135, 31, 31, 0.2)  !important;
+  backdrop-filter: blur( 11px )  !important;
+  -webkit-backdrop-filter: blur( 11px )  !important;
+  border-radius: 10px  !important;
+  border: 1px solid rgba( 255, 255, 255, 0.18 )  !important;
 }
 
 .instructions-container > h2 {
