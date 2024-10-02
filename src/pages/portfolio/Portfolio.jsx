@@ -121,7 +121,7 @@ const Portfolio = () => {
             <div className="languagesUsed">JavaScript • CSS • HTML </div>
             <div className="linkAndCodeContainer">
               <a
-                href="https://github.com/calebrosen/distributors-inventory"
+                href="https://github.com/calebrosen/google-reviews"
                 className="linkAndCode"
                 target="_blank"
                 rel="noopener noreferrer"
