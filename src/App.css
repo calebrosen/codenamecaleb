@@ -19,8 +19,38 @@ body {
 }
 
 .burgerButton {
-  color: #000;
+  animation: colorChange 5s infinite alternate;
 }
+
+@keyframes colorChange {
+  0% {
+      color: red;
+  }
+  14% {
+      color: cyan;
+  }
+  28% {
+      color: pink;
+  }
+  42% {
+      color: hotpink;
+  }
+  56% {
+      color: green;
+  }
+  70% {
+      color: orange;
+  }
+  84% {
+      color: purple;
+  }
+  100% {
+      color: blue;
+  }
+}
+
+
+
 
 .fullWidthDarkGray {
   width: 100%;

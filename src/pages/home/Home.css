@@ -4,48 +4,61 @@
 .h1Home {
   line-height: normal;
   font-weight: lighter;
-  margin: 8rem auto;
+  margin: 8rem auto 3rem auto;
   font-size: 7em;
   padding: 0.5rem 2rem;
-  background: rgba( 255, 255, 255, 0.25 );
-  box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
-  backdrop-filter: blur( 4.5px );
-  -webkit-backdrop-filter: blur( 4.5px );
-  border-radius: 10px;
-  border: 1px solid rgba( 255, 255, 255, 0.18 );
+  background: rgba(255, 255, 255, 0.2);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(15px);
+  border-radius: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
   position: relative;
   display: inline-block;
-  color: #291d36;
+  color: #ffffffbe;
+  z-index: 15;
   border-radius: 2.8rem;
-  animation: vaporwave-negative 2s infinite alternate;
   text-align: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
+}
+
+.h1Home:hover {
+  transform: translateY(-10px);
+  background: rgba(255, 255, 255, 0.25);
+  box-shadow: 0 8px 40px rgba(0, 0, 0, 0.15);
 }
 
 .h2Home {
-  font-size: 4rem;
-  color: #291d36;
-}
-
-@keyframes vaporwave-negative {
-  0% {
-    text-shadow: -1px -1px 1px #000000, -2px -2px 1px #e98952, -3px -3px 1px #dd00ff,
-    -4px -4px 1px #ff00f2;
-  }
-  100% {
-    text-shadow: -1px -1px 1px #000000, -2px -2px 1px #9e85d0,
-      -3px -3px 1px #00ccff, -4px -4px 1px #00ffb3;
-  }
+  line-height: normal;
+  z-index: 15;
+  font-weight: lighter;
+  border-radius: 2rem;
+  margin: 1rem auto;
+  font-size: 4em;
+  padding: 0.5rem 2rem;
+  background: rgba(255, 255, 255, 0.2);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(15px);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  position: relative;
+  width: fit-content;
+  height: fit-content;
+  color: #ffffffbe;
 }
 
 @media screen and (max-width: 768px) {
+
     .h1Home {
     font-size: 3rem;
     padding: 1rem;
   }
 
   .h2Home {
-    font-size:2rem;
+    font-size:1.7rem;
+    text-align: center;
+    max-width: 80%;
+    padding: 0.35rem 0.3rem;
   }
+
 }
 
 @keyframes rotateOut {
@@ -118,36 +131,42 @@
   }
 }
 
-@keyframes homeGradient {
-  0% {
-    background-position: 0% 50%;
-  }
-  50% {
-    background-position: 100% 50%;
-  }
-  100% {
-    background-position: 0% 50%;
-  }
-}
 
 .fsBackground {
-  background: linear-gradient(-45deg, #11c4db, #9ae7f1, #f0a6e0, #df46b1);
-  filter: blur(50%);
-  background-size: 250% 250%;
-  animation: homeGradient 10s ease infinite;
+  position: relative;
   width: 100%;
   height: 100vh;
   top: 0;
   left: 0;
+  overflow: hidden;
   text-align: center;
+  z-index: 11;
 }
+
+.fsBackground::before {
+  content: '';
+  position: absolute;
+  /* extending the background slightly beyond the edges to stop white borders */
+  top: -2.5rem;
+  left: -2.5rem;
+  right: -2.5rem;
+  bottom: -2.5rem;
+  background-image: url("../../img/home/6499640.jpg");
+  background-size: cover;
+  background-position: center;
+  filter: blur(7px);
+  opacity: 0.9;
+  z-index: 11;
+}
+
+
 
 .homeContainer {
   text-align: center;
   margin-top: 5%;
 }
 
-.homeIcon {
+/*.homeIcon {
   font-size: 3.25rem;
   transition: transform 0.5s;
 }
@@ -168,23 +187,35 @@
 
 .iconBackground:hover {
   animation: vaporwaveGlow 2s infinite;
-}
+}*/
 
 .about-container {
-  display: flex;
-  flex-wrap: wrap;
-  background-image: url("../../img/home/aboutMeBG.jpg") !important;
-  background-size: 100% 100%;
-  padding: 1.3rem 5px;
-  flex-direction: row;
+  position: relative;
+  padding: 0.3rem 5px;
+  z-index: 10;
 }
 
+.about-container::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -2rem;
+  right: -2rem;
+  bottom: -2rem;
+  margin-bottom: -1rem;
+  background-image: url("../../img/home/aboutMeBG1.jpg");
+  background-position: center;
+  filter: blur(5px);
+}
+
+.about-content {
+  position: relative;
+  z-index: 1;
+}
 
 .homeIcon {
   color: #000000;
-
 }
-
 
 .arrowContainer {
     z-index: 5;
@@ -263,39 +294,66 @@
   }
 }
 
-h3.aboutMeH3 {
-  font-size: 3.85rem;
-  display: inline-block;
+.homeBlocks {
+  padding: 1.5rem;
+  background: rgba(255, 255, 255, 0.15);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(15px);
+  border-radius: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
+}
+
+.homeBlocks:hover {
+  transform: translateY(-10px);
+  background: rgba(255, 255, 255, 0.25);
+  box-shadow: 0 8px 40px rgba(0, 0, 0, 0.15);
+}
+
+.flexAboutMeHome {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 2rem;
+  padding-top: 3rem;
 }
 
 .aboutMeH3Container {
   text-align: center;
+  margin-bottom: 2rem;
+}
+
+h3.aboutMeH3 {
+  font-size: 3rem;
+  font-weight: 700;
+  letter-spacing: 1px;
+  color: #222;
 }
 
 h4.aboutMeH4 {
-  font-size: 2.65rem;
+  font-size: 2.25rem;
+  font-weight: 600;
+  color: #3d354d;
 }
 
-.flexAboutMeHome {
-  text-align: center;
-  display: flex;
-  gap: 4%;
-  padding-top: 2rem;
-  justify-content: center;
+@media (max-width: 800px) {
+  .flexAboutMeHome {
+    grid-template-columns: 1fr;
+  }
+
+  .homeBlocks {
+    max-width: 90%;
+    margin: 0 auto;
+  }
+}
+.aboutMeBorder {
+  animation: fadeIn 1s ease-in-out;
 }
 
-.homeBlocks {
-  max-width: 20%;
-  text-wrap: wrap;
-  word-break: none;
-  padding: 1rem 1rem 0.2rem 1rem;
-  background: rgba(255, 255, 255, 0.356);
-  box-shadow: rgba(0, 238, 255, 0.582) -4px 4px, rgba(0, 247, 255, 0.404) -8px 8px, rgba(163, 4, 255, 0.192) -12px 12px, rgba(248, 13, 162, 0.137) -16px 16px;
-  backdrop-filter: blur( 10px );
-  -webkit-backdrop-filter: blur( 10px );
-  border-radius: 10px;
-  border: 1px solid rgba( 255, 255, 255, 0.18 );
+@keyframes fadeIn {
+  0% { opacity: 0; }
+  100% { opacity: 1; }
 }
+
 
 .about-content {
   flex: 1 1 65%;
@@ -468,7 +526,137 @@ h1.about-me:hover {
   border-top: 2px solid #291d36;
 }
 
+section{
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 12;
+  height: 100vh;
+  background-size: cover;
+  animation: animateBg 100s linear infinite;
+}
 
+@keyframes animateBg{
+  0%,100%{
+      transform: scale(1);
+  }
+  50%{
+      transform: scale(1.2);
+  }
+}
+
+span.star{
+  position: absolute;
+  top:20%;
+  left:50%;
+  z-index: 20;
+  width: 4px;
+  height: 4px;
+  background: #fff;
+  border-radius: 50%;
+  box-shadow: 0 0 0 4px rgba(255,255,255,0.1),0 0 0 8px rgba(255,255,255,0.1),0 0 20px rgba(255,255,255,0.1);
+  animation: animate 3s linear infinite;
+}
+span.star::before{
+  content:'';
+  position: absolute;
+  top: 50%;
+  z-index: 20;
+  transform: translateY(-50%);
+  width: 300px;
+  height: 1px;
+  background: linear-gradient(90deg,#fff,transparent);
+}
+
+@keyframes animate
+{
+  0%
+  {
+      transform: rotate(315deg) translateX(0);
+      opacity: 1;
+  }
+  70%
+  {
+      opacity: 1;
+  }
+  100%
+  {
+      transform: rotate(315deg) translateX(-1000px);
+      opacity: 0;
+  }
+}
+
+span.star:nth-child(1){
+  top: 0;
+  right: 0;
+  left: initial;
+  animation-delay: 0s;
+  animation-duration: 1s;
+}
+span.star:nth-child(2){
+  top: 0;
+  right: 80px;
+  left: initial;
+  animation-delay: 0.2s;
+  animation-duration: 3s;
+}
+span.star:nth-child(3){
+  top: 80;
+  right: 0px;
+  left: initial;
+  animation-delay: 0.4s;
+  animation-duration: 2s;
+}
+span.star:nth-child(4){
+  top: 0;
+  right: 180px;
+  left: initial;
+  animation-delay: 0.6s;
+  animation-duration: 1.5s;
+}
+span.star:nth-child(5){
+  top: 0;
+  right: 400px;
+  left: initial;
+  animation-delay: 0.8s;
+  animation-duration: 2.5s;
+}
+span.star:nth-child(6){
+  top: 0;
+  right: 600px;
+  left: initial;
+  animation-delay: 1s;
+  animation-duration: 3s;
+}
+span.star:nth-child(7){
+  top: 300px;
+  right: 0px;
+  left: initial;
+  animation-delay: 1.2s;
+  animation-duration: 1.75s;
+}
+span.star:nth-child(8){
+  top: 0px;
+  right: 700px;
+  left: initial;
+  animation-delay: 1.4s;
+  animation-duration: 1.25s;
+}
+span.star:nth-child(9){
+  top: 0px;
+  right: 1000px;
+  left: initial;
+  animation-delay: 0.75s;
+  animation-duration: 2.25s;
+}
+span.star:nth-child(9){
+  top: 0px;
+  right: 450px;
+  left: initial;
+  animation-delay: 2.75s;
+  animation-duration: 2.75s;
+}
 
 
 
@@ -476,31 +664,6 @@ h1.about-me:hover {
 
 
 @media (max-width: 800px) {
-
-  .flexAboutMeHome {
-    text-align: center;
-    justify-content: center;
-    padding-top: 2rem;
-    display: grid;
-    gap: 0;
-    padding-top: 2rem;
-  }
-
-  .homeBlocks {
-    min-width: 95%;
-    max-width: 95%;
-    display: block;
-    margin: 0 auto !important;
-    margin-top: 1.35rem !important;
-    padding: 1rem 1rem 0.2rem 1rem;
-    background: rgba(255, 255, 255, 0.781);
-    box-shadow: rgba(0, 238, 255, 0.582) -4px 4px, rgba(0, 247, 255, 0.404) -8px 8px, rgba(163, 4, 255, 0.192) -12px 12px, rgba(248, 13, 162, 0.137) -16px 16px;
-    backdrop-filter: blur( 2px );
-    -webkit-backdrop-filter: blur( 2px );
-    border-radius: 10px;
-    border: 1px solid rgba( 255, 255, 255, 0.18 );
-  }
-
   h3.aboutMeH3 {
     font-size: 3rem;
     display: block;

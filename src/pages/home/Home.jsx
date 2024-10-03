@@ -166,19 +166,25 @@ const HomePage = () => {
   return (
     <div>
       <div className="fsBackground">
+      <section>
+            <span className='star'></span>
+            <span className='star'></span>
+            <span className='star'></span>
+            <span className='star'></span>
+            <span className='star'></span>
+            <span className='star'></span>
+            <span className='star'></span>
+            <span className='star'></span>
+            <span className='star'></span>
+            <span className='star'></span>
+        </section>
         <h1 className="h1Home">Hi! I'm Caleb.</h1>
         <h2 className="h2Home">I'm a full stack web developer.</h2>
-        {/* <IconGroup /> */}
-        {/* <div className="arrowContainer" onClick={handleArrowClick}>
-          <div className="styledArrow">▼</div>
-        </div> */}
       </div>
 
-      {/* {showSection && ( */}
       <div className="showOnArrowClick">
         <AboutMe />
       </div>
-      {/* )} */}
     </div>
   );
 };
