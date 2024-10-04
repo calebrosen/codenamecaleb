@@ -27,3 +27,6 @@ yarn-debug.log*
 yarn-error.log*
 package.json
 package-lock.json
+env.development
+node_srv/env
+env.production
