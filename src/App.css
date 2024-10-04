@@ -19,13 +19,13 @@ body {
 }
 
 .burgerButton {
-  animation: colorChange 5s infinite alternate;
+  animation: colorChange 2.5s infinite alternate;
 }
 
 @keyframes colorChange {
-  0% {
+  /*0% {
       color: red;
-  }
+   }
   14% {
       color: cyan;
   }
@@ -43,10 +43,18 @@ body {
   }
   84% {
       color: purple;
-  }
+  } 
   100% {
       color: blue;
-  }
+  }*/
+  0% {
+    color: #fff;
+    transform: scale(1.0);
+ }
+ 100% {
+  color: #000;
+  transform: scale(1.03);
+}
 }
 
 

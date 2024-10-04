@@ -1,7 +1,11 @@
 import React from "react";
 import "sweetalert2/dist/sweetalert2.min.css";
-import "./Home.css";
+import {
+  faFolderOpen
+} from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
+import "./Home.css";
 const HomePage = () => {
   /*const [imageSrc, setImageSrc] = useState(AvatarDrawing);
   const [clicks, setClicks] = useState(0);
@@ -68,38 +72,34 @@ const HomePage = () => {
     }, []);*/
 
     return (
-      <div className="aboutMeBorder">
-        <div className="aboutMeSection" name="aboutMeSection">
-          <div className="about-container">
-            <div className="about-content">
-              <div className="aboutMeH3Container">
-                <h3 className="aboutMeH3">About Me</h3>
-              </div>
-              <div className="flexAboutMeHome">
-                <div className='homeBlocks'>
-                  <h4 className='aboutMeH4'>Experience</h4>
-                  <p>
-                    I've been developing full stack applications for 3 years.
-                  </p>
-                </div>
-                <div className='homeBlocks'>
-                  <h4 className='aboutMeH4'>Front End</h4>
-                  <p>React • JavaScript • JQuery • TypeScript • HTML • CSS</p>
-                </div>
-                <div className='homeBlocks'>
-                  <h4 className='aboutMeH4'>Back End</h4>
-                  <p>SQL • PHP • NodeJS</p>
-                </div>
-                <div className='homeBlocks'>
-                  <h4 className='aboutMeH4'>Styling</h4>
-                  <p>CSS • Boostrap • SASS</p>
-                </div>
-              </div>
-            </div>
-          </div>
+      <div className="about-content">
+      <div className="aboutMeH3Container">
+        <a href="/portfolio">
+          <h3 className="aboutMeH3">About Me <FontAwesomeIcon icon={faFolderOpen} /></h3>
+        </a>
+      </div>
+      <div className="flexAboutMeHome">
+        <div className="homeBlocks">
+          <h4 className="aboutMeH4">Experience</h4>
+          <p className='aboutMeP'>I've been developing full stack applications for 3 years.</p>
+        </div>
+        <div className="homeBlocks">
+          <h4 className="aboutMeH4">Front End</h4>
+          <p className='aboutMeP'>React • JavaScript • JQuery • TypeScript • HTML • CSS</p>
+        </div>
+        <div className="homeBlocks">
+          <h4 className="aboutMeH4">Back End</h4>
+          <p className='aboutMeP'>SQL • PHP • NodeJS</p>
+        </div>
+        <div className="homeBlocks">
+          <h4 className="aboutMeH4">Styling</h4>
+          <p className='aboutMeP'>CSS • Bootstrap • SASS</p>
         </div>
       </div>
-    );
+  
+    </div>
+
+    )
   };
 
   /*
@@ -166,17 +166,17 @@ const HomePage = () => {
   return (
     <div>
       <div className="fsBackground">
-      <section>
-            <span className='star'></span>
-            <span className='star'></span>
-            <span className='star'></span>
-            <span className='star'></span>
-            <span className='star'></span>
-            <span className='star'></span>
-            <span className='star'></span>
-            <span className='star'></span>
-            <span className='star'></span>
-            <span className='star'></span>
+        <section>
+          <span className="star"></span>
+          <span className="star"></span>
+          <span className="star"></span>
+          <span className="star"></span>
+          <span className="star"></span>
+          <span className="star"></span>
+          <span className="star"></span>
+          <span className="star"></span>
+          <span className="star"></span>
+          <span className="star"></span>
         </section>
         <h1 className="h1Home">Hi! I'm Caleb.</h1>
         <h2 className="h2Home">I'm a full stack web developer.</h2>

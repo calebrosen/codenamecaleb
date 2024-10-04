@@ -83,34 +83,7 @@
   }
 }
 
-.rotating-text {
-  font-weight: 600;
-  font-size: 3rem;
-  color: #000;
-  display: block;
-  opacity: 100;
-}
-
-.rotatedTextInner {
-  background-color: rgba(255, 255, 255, 0.767);
-  display: inline-block;
-  padding: 1rem 1.5rem;
-  overflow: hidden;
-  border-radius: 12px;
-  transition: 2s;
-}
-
-.rotating-text.enter {
-  animation: rotateIn 1s ease forwards;
-  animation-fill-mode: forwards;
-}
-
-.rotating-text.exit {
-  animation: rotateOut 1s ease forwards;
-  animation-fill-mode: forwards;
-}
-
-.iconContainer {
+/* .iconContainer {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -119,7 +92,7 @@
   left: 0;
   right: 0;
   gap: 10%;
-}
+} */
 
 @media screen and (max-width: 1050px) and (orientation: landscape) {
   .h1Home {
@@ -130,7 +103,6 @@
     bottom: 20%;
   }
 }
-
 
 .fsBackground {
   position: relative;
@@ -151,11 +123,10 @@
   left: -2.5rem;
   right: -2.5rem;
   bottom: -2.5rem;
-  background-image: url("../../img/home/6499640.jpg");
+  background-image: url("../../img/home/v882-kul-42.jpg");
   background-size: cover;
   background-position: center;
-  filter: blur(7px);
-  opacity: 0.9;
+  filter: blur(2px);
   z-index: 11;
 }
 
@@ -189,79 +160,10 @@
   animation: vaporwaveGlow 2s infinite;
 }*/
 
-.about-container {
-  position: relative;
-  padding: 0.3rem 5px;
-  z-index: 10;
-}
 
-.about-container::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: -2rem;
-  right: -2rem;
-  bottom: -2rem;
-  margin-bottom: -1rem;
-  background-image: url("../../img/home/aboutMeBG1.jpg");
-  background-position: center;
-  filter: blur(5px);
-}
 
-.about-content {
-  position: relative;
-  z-index: 1;
-}
 
-.homeIcon {
-  color: #000000;
-}
-
-.arrowContainer {
-    z-index: 5;
-    font-size: 2rem;
-    position: fixed;
-    bottom: 4%;
-    left: 50%;
-    background: rgba(255, 255, 255, 0.45);
-    box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
-    backdrop-filter: blur( 4.5px );
-    -webkit-backdrop-filter: blur( 4.5px );
-    border-radius: 50%;
-    transform: translateX(-50%);
-    padding: 0.13rem 0.5rem;
-}
-
-.styledArrow {
-  color: #291d36;
-  margin-top: 5px;
-  transition: 1s;
-}
-
-.styledArrow:hover {
-  transform: scale(1.2);
-  cursor: pointer;
-}
-
-.arrowContainer:hover {
-  animation: vaporwaveGlow 2s infinite;
-}
-
-@keyframes vaporwaveGlow {
-  0% {
-    box-shadow: 0 0 15px rgba(255, 0, 150, 0.8), 0 0 30px #00eef7,
-      0 0 45px rgba(255, 0, 150, 0.8), 0 0 60px #00eef7;
-  }
-  50% {
-    box-shadow: 0 0 25px #00eef7, 0 0 50px rgba(255, 0, 150, 0.8),
-      0 0 75px #00eef7, 0 0 100px rgba(255, 0, 150, 0.8);
-  }
-  100% {
-    box-shadow: 0 0 15px rgba(255, 0, 150, 0.8), 0 0 30px #00eef7,
-      0 0 45px rgba(255, 0, 150, 0.8), 0 0 60px #00eef7;
-  }
-}
-
+/* 
 .profile-picture {
   flex: 1 1 30%;
   display: flex;
@@ -277,17 +179,17 @@
   border: 1px solid #303030 inset;
   background-color: #fff;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
-}
+} */
 
 @media screen and (max-width: 768px) {
-  .profile-picture img {
+  /* .profile-picture img {
     margin-top: 3.25em;
     border-radius: 50%;
     width: 60%;
     height: auto;
     object-fit: cover;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  }
+  } */
 
   .about-content {
     text-align: center;
@@ -326,13 +228,24 @@ h3.aboutMeH3 {
   font-size: 3rem;
   font-weight: 700;
   letter-spacing: 1px;
-  color: #222;
+  color: #ffffffbe;
+  padding: 0.5rem 2rem;
+  background: rgba(255, 255, 255, 0.2);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(15px);
+  border-radius: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  display: inline-block;
 }
 
 h4.aboutMeH4 {
   font-size: 2.25rem;
   font-weight: 600;
-  color: #3d354d;
+  color: #14d5f2;
+}
+
+.aboutMeP {
+  color: #d4d4d4;
 }
 
 @media (max-width: 800px) {
@@ -345,8 +258,27 @@ h4.aboutMeH4 {
     margin: 0 auto;
   }
 }
-.aboutMeBorder {
-  animation: fadeIn 1s ease-in-out;
+
+.about-content {
+  position: relative;
+  z-index: 1;
+  padding: 1.9rem 1.5rem 4rem 1.5rem;
+  background-blend-mode: darken;
+  box-shadow: rgba(0, 0, 0, 0.99) 0px 22px 70px 4px;
+  overflow: hidden;
+}
+
+.about-content::before {
+  content: '';
+  position: absolute;
+  /* extending the background slightly beyond the edges to stop white borders */
+  top: -5.4rem;
+  left: -2.5rem;
+  right: -2.5rem;
+  bottom: -2.5rem;
+  background-image: url("../../img/home/v882-kul-4211.jpg");
+  background-size: cover;
+  filter: blur(2px);
 }
 
 @keyframes fadeIn {
@@ -355,81 +287,14 @@ h4.aboutMeH4 {
 }
 
 
-.about-content {
-  flex: 1 1 65%;
-  color: #291d36;
-  padding: 20px;
-}
-
 .about-content p {
   font-size: 1.7rem;
   line-height: 1.6;
   margin-bottom: 15px;
 }
 
-.about-content h1.about-me {
-  font-size: 2.5rem;
-  color: #291d36;
-  margin-bottom: 15px;
-  z-index: 10;
-  position: relative;
-  padding-bottom: 25px;
-}
-
 .main-content {
   margin-top: 10rem;
-}
-
-@media screen and (min-width: 600px) {
-  h1.about-me::before {
-    content: "";
-    position: absolute;
-    left: 16%;
-    bottom: 30%;
-    width: 35%;
-    height: 6px;
-    background: #c8425b;
-    transform: translateX(-50%);
-    z-index: -1;
-    border-radius: 2px;
-  }
-}
-
-h1.about-me:hover {
-  transition: 1.25s;
-  color: #c8425b;
-}
-
-/*easter egg avatar styling*/
-.magic-container {
-  position: absolute;
-  pointer-events: none;
-  animation: fadeOut 2s forwards;
-}
-
-.magic-particle {
-  position: fixed;
-  opacity: 0.9;
-  animation: sparkle 1.5s ease-out forwards, twinkle 2.5s infinite;
-  transform-origin: center;
-}
-
-.magic-particle.star-shape {
-  width: 9px;
-  height: 9px;
-  clip-path: polygon(
-    50% 0%,
-    61% 35%,
-    98% 35%,
-    68% 57%,
-    79% 91%,
-    50% 70%,
-    21% 91%,
-    32% 57%,
-    2% 35%,
-    39% 35%
-  );
-  background-color: inherit;
 }
 
 @keyframes sparkle {
@@ -479,22 +344,6 @@ h1.about-me:hover {
   opacity: 1;
 }
 
-.easterEggPopupText {
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  background-color: rgba(0, 0, 0, 0.8);
-  color: #fff;
-  padding: 20px;
-  border-radius: 8px;
-  font-size: 2em;
-  text-align: center;
-  z-index: 1000;
-}
-
-/* end easter egg avatar styling */
-
 .h1Wrapper {
   margin-top: 8em;
   background-color: rgb(0, 0, 0, 0.5);
@@ -512,18 +361,6 @@ h1.about-me:hover {
 .header-section {
   display: flex;
   flex-direction: column;
-}
-
-.timeSinceCreation {
-  font-size: 2rem;
-  color: #291d36;
-  background-color: #fff;
-  text-align: center;
-  padding: 0.25rem 1rem 2rem 1rem;
-}
-
-.aboutMeBorder {
-  border-top: 2px solid #291d36;
 }
 
 section{
@@ -558,6 +395,7 @@ span.star{
   box-shadow: 0 0 0 4px rgba(255,255,255,0.1),0 0 0 8px rgba(255,255,255,0.1),0 0 20px rgba(255,255,255,0.1);
   animation: animate 3s linear infinite;
 }
+
 span.star::before{
   content:'';
   position: absolute;
@@ -566,7 +404,7 @@ span.star::before{
   transform: translateY(-50%);
   width: 300px;
   height: 1px;
-  background: linear-gradient(90deg,#fff,transparent);
+  background: linear-gradient(90deg,#fff,transparent,#14d5f2);
 }
 
 @keyframes animate
