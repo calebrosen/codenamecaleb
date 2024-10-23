@@ -1,106 +1,12 @@
 import React from "react";
+import { BsTwitterX } from "react-icons/bs";
+import { FaDiscord, FaGithub } from "react-icons/fa";
 import "sweetalert2/dist/sweetalert2.min.css";
-import {
-  faFolderOpen
-} from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-
+import Avatar from "../../img/home/avatar/Avatar.png";
 import "./Home.css";
+
 const HomePage = () => {
-  /*const [imageSrc, setImageSrc] = useState(AvatarDrawing);
-  const [clicks, setClicks] = useState(0);
-  const [particles, setParticles] = useState([]);
-  const [fadeClass, setFadeClass] = useState("");
-  const [showEasterEggPopup, setShowEasterEggPopup] = useState(false);
-  const [showSection, setShowSection] = useState(false);
-  const [easterEggTriggered, setEasterEggTriggered] = useState(false);
-  const [easterEggInProgress, setEasterEggInProgress] = useState(false);
-  const [scrollTriggeredByClick, setScrollTriggeredByClick] = useState(false);
-  const wordsToShow = ["Websites", "Solutions", "Projects", "Tools"];
-  const [wordToShow, setWordToShow] = useState(wordsToShow[0]);
-  const [isEntering, setIsEntering] = useState(true);
-  const [isExiting, setIsExiting] = useState(false);
 
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setIsExiting(true);
-      setTimeout(() => {
-        setIsExiting(false);
-        setWordToShow((prevWord) => {
-          const currentIndex = wordsToShow.indexOf(prevWord);
-          const nextIndex = (currentIndex + 1) % wordsToShow.length;
-          return wordsToShow[nextIndex];
-        });
-        setIsEntering(true);
-        setTimeout(() => {
-          setIsEntering(false);
-        }, 1000);
-      }, 1000);
-    }, 3500);
-
-    return () => clearInterval(interval);
-  }, []);*/
-
-  const AboutMe = () => {
-    /*const [timeDifference, setTimeDifference] = useState("");
-
-    useEffect(() => {
-      const originDate = new Date("2024-08-15T12:10");
-
-      const updateTimeDifference = () => {
-        const now = new Date();
-        const diff = now - originDate;
-
-        const days = Math.floor(diff / (1000 * 60 * 60 * 24));
-        const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
-        const minutes = Math.floor((diff / 1000 / 60) % 60);
-        const seconds = Math.floor((diff / 1000) % 60);
-
-        setTimeDifference(
-          `<span style="color: #11c4db; text-shadow: 1px 1px 2px #000;">${days} days</span>,
-           <span style="color: #9ae7f1; text-shadow: 1px 1px 2px #000;">${hours} hours</span>,
-           <span style="color: #f0a6e0; text-shadow: 1px 1px 2px #000;">${minutes} minutes</span>,
-           <span style='color: #df46b1; text-shadow: 1px 1px 2px #000;'>${seconds} seconds</span>`
-        );
-      };
-
-      updateTimeDifference();
-
-      const intervalId = setInterval(updateTimeDifference, 1000); // updating date every second
-
-      return () => clearInterval(intervalId);
-    }, []);*/
-
-    return (
-      <div className="about-content">
-      <div className="aboutMeH3Container">
-        <a href="/portfolio">
-          <h3 className="aboutMeH3">About Me <FontAwesomeIcon icon={faFolderOpen} /></h3>
-        </a>
-      </div>
-      <div className="flexAboutMeHome">
-        <div className="homeBlocks">
-          <h4 className="aboutMeH4">Experience</h4>
-          <p className='aboutMeP'>I've been developing full stack applications for 3 years.</p>
-        </div>
-        <div className="homeBlocks">
-          <h4 className="aboutMeH4">Front End</h4>
-          <p className='aboutMeP'>React • JavaScript • JQuery • TypeScript • HTML • CSS</p>
-        </div>
-        <div className="homeBlocks">
-          <h4 className="aboutMeH4">Back End</h4>
-          <p className='aboutMeP'>SQL • PHP • NodeJS</p>
-        </div>
-        <div className="homeBlocks">
-          <h4 className="aboutMeH4">Styling</h4>
-          <p className='aboutMeP'>CSS • Bootstrap • SASS</p>
-        </div>
-      </div>
-  
-    </div>
-
-    )
-  };
 
   /*
   const IconGroup = () => {
@@ -164,26 +70,39 @@ const HomePage = () => {
 */
 
   return (
-    <div>
+    <div className='homePageContainer'>
       <div className="fsBackground">
-        <section>
-          <span className="star"></span>
-          <span className="star"></span>
-          <span className="star"></span>
-          <span className="star"></span>
-          <span className="star"></span>
-          <span className="star"></span>
-          <span className="star"></span>
-          <span className="star"></span>
-          <span className="star"></span>
-          <span className="star"></span>
-        </section>
-        <h1 className="h1Home">Hi! I'm Caleb.</h1>
-        <h2 className="h2Home">I'm a full stack web developer.</h2>
+
+      <div className='about-content'>
+        <div className='mainContentHome'>
+          <div className='row'>
+          
+            <div className='col-xs-12 col-sm-12 col-md-8 col-lg-8 col-xl-8'>
+            Hi, I'm <span style={{fontWeight: 'bold', color: "#fff"}}>Caleb</span>, a full stack developer.
+            </div>
+            <div className='col-xs-12 col-sm-12 col-md-4 col-lg-4 col-xl-4'>
+            <img src={Avatar} className='homePageAvatar'></img>
+            </div>
+          </div>
+          
+          <div className='homeIcons'>
+            <div className='homeIndividualIcon'>
+              <FaGithub size={40}/>
+            </div>
+            <div className='homeIndividualIcon'>
+              <FaDiscord size={40}/>
+            </div>
+            <div className='homeIndividualIcon'>
+              <BsTwitterX size={40}/>
+            </div>
+
+          </div>
+        </div>
+        <div className='sideContentHome'>
+          Welcome to my website.
+        </div>
       </div>
 
-      <div className="showOnArrowClick">
-        <AboutMe />
       </div>
     </div>
   );
