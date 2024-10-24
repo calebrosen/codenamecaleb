@@ -24,7 +24,7 @@ import "./vacation-planner.css";
 Modal.setAppElement("#root");
 
 const VacationPlanner = () => {
-  const { userID, userName } = useContext(UserContext);
+  const { userID } = useContext(UserContext);
   const [showNameVacation, setShowNameVacation] = useState(false);
   const [vacationName, setVacationName] = useState("");
   const [vacations, setVacations] = useState([]);
@@ -608,13 +608,13 @@ const VacationPlanner = () => {
         let toDateUpdate;
         if (form) {
           Array.from(form.elements).forEach((input) => {
-            if (input.id == "fromLocationModal") {
+            if (input.id === "fromLocationModal") {
               fromLocationUpdate = input.value;
-            } else if (input.id == "fromDateModal") {
+            } else if (input.id === "fromDateModal") {
               fromDateUpdate = formatDateForSQL(input.value);
-            } else if (input.id == "toLocationModal") {
+            } else if (input.id === "toLocationModal") {
               toLocationUpdate = input.value;
-            } else if (input.id == "toDateModal") {
+            } else if (input.id === "toDateModal") {
               toDateUpdate = formatDateForSQL(input.value);
             }
           });
