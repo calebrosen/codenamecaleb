@@ -21,7 +21,7 @@ const Portfolio = () => {
       {/* <div className='portfolioH1Wrapper'>
         <h1 className='portfolioH1'>Portfolio</h1>
       </div> */}
-        <VerticalTimeline lineColor={"#dedcdc"}>
+        <VerticalTimeline lineColor={"#232323"}>
           <VerticalTimelineElement
             className="vertical-timeline-element--work"
             icon={<img src={Fireplace} className='portfolioIconImg' alt="fireplace" />}

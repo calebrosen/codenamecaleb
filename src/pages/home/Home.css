@@ -3,9 +3,12 @@
   z-index: 1;
   background-size: 5.4rem 5.4rem;
   background-color: rgb(20, 20, 20);
-  background-image:
-      linear-gradient(to right, rgb(190, 190, 190) 1px, transparent 0),
-      linear-gradient(to bottom, rgb(190, 190, 190) 1px, transparent 0);
+  background-image: linear-gradient(
+      to right,
+      rgb(190, 190, 190) 1px,
+      transparent 0
+    ),
+    linear-gradient(to bottom, rgb(190, 190, 190) 1px, transparent 0);
   position: relative;
   overflow: hidden;
 }
@@ -18,7 +21,12 @@
   overflow: hidden;
   right: 0;
   bottom: 0;
-  background: linear-gradient(180deg, rgba(20, 20, 20, 0.8) 1% , rgba(20, 20, 20, 0.96) 40% , rgba(23, 23, 23, 1) 100%);
+  background: linear-gradient(
+    180deg,
+    rgba(20, 20, 20, 0.8) 1%,
+    rgba(20, 20, 20, 0.96) 40%,
+    rgba(23, 23, 23, 1) 100%
+  );
   z-index: -5;
 }
 
@@ -41,8 +49,8 @@
 
 .main-content {
   display: grid;
-  grid-template-columns: 78% 22%; /* 78% for main content, 22% for side content */
-  grid-template-rows: subgrid; /* Allow rows to adjust to content height */
+  grid-template-columns: 78% 22%;
+  grid-template-rows: subgrid;
   gap: 2rem;
   margin: 0 20%;
   margin-top: 4rem;
@@ -51,21 +59,17 @@
 
 .mainContentHome {
   grid-column: 1 / 2; /* First column */
-  grid-row: 1; /* Place it in the first row */
-  padding: 1rem 1.5rem;
+  grid-row: 1;
+  padding: 0.9rem 1rem;
   border: 1px solid #2f2f2f;
   color: rgb(219, 219, 219);
   font-size: 1.5rem;
-  background: rgba(56, 54, 54, 0.192);
-  box-shadow: rgba(0, 0, 0, 0.4) 0px 4px 7px, rgba(0, 0, 0, 0.3) 0px 9px 15px -5px, rgba(0, 0, 0, 0.2) 0px -3px 0px;
-  backdrop-filter: blur(7.5px);
+  background: rgba(53, 53, 53, 0.192);
+  box-shadow: rgba(0, 0, 0, 0.4) 0px 4px 7px,
+    rgba(0, 0, 0, 0.3) 0px 9px 15px -5px, rgba(0, 0, 0, 0.2) 0px -3px 0px;
+  backdrop-filter: blur(15px);
   border-radius: 10px;
   font-weight: 500;
-}
-
-
-.leftPanel {
-  flex: 1;
 }
 
 .triGridColumn {
@@ -76,12 +80,164 @@
 
 .triBlockHome {
   flex: 0.33333333333;
-  background: rgba(56, 54, 54, 0.192);
-  box-shadow: rgba(0, 0, 0, 0.4) 0px 4px 7px, rgba(0, 0, 0, 0.3) 0px 9px 15px -5px, rgba(0, 0, 0, 0.2) 0px -3px 0px;
+  padding: 0.6rem 0.9rem;
+  background: rgba(53, 53, 53, 0.192);
+  box-shadow: rgba(0, 0, 0, 0.4) 0px 4px 7px,
+    rgba(0, 0, 0, 0.3) 0px 9px 15px -5px, rgba(0, 0, 0, 0.2) 0px -3px 0px;
   backdrop-filter: blur(7.5px);
-  border-radius:10px;
+  border-radius: 10px;
   border: 1px solid #2f2f2f;
 }
+
+.homeLocalTime {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  min-height: 2.75rem;
+  font-size: 1.5rem;
+  text-align: center;
+}
+
+.portfolioBackground {
+  position: relative;
+  overflow: hidden;
+}
+
+/* Background image for this block */
+.portfolioBackground::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: url("../../img/home/code_bg.jpg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  z-index: 1;
+}
+
+/* Gray overlay over the background image to darken it */
+.portfolioBackground::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(14, 14, 14, 0.486);
+  z-index: 2;
+}
+
+.portfolioBlockHome {
+  position: relative;
+  z-index: 5;
+  justify-content: space-between;
+  display: flex;
+  align-items: center;
+  min-height: 2.75rem;
+  height: 100%;
+  font-size: 1.5rem;
+}
+
+.portfolioBackground > * {
+  position: relative;
+  z-index: 5;
+}
+
+.colorBlockHome {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+  height: 100%;
+}
+
+.circle {
+  width: 2.25rem;
+  height: 2.25rem;
+  border-radius: 50%;
+  display: flex;
+  transition: 0.5s;
+  align-items: center;
+  justify-content: center;
+}
+
+.circle:hover {
+  transform: scale(1.1);
+}
+
+/* CHANGE COLOR SECTION */
+.redBG {
+  background-color: rgb(189, 17, 17);
+}
+.yellowBG {
+  background-color: rgb(212, 177, 21);
+}
+.greenBG {
+  background-color: rgb(36, 163, 19);
+}
+.blueBG {
+  background-color: rgb(9, 176, 226);
+}
+.pinkBG {
+  background-color: rgb(212, 13, 238);
+}
+.blueBoxShadow {
+  box-shadow: rgb(9, 176, 226) 0px 3px 4px, rgba(0, 0, 0, 0.3) 0px 7px 15px -3px,
+    rgba(4, 217, 255, 0.13) 0px -2px 0px inset;
+}
+.yellowBoxShadow {
+  box-shadow: rgb(212, 177, 21) 0px 3px 4px,
+    rgba(0, 0, 0, 0.3) 0px 7px 15px -3px,
+    rgba(196, 176, 5, 0.2) 0px -2px 0px inset;
+}
+.redBoxShadow {
+  box-shadow: rgb(189, 17, 17) 0px 3px 4px, rgba(0, 0, 0, 0.3) 0px 7px 15px -3px,
+    rgba(197, 4, 4, 0.2) 0px -2px 0px inset;
+}
+.greenBoxShadow {
+  box-shadow: rgb(36, 163, 19) 0px 3px 4px, rgba(0, 0, 0, 0.3) 0px 7px 15px -3px,
+    rgba(20, 185, 4, 0.2) 0px -2px 0px inset;
+}
+.pinkBoxShadow {
+  box-shadow: rgb(212, 13, 238) 0px 3px 4px,
+    rgba(0, 0, 0, 0.3) 0px 7px 15px -3px,
+    rgba(212, 13, 238, 0.219) 0px -2px 0px inset;
+}
+.blueHoverBorderEffectHome {
+  transition: 0.25s ease-in-out;
+}
+.yellowHoverBorderEffectHome {
+  transition: 0.25s ease-in-out;
+}
+.redHoverBorderEffectHome {
+  transition: 0.25s ease-in-out;
+}
+.greenHoverBorderEffectHome {
+  transition: 0.25s ease-in-out;
+}
+.pinkHoverBorderEffectHome {
+  transition: 0.25s ease-in-out;
+}
+.blueHoverBorderEffectHome:hover {
+  border: 1px solid rgb(9, 176, 226);
+}
+.yellowHoverBorderEffectHome:hover {
+  border: 1px solid rgb(212, 177, 21);
+}
+.redHoverBorderEffectHome:hover {
+  border: 1px solid rgb(189, 17, 17);
+}
+.greenHoverBorderEffectHome:hover {
+  border: 1px solid rgb(36, 163, 19);
+}
+.pinkHoverBorderEffectHome:hover {
+  border: 1px solid rgb(212, 13, 238);
+}
+/* END OF CHANGE COLOR SECTION */
 
 .sideContentHome {
   border: 1px solid #2f2f2f;
@@ -89,8 +245,9 @@
   grid-row: 1 / span 2;
   padding: 1rem;
   color: rgb(219, 219, 219);
-  background: rgba(56, 54, 54, 0.192);
-  box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
+  background: rgba(53, 53, 53, 0.192);
+  box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px,
+    rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
   backdrop-filter: blur(7.5px);
   border-radius: 10px;
   height: fit-content;
@@ -100,6 +257,10 @@
 .main-content .testblock-content {
   overflow: hidden;
   position: relative;
+}
+
+.anchorNoDecoration {
+  text-decoration: none;
 }
 
 .homeMyStack {
@@ -134,10 +295,13 @@ h5.aboutMeH5 {
   display: flex;
 }
 
+.homeSlightScaleOnHover:hover {
+  transform: scale(1.03);
+}
+
 .homeIndividualIcon {
   padding: 0.6rem;
   margin: 0 0.5rem 0 0;
-  box-shadow: rgba(0, 194, 253, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(4, 217, 255, 0.2) 0px -3px 0px inset;
   transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
 }
 
@@ -147,23 +311,4 @@ h5.aboutMeH5 {
 
 .hoverEffectHomePage:hover {
   cursor: pointer;
-}
-
-
-@keyframes fadeIn {
-  0% { opacity: 0; }
-  100% { opacity: 1; }
-}
-
-@keyframes fadeOut {
-  to {
-    opacity: 0;
-  }
-}
-.fade-out {
-  opacity: 0;
-}
-
-.fade-in {
-  opacity: 1;
 }
