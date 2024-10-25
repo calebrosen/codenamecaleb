@@ -52,12 +52,12 @@
 .mainContentHome {
   grid-column: 1 / 2; /* First column */
   grid-row: 1; /* Place it in the first row */
-  padding: 1rem 2rem;
+  padding: 1rem 1.5rem;
   border: 1px solid #2f2f2f;
   color: rgb(219, 219, 219);
   font-size: 1.5rem;
   background: rgba(56, 54, 54, 0.192);
-  box-shadow: rgba(0, 0, 0, 0.4) 0px 4px 7px, rgba(0, 0, 0, 0.3) 0px 9px 15px -5px, rgba(0, 0, 0, 0.2) 0px -7px 0px;
+  box-shadow: rgba(0, 0, 0, 0.4) 0px 4px 7px, rgba(0, 0, 0, 0.3) 0px 9px 15px -5px, rgba(0, 0, 0, 0.2) 0px -3px 0px;
   backdrop-filter: blur(7.5px);
   border-radius: 10px;
   font-weight: 500;
@@ -70,9 +70,17 @@
 
 .triGridColumn {
   display: flex;
+  gap: 1.5rem;
   color: rgb(219, 219, 219);
-  background-color: rgba(100, 100, 100, 0.2);
-  padding: 1rem;
+}
+
+.triBlockHome {
+  flex: 0.33333333333;
+  background: rgba(56, 54, 54, 0.192);
+  box-shadow: rgba(0, 0, 0, 0.4) 0px 4px 7px, rgba(0, 0, 0, 0.3) 0px 9px 15px -5px, rgba(0, 0, 0, 0.2) 0px -3px 0px;
+  backdrop-filter: blur(7.5px);
+  border-radius:10px;
+  border: 1px solid #2f2f2f;
 }
 
 .sideContentHome {

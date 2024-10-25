@@ -118,7 +118,15 @@ const HomePage = () => {
 
       <div className="triGridColumn">
       {/* Content block below main content */}
-        To be continued
+        <div className='triBlockHome'>
+          To be continuedTo be continuedTo be continuedTo be continuedTo be continuedTo be continued
+        </div>
+        <div className='triBlockHome'>
+          To be continuedTo be continuedTo be continuedTo be continuedTo be continuedTo be continuedTo be continuedTo be continued
+        </div>
+        <div className='triBlockHome'>
+          To be continuedTo be continuedTo be continuedTo be continuedTo be continued
+        </div>
       </div>
 
       {/* Side content section */}
