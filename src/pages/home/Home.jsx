@@ -18,6 +18,22 @@ const HomePage = () => {
   const [balloonSpeed, setBalloonSpeed] = useState(4);
   let spawnTimeout;
 
+  // function toggleScroll() {
+  //   const { scrollHeight, clientHeight, scrollWidth, clientWidth } =
+  //     document.documentElement;
+  //   const noScrollNeeded =
+  //     scrollHeight <= clientHeight && scrollWidth <= clientWidth;
+
+  //   if (noScrollNeeded) {
+  //     document.documentElement.style.overflow = "hidden";
+  //   } else {
+  //     document.documentElement.style.overflow = "";
+  //   }
+  // }
+
+  // toggleScroll();
+  // window.addEventListener("resize", toggleScroll);
+
   const IconGroup = () => {
     /* This is for the Icons Group of the Main Content box */
 
@@ -205,7 +221,7 @@ const HomePage = () => {
       balloon.style.fontSize = "8vw";
       // Random horizontal position
       balloon.style.left = `${Math.random() * (window.innerWidth - 90)}px`;
-      balloon.style.bottom = "-250px";
+      balloon.style.bottom = "0px";
       // Random color
       balloon.style.filter = `hue-rotate(${Math.random() * 360}deg)`;
       balloon.style.zIndex = "9999";
@@ -282,6 +298,38 @@ const HomePage = () => {
     }
   };
 
+  const BalloonGameOnOrOffText = () => {
+    return (
+      <div
+        style={{
+          color: "rgb(219, 219, 219)",
+          marginRight: "0.5rem",
+          verticalAlign: "top",
+          display: "inline-block",
+        }}
+      >
+        {balloonGameOnOrOff}
+      </div>
+    );
+  };
+
+  const BalloonGameCounter = () => {
+    return (
+      <div id="balloonCounter" className="balloonCounter">
+        <span
+          id="balloons_popped"
+          style={{
+            color: "rgb(219, 219, 219)",
+            verticalAlign: "top",
+          }}
+        >
+          0{" "}
+        </span>
+        🎈
+      </div>
+    );
+  };
+
   // END BALLOON GAME
 
   return (
@@ -317,14 +365,7 @@ const HomePage = () => {
           </div>
 
           <div className="triGridColumn">
-            {/* Content block below main content */}
-
-            {/* <div className="triBlockHome redHoverBorderEffectHome">
-              <div className="homeLocalTime">
-                <LocalTime />
-              </div>
-            </div> */}
-
+            {/* Tall Block for Balloon Game */}
             <div className="tallHomeBlock redHoverBorderEffectHome">
               <div className="balloonGame">
                 <div className="balloonGameElement">Balloon Game 🎮</div>
@@ -339,43 +380,28 @@ const HomePage = () => {
                   />
                 </div>
                 <div className="balloonGameFlexOnOffAndCounter">
-                  <div className='inlineBlockDiv'>
-                    <span
-                      style={{
-                        color: "rgb(219, 219, 219)",
-                        marginRight: "0.5rem",
-                        verticalAlign: "top",
-                      }}
-                    >
-                      {balloonGameOnOrOff}
-                    </span>
-                    <div className="checkbox-wrapper-22">
+                  <div>
+                    <BalloonGameOnOrOffText />
+                    <span className="checkbox-wrapper-22">
                       <label className="switch" htmlFor="checkbox">
                         <input
                           type="checkbox"
                           id="checkbox"
                           onClick={enableDisableBalloonGame}
                         />
-                        <div className="slider round"></div>
+                        <div
+                          className="slider round"
+                          style={{ display: "inline-block" }}
+                        ></div>
                       </label>
-                    </div>
-                  </div>
-                  <div id="balloonCounter" className="balloonCounter">
-                    <span
-                      id="balloons_popped"
-                      style={{
-                        color: "rgb(219, 219, 219)",
-                        verticalAlign: "top",
-                      }}
-                    >
-                      0{" "}
                     </span>
-                    🎈
                   </div>
+                  <BalloonGameCounter />
                 </div>
               </div>
             </div>
 
+            {/* Portfolio Block */}
             <div className="triBlockHome portfolioBackground redHoverBorderEffectHome">
               <a href="/portfolio" className="anchorNoDecoration">
                 <div className="portfolioBlockHome">
@@ -383,6 +409,8 @@ const HomePage = () => {
                 </div>
               </a>
             </div>
+
+            {/* Color Block with animated color circles */}
             <div className="triBlockHome redHoverBorderEffectHome">
               <div className="colorBlockHome">
                 <motion.div
@@ -398,7 +426,7 @@ const HomePage = () => {
                 >
                   <div
                     className="circle redBG hoverEffectHomePage"
-                    onClick={(e) => ChangeThemeColor("red", "rgb(189, 17, 17)")}
+                    onClick={() => ChangeThemeColor("red", "rgb(189, 17, 17)")}
                   ></div>
                 </motion.div>
 
@@ -415,11 +443,12 @@ const HomePage = () => {
                 >
                   <div
                     className="circle yellowBG hoverEffectHomePage"
-                    onClick={(e) =>
+                    onClick={() =>
                       ChangeThemeColor("yellow", "rgb(212, 177, 21)")
                     }
                   ></div>
                 </motion.div>
+
                 <motion.div
                   animate={{
                     scale: [1, 1.18, 0.3, 1],
@@ -433,11 +462,12 @@ const HomePage = () => {
                 >
                   <div
                     className="circle greenBG hoverEffectHomePage"
-                    onClick={(e) =>
+                    onClick={() =>
                       ChangeThemeColor("green", "rgb(36, 163, 19)")
                     }
                   ></div>
                 </motion.div>
+
                 <motion.div
                   animate={{
                     scale: [1, 1.18, 0.3, 1],
@@ -451,11 +481,10 @@ const HomePage = () => {
                 >
                   <div
                     className="circle blueBG hoverEffectHomePage"
-                    onClick={(e) =>
-                      ChangeThemeColor("blue", "rgb(9, 176, 226)")
-                    }
+                    onClick={() => ChangeThemeColor("blue", "rgb(9, 176, 226)")}
                   ></div>
                 </motion.div>
+
                 <motion.div
                   animate={{
                     scale: [1, 1.18, 0.3, 1],
@@ -469,18 +498,24 @@ const HomePage = () => {
                 >
                   <div
                     className="circle pinkBG hoverEffectHomePage"
-                    onClick={(e) =>
+                    onClick={() =>
                       ChangeThemeColor("pink", "rgb(212, 13, 238)")
                     }
                   ></div>
                 </motion.div>
               </div>
             </div>
+
+            {/* Bottom Grid Long */}
+            <div className="bottomGridLong">
+              <div className="homeLocalTime">
+                <LocalTime />
+              </div>
+            </div>
           </div>
 
           {/* Side content section */}
           <div className="sideContentHome redHoverBorderEffectHome">
-            <h5 className="aboutMeH5">About me</h5>
             <div className="aboutMeSidePanel">
               I'm a full stack developer with a strong desire to learn and
               improve everyday.
@@ -490,27 +525,27 @@ const HomePage = () => {
                   <ul>
                     <li>
                       <span className="homeListItemsStack">JavaScript</span>{" "}
-                      <Star amount={5} />
+                      {/* <Star amount={5} /> */}
                     </li>
                     <li>
                       <span className="homeListItemsStack">React</span>{" "}
-                      <Star amount={5} />
+                      {/* <Star amount={5} /> */}
                     </li>
                     <li>
                       <span className="homeListItemsStack">MySQL</span>{" "}
-                      <Star amount={5} />
+                      {/* <Star amount={5} /> */}
                     </li>
                     <li>
                       <span className="homeListItemsStack">NodeJS</span>{" "}
-                      <Star amount={4} />
+                      {/* <Star amount={4} /> */}
                     </li>
                     <li>
                       <span className="homeListItemsStack">CSS</span>{" "}
-                      <Star amount={4} />
+                      {/* <Star amount={4} /> */}
                     </li>
                     <li>
                       <span className="homeListItemsStack">PHP</span>{" "}
-                      <Star amount={4} />
+                      {/* <Star amount={4} /> */}
                     </li>
                   </ul>
                 </div>

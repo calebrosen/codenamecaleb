@@ -2,14 +2,8 @@
   position: relative;
   text-align: left !important;
   overflow: hidden;
+  max-height: 100%;
 }
-
-.homePageContainer > html, .homePageContainer > body{
-  margin: 0;
-  height: 100%;
-  overflow: hidden;
-}
-
 
 .fsBackground {
   height: 100vh;
@@ -25,8 +19,6 @@
   position: relative;
   overflow: hidden !important;
 }
-
-
 
 .fsBackground::after {
   content: "";
@@ -46,7 +38,12 @@
 }
 
 .mainContentDivIntro {
-  margin: 0.3rem 0;
+  /* Spreading out items vertically */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between; 
+  flex: 1;
+  margin: 0.3 0;
 }
 
 .homePageAvatar {
@@ -60,9 +57,10 @@
   display: grid;
   grid-template-columns: 78% 22%;
   grid-template-rows: subgrid;
-  gap: 2rem;
+  gap: 1.7rem;
   margin: 0 20%;
-  margin-top: 4rem;
+  margin-top: 4.5%;
+  max-height: 5px !important;
   align-items: start;
 }
 
@@ -72,7 +70,7 @@
   padding: 0.9rem 1rem;
   border: 1px solid #2f2f2f;
   color: rgb(219, 219, 219);
-  font-size: 1.5rem;
+  font-size: 1.15vw;
   background: rgba(53, 53, 53, 0.192);
   box-shadow: rgba(0, 0, 0, 0.4) 0px 4px 7px,
     rgba(0, 0, 0, 0.3) 0px 9px 15px -5px, rgba(0, 0, 0, 0.2) 0px -3px 0px;
@@ -82,10 +80,23 @@
 }
 
 .triGridColumn {
-  align-items: flex-start;
-  display: flex;
-  gap: 1.5rem;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: auto;
+  gap: 0 15px;
   color: rgb(219, 219, 219);
+}
+
+.bottomGridLong {
+  margin-top: -10px;
+  grid-column: 2 / 4;
+  padding: 0.6rem 0.9rem;
+  border: 1px solid #2f2f2f;
+  background: rgba(53, 53, 53, 0.192);
+  box-shadow: rgba(0, 0, 0, 0.4) 0px 4px 7px,
+    rgba(0, 0, 0, 0.3) 0px 9px 15px -5px, rgba(0, 0, 0, 0.2) 0px -3px 0px;
+  backdrop-filter: blur(7.5px);
+  border-radius: 10px;
 }
 
 .triBlockHome {
@@ -96,11 +107,13 @@
     rgba(0, 0, 0, 0.3) 0px 9px 15px -5px, rgba(0, 0, 0, 0.2) 0px -3px 0px;
   backdrop-filter: blur(7.5px);
   border-radius: 10px;
+  height: 65%;
   border: 1px solid #2f2f2f;
 }
 
 .tallHomeBlock {
-  flex: 0.33333333333;
+  grid-row: span 2;
+  grid-column: 1 / 2;
   padding: 0.6rem 0.9rem;
   min-height: 5rem;
   background: rgba(53, 53, 53, 0.192);
@@ -117,7 +130,7 @@
   align-items: center;
   height: 100%;
   min-height: 2.75rem;
-  font-size: 1.5rem;
+  font-size: 1.2vw;
   text-align: center;
 }
 
@@ -161,7 +174,7 @@
   align-items: center;
   min-height: 2.75rem;
   height: 100%;
-  font-size: 1.5rem;
+  font-size: 1.25vw;
 }
 
 .portfolioBackground > * {
@@ -263,18 +276,21 @@
 /* END OF CHANGE COLOR SECTION */
 
 .sideContentHome {
+  max-height: 100%;
+  font-size: 0.8vw;
   border: 1px solid #2f2f2f;
   grid-column: 2 / 3;
   grid-row: 1 / span 2;
-  padding: 1rem;
+  padding: 0.825rem 1rem 0.2rem 1rem;
   color: rgb(219, 219, 219);
   background: rgba(53, 53, 53, 0.192);
-  box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px,
-    rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
+  box-shadow: rgba(0, 0, 0, 0.4) 0px 4px 7px,
+  rgba(0, 0, 0, 0.3) 0px 9px 15px -5px, rgba(0, 0, 0, 0.2) 0px -3px 0px;
   backdrop-filter: blur(7.5px);
   border-radius: 10px;
   height: fit-content;
-  overflow-x: hidden;
+  min-height: 100%;
+  overflow: hidden;
 }
 
 .main-content .testblock-content {
@@ -304,7 +320,7 @@ h5.aboutMeH5 {
 }
 
 .sidePanelLowerPart {
-  font-size: 0.95rem;
+  font-size: 0.8vw;
 }
 
 .aboutMeSidePanel {
@@ -312,10 +328,9 @@ h5.aboutMeH5 {
 }
 
 .homeIcons {
-  position: absolute;
-  bottom: 0;
-  padding: 1rem 0;
   display: flex;
+  justify-content: flex-start;
+  padding: 1rem 0;
 }
 
 .homeSlightScaleOnHover:hover {
@@ -354,16 +369,16 @@ h5.aboutMeH5 {
   flex-direction: column;
   text-align: left;
   justify-content: left;
-  align-items: center;
+  align-items: left;
   gap: 1.25rem;
   padding: 0.35rem;
 }
 
 .checkbox-wrapper-22 .switch {
   display: inline-block;
-  height: 34px;
+  height: 31px;
   position: relative;
-  width: 60px;
+  width: 54px;
 }
 
 .checkbox-wrapper-22 .switch input {
@@ -383,7 +398,7 @@ h5.aboutMeH5 {
 
 .checkbox-wrapper-22 .slider:before {
   background-color: #fff;
-  bottom: 4px;
+  bottom: 2px;
   content: "";
   height: 26px;
   left: 4px;
@@ -412,18 +427,26 @@ h5.aboutMeH5 {
   display: inline-block;
 }
 
+.balloonCounter {
+  vertical-align: top;
+}
+
+
 .balloonCounter,
 .balloonGame {
-  font-size: 1.5rem;
+  font-size: 1.15vw;
 }
 
 .balloonGameFlexOnOffAndCounter {
   display: flex;
   justify-content: left;
-  align-items: center;
   gap: 2rem;
 }
 
 .inlineBlockDiv {
   display: inline-block;
+}
+
+.balloonGameElement {
+  text-align: left;
 }
