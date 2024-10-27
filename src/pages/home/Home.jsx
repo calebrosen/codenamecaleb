@@ -13,6 +13,10 @@ const HomePage = () => {
   const [themeColor, setThemeColor] = useState("red");
   const [boxShadowClass, setBoxShadowClass] = useState("red");
   const [starsColor, setStarsColor] = useState("red");
+  const [balloonGame, setBalloonGame] = useState(false);
+  const [balloonGameOnOrOff, setBalloonGameOnOrOff] = useState("Off");
+  const [balloonSpeed, setBalloonSpeed] = useState(4);
+  let spawnTimeout;
 
   const IconGroup = () => {
     /* This is for the Icons Group of the Main Content box */
@@ -112,22 +116,22 @@ const HomePage = () => {
     // borders (on hover)
     // using native JS instead of defining many className objects
     const elementWithBorderHoverColorClasses = document.querySelectorAll(
-      '.greenHoverBorderEffectHome, .blueHoverBorderEffectHome, .yellowHoverBorderEffectHome, .pinkHoverBorderEffectHome, .redHoverBorderEffectHome'
+      ".greenHoverBorderEffectHome, .blueHoverBorderEffectHome, .yellowHoverBorderEffectHome, .pinkHoverBorderEffectHome, .redHoverBorderEffectHome"
     );
-    
+
     // looping
     elementWithBorderHoverColorClasses.forEach((element) => {
       const classList = Array.from(element.classList);
 
       // Looping through classes and removing the hover ones
       classList.forEach((className) => {
-        if (className.endsWith('HoverBorderEffectHome')) {
+        if (className.endsWith("HoverBorderEffectHome")) {
           element.classList.remove(className);
-          element.classList.add(color + 'HoverBorderEffectHome');
+          element.classList.add(color + "HoverBorderEffectHome");
         }
       });
     });
-  }
+  };
 
   // END
   // OF
@@ -179,6 +183,107 @@ const HomePage = () => {
     return <div>{currentTime} EST</div>;
   };
 
+  // START
+  // BALLOON
+  // GAME
+
+  useEffect(() => {
+    if (balloonGame) {
+      spawnBalloon();
+    } else {
+      clearTimeout(spawnTimeout); // Clear the timeout if the game is disabled
+    }
+
+    return () => clearTimeout(spawnTimeout);
+  }, [balloonGame]);
+
+  function spawnBalloon() {
+    if (balloonGame) {
+      const balloon = document.createElement("div");
+      balloon.textContent = "🎈";
+      balloon.style.position = "absolute";
+      balloon.style.fontSize = "8vw";
+      // Random horizontal position
+      balloon.style.left = `${Math.random() * (window.innerWidth - 90)}px`;
+      balloon.style.bottom = "-250px";
+      // Random color
+      balloon.style.filter = `hue-rotate(${Math.random() * 360}deg)`;
+      balloon.style.zIndex = "9999";
+      balloon.style.cursor = "pointer";
+      document.body.appendChild(balloon);
+
+      // Start moving the balloon
+      let moveInterval = moveBalloon(balloon);
+
+      balloon.addEventListener("click", function () {
+        popBalloon(balloon, moveInterval);
+      });
+      balloon.addEventListener("touchstart", function (event) {
+        event.preventDefault();
+        popBalloon(balloon, moveInterval);
+      });
+
+      // Set the timeout to spawn the next balloon
+      spawnTimeout = setTimeout(spawnBalloon, Math.random() * 400 + 400); // Random delay for spawning
+    }
+  }
+
+  function moveBalloon(balloon) {
+    let moveInterval = setInterval(() => {
+      let currentBottom = parseInt(balloon.style.bottom, 10);
+      let speed = { balloonSpeed };
+      currentBottom += parseInt(speed.balloonSpeed); // Move up
+      balloon.style.bottom = `${currentBottom}px`;
+
+      if (currentBottom > window.innerHeight) {
+        clearInterval(moveInterval);
+        balloon.remove(); // Clean up off-screen
+      }
+    }, 20);
+    return moveInterval;
+  }
+
+  function popBalloon(balloon, moveInterval) {
+    clearInterval(moveInterval);
+
+    // Changing to explosion
+    balloon.textContent = "💥";
+    balloon.style.filter = "none";
+
+    setTimeout(() => {
+      balloon.remove(); // Remove the balloon after a short delay
+    }, 100);
+
+    const balloonCounter = document.getElementById("balloons_popped");
+    let count = parseInt(balloonCounter.textContent, 10);
+    balloonCounter.textContent = ++count;
+  }
+
+  const ChangeBalloonSpeed = (e) => {
+    let speed = e.target.value;
+    setBalloonSpeed(speed);
+
+    //Resetting game to apply speed change
+    if (balloonGame) {
+      setBalloonGame(false);
+      setTimeout(function () {
+        setBalloonGame(true);
+      }, 100);
+    }
+  };
+
+  const enableDisableBalloonGame = (e) => {
+    const value = e.target.checked;
+    setBalloonGame(value);
+    if (value) {
+      setBalloonGameOnOrOff("On");
+    } else {
+      setBalloonGameOnOrOff("Off");
+    }
+  };
+
+  // END BALLOON GAME
+
   return (
     <div className="homePageContainer">
       <div className="fsBackground">
@@ -213,14 +318,66 @@ const HomePage = () => {
 
           <div className="triGridColumn">
             {/* Content block below main content */}
-            <div className="triBlockHome redHoverBorderEffectHome">
+
+            {/* <div className="triBlockHome redHoverBorderEffectHome">
               <div className="homeLocalTime">
                 <LocalTime />
               </div>
+            </div> */}
+
+            <div className="tallHomeBlock redHoverBorderEffectHome">
+              <div className="balloonGame">
+                <div className="balloonGameElement">Balloon Game 🎮</div>
+                <div className="balloonGameElement">
+                  Speed{" "}
+                  <input
+                    type="range"
+                    min="1"
+                    max="14"
+                    defaultValue="7"
+                    onChange={ChangeBalloonSpeed}
+                  />
+                </div>
+                <div className="balloonGameFlexOnOffAndCounter">
+                  <div className='inlineBlockDiv'>
+                    <span
+                      style={{
+                        color: "rgb(219, 219, 219)",
+                        marginRight: "0.5rem",
+                        verticalAlign: "top",
+                      }}
+                    >
+                      {balloonGameOnOrOff}
+                    </span>
+                    <div className="checkbox-wrapper-22">
+                      <label className="switch" htmlFor="checkbox">
+                        <input
+                          type="checkbox"
+                          id="checkbox"
+                          onClick={enableDisableBalloonGame}
+                        />
+                        <div className="slider round"></div>
+                      </label>
+                    </div>
+                  </div>
+                  <div id="balloonCounter" className="balloonCounter">
+                    <span
+                      id="balloons_popped"
+                      style={{
+                        color: "rgb(219, 219, 219)",
+                        verticalAlign: "top",
+                      }}
+                    >
+                      0{" "}
+                    </span>
+                    🎈
+                  </div>
+                </div>
+              </div>
             </div>
-            
+
             <div className="triBlockHome portfolioBackground redHoverBorderEffectHome">
-              <a href="/portfolio" className='anchorNoDecoration'>
+              <a href="/portfolio" className="anchorNoDecoration">
                 <div className="portfolioBlockHome">
                   Portfolio <FiArrowUpRight />
                 </div>
@@ -228,7 +385,7 @@ const HomePage = () => {
             </div>
             <div className="triBlockHome redHoverBorderEffectHome">
               <div className="colorBlockHome">
-              <motion.div
+                <motion.div
                   animate={{
                     scale: [1, 1.18, 0.3, 1],
                     rotate: [0, 0, 180, 180, 0],
@@ -239,10 +396,10 @@ const HomePage = () => {
                     times: [0, 0.2, 0.5, 0.8, 1],
                   }}
                 >
-                <div
-                  className="circle redBG hoverEffectHomePage"
-                  onClick={(e) => ChangeThemeColor("red", "rgb(189, 17, 17)")}
-                ></div>
+                  <div
+                    className="circle redBG hoverEffectHomePage"
+                    onClick={(e) => ChangeThemeColor("red", "rgb(189, 17, 17)")}
+                  ></div>
                 </motion.div>
 
                 <motion.div
@@ -256,12 +413,12 @@ const HomePage = () => {
                     times: [0, 0.2, 0.5, 0.8, 1],
                   }}
                 >
-                <div
-                  className="circle yellowBG hoverEffectHomePage"
-                  onClick={(e) =>
-                    ChangeThemeColor("yellow", "rgb(212, 177, 21)")
-                  }
-                ></div>
+                  <div
+                    className="circle yellowBG hoverEffectHomePage"
+                    onClick={(e) =>
+                      ChangeThemeColor("yellow", "rgb(212, 177, 21)")
+                    }
+                  ></div>
                 </motion.div>
                 <motion.div
                   animate={{
@@ -274,10 +431,12 @@ const HomePage = () => {
                     times: [0, 0.2, 0.5, 0.8, 1],
                   }}
                 >
-                <div
-                  className="circle greenBG hoverEffectHomePage"
-                  onClick={(e) => ChangeThemeColor("green", "rgb(36, 163, 19)")}
-                ></div>
+                  <div
+                    className="circle greenBG hoverEffectHomePage"
+                    onClick={(e) =>
+                      ChangeThemeColor("green", "rgb(36, 163, 19)")
+                    }
+                  ></div>
                 </motion.div>
                 <motion.div
                   animate={{
@@ -308,10 +467,12 @@ const HomePage = () => {
                     times: [0, 0.2, 0.5, 0.8, 1],
                   }}
                 >
-                <div
-                  className="circle pinkBG hoverEffectHomePage"
-                  onClick={(e) => ChangeThemeColor("pink", "rgb(212, 13, 238)")}
-                ></div>
+                  <div
+                    className="circle pinkBG hoverEffectHomePage"
+                    onClick={(e) =>
+                      ChangeThemeColor("pink", "rgb(212, 13, 238)")
+                    }
+                  ></div>
                 </motion.div>
               </div>
             </div>

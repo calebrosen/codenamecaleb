@@ -1,3 +1,16 @@
+.homePageContainer {
+  position: relative;
+  text-align: left !important;
+  overflow: hidden;
+}
+
+.homePageContainer > html, .homePageContainer > body{
+  margin: 0;
+  height: 100%;
+  overflow: hidden;
+}
+
+
 .fsBackground {
   height: 100vh;
   z-index: 1;
@@ -10,15 +23,17 @@
     ),
     linear-gradient(to bottom, rgb(190, 190, 190) 1px, transparent 0);
   position: relative;
-  overflow: hidden;
+  overflow: hidden !important;
 }
+
+
 
 .fsBackground::after {
   content: "";
   position: absolute;
   top: 0;
   left: 0;
-  overflow: hidden;
+  overflow: hidden !important;
   right: 0;
   bottom: 0;
   background: linear-gradient(
@@ -41,12 +56,6 @@
   display: inline;
 }
 
-.homePageContainer {
-  position: relative;
-  text-align: left !important;
-  overflow: hidden;
-}
-
 .main-content {
   display: grid;
   grid-template-columns: 78% 22%;
@@ -58,7 +67,7 @@
 }
 
 .mainContentHome {
-  grid-column: 1 / 2; /* First column */
+  grid-column: 1 / 2;
   grid-row: 1;
   padding: 0.9rem 1rem;
   border: 1px solid #2f2f2f;
@@ -67,12 +76,13 @@
   background: rgba(53, 53, 53, 0.192);
   box-shadow: rgba(0, 0, 0, 0.4) 0px 4px 7px,
     rgba(0, 0, 0, 0.3) 0px 9px 15px -5px, rgba(0, 0, 0, 0.2) 0px -3px 0px;
-  backdrop-filter: blur(15px);
+  backdrop-filter: blur(7.5px);
   border-radius: 10px;
   font-weight: 500;
 }
 
 .triGridColumn {
+  align-items: flex-start;
   display: flex;
   gap: 1.5rem;
   color: rgb(219, 219, 219);
@@ -81,6 +91,18 @@
 .triBlockHome {
   flex: 0.33333333333;
   padding: 0.6rem 0.9rem;
+  background: rgba(53, 53, 53, 0.192);
+  box-shadow: rgba(0, 0, 0, 0.4) 0px 4px 7px,
+    rgba(0, 0, 0, 0.3) 0px 9px 15px -5px, rgba(0, 0, 0, 0.2) 0px -3px 0px;
+  backdrop-filter: blur(7.5px);
+  border-radius: 10px;
+  border: 1px solid #2f2f2f;
+}
+
+.tallHomeBlock {
+  flex: 0.33333333333;
+  padding: 0.6rem 0.9rem;
+  min-height: 5rem;
   background: rgba(53, 53, 53, 0.192);
   box-shadow: rgba(0, 0, 0, 0.4) 0px 4px 7px,
     rgba(0, 0, 0, 0.3) 0px 9px 15px -5px, rgba(0, 0, 0, 0.2) 0px -3px 0px;
@@ -149,6 +171,7 @@
 
 .colorBlockHome {
   display: flex;
+  min-height: 2.75rem;
   justify-content: center;
   align-items: center;
   gap: 0.5rem;
@@ -186,26 +209,26 @@
   background-color: rgb(212, 13, 238);
 }
 .blueBoxShadow {
-  box-shadow: rgb(9, 176, 226) 0px 3px 4px, rgba(0, 0, 0, 0.3) 0px 7px 15px -3px,
-    rgba(4, 217, 255, 0.13) 0px -2px 0px inset;
+  box-shadow: rgb(9, 176, 226) 3px 3px 4px, rgba(0, 0, 0, 0.3) 0px 7px 15px -3px,
+    rgba(4, 217, 255, 0.13) 1px -1.5px 2px inset;
 }
 .yellowBoxShadow {
-  box-shadow: rgb(212, 177, 21) 0px 3px 4px,
+  box-shadow: rgb(212, 177, 21) 3px 3px 4px,
     rgba(0, 0, 0, 0.3) 0px 7px 15px -3px,
-    rgba(196, 176, 5, 0.2) 0px -2px 0px inset;
+    rgba(196, 176, 5, 0.2) 1px -1.5px 2px inset;
 }
 .redBoxShadow {
-  box-shadow: rgb(189, 17, 17) 0px 3px 4px, rgba(0, 0, 0, 0.3) 0px 7px 15px -3px,
-    rgba(197, 4, 4, 0.2) 0px -2px 0px inset;
+  box-shadow: rgb(189, 17, 17) 3px 3px 4px, rgba(0, 0, 0, 0.3) 0px 7px 15px -3px,
+    rgba(197, 4, 4, 0.2) 1px -1.5px 2px inset;
 }
 .greenBoxShadow {
-  box-shadow: rgb(36, 163, 19) 0px 3px 4px, rgba(0, 0, 0, 0.3) 0px 7px 15px -3px,
-    rgba(20, 185, 4, 0.2) 0px -2px 0px inset;
+  box-shadow: rgb(36, 163, 19) 3px 3px 4px, rgba(0, 0, 0, 0.3) 0px 7px 15px -3px,
+    rgba(20, 185, 4, 0.2) 1px -1.5px 2px inset;
 }
 .pinkBoxShadow {
-  box-shadow: rgb(212, 13, 238) 0px 3px 4px,
+  box-shadow: rgb(212, 13, 238) 3px 3px 4px,
     rgba(0, 0, 0, 0.3) 0px 7px 15px -3px,
-    rgba(212, 13, 238, 0.219) 0px -2px 0px inset;
+    rgba(212, 13, 238, 0.219) 1px -1.5px 2px inset;
 }
 .blueHoverBorderEffectHome {
   transition: 0.25s ease-in-out;
@@ -301,14 +324,106 @@ h5.aboutMeH5 {
 
 .homeIndividualIcon {
   padding: 0.6rem;
-  margin: 0 0.5rem 0 0;
+  margin: 0 1rem 0 0;
   transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
 }
 
-.homeIndividualIcon:not(:first-child) {
-  margin: 0 0.5rem;
+.homeIndividualIcon:hover {
+  animation: pulseIconHome 1.25s infinite;
+  transform: translateY(-1rem);
+}
+
+@keyframes pulseIconHome {
+  0% {
+    transform: scale(1) translateY(0);
+  }
+  50% {
+    transform: scale(1.065) translateY(-0.2rem);
+  }
+  100% {
+    transform: scale(1) translateY(0);
+  }
 }
 
 .hoverEffectHomePage:hover {
   cursor: pointer;
+}
+
+.balloonGame {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+  justify-content: left;
+  align-items: center;
+  gap: 1.25rem;
+  padding: 0.35rem;
+}
+
+.checkbox-wrapper-22 .switch {
+  display: inline-block;
+  height: 34px;
+  position: relative;
+  width: 60px;
+}
+
+.checkbox-wrapper-22 .switch input {
+  display: none;
+}
+
+.checkbox-wrapper-22 .slider {
+  background-color: #ccc;
+  bottom: 0;
+  cursor: pointer;
+  left: 0;
+  position: absolute;
+  right: 0;
+  top: 0;
+  transition: 0.4s;
+}
+
+.checkbox-wrapper-22 .slider:before {
+  background-color: #fff;
+  bottom: 4px;
+  content: "";
+  height: 26px;
+  left: 4px;
+  position: absolute;
+  transition: 0.4s;
+  width: 26px;
+}
+
+.checkbox-wrapper-22 input:checked + .slider {
+  background-color: #434643;
+}
+
+.checkbox-wrapper-22 input:checked + .slider:before {
+  transform: translateX(26px);
+}
+
+.checkbox-wrapper-22 .slider.round {
+  border-radius: 34px;
+}
+
+.checkbox-wrapper-22 .slider.round:before {
+  border-radius: 50%;
+}
+
+.balloonCounterGroup {
+  display: inline-block;
+}
+
+.balloonCounter,
+.balloonGame {
+  font-size: 1.5rem;
+}
+
+.balloonGameFlexOnOffAndCounter {
+  display: flex;
+  justify-content: left;
+  align-items: center;
+  gap: 2rem;
+}
+
+.inlineBlockDiv {
+  display: inline-block;
 }
