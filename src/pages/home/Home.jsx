@@ -1,5 +1,7 @@
+import AnalogClock from 'analog-clock-react';
+import axios from 'axios';
 import { motion } from "framer-motion";
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { BsTwitterX } from "react-icons/bs";
 import { FaDiscord, FaGithub, FaLinkedin, FaStar } from "react-icons/fa";
 import { FiArrowUpRight } from "react-icons/fi";
@@ -16,23 +18,49 @@ const HomePage = () => {
   const [balloonGame, setBalloonGame] = useState(false);
   const [balloonGameOnOrOff, setBalloonGameOnOrOff] = useState("Off");
   const [balloonSpeed, setBalloonSpeed] = useState(4);
+  const [balloonsPopped, setBalloonsPopped] = useState(0);
+  const [currentTime, setCurrentTime] = useState('');
+  const [RGBColor, setRGBColor] = useState('rgb(189, 17, 17)');
   let spawnTimeout;
 
-  // function toggleScroll() {
-  //   const { scrollHeight, clientHeight, scrollWidth, clientWidth } =
-  //     document.documentElement;
-  //   const noScrollNeeded =
-  //     scrollHeight <= clientHeight && scrollWidth <= clientWidth;
 
-  //   if (noScrollNeeded) {
-  //     document.documentElement.style.overflow = "hidden";
-  //   } else {
-  //     document.documentElement.style.overflow = "";
-  //   }
-  // }
 
-  // toggleScroll();
-  // window.addEventListener("resize", toggleScroll);
+
+   //API call to get weather
+   const WeatherComponent = ({ latitude, longitude }) => {
+    const [dataFetched, setDataFetched] = useState(false);
+
+
+    useEffect(() => {
+      if (!dataFetched) {
+        const fetchWeatherData = async () => {
+          try {
+            const res = await axios.post(`https://api.openweathermap.org/data/2.5/weather`, null, {
+              params: {
+                lat: latitude,
+                lon: longitude,
+                appid: process.env.REACT_APP_WEATHER_API_KEY,
+              },
+            });
+  
+            if (res.data.weather && res.data.weather.length > 0) {
+              const weatherMain = res.data.weather[0].main;
+              console.log('Weather Main:', weatherMain);
+            }
+          } catch (error) {
+            console.error('Error fetching weather data:', error);
+          } finally {
+            // Set to true after fetching data
+            setDataFetched(true);
+          }
+        };
+  
+        fetchWeatherData();
+      }
+    }, [dataFetched, latitude, longitude]);
+  
+    return null;
+  };
 
   const IconGroup = () => {
     /* This is for the Icons Group of the Main Content box */
@@ -115,6 +143,7 @@ const HomePage = () => {
 
   const ChangeThemeColor = (color, rgb) => {
     setThemeColor(color);
+    setRGBColor(rgb);
 
     const classNames = require("classnames");
 
@@ -167,38 +196,62 @@ const HomePage = () => {
     );
   };
 
-  // This function just returns the local time for use below
+  // This function is the content of the time block
   const LocalTime = () => {
-    const [currentTime, setCurrentTime] = useState(
-      new Date().toLocaleTimeString([], {
-        hour: "2-digit",
-        minute: "2-digit",
+
+    const updateTime = useCallback(() => {
+      const newTime = new Date().toLocaleTimeString([], {
+        hour: '2-digit',
+        minute: '2-digit',
         hour12: true,
-      })
-    );
-
+      });
+  
+      // Only update state if the time has changed
+      if (newTime !== currentTime) {
+        setCurrentTime(newTime);
+      }
+    }, [currentTime]); // Use currentTime as a dependency
+  
     useEffect(() => {
-      const updateTime = () => {
-        setCurrentTime(
-          new Date().toLocaleTimeString([], {
-            hour: "2-digit",
-            minute: "2-digit",
-            hour12: true,
-          })
-        );
-      };
-
+      const intervalId = setInterval(updateTime, 1000);
+      
+      // Initial call to set the time immediately
       updateTime();
-
-      // Setting interival to update time every 5 seconds
-      const intervalId = setInterval(updateTime, 5000);
-
+  
       return () => clearInterval(intervalId);
-    }, []);
+    }, [updateTime]); // Depend on updateTime function
 
-    return <div>{currentTime} EST</div>;
+    let handColor = {RGBColor};
+
+    const clockOptions = {
+      width: "2.75vw",
+      border: true,
+      borderColor: "#2e2e2e",
+      baseColor: "#d7d3d3",
+      centerColor: "#2f2e2e",
+      centerBorderColor: "#d7d3d3",
+      handColors: {
+        second: handColor.RGBColor,
+        minute: "#1a1919",
+        hour: "#1a1919"
+      }
+    };
+  
+    // You can call updateTime here if needed
+    // updateTime();
+  
+    return (
+      <div className='clockFlexGroup'>
+        <span className='clockSpan'>
+          Local Time:  {currentTime} EST
+        </span>
+        <span>
+          <AnalogClock {...clockOptions} />
+        </span>
+      </div>
+    );
   };
-
+  
   // START
   // BALLOON
   // GAME
@@ -270,9 +323,8 @@ const HomePage = () => {
       balloon.remove(); // Remove the balloon after a short delay
     }, 100);
 
-    const balloonCounter = document.getElementById("balloons_popped");
-    let count = parseInt(balloonCounter.textContent, 10);
-    balloonCounter.textContent = ++count;
+    setBalloonsPopped(prevCount => prevCount + 1);
+
   }
 
   const ChangeBalloonSpeed = (e) => {
@@ -316,35 +368,45 @@ const HomePage = () => {
   const BalloonGameCounter = () => {
     return (
       <div id="balloonCounter" className="balloonCounter">
-        <span
-          id="balloons_popped"
-          style={{
-            color: "rgb(219, 219, 219)",
-            verticalAlign: "top",
-          }}
-        >
-          0{" "}
-        </span>
+      <span
+        style={{
+          color: "rgb(219, 219, 219)",
+          verticalAlign: "top",
+        }}
+      >
+        {balloonsPopped}
+      </span>
         🎈
       </div>
     );
   };
 
   // END BALLOON GAME
+ 
 
   return (
     <div className="homePageContainer">
       <div className="fsBackground">
         <div className="main-content">
           {/* Main content section */}
+          <motion.div
+            initial={{ scale: 0.8, y: 500 }}
+            animate={{ scale: 1, y: 0 }}
+            transition={{
+              type: "spring",
+              stiffness: 70,
+              damping: 12,
+              duration: 0.5,
+            }}
+          >
           <div className="mainContentHome redHoverBorderEffectHome">
             {/* Inside of main content box */}
             <div className="row">
               <div className="col-xs-12 col-sm-12 col-md-8 col-lg-8 col-xl-8 mainContentDivIntro">
                 <h4>
-                  Hi, I'm{" "}
+                  Hi, I'm
                   <span style={{ fontWeight: "bold", color: "#fff" }}>
-                    Caleb
+                  &nbsp;Caleb
                   </span>
                   , a software developer.
                 </h4>
@@ -363,6 +425,20 @@ const HomePage = () => {
               </div>
             </div>
           </div>
+          </motion.div>
+
+
+          <motion.div
+            initial={{ scale: 0.8, y: 500 }}
+            animate={{ scale: 1, y: 0 }}
+            transition={{
+              type: "spring",
+              stiffness: 70,
+              damping: 12,
+              duration: 0.5,
+              delay: 0.15,
+            }}
+          >
 
           <div className="triGridColumn">
             {/* Tall Block for Balloon Game */}
@@ -377,6 +453,9 @@ const HomePage = () => {
                     max="14"
                     defaultValue="7"
                     onChange={ChangeBalloonSpeed}
+                    style={{
+                      accentColor: RGBColor
+                    }}
                   />
                 </div>
                 <div className="balloonGameFlexOnOffAndCounter">
@@ -507,15 +586,33 @@ const HomePage = () => {
             </div>
 
             {/* Bottom Grid Long */}
-            <div className="bottomGridLong">
-              <div className="homeLocalTime">
-                <LocalTime />
+            <div className="bottomGridLong redHoverBorderEffectHome">
+              <div className="homeBottomInterior">
+                <LocalTime /><WeatherComponent latitude={26.7084} longitude={80.2306} />
               </div>
+
             </div>
           </div>
 
+          </motion.div>
+
+
+
+
+          <motion.div
+            initial={{ scale: 0.6, y: 700 }}
+            animate={{ scale: 1, y: 0 }}
+            transition={{
+              type: "spring",
+              stiffness: 70,
+              damping: 12,
+              duration: 0.5,
+              delay: 0.27
+            }}
+            className='sideContentHome redHoverBorderEffectHome'
+          >
           {/* Side content section */}
-          <div className="sideContentHome redHoverBorderEffectHome">
+          <div>
             <div className="aboutMeSidePanel">
               I'm a full stack developer with a strong desire to learn and
               improve everyday.
@@ -559,6 +656,7 @@ const HomePage = () => {
               </p>
             </div>
           </div>
+          </motion.div>
         </div>
       </div>
     </div>

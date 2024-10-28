@@ -90,7 +90,7 @@
 .bottomGridLong {
   margin-top: -10px;
   grid-column: 2 / 4;
-  padding: 0.6rem 0.9rem;
+  padding: 0.2rem 0.9rem;
   border: 1px solid #2f2f2f;
   background: rgba(53, 53, 53, 0.192);
   box-shadow: rgba(0, 0, 0, 0.4) 0px 4px 7px,
@@ -124,7 +124,7 @@
   border: 1px solid #2f2f2f;
 }
 
-.homeLocalTime {
+.homeBottomInterior {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -242,21 +242,6 @@
   box-shadow: rgb(212, 13, 238) 3px 3px 4px,
     rgba(0, 0, 0, 0.3) 0px 7px 15px -3px,
     rgba(212, 13, 238, 0.219) 1px -1.5px 2px inset;
-}
-.blueHoverBorderEffectHome {
-  transition: 0.25s ease-in-out;
-}
-.yellowHoverBorderEffectHome {
-  transition: 0.25s ease-in-out;
-}
-.redHoverBorderEffectHome {
-  transition: 0.25s ease-in-out;
-}
-.greenHoverBorderEffectHome {
-  transition: 0.25s ease-in-out;
-}
-.pinkHoverBorderEffectHome {
-  transition: 0.25s ease-in-out;
 }
 .blueHoverBorderEffectHome:hover {
   border: 1px solid rgb(9, 176, 226);
@@ -449,6 +434,17 @@ h5.aboutMeH5 {
 
 .balloonGameElement {
   text-align: left;
+}
+
+.clockSpan {
+  color: rgb(219, 219, 219);
+}
+
+.clockFlexGroup {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 2rem;
 }
 
 /* Mobile portrait */
