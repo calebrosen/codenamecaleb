@@ -450,3 +450,8 @@ h5.aboutMeH5 {
 .balloonGameElement {
   text-align: left;
 }
+
+/* Mobile portrait */
+@media screen and (max-width: 850px) {
+
+}
