@@ -23,43 +23,6 @@ const HomePage = () => {
   const [weather, setWeather] = useState("");
   let spawnTimeout;
 
-  //API call to get weather
-  /* const WeatherComponent = ({ latitude, longitude }) => {
-    const [dataFetched, setDataFetched] = useState(false);
-
-
-   useEffect(() => {
-      if (!dataFetched) {
-        const fetchWeatherData = async () => {
-          try {
-            const res = await axios.post(`https://api.openweathermap.org/data/2.5/weather`, null, {
-              params: {
-                lat: latitude,
-                lon: longitude,
-                appid: process.env.REACT_APP_WEATHER_API_KEY,
-              },
-            });
-  
-            if (res.data.weather && res.data.weather.length > 0) {
-              const weatherMain = res.data.weather[0].main;
-              console.log('Weather Main:', weatherMain);
-              setWeather(weatherMain.lower());
-            }
-          } catch (error) {
-            console.error('Error fetching weather data:', error);
-          } finally {
-            // Set to true after fetching data
-            setDataFetched(true);
-          }
-        };
-  
-        fetchWeatherData();
-      }
-    }, [dataFetched, latitude, longitude]);
-  
-    return null;
-  };*/
-
   const IconGroup = () => {
     /* This is for the Icons Group of the Main Content box */
 
@@ -73,7 +36,7 @@ const HomePage = () => {
           timer: 2000,
           showConfirmButton: false,
           toast: true,
-          background: "rgba(53, 53, 53, 0.192)",
+          background: "rgba(20, 20, 20, 1.0)",
           color: "#f9f9f9",
         });
       });
@@ -259,7 +222,7 @@ const HomePage = () => {
     if (balloonGame) {
       spawnBalloon();
     } else {
-      clearTimeout(spawnTimeout); // Clear the timeout if the game is disabled
+      clearTimeout(spawnTimeout);
     }
 
     return () => clearTimeout(spawnTimeout);
@@ -350,16 +313,11 @@ const HomePage = () => {
 
   const BalloonGameOnOrOffText = () => {
     return (
-      <div
-        style={{
-          color: "rgb(219, 219, 219)",
-          marginRight: "0.5rem",
-          verticalAlign: "top",
-          display: "inline-block",
-        }}
+      <span
+        className='balloonGameOnOrOff'
       >
-        {balloonGameOnOrOff}
-      </div>
+        {balloonGameOnOrOff}&nbsp;
+      </span>
     );
   };
 
@@ -367,34 +325,66 @@ const HomePage = () => {
     return (
       <div id="balloonCounter" className="balloonCounter">
         <span
-          style={{
-            color: "rgb(219, 219, 219)",
-            verticalAlign: "top",
-          }}
-        >
-          {balloonsPopped}
+          className='balloonCounterSpan'>
+          {balloonsPopped} 🎈
         </span>
-        🎈
       </div>
     );
   };
 
   // END BALLOON GAME
 
-  // const WeatherCondition = () => {
-  //   switch (weather) {
-  //     case 'clouds':
-  //       return (
 
-  //       )
-  //     case 'clear':
-
-  //     case 'rain':
-
-  //     default:
-  //       break;
-  //   }
-  // }
+  // About me content
+  const AboutMeContent = () => {
+    return (
+      <div>
+        <h5 className="aboutMeH5">About me</h5>
+        <div className="aboutMeSidePanel">
+          I'm a full stack developer with a strong desire to learn and improve
+          everyday.
+          <div className="homeMyStack">
+            My stack:
+            <div className="homeMyStackInner">
+              <ul>
+                <li>
+                  <span className="homeListItemsStack">JavaScript</span>{" "}
+                  {/* <Star amount={5} /> */}
+                </li>
+                <li>
+                  <span className="homeListItemsStack">React</span>{" "}
+                  {/* <Star amount={5} /> */}
+                </li>
+                <li>
+                  <span className="homeListItemsStack">MySQL</span>{" "}
+                  {/* <Star amount={5} /> */}
+                </li>
+                <li>
+                  <span className="homeListItemsStack">NodeJS</span>{" "}
+                  {/* <Star amount={4} /> */}
+                </li>
+                <li>
+                  <span className="homeListItemsStack">CSS</span>{" "}
+                  {/* <Star amount={4} /> */}
+                </li>
+                <li>
+                  <span className="homeListItemsStack">PHP</span>{" "}
+                  {/* <Star amount={4} /> */}
+                </li>
+              </ul>
+            </div>
+          </div>
+          <p className="sidePanelLowerPart">
+            Beyond coding, I love to cook, work out, and watch anime.
+          </p>
+          <p className="sidePanelLowerPart">
+            I'm always learning and eager to work with new technologies.
+            Currently, it's on my roadmap to learn Angular and C#/.NET.
+          </p>
+        </div>
+      </div>
+    );
+  };
 
   return (
     <div className="homePageContainer">
@@ -422,7 +412,7 @@ const HomePage = () => {
                     </span>
                     , a software developer.
                   </h4>
-                  <h4>
+                  <h4 id="desktopOnlyH4Home">
                     Feel free to reach out about any projects you may have in
                     mind, or just to say hello.
                   </h4>
@@ -439,6 +429,27 @@ const HomePage = () => {
             </div>
           </motion.div>
 
+          {/* MOBILE ONLY ABOUT ME */}
+          {/* MOBILE ONLY ABOUT ME */}
+          {/* MOBILE ONLY ABOUT ME */}
+          <motion.div
+            initial={{ scale: 0.6, y: 700 }}
+            animate={{ scale: 1, y: 0 }}
+            transition={{
+              type: "spring",
+              stiffness: 70,
+              damping: 12,
+              duration: 0.5,
+              delay: 0.2,
+            }}
+            className="sideContentHome redHoverBorderEffectHome"
+            id="mobileHomeAboutMe"
+          >
+            <AboutMeContent />
+          </motion.div>
+          {/* END OF MOBILE ONLY ABOUT ME */}
+          {/* END OF MOBILE ONLY ABOUT ME */}
+          {/* END OF MOBILE ONLY ABOUT ME */}
 
           <motion.div
             initial={{ scale: 0.6, y: 700 }}
@@ -451,179 +462,192 @@ const HomePage = () => {
               delay: 0.1,
             }}
           >
-          <div className="triGridColumn">
-            {/* Tall Block for Balloon Game */}
-            <div className="tallHomeBlock redHoverBorderEffectHome">
-              <div className="balloonGame">
-                <div className="balloonGameElement">Balloon Game 🎮</div>
-                <div className="balloonGameElement">
-                  Speed{" "}
-                  <input
-                    type="range"
-                    min="1"
-                    max="14"
-                    defaultValue="7"
-                    onChange={ChangeBalloonSpeed}
-                    style={{
-                      accentColor: RGBColor,
-                    }}
-                  />
-                </div>
-                <div className="balloonGameFlexOnOffAndCounter">
-                  <div>
-                    <BalloonGameOnOrOffText />
-                    <span className="checkbox-wrapper-22">
-                      <label className="switch" htmlFor="checkbox">
-                        <input
-                          type="checkbox"
-                          id="checkbox"
-                          onClick={enableDisableBalloonGame}
-                        />
-                        <div
-                          className="slider round"
-                          style={{ display: "inline-block" }}
-                        ></div>
-                      </label>
-                    </span>
-                  </div>
-                  <BalloonGameCounter />
-                </div>
-              </div>
-            </div>
-
-            {/* Portfolio Block */}
-            <div className="triBlockHome portfolioBackground redHoverBorderEffectHome" id="portfolioBlock">
-              <a href="/portfolio" className="anchorNoDecoration">
-                <div className="portfolioBlockHome">
-                  Portfolio <FiArrowUpRight />
-                </div>
-              </a>
-            </div>
-
-            {/* Color Block with animated color circles */}
-            <div className="triBlockHome redHoverBorderEffectHome" id="colorBlock">
-              <div className="colorBlockHome">
-                <motion.div
-                  animate={{
-                    scale: [1, 1.18, 0.3, 1],
-                    rotate: [0, 0, 180, 180, 0],
-                  }}
-                  transition={{
-                    duration: 2,
-                    ease: "easeInOut",
-                    times: [0, 0.2, 0.5, 0.8, 1],
-                  }}
-                >
-                  <div
-                    className="circle redBG hoverEffectHomePage"
-                    onClick={() => ChangeThemeColor("red", "rgb(189, 17, 17)")}
-                  ></div>
-                </motion.div>
-
-                <motion.div
-                  animate={{
-                    scale: [1, 1.18, 0.3, 1],
-                    rotate: [0, 0, 180, 180, 0],
-                  }}
-                  transition={{
-                    duration: 2,
-                    ease: "easeInOut",
-                    times: [0, 0.2, 0.5, 0.8, 1],
-                  }}
-                >
-                  <div
-                    className="circle yellowBG hoverEffectHomePage"
-                    onClick={() =>
-                      ChangeThemeColor("yellow", "rgb(212, 177, 21)")
-                    }
-                  ></div>
-                </motion.div>
-
-                <motion.div
-                  animate={{
-                    scale: [1, 1.18, 0.3, 1],
-                    rotate: [0, 0, 180, 180, 0],
-                  }}
-                  transition={{
-                    duration: 2,
-                    ease: "easeInOut",
-                    times: [0, 0.2, 0.5, 0.8, 1],
-                  }}
-                >
-                  <div
-                    className="circle greenBG hoverEffectHomePage"
-                    onClick={() =>
-                      ChangeThemeColor("green", "rgb(36, 163, 19)")
-                    }
-                  ></div>
-                </motion.div>
-
-                <motion.div
-                  animate={{
-                    scale: [1, 1.18, 0.3, 1],
-                    rotate: [0, 0, 180, 180, 0],
-                  }}
-                  transition={{
-                    duration: 2,
-                    ease: "easeInOut",
-                    times: [0, 0.2, 0.5, 0.8, 1],
-                  }}
-                >
-                  <div
-                    className="circle blueBG hoverEffectHomePage"
-                    onClick={() => ChangeThemeColor("blue", "rgb(9, 176, 226)")}
-                  ></div>
-                </motion.div>
-
-                <motion.div
-                  animate={{
-                    scale: [1, 1.18, 0.3, 1],
-                    rotate: [0, 0, 180, 180, 0],
-                  }}
-                  transition={{
-                    duration: 2,
-                    ease: "easeInOut",
-                    times: [0, 0.2, 0.5, 0.8, 1],
-                  }}
-                >
-                  <div
-                    className="circle pinkBG hoverEffectHomePage"
-                    onClick={() =>
-                      ChangeThemeColor("pink", "rgb(212, 13, 238)")
-                    }
-                  ></div>
-                </motion.div>
-              </div>
-            </div>
-
-            {/* Bottom Grid Long */}
-            <div className="bottomGrid">
-              {/* Bottom Grid Long */}
-              <div className="bottomGridLong redHoverBorderEffectHome">
-                <div className="homeBottomInterior">
-                  <LocalTime />
-                </div>
-              </div>
-
-              <div className="bottomGridShort redHoverBorderEffectHome">
-                <div className="madeWithReact">
-                  <div>
-                    Built with{" "}
-                    <span
+            <div className="triGridColumn">
+              {/* Tall Block for Balloon Game */}
+              <div className="tallHomeBlock redHoverBorderEffectHome">
+                <div className="balloonGame">
+                  <div className="balloonGameElement">Balloon Game 🎮</div>
+                  <div className="balloonGameElement">
+                    Speed{" "}
+                    <input
+                      type="range"
+                      min="1"
+                      max="14"
+                      defaultValue="7"
+                      onChange={ChangeBalloonSpeed}
                       style={{
-                        color: RGBColor,
-                        fontSize: '0.9vw',
-                        fontWeight: '700'
+                        accentColor: RGBColor,
                       }}
-                    >
-                      ♡
-                    </span>{" "}
-                    in React
+                    />
+                  </div>
+                  <div className="balloonGameFlexOnOffAndCounter">
+                    <div>
+                      <BalloonGameOnOrOffText />
+                      <span className="checkbox-wrapper-22">
+                        <label className="switch" htmlFor="checkbox">
+                          <input
+                            type="checkbox"
+                            id="checkbox"
+                            onClick={enableDisableBalloonGame}
+                          />
+                          <div
+                            className="slider round"
+                            style={{ display: "inline-block" }}
+                          ></div>
+                        </label>
+                      </span>
+                    </div>
+                    <BalloonGameCounter />
+                  </div>
+                </div>
+              </div>
+
+              {/* Portfolio Block */}
+              <div
+                className="triBlockHome portfolioBackground redHoverBorderEffectHome"
+                id="portfolioBlock"
+              >
+                <a href="/portfolio" className="anchorNoDecoration">
+                  <div className="portfolioBlockHome">
+                    Portfolio&nbsp;
+                   
+                      <FiArrowUpRight color={RGBColor}/>
+                
+                  </div>
+                </a>
+              </div>
+
+              {/* Color Block with animated color circles */}
+              <div
+                className="triBlockHome redHoverBorderEffectHome"
+                id="colorBlock"
+              >
+                <div className="colorBlockHome">
+                  <motion.div
+                    animate={{
+                      scale: [1, 1.18, 0.3, 1],
+                      rotate: [0, 0, 180, 180, 0],
+                    }}
+                    transition={{
+                      duration: 2,
+                      ease: "easeInOut",
+                      times: [0, 0.2, 0.5, 0.8, 1],
+                    }}
+                  >
+                    <div
+                      className="circle redBG hoverEffectHomePage"
+                      onClick={() =>
+                        ChangeThemeColor("red", "rgb(189, 17, 17)")
+                      }
+                    ></div>
+                  </motion.div>
+
+                  <motion.div
+                    animate={{
+                      scale: [1, 1.18, 0.3, 1],
+                      rotate: [0, 0, 180, 180, 0],
+                    }}
+                    transition={{
+                      duration: 2,
+                      ease: "easeInOut",
+                      times: [0, 0.2, 0.5, 0.8, 1],
+                    }}
+                  >
+                    <div
+                      className="circle yellowBG hoverEffectHomePage"
+                      onClick={() =>
+                        ChangeThemeColor("yellow", "rgb(212, 177, 21)")
+                      }
+                    ></div>
+                  </motion.div>
+
+                  <motion.div
+                    animate={{
+                      scale: [1, 1.18, 0.3, 1],
+                      rotate: [0, 0, 180, 180, 0],
+                    }}
+                    transition={{
+                      duration: 2,
+                      ease: "easeInOut",
+                      times: [0, 0.2, 0.5, 0.8, 1],
+                    }}
+                  >
+                    <div
+                      className="circle greenBG hoverEffectHomePage"
+                      onClick={() =>
+                        ChangeThemeColor("green", "rgb(36, 163, 19)")
+                      }
+                    ></div>
+                  </motion.div>
+
+                  <motion.div
+                    animate={{
+                      scale: [1, 1.18, 0.3, 1],
+                      rotate: [0, 0, 180, 180, 0],
+                    }}
+                    transition={{
+                      duration: 2,
+                      ease: "easeInOut",
+                      times: [0, 0.2, 0.5, 0.8, 1],
+                    }}
+                  >
+                    <div
+                      className="circle blueBG hoverEffectHomePage"
+                      onClick={() =>
+                        ChangeThemeColor("blue", "rgb(9, 176, 226)")
+                      }
+                    ></div>
+                  </motion.div>
+
+                  <motion.div
+                    animate={{
+                      scale: [1, 1.18, 0.3, 1],
+                      rotate: [0, 0, 180, 180, 0],
+                    }}
+                    transition={{
+                      duration: 2,
+                      ease: "easeInOut",
+                      times: [0, 0.2, 0.5, 0.8, 1],
+                    }}
+                  >
+                    <div
+                      className="circle pinkBG hoverEffectHomePage"
+                      onClick={() =>
+                        ChangeThemeColor("pink", "rgb(212, 13, 238)")
+                      }
+                    ></div>
+                  </motion.div>
+                </div>
+              </div>
+
+              {/* Bottom Grid */}
+              <div className="bottomGrid">
+                {/* Bottom Grid Long */}
+                <div className="bottomGridLong redHoverBorderEffectHome">
+                  <div className="homeBottomInterior">
+                    <LocalTime />
+                  </div>
+                </div>
+
+                <div className="bottomGridShort redHoverBorderEffectHome">
+                  <div className="madeWithReact">
+                    <div>
+                      Built with{" "}
+                      <span
+                        style={{
+                          color: RGBColor,
+                          fontSize: "0.9vw",
+                          fontWeight: "700",
+                        }}
+                      >
+                        ♡
+                      </span>{" "}
+                      in React
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
-          </div>
           </motion.div>
 
           <motion.div
@@ -640,51 +664,7 @@ const HomePage = () => {
             id="sideHome"
           >
             {/* Side content section */}
-            <div>
-              <h5 className="aboutMeH5">About me</h5>
-              <div className="aboutMeSidePanel">
-                I'm a full stack developer with a strong desire to learn and
-                improve everyday.
-                <div className="homeMyStack">
-                  My stack:
-                  <div className="homeMyStackInner">
-                    <ul>
-                      <li>
-                        <span className="homeListItemsStack">JavaScript</span>{" "}
-                        {/* <Star amount={5} /> */}
-                      </li>
-                      <li>
-                        <span className="homeListItemsStack">React</span>{" "}
-                        {/* <Star amount={5} /> */}
-                      </li>
-                      <li>
-                        <span className="homeListItemsStack">MySQL</span>{" "}
-                        {/* <Star amount={5} /> */}
-                      </li>
-                      <li>
-                        <span className="homeListItemsStack">NodeJS</span>{" "}
-                        {/* <Star amount={4} /> */}
-                      </li>
-                      <li>
-                        <span className="homeListItemsStack">CSS</span>{" "}
-                        {/* <Star amount={4} /> */}
-                      </li>
-                      <li>
-                        <span className="homeListItemsStack">PHP</span>{" "}
-                        {/* <Star amount={4} /> */}
-                      </li>
-                    </ul>
-                  </div>
-                </div>
-                <p className="sidePanelLowerPart">
-                  Beyond coding, I love to cook, work out, and watch anime.
-                </p>
-                <p className="sidePanelLowerPart">
-                  I'm always learning and eager to work with new technologies.
-                  Currently, it's on my roadmap to learn Angular and C#/.NET.
-                </p>
-              </div>
-            </div>
+            <AboutMeContent />
           </motion.div>
         </div>
       </div>

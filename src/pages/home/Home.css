@@ -56,7 +56,7 @@
   display: grid;
   grid-template-columns: 78% 22%;
   grid-template-rows: subgrid;
-  gap: 1.3rem;
+  gap: 1rem;
   margin: 0 20%;
   margin-top: 4.5%;
   max-height: 5px !important;
@@ -82,17 +82,17 @@
   display: grid;
   grid-template-columns: repeat(3, 1fr); /* Three equal columns */
   grid-template-rows: auto auto; /* Two rows */
-  gap: 0 1.3rem;
+  gap: 0 1rem;
   color: rgb(219, 219, 219);
 }
 
 .bottomGrid {
   grid-column: 2 / -1;
   grid-row: 2;
-  margin-top: 0.1vw;
-  gap: 1.3rem;
+  margin-top: -15px;
+  gap: 1rem;
   display: grid; /* Nested grid */
-  grid-template-columns: 8fr 2fr;
+  grid-template-columns: 7.75fr 2.25fr;
 }
 
 .bottomGridLong {
@@ -253,7 +253,7 @@
   justify-content: center;
 }
 
-.circle:hover {
+.circle:hover, .circle:active {
   transform: scale(1.1);
 }
 
@@ -295,19 +295,19 @@
     rgba(0, 0, 0, 0.3) 0px 7px 15px -3px,
     rgba(212, 13, 238, 0.219) 1px -1.5px 2px inset;
 }
-.blueHoverBorderEffectHome:hover {
+.blueHoverBorderEffectHome:hover, .blueHoverBorderEffectHome:active {
   border: 1px solid rgb(9, 176, 226);
 }
-.yellowHoverBorderEffectHome:hover {
+.yellowHoverBorderEffectHome:hover, .yellowHoverBorderEffectHome:active {
   border: 1px solid rgb(212, 177, 21);
 }
-.redHoverBorderEffectHome:hover {
+.redHoverBorderEffectHome:hover, .redHoverBorderEffectHome:active {
   border: 1px solid rgb(189, 17, 17);
 }
-.greenHoverBorderEffectHome:hover {
+.greenHoverBorderEffectHome:hover, .greenHoverBorderEffectHome:active {
   border: 1px solid rgb(36, 163, 19);
 }
-.pinkHoverBorderEffectHome:hover {
+.pinkHoverBorderEffectHome:hover, .pinkHoverBorderEffectHome:active {
   border: 1px solid rgb(212, 13, 238);
 }
 /* END OF CHANGE COLOR SECTION */
@@ -371,7 +371,7 @@ h5.aboutMeH5 {
   padding: 1rem 0;
 }
 
-.homeSlightScaleOnHover:hover {
+.homeSlightScaleOnHover:hover, .homeSlightScaleOnHover:active {
   transform: scale(1.03);
 }
 
@@ -408,7 +408,7 @@ h5.aboutMeH5 {
   text-align: left;
   justify-content: left;
   align-items: left;
-  gap: 1.25rem;
+  gap: 0.75rem;
   padding: 0.35rem;
 }
 
@@ -469,6 +469,11 @@ h5.aboutMeH5 {
   vertical-align: top;
 }
 
+.balloonCounterSpan {
+  color: rgb(219, 219, 219);
+  vertical-align: top;
+}
+
 
 .balloonCounter,
 .balloonGame {
@@ -501,9 +506,21 @@ h5.aboutMeH5 {
   gap: 2rem;
 }
 
+#mobileHomeAboutMe {
+  display: none;
+}
+
+.balloonGameOnOrOff {
+  color: rgb(219, 219, 219);
+  margin-right: 0.5rem;
+  vertical-align: top;
+  display: inline-block;
+  align-items: center;
+}
+
 
 /* Mobile portrait */
-@media screen and (max-width: 850px) and (orientation: portrait) {
+@media screen and (max-width: 875px) and (orientation: portrait) {
   .main-content, .mainContentDivIntro {
     display: block;
     min-width: 85%;
@@ -522,11 +539,15 @@ h5.aboutMeH5 {
   }
 
   .fsBackground {
-    height: 150vh;
+    height: 178vh;
   }
 
   .avatarSection {
-    display: none;
+    position: relative;
+  }
+  .avatarSection > img {
+    margin-top: -15%;
+    width: 63%;
   }
 
   .triGridColumn {
@@ -545,16 +566,25 @@ h5.aboutMeH5 {
     grid-row: none;
   }
 
-  #portfolioBlock {
-    order: 1;
-    min-height:5.5rem;
-    font-size: 30px;
-
-    .portfolioBlockHome {
-      font-size: 24px;
-    }
-    
+  .mainContentHome {
+    padding: 0.2rem 3px 0 3px;
   }
+  #portfolioBlock {
+    display: flex !important;
+    align-items: center !important; /* Vertically center the content */
+    justify-content: space-between !important; /* Space between items */
+    order: 1;
+    min-height: 5.5rem;
+    font-size: 30px;
+  }
+  
+  .portfolioBlockHome {
+    display: flex !important;
+    align-items: center !important; /* Vertically center the text and icon */
+    font-size: 24px;
+    justify-content: space-between;
+  }
+
   #colorBlock {
     order: 2;
   }
@@ -569,5 +599,159 @@ h5.aboutMeH5 {
     grid-column: none;
     grid-row: none;
     display: block;
+    order: 4;
+  }
+
+  .bottomGrid {
+    display: none;
+  }
+
+  #desktopOnlyH4Home, #sideHome {
+    display: none;
+  }
+
+  #mobileHomeAboutMe {
+    margin-top: 1rem;
+    display: block;
+    font-size: 1rem;
+    text-align: left;
+    justify-content: left;
+  }
+
+  h5.aboutMeH5 {
+    font-size: 1.1rem;
+    font-weight: bold;
+    text-align: center;
+  }
+  .sidePanelLowerPart {
+    font-size: 0.95rem;
+  }
+
+  .balloonGame {
+    font-size: 1.5rem;
+  }
+
+  .balloonCounterSpan {
+    font-size: 1.3rem;
+  }
+}
+/* End mobile portrait */
+
+
+
+/* Mobile landscape */
+@media screen and (min-width: 875px) and (orientation: landscape) {
+  .main-content, .mainContentDivIntro {
+    display: block;
+    min-width: 100%;
+    text-align: center;
+    padding: 2px 0;
+    margin: 1rem 1rem;
+  }
+  
+  .homeIndividualIcon {
+    padding: 7px 6px;
+  }
+
+  .homeIcons {
+    justify-content: center;
+    margin-left: 4px;
+  }
+
+  .fsBackground {
+    height: 178vh;
+  }
+
+  .avatarSection {
+    position: relative;
+  }
+  .avatarSection > img {
+    margin-top: -15%;
+    width: 63%;
+  }
+
+  .triGridColumn {
+    display: flex;
+    flex-flow: column;
+    flex-direction: column;
+    grid-template-columns: none;
+    grid-template-rows: none;
+    order: 1;
+  }
+
+  .tallHomeBlock, .triBlockHome, #portfolioBlock {
+    display: block;
+    margin: 12px 0 0 0;
+    grid-column: none;
+    grid-row: none;
+  }
+
+  .mainContentHome {
+    padding: 0.2rem 3px 0 3px;
+  }
+  #portfolioBlock {
+    display: flex !important;
+    align-items: center !important; /* Vertically center the content */
+    justify-content: space-between !important; /* Space between items */
+    order: 1;
+    min-height: 5.5rem;
+    font-size: 30px;
+  }
+  
+  .portfolioBlockHome {
+    display: flex !important;
+    align-items: center !important; /* Vertically center the text and icon */
+    font-size: 24px;
+    justify-content: space-between;
+  }
+
+  #colorBlock {
+    order: 2;
+  }
+  .tallHomeBlock {
+    order: 3;
+  }
+  .bottomGrid {
+    order: 5;
+  }
+
+  .sideContentHome {
+    grid-column: none;
+    grid-row: none;
+    display: block;
+    order: 4;
+  }
+
+  .bottomGrid {
+    display: none;
+  }
+
+  #desktopOnlyH4Home, #sideHome {
+    display: none;
+  }
+
+  #mobileHomeAboutMe {
+    margin-top: 1rem;
+    display: block;
+    font-size: 1rem;
+    text-align: left;
+    justify-content: left;
+  }
+
+  h5.aboutMeH5 {
+    font-size: 1.1rem;
+    font-weight: bold;
+    text-align: center;
+  }
+  .sidePanelLowerPart {
+    font-size: 0.95rem;
+  }
+
+  .balloonGame {
+    font-size: 1.5rem;
+  }
+
+  .balloonCounterSpan {
+    font-size: 1.3rem;
   }
 }
