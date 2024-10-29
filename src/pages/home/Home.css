@@ -99,6 +99,10 @@
   border-radius: 10px;
 }
 
+.madeWithReact {
+  width: 30%;
+}
+
 .triBlockHome {
   flex: 0.33333333333;
   padding: 0.6rem 0.9rem;
@@ -126,7 +130,7 @@
 
 .homeBottomInterior {
   display: flex;
-  justify-content: center;
+  justify-content: space-around;
   align-items: center;
   height: 100%;
   min-height: 2.75rem;
@@ -447,7 +451,12 @@ h5.aboutMeH5 {
   gap: 2rem;
 }
 
+
+
+
+
+
 /* Mobile portrait */
 @media screen and (max-width: 850px) {
 
-}
+} 

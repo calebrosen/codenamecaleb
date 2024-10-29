@@ -9,6 +9,8 @@ import { MdOutlineEmail } from "react-icons/md";
 import Swal from "sweetalert2";
 import "sweetalert2/dist/sweetalert2.min.css";
 import Avatar from "../../img/home/avatar/Avatar.png";
+import Awake from "../../img/home/awake.gif";
+import Asleep from "../../img/home/sleeping.gif";
 import "./Home.css";
 
 const HomePage = () => {
@@ -21,17 +23,18 @@ const HomePage = () => {
   const [balloonsPopped, setBalloonsPopped] = useState(0);
   const [currentTime, setCurrentTime] = useState('');
   const [RGBColor, setRGBColor] = useState('rgb(189, 17, 17)');
+  const [weather, setWeather] = useState('');
   let spawnTimeout;
 
 
 
 
    //API call to get weather
-   const WeatherComponent = ({ latitude, longitude }) => {
+   /* const WeatherComponent = ({ latitude, longitude }) => {
     const [dataFetched, setDataFetched] = useState(false);
 
 
-    useEffect(() => {
+   useEffect(() => {
       if (!dataFetched) {
         const fetchWeatherData = async () => {
           try {
@@ -46,6 +49,7 @@ const HomePage = () => {
             if (res.data.weather && res.data.weather.length > 0) {
               const weatherMain = res.data.weather[0].main;
               console.log('Weather Main:', weatherMain);
+              setWeather(weatherMain.lower());
             }
           } catch (error) {
             console.error('Error fetching weather data:', error);
@@ -60,7 +64,7 @@ const HomePage = () => {
     }, [dataFetched, latitude, longitude]);
   
     return null;
-  };
+  };*/
 
   const IconGroup = () => {
     /* This is for the Icons Group of the Main Content box */
@@ -243,7 +247,7 @@ const HomePage = () => {
     return (
       <div className='clockFlexGroup'>
         <span className='clockSpan'>
-          Local Time:  {currentTime} EST
+          Local Time:<br />{currentTime} EST
         </span>
         <span>
           <AnalogClock {...clockOptions} />
@@ -383,6 +387,22 @@ const HomePage = () => {
 
   // END BALLOON GAME
  
+
+  // const WeatherCondition = () => {
+  //   switch (weather) {
+  //     case 'clouds':
+  //       return (
+
+  //       )
+  //     case 'clear':
+
+  //     case 'rain':
+
+  //     default:
+  //       break;
+  //   }
+  // }
+
 
   return (
     <div className="homePageContainer">
@@ -588,7 +608,7 @@ const HomePage = () => {
             {/* Bottom Grid Long */}
             <div className="bottomGridLong redHoverBorderEffectHome">
               <div className="homeBottomInterior">
-                <LocalTime /><WeatherComponent latitude={26.7084} longitude={80.2306} />
+              <div className='madeWithReact'>Local</div> <LocalTime />
               </div>
 
             </div>
@@ -607,7 +627,7 @@ const HomePage = () => {
               stiffness: 70,
               damping: 12,
               duration: 0.5,
-              delay: 0.27
+              delay: 0.2
             }}
             className='sideContentHome redHoverBorderEffectHome'
           >
