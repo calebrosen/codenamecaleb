@@ -1,5 +1,4 @@
-import AnalogClock from 'analog-clock-react';
-import axios from 'axios';
+import AnalogClock from "analog-clock-react";
 import { motion } from "framer-motion";
 import React, { useCallback, useEffect, useState } from "react";
 import { BsTwitterX } from "react-icons/bs";
@@ -9,8 +8,6 @@ import { MdOutlineEmail } from "react-icons/md";
 import Swal from "sweetalert2";
 import "sweetalert2/dist/sweetalert2.min.css";
 import Avatar from "../../img/home/avatar/Avatar.png";
-import Awake from "../../img/home/awake.gif";
-import Asleep from "../../img/home/sleeping.gif";
 import "./Home.css";
 
 const HomePage = () => {
@@ -21,16 +18,13 @@ const HomePage = () => {
   const [balloonGameOnOrOff, setBalloonGameOnOrOff] = useState("Off");
   const [balloonSpeed, setBalloonSpeed] = useState(4);
   const [balloonsPopped, setBalloonsPopped] = useState(0);
-  const [currentTime, setCurrentTime] = useState('');
-  const [RGBColor, setRGBColor] = useState('rgb(189, 17, 17)');
-  const [weather, setWeather] = useState('');
+  const [currentTime, setCurrentTime] = useState("");
+  const [RGBColor, setRGBColor] = useState("rgb(189, 17, 17)");
+  const [weather, setWeather] = useState("");
   let spawnTimeout;
 
-
-
-
-   //API call to get weather
-   /* const WeatherComponent = ({ latitude, longitude }) => {
+  //API call to get weather
+  /* const WeatherComponent = ({ latitude, longitude }) => {
     const [dataFetched, setDataFetched] = useState(false);
 
 
@@ -202,33 +196,32 @@ const HomePage = () => {
 
   // This function is the content of the time block
   const LocalTime = () => {
-
     const updateTime = useCallback(() => {
       const newTime = new Date().toLocaleTimeString([], {
-        hour: '2-digit',
-        minute: '2-digit',
+        hour: "2-digit",
+        minute: "2-digit",
         hour12: true,
       });
-  
+
       // Only update state if the time has changed
       if (newTime !== currentTime) {
         setCurrentTime(newTime);
       }
     }, [currentTime]); // Use currentTime as a dependency
-  
+
     useEffect(() => {
       const intervalId = setInterval(updateTime, 1000);
-      
+
       // Initial call to set the time immediately
       updateTime();
-  
+
       return () => clearInterval(intervalId);
     }, [updateTime]); // Depend on updateTime function
 
-    let handColor = {RGBColor};
+    let handColor = { RGBColor };
 
     const clockOptions = {
-      width: "2.75vw",
+      width: "3vw",
       border: true,
       borderColor: "#2e2e2e",
       baseColor: "#d7d3d3",
@@ -237,17 +230,19 @@ const HomePage = () => {
       handColors: {
         second: handColor.RGBColor,
         minute: "#1a1919",
-        hour: "#1a1919"
-      }
+        hour: "#1a1919",
+      },
     };
-  
+
     // You can call updateTime here if needed
     // updateTime();
-  
+
     return (
-      <div className='clockFlexGroup'>
-        <span className='clockSpan'>
-          Local Time:<br />{currentTime} EST
+      <div className="clockFlexGroup">
+        <span className="clockSpan">
+          Local Time:
+          <br />
+          {currentTime} EST
         </span>
         <span>
           <AnalogClock {...clockOptions} />
@@ -255,7 +250,7 @@ const HomePage = () => {
       </div>
     );
   };
-  
+
   // START
   // BALLOON
   // GAME
@@ -327,8 +322,7 @@ const HomePage = () => {
       balloon.remove(); // Remove the balloon after a short delay
     }, 100);
 
-    setBalloonsPopped(prevCount => prevCount + 1);
-
+    setBalloonsPopped((prevCount) => prevCount + 1);
   }
 
   const ChangeBalloonSpeed = (e) => {
@@ -372,21 +366,20 @@ const HomePage = () => {
   const BalloonGameCounter = () => {
     return (
       <div id="balloonCounter" className="balloonCounter">
-      <span
-        style={{
-          color: "rgb(219, 219, 219)",
-          verticalAlign: "top",
-        }}
-      >
-        {balloonsPopped}
-      </span>
+        <span
+          style={{
+            color: "rgb(219, 219, 219)",
+            verticalAlign: "top",
+          }}
+        >
+          {balloonsPopped}
+        </span>
         🎈
       </div>
     );
   };
 
   // END BALLOON GAME
- 
 
   // const WeatherCondition = () => {
   //   switch (weather) {
@@ -403,7 +396,6 @@ const HomePage = () => {
   //   }
   // }
 
-
   return (
     <div className="homePageContainer">
       <div className="fsBackground">
@@ -419,47 +411,46 @@ const HomePage = () => {
               duration: 0.5,
             }}
           >
-          <div className="mainContentHome redHoverBorderEffectHome">
-            {/* Inside of main content box */}
-            <div className="row">
-              <div className="col-xs-12 col-sm-12 col-md-8 col-lg-8 col-xl-8 mainContentDivIntro">
-                <h4>
-                  Hi, I'm
-                  <span style={{ fontWeight: "bold", color: "#fff" }}>
-                  &nbsp;Caleb
-                  </span>
-                  , a software developer.
-                </h4>
-                <h4>
-                  Feel free to reach out about any projects you may have in
-                  mind, or just to say hello.
-                </h4>
-                <IconGroup />
-              </div>
-              <div className="col-xs-12 col-sm-12 col-md-4 col-lg-4 col-xl-4">
-                <img
-                  src={Avatar}
-                  className="homePageAvatar"
-                  alt="An avatar of Caleb smiling wearing a white button-up shirt"
-                ></img>
+            <div className="mainContentHome redHoverBorderEffectHome">
+              {/* Inside of main content box */}
+              <div className="row">
+                <div className="col-xs-12 col-sm-12 col-md-8 col-lg-8 col-xl-8 mainContentDivIntro">
+                  <h4>
+                    Hi, I'm
+                    <span style={{ fontWeight: "bold", color: "#fff" }}>
+                      &nbsp;Caleb
+                    </span>
+                    , a software developer.
+                  </h4>
+                  <h4>
+                    Feel free to reach out about any projects you may have in
+                    mind, or just to say hello.
+                  </h4>
+                  <IconGroup />
+                </div>
+                <div className="col-xs-12 col-sm-12 col-md-4 col-lg-4 col-xl-4 avatarSection">
+                  <img
+                    src={Avatar}
+                    className="homePageAvatar"
+                    alt="An avatar of Caleb smiling wearing a white button-up shirt"
+                  ></img>
+                </div>
               </div>
             </div>
-          </div>
           </motion.div>
 
 
           <motion.div
-            initial={{ scale: 0.8, y: 500 }}
+            initial={{ scale: 0.6, y: 700 }}
             animate={{ scale: 1, y: 0 }}
             transition={{
               type: "spring",
               stiffness: 70,
               damping: 12,
               duration: 0.5,
-              delay: 0.15,
+              delay: 0.1,
             }}
           >
-
           <div className="triGridColumn">
             {/* Tall Block for Balloon Game */}
             <div className="tallHomeBlock redHoverBorderEffectHome">
@@ -474,7 +465,7 @@ const HomePage = () => {
                     defaultValue="7"
                     onChange={ChangeBalloonSpeed}
                     style={{
-                      accentColor: RGBColor
+                      accentColor: RGBColor,
                     }}
                   />
                 </div>
@@ -501,7 +492,7 @@ const HomePage = () => {
             </div>
 
             {/* Portfolio Block */}
-            <div className="triBlockHome portfolioBackground redHoverBorderEffectHome">
+            <div className="triBlockHome portfolioBackground redHoverBorderEffectHome" id="portfolioBlock">
               <a href="/portfolio" className="anchorNoDecoration">
                 <div className="portfolioBlockHome">
                   Portfolio <FiArrowUpRight />
@@ -510,7 +501,7 @@ const HomePage = () => {
             </div>
 
             {/* Color Block with animated color circles */}
-            <div className="triBlockHome redHoverBorderEffectHome">
+            <div className="triBlockHome redHoverBorderEffectHome" id="colorBlock">
               <div className="colorBlockHome">
                 <motion.div
                   animate={{
@@ -606,18 +597,34 @@ const HomePage = () => {
             </div>
 
             {/* Bottom Grid Long */}
-            <div className="bottomGridLong redHoverBorderEffectHome">
-              <div className="homeBottomInterior">
-              <div className='madeWithReact'>Local</div> <LocalTime />
+            <div className="bottomGrid">
+              {/* Bottom Grid Long */}
+              <div className="bottomGridLong redHoverBorderEffectHome">
+                <div className="homeBottomInterior">
+                  <LocalTime />
+                </div>
               </div>
 
+              <div className="bottomGridShort redHoverBorderEffectHome">
+                <div className="madeWithReact">
+                  <div>
+                    Built with{" "}
+                    <span
+                      style={{
+                        color: RGBColor,
+                        fontSize: '0.9vw',
+                        fontWeight: '700'
+                      }}
+                    >
+                      ♡
+                    </span>{" "}
+                    in React
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
-
           </motion.div>
-
-
-
 
           <motion.div
             initial={{ scale: 0.6, y: 700 }}
@@ -627,55 +634,57 @@ const HomePage = () => {
               stiffness: 70,
               damping: 12,
               duration: 0.5,
-              delay: 0.2
+              delay: 0.2,
             }}
-            className='sideContentHome redHoverBorderEffectHome'
+            className="sideContentHome redHoverBorderEffectHome"
+            id="sideHome"
           >
-          {/* Side content section */}
-          <div>
-            <div className="aboutMeSidePanel">
-              I'm a full stack developer with a strong desire to learn and
-              improve everyday.
-              <div className="homeMyStack">
-                My stack:
-                <div className="homeMyStackInner">
-                  <ul>
-                    <li>
-                      <span className="homeListItemsStack">JavaScript</span>{" "}
-                      {/* <Star amount={5} /> */}
-                    </li>
-                    <li>
-                      <span className="homeListItemsStack">React</span>{" "}
-                      {/* <Star amount={5} /> */}
-                    </li>
-                    <li>
-                      <span className="homeListItemsStack">MySQL</span>{" "}
-                      {/* <Star amount={5} /> */}
-                    </li>
-                    <li>
-                      <span className="homeListItemsStack">NodeJS</span>{" "}
-                      {/* <Star amount={4} /> */}
-                    </li>
-                    <li>
-                      <span className="homeListItemsStack">CSS</span>{" "}
-                      {/* <Star amount={4} /> */}
-                    </li>
-                    <li>
-                      <span className="homeListItemsStack">PHP</span>{" "}
-                      {/* <Star amount={4} /> */}
-                    </li>
-                  </ul>
+            {/* Side content section */}
+            <div>
+              <h5 className="aboutMeH5">About me</h5>
+              <div className="aboutMeSidePanel">
+                I'm a full stack developer with a strong desire to learn and
+                improve everyday.
+                <div className="homeMyStack">
+                  My stack:
+                  <div className="homeMyStackInner">
+                    <ul>
+                      <li>
+                        <span className="homeListItemsStack">JavaScript</span>{" "}
+                        {/* <Star amount={5} /> */}
+                      </li>
+                      <li>
+                        <span className="homeListItemsStack">React</span>{" "}
+                        {/* <Star amount={5} /> */}
+                      </li>
+                      <li>
+                        <span className="homeListItemsStack">MySQL</span>{" "}
+                        {/* <Star amount={5} /> */}
+                      </li>
+                      <li>
+                        <span className="homeListItemsStack">NodeJS</span>{" "}
+                        {/* <Star amount={4} /> */}
+                      </li>
+                      <li>
+                        <span className="homeListItemsStack">CSS</span>{" "}
+                        {/* <Star amount={4} /> */}
+                      </li>
+                      <li>
+                        <span className="homeListItemsStack">PHP</span>{" "}
+                        {/* <Star amount={4} /> */}
+                      </li>
+                    </ul>
+                  </div>
                 </div>
+                <p className="sidePanelLowerPart">
+                  Beyond coding, I love to cook, work out, and watch anime.
+                </p>
+                <p className="sidePanelLowerPart">
+                  I'm always learning and eager to work with new technologies.
+                  Currently, it's on my roadmap to learn Angular and C#/.NET.
+                </p>
               </div>
-              <p className="sidePanelLowerPart">
-                Beyond coding, I love to cook, work out, and watch anime.
-              </p>
-              <p className="sidePanelLowerPart">
-                I'm always learning and eager to work with new technologies.
-                Currently, it's on my roadmap to learn Angular and C#/.NET.
-              </p>
             </div>
-          </div>
           </motion.div>
         </div>
       </div>
