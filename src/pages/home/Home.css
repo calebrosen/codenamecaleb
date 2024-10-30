@@ -187,9 +187,10 @@ svg {
   bottom: 0;
   background-image: url("../../img/home/code_bg.jpg");
   background-position: center;
+  border-radius: 10px;
   background-repeat: no-repeat;
   background-size: cover;
-  z-index: 1;
+  z-index: -5;
 }
 
 /* Gray overlay over the background image to darken it */
