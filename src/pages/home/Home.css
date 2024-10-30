@@ -173,6 +173,13 @@
   overflow: hidden;
 }
 
+svg {
+  transition: 0.25s ease-in-out;
+}
+
+#portfolioBlock:hover .portfolioBlockHome svg {
+  transform: scale(1.15) translateY(-1px);
+}
 /* Background image for this block */
 .portfolioBackground::before {
   content: "";
@@ -203,6 +210,7 @@
 .portfolioBlockHome {
   position: relative;
   z-index: 5;
+  transition: 1s ease-in-out;
   justify-content: space-between;
   display: flex;
   align-items: center;
@@ -358,7 +366,7 @@ h5.aboutMeH5 {
 }
 
 .sidePanelLowerPart {
-  font-size: 0.8vw;
+  font-size: 0.9rem
 }
 
 .aboutMeSidePanel {
@@ -640,7 +648,7 @@ h5.aboutMeH5 {
 
 
 /* Mobile landscape */
-@media screen and (min-width: 875px) and (orientation: landscape) {
+@media screen and (min-width: 875px) and (max-width: 1200px) and(orientation: landscape) {
   .main-content, .mainContentDivIntro {
     display: block;
     min-width: 100%;
