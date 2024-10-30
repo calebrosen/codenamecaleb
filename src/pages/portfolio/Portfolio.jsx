@@ -1,4 +1,4 @@
-import { faCode, faLink } from "@fortawesome/free-solid-svg-icons";
+import { faCode, faHome, faLink } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   VerticalTimeline,
@@ -9,30 +9,78 @@ import DistributorInventory from "../../img/portfolio/distributorInventory.png";
 import FileCopy from "../../img/portfolio/fileCopy.png";
 import Fireplace from "../../img/portfolio/fireplace.png";
 import GoogleReviews from "../../img/portfolio/googleReview.png";
+import iosNotes from "../../img/portfolio/iosNotes.png";
 import Printer from "../../img/portfolio/printer.png";
+import Wasted from "../../img/portfolio/wasted.png";
 import "./Portfolio.css";
 // definitely: displays, distributor inventory,
 // maybe: invoice,
 
 const Portfolio = () => {
   return (
+    <div>
+    <a href="/">
+      <FontAwesomeIcon icon={faHome} style={{position: 'fixed', zIndex: '5', top: '25', left: '25', color: 'rgb(219, 219, 219)', transform: 'scale(1.5)'}}/>
+    </a>
     <div className="portfolio-container">
+    
       <div className="timeline-wrapper">
-      {/* <div className='portfolioH1Wrapper'>
-        <h1 className='portfolioH1'>Portfolio</h1>
-      </div> */}
+
+        {/* Vertical timeline start */}
         <VerticalTimeline lineColor={"#232323"}>
+
+
+          {/* IOS Notes App */}
           <VerticalTimelineElement
             className="vertical-timeline-element--work"
-            icon={<img src={Fireplace} className='portfolioIconImg' alt="fireplace" />}
+            icon={
+              <img
+                src={iosNotes}
+                className="portfolioIconImg"
+                alt="fireplace"
+              />
+            }
+          >
+            <h2 className="vertical-timeline-element-title">IOS Notes App</h2>
+            <p className="portfolipPBody">
+              A copy of the notes app on IOS, this application is built in React
+              and has the ability to do nearly everything that the real IOS
+              notes app does.
+            </p>
+            <div className="languagesUsed">JavaScript • React • CSS • HTML</div>
+            <div className="linkAndCodeContainer">
+              <a
+                href="https://github.com/calebrosen/IOS-Notes-App-In-React"
+                className="linkAndCode"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <div className="linkAndCode">
+                  Link <FontAwesomeIcon icon={faLink} />
+                </div>
+              </a>{" "}
+            </div>
+          </VerticalTimelineElement>
+
+
+          {/* Fireplace sizing guide */}
+          <VerticalTimelineElement
+            className="vertical-timeline-element--work"
+            icon={
+              <img
+                src={Fireplace}
+                className="portfolioIconImg"
+                alt="fireplace"
+              />
+            }
           >
             <h2 className="vertical-timeline-element-title">
               Fireplace Sizing Guide
             </h2>
-            <p className='portfolipPBody'>
-              This tool takes customers through 3 steps, getting the type of
-              fireplace they have, the dimensions of it, and which gas type they
-              have - and uses
+            <p className="portfolipPBody">
+              This tool takes customers through 3 steps, gathering information,
+              and then uses all of that information to calculate what log sets
+              they can fit in their fireplace.
             </p>
             <div className="languagesUsed">
               JavaScript • PHP • SQL • CSS • HTML
@@ -50,12 +98,21 @@ const Portfolio = () => {
               </a>{" "}
             </div>
           </VerticalTimelineElement>
+
+
+          {/* File copier */}
           <VerticalTimelineElement
             className="vertical-timeline-element--work"
-            icon={<img src={FileCopy} className='portfolioIconImg' alt="Copy file icon" />}
+            icon={
+              <img
+                src={FileCopy}
+                className="portfolioIconImg"
+                alt="Copy file icon"
+              />
+            }
           >
             <h2 className="vertical-timeline-element-title">File Copier</h2>
-            <p className='portfolipPBody'>
+            <p className="portfolipPBody">
               This file copier uses FTP to connect to a master website and
               transfer files to another website. All you have to do is call the
               function with the file path.
@@ -74,12 +131,15 @@ const Portfolio = () => {
               </a>{" "}
             </div>
           </VerticalTimelineElement>
+
+
+          {/* Distributors Inventory */}
           <VerticalTimelineElement
             className="vertical-timeline-element--work"
             icon={
               <img
                 src={DistributorInventory}
-                className='portfolioIconImg'
+                className="portfolioIconImg"
                 alt="Icon with excel logo and python"
               />
             }
@@ -87,7 +147,7 @@ const Portfolio = () => {
             <h2 className="vertical-timeline-element-title">
               Distributor's Inventory Formatter
             </h2>
-            <p className='portfolipPBody'>
+            <p className="portfolipPBody">
               An internal tool that uses Zoho's Mail API and Selenium to
               retrieve inventory counts. These are all converted into CSV's,
               formatted to a certain structure, merged into a master file, and
@@ -107,14 +167,23 @@ const Portfolio = () => {
               </a>{" "}
             </div>
           </VerticalTimelineElement>
+
+
+          {/* Google reviews carousel */}
           <VerticalTimelineElement
             className="vertical-timeline-element--work"
-            icon={<img src={GoogleReviews} className='portfolioIconImg' alt="Google icon" />}
+            icon={
+              <img
+                src={GoogleReviews}
+                className="portfolioIconImg"
+                alt="Google icon"
+              />
+            }
           >
             <h2 className="vertical-timeline-element-title">
               Google Reviews Carousel
             </h2>
-            <p className='portfolipPBody'>
+            <p className="portfolipPBody">
               A customer facing carousel that dynamically pulls Google reviews
               from Google's places API and displays them in a carousel.
             </p>
@@ -142,15 +211,72 @@ const Portfolio = () => {
               </a>
             </div>
           </VerticalTimelineElement>
+
+
+          {/* Wasted image generator */}
           <VerticalTimelineElement
             className="vertical-timeline-element--work"
-            icon={<img src={Printer} className='portfolioIconImg' alt="Printer icon" />}
+            icon={
+              <img
+                src={Wasted}
+                className="portfolioIconImg"
+                alt="Wasted icon"
+              />
+            }
+          >
+            <h2 className="vertical-timeline-element-title">
+              Wasted Image Generator
+            </h2>
+            <p className="portfolipPBody">
+              An easy to use image generator that simply puts the GTA V 'Wasted'
+              effect over any image uploaded.
+            </p>
+            <div className="languagesUsed">
+              JavaScript • React • CSS • HTML{" "}
+            </div>
+            <div className="linkAndCodeContainer">
+              <a
+                href="https://github.com/calebrosen/codenamecaleb/tree/main/src/pages/wasted"
+                className="linkAndCode"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <div className="linkAndCode">
+                  Code <FontAwesomeIcon icon={faCode} />
+                </div>
+              </a>
+              <a
+                href="https://codenamecaleb.com/gta-v-wasted-overlay-generator"
+                className="linkAndCode"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <div className="linkAndCode">
+                  Link <FontAwesomeIcon icon={faLink} />
+                </div>
+              </a>
+            </div>
+          </VerticalTimelineElement>
+
+
+          {/* Display cards */}
+          <VerticalTimelineElement
+            className="vertical-timeline-element--work"
+            icon={
+              <img
+                src={Printer}
+                className="portfolioIconImg"
+                alt="Printer icon"
+              />
+            }
           >
             <h2 className="vertical-timeline-element-title">
               Printable Display Cards
             </h2>
-            <p className='portfolipPBody'>
-              An internal tool that uses Zoho API to pull display products and format them into printable cards with product information, price, and a scannable QR code.
+            <p className="portfolipPBody">
+              An internal tool that uses Zoho API to pull display products and
+              format them into printable cards with product information, price,
+              and a scannable QR code.
             </p>
             <div className="languagesUsed">JavaScript • PHP • CSS • HTML </div>
             <div className="linkAndCodeContainer">
@@ -168,6 +294,7 @@ const Portfolio = () => {
           </VerticalTimelineElement>
         </VerticalTimeline>
       </div>
+    </div>
     </div>
   );
 };

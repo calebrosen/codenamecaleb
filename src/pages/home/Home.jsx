@@ -151,7 +151,7 @@ const HomePage = () => {
     return (
       <>
         {Array.from({ length: amount }, (_, index) => (
-          <FaStar key={index} color={starsColor} size={10} />
+          <FaStar key={index} style={{verticalAlign: 'baseline'}} color={starsColor} size={10} />
         ))}
       </>
     );
@@ -228,12 +228,16 @@ const HomePage = () => {
     return () => clearTimeout(spawnTimeout);
   }, [balloonGame]);
 
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   function spawnBalloon() {
     if (balloonGame) {
       const balloon = document.createElement("div");
       balloon.textContent = "🎈";
       balloon.style.position = "absolute";
-      balloon.style.fontSize = "8vw";
+      balloon.style.fontSize = "6.5rem";
       // Random horizontal position
       balloon.style.left = `${Math.random() * (window.innerWidth - 90)}px`;
       balloon.style.bottom = "0px";
@@ -349,27 +353,27 @@ const HomePage = () => {
               <ul>
                 <li>
                   <span className="homeListItemsStack">JavaScript</span>{" "}
-                  {/* <Star amount={5} /> */}
+                  <Star amount={5} />
                 </li>
                 <li>
                   <span className="homeListItemsStack">React</span>{" "}
-                  {/* <Star amount={5} /> */}
+                  <Star amount={5} />
                 </li>
                 <li>
                   <span className="homeListItemsStack">MySQL</span>{" "}
-                  {/* <Star amount={5} /> */}
+                  <Star amount={5} />
                 </li>
                 <li>
                   <span className="homeListItemsStack">NodeJS</span>{" "}
-                  {/* <Star amount={4} /> */}
+                  <Star amount={4} />
                 </li>
                 <li>
                   <span className="homeListItemsStack">CSS</span>{" "}
-                  {/* <Star amount={4} /> */}
+                  <Star amount={4} />
                 </li>
                 <li>
                   <span className="homeListItemsStack">PHP</span>{" "}
-                  {/* <Star amount={4} /> */}
+                  <Star amount={4} />
                 </li>
               </ul>
             </div>
@@ -385,10 +389,10 @@ const HomePage = () => {
       </div>
     );
   };
-
+  
   return (
     <div className="homePageContainer">
-      <div className="fsBackground">
+      <div className="fsBackground"></div>
         <div className="main-content">
           {/* Main content section */}
           <motion.div
@@ -462,7 +466,7 @@ const HomePage = () => {
               delay: 0.1,
             }}
           >
-            <div className="triGridColumn">
+            <div className="triGridColumn" id="balloonGameBlock">
               {/* Tall Block for Balloon Game */}
               <div className="tallHomeBlock redHoverBorderEffectHome">
                 <div className="balloonGame">
@@ -503,20 +507,19 @@ const HomePage = () => {
               </div>
 
               {/* Portfolio Block */}
-              <div
-                className="triBlockHome portfolioBackground redHoverBorderEffectHome"
-                id="portfolioBlock"
-              >
-                <a href="/portfolio" className="anchorNoDecoration">
-                  <div className="portfolioBlockHome">
-                    Portfolio&nbsp;
-                   
-                      <FiArrowUpRight color={RGBColor}/>
-                
-                  </div>
-                </a>
-              </div>
+              
+              <a href="/portfolio" className="anchorNoDecoration">
+                <div
+                  className="triBlockHome portfolioBackground redHoverBorderEffectHome"
+                  id="portfolioBlock"
+                >
 
+                    <div className="portfolioBlockHome">
+                      Portfolio&nbsp;
+                        <FiArrowUpRight color={RGBColor}/>
+                    </div>
+                </div>
+              </a>
               {/* Color Block with animated color circles */}
               <div
                 className="triBlockHome redHoverBorderEffectHome"
@@ -667,7 +670,6 @@ const HomePage = () => {
             <AboutMeContent />
           </motion.div>
         </div>
-      </div>
     </div>
   );
 };

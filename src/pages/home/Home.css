@@ -1,12 +1,10 @@
 .homePageContainer {
   position: relative;
-  text-align: left !important;
-  max-height: 100%;
+  height: calc(var(--vh, 1vh) * 100);
 }
 
 .fsBackground {
-  height: 100vh;
-  z-index: 1;
+  z-index: 0;
   background-size: 5.2rem 5.2rem;
   background-color: rgb(20, 20, 20);
   background-image: linear-gradient(
@@ -15,8 +13,11 @@
       transparent 0
     ),
     linear-gradient(to bottom, rgb(230, 230, 230) 1px, transparent 0);
-  position: relative;
-  padding-top: 0.25%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
 }
 
 .fsBackground::after {
@@ -24,7 +25,6 @@
   position: absolute;
   top: 0;
   left: 0;
-  overflow: hidden !important;
   right: 0;
   bottom: 0;
   background: linear-gradient(
@@ -33,7 +33,7 @@
     rgba(20, 20, 20, 0.96) 40%,
     rgba(23, 23, 23, 1) 100%
   );
-  z-index: -5;
+  z-index: -1;
 }
 
 .mainContentDivIntro {
@@ -89,9 +89,8 @@
 .bottomGrid {
   grid-column: 2 / -1;
   grid-row: 2;
-  margin-top: -15px;
   gap: 1rem;
-  display: grid; /* Nested grid */
+  display: grid;
   grid-template-columns: 7.75fr 2.25fr;
 }
 
@@ -144,10 +143,10 @@
 }
 
 .tallHomeBlock {
-  grid-column: 1; /* First column */
-  grid-row: 1 / span 2; /* Span both rows */
+  grid-column: 1;
+  grid-row: 1 / span 2;
   padding: 0.6rem 0.9rem;
-  min-height: 100%; /* Make sure it takes up full height */
+  min-height: 100%;
   background: rgba(53, 53, 53, 0.192);
   box-shadow: rgba(0, 0, 0, 0.4) 0px 4px 7px,
     rgba(0, 0, 0, 0.3) 0px 9px 15px -5px, rgba(0, 0, 0, 0.2) 0px -3px 0px;
@@ -155,8 +154,6 @@
   border-radius: 10px;
   border: 1px solid #2f2f2f;
 }
-
-
 
 .homeBottomInterior {
   display: flex;
@@ -170,7 +167,6 @@
 
 .portfolioBackground {
   position: relative;
-  overflow: hidden;
 }
 
 svg {
@@ -178,8 +174,9 @@ svg {
 }
 
 #portfolioBlock:hover .portfolioBlockHome svg {
-  transform: scale(1.15) translateY(-1px);
+  transform: scale(1.15) translateX(5px);
 }
+
 /* Background image for this block */
 .portfolioBackground::before {
   content: "";
@@ -238,6 +235,8 @@ svg {
 }
 
 .colorBlockHome {
+  grid-column: 3; /* Third column */
+  grid-row: 1; /* First row */
   display: flex;
   justify-content: center;
   vertical-align: top;
@@ -246,10 +245,6 @@ svg {
   height: 100%;
 }
 
-.colorBlockHome {
-  grid-column: 3; /* Third column */
-  grid-row: 1; /* First row */
-}
 
 .circle {
   width: 2.25rem;
@@ -335,11 +330,9 @@ svg {
   border-radius: 10px;
   height: fit-content;
   min-height: 100%;
-  overflow: hidden;
 }
 
 .main-content .testblock-content {
-  overflow: hidden;
   position: relative;
 }
 
@@ -418,6 +411,7 @@ h5.aboutMeH5 {
   align-items: left;
   gap: 0.75rem;
   padding: 0.35rem;
+
 }
 
 .checkbox-wrapper-22 .switch {
@@ -528,7 +522,12 @@ h5.aboutMeH5 {
 
 
 /* Mobile portrait */
-@media screen and (max-width: 875px) and (orientation: portrait) {
+@media screen and (max-width: 812px) and (orientation: portrait) {
+
+  .homePageContainer {
+    position: absolute;
+  }
+
   .main-content, .mainContentDivIntro {
     display: block;
     min-width: 85%;
@@ -546,13 +545,10 @@ h5.aboutMeH5 {
     margin-left: 4px;
   }
 
-  .fsBackground {
-    height: 178vh;
-  }
-
   .avatarSection {
     position: relative;
   }
+  
   .avatarSection > img {
     margin-top: -15%;
     width: 63%;
@@ -577,18 +573,18 @@ h5.aboutMeH5 {
   .mainContentHome {
     padding: 0.2rem 3px 0 3px;
   }
+
   #portfolioBlock {
-    display: flex !important;
-    align-items: center !important; /* Vertically center the content */
-    justify-content: space-between !important; /* Space between items */
+    display: flex;
+    align-items: center;
     order: 1;
     min-height: 5.5rem;
     font-size: 30px;
   }
   
   .portfolioBlockHome {
-    display: flex !important;
-    align-items: center !important; /* Vertically center the text and icon */
+    display: flex;
+    align-items: center;
     font-size: 24px;
     justify-content: space-between;
   }
@@ -639,8 +635,16 @@ h5.aboutMeH5 {
     font-size: 1.5rem;
   }
 
+  #balloonGameBlock {
+    padding-bottom: 1.25rem;
+  }
+
   .balloonCounterSpan {
     font-size: 1.3rem;
+  }
+
+  .colorBlockHome {
+    gap: 1.25rem;
   }
 }
 /* End mobile portrait */
@@ -648,13 +652,31 @@ h5.aboutMeH5 {
 
 
 /* Mobile landscape */
-@media screen and (min-width: 875px) and (max-width: 1200px) and(orientation: landscape) {
-  .main-content, .mainContentDivIntro {
+
+@media screen and (orientation: landscape) and (max-width: 770px) {
+  .homePageAvatar {
+    display: none;
+  }
+}
+
+@media screen and (orientation: landscape) and (max-width: 1200px) {
+  .homePageContainer {
+    position: absolute;
+  }
+  
+  .main-content {
     display: block;
-    min-width: 100%;
+    min-width: 90%;
     text-align: center;
     padding: 2px 0;
     margin: 1rem 1rem;
+  }
+
+  .mainContentDivIntro {
+    padding: 1rem 0;
+    margin: 0 1.5rem;
+    justify-content: left;
+    text-align: left;
   }
   
   .homeIndividualIcon {
@@ -662,20 +684,8 @@ h5.aboutMeH5 {
   }
 
   .homeIcons {
-    justify-content: center;
-    margin-left: 4px;
-  }
-
-  .fsBackground {
-    height: 178vh;
-  }
-
-  .avatarSection {
-    position: relative;
-  }
-  .avatarSection > img {
-    margin-top: -15%;
-    width: 63%;
+    justify-content: left;
+    margin-left: 2px;
   }
 
   .triGridColumn {
@@ -695,12 +705,20 @@ h5.aboutMeH5 {
   }
 
   .mainContentHome {
+    grid-column: none;
+    grid-row: none;
     padding: 0.2rem 3px 0 3px;
   }
+
+  .avatarSection > img {
+    width: 90%;
+    margin-right: 2rem;
+  }
+  
   #portfolioBlock {
     display: flex !important;
-    align-items: center !important; /* Vertically center the content */
-    justify-content: space-between !important; /* Space between items */
+    align-items: center !important;
+    justify-content: space-between !important;
     order: 1;
     min-height: 5.5rem;
     font-size: 30px;
@@ -708,9 +726,13 @@ h5.aboutMeH5 {
   
   .portfolioBlockHome {
     display: flex !important;
-    align-items: center !important; /* Vertically center the text and icon */
+    align-items: center !important;
     font-size: 24px;
     justify-content: space-between;
+  }
+
+  #balloonGameBlock {
+    padding-bottom: 1.25rem;
   }
 
   #colorBlock {
@@ -734,7 +756,7 @@ h5.aboutMeH5 {
     display: none;
   }
 
-  #desktopOnlyH4Home, #sideHome {
+  #sideHome {
     display: none;
   }
 
@@ -761,5 +783,10 @@ h5.aboutMeH5 {
 
   .balloonCounterSpan {
     font-size: 1.3rem;
+  }
+
+  
+  .colorBlockHome {
+    gap: 3rem;
   }
 }

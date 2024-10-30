@@ -3,6 +3,8 @@
   color: #000;
   overflow: hidden;
   z-index: 1000;
+
+  display:none;
 }
 
 .menu-items {
