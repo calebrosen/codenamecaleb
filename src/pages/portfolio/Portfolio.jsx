@@ -5,6 +5,7 @@ import {
   VerticalTimelineElement,
 } from "react-vertical-timeline-component";
 import "react-vertical-timeline-component/style.min.css";
+import PartsDiagrams from "../../img/portfolio/diagram.png";
 import DistributorInventory from "../../img/portfolio/distributorInventory.png";
 import FileCopy from "../../img/portfolio/fileCopy.png";
 import Fireplace from "../../img/portfolio/fireplace.png";
@@ -23,8 +24,12 @@ const Portfolio = () => {
       <FontAwesomeIcon icon={faHome} style={{position: 'fixed', zIndex: '5', top: '25', left: '25', color: 'rgb(219, 219, 219)', transform: 'scale(1.5)'}}/>
     </a>
     <div className="portfolio-container">
-    
       <div className="timeline-wrapper">
+
+      <p className='portfolioH1Wrapper'>
+        <h1 className="portfolioH1">Portfolio and Projects</h1>
+      </p>
+
 
         {/* Vertical timeline start */}
         <VerticalTimeline lineColor={"#232323"}>
@@ -132,6 +137,37 @@ const Portfolio = () => {
             </div>
           </VerticalTimelineElement>
 
+          {/* Parts diagrams */}
+          <VerticalTimelineElement
+            className="vertical-timeline-element--work"
+            icon={
+              <img
+                src={PartsDiagrams}
+                className="portfolioIconImg"
+                alt="A parts diagram of car engine"
+              />
+            }
+          >
+            <h2 className="vertical-timeline-element-title">Parts Diagrams</h2>
+            <p className="portfolipPBody">
+              A customer facing tool that allows selection of their grill model, and displays all
+              of the parts for that model overlaid on top of an image of the grill model they selected.
+            </p>
+            <div className="languagesUsed">PHP • Javascript • React • SQL</div>
+            <div className="linkAndCodeContainer">
+              <a
+                href="https://firemagicstore.com/parts-diagrams"
+                className="linkAndCode"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <div className="linkAndCode">
+                  Link <FontAwesomeIcon icon={faLink} />
+                </div>
+              </a>{" "}
+            </div>
+          </VerticalTimelineElement>
+
 
           {/* Distributors Inventory */}
           <VerticalTimelineElement
@@ -165,50 +201,6 @@ const Portfolio = () => {
                   Code <FontAwesomeIcon icon={faCode} />
                 </div>
               </a>{" "}
-            </div>
-          </VerticalTimelineElement>
-
-
-          {/* Google reviews carousel */}
-          <VerticalTimelineElement
-            className="vertical-timeline-element--work"
-            icon={
-              <img
-                src={GoogleReviews}
-                className="portfolioIconImg"
-                alt="Google icon"
-              />
-            }
-          >
-            <h2 className="vertical-timeline-element-title">
-              Google Reviews Carousel
-            </h2>
-            <p className="portfolipPBody">
-              A customer facing carousel that dynamically pulls Google reviews
-              from Google's places API and displays them in a carousel.
-            </p>
-            <div className="languagesUsed">JavaScript • CSS • HTML </div>
-            <div className="linkAndCodeContainer">
-              <a
-                href="https://github.com/calebrosen/google-reviews"
-                className="linkAndCode"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <div className="linkAndCode">
-                  Code <FontAwesomeIcon icon={faCode} />
-                </div>
-              </a>
-              <a
-                href=" https://www.dimplexstore.com/our-customer-reviews"
-                className="linkAndCode"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <div className="linkAndCode">
-                  Link <FontAwesomeIcon icon={faLink} />
-                </div>
-              </a>
             </div>
           </VerticalTimelineElement>
 
@@ -257,6 +249,52 @@ const Portfolio = () => {
               </a>
             </div>
           </VerticalTimelineElement>
+
+
+          {/* Google reviews carousel */}
+          <VerticalTimelineElement
+            className="vertical-timeline-element--work"
+            icon={
+              <img
+                src={GoogleReviews}
+                className="portfolioIconImg"
+                alt="Google icon"
+              />
+            }
+          >
+            <h2 className="vertical-timeline-element-title">
+              Google Reviews Carousel
+            </h2>
+            <p className="portfolipPBody">
+              A customer facing carousel that dynamically pulls Google reviews
+              from Google's places API and displays them in a carousel.
+            </p>
+            <div className="languagesUsed">JavaScript • CSS • HTML </div>
+            <div className="linkAndCodeContainer">
+              <a
+                href="https://github.com/calebrosen/google-reviews"
+                className="linkAndCode"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <div className="linkAndCode">
+                  Code <FontAwesomeIcon icon={faCode} />
+                </div>
+              </a>
+              <a
+                href=" https://www.dimplexstore.com/our-customer-reviews"
+                className="linkAndCode"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <div className="linkAndCode">
+                  Link <FontAwesomeIcon icon={faLink} />
+                </div>
+              </a>
+            </div>
+          </VerticalTimelineElement>
+
+
 
 
           {/* Display cards */}
