@@ -156,7 +156,7 @@ const Portfolio = () => {
             <div className="languagesUsed">PHP • Javascript • React • SQL</div>
             <div className="linkAndCodeContainer">
               <a
-                href="https://firemagicstore.com/parts-diagrams"
+                href="https://www.firemagicstore.com/parts-diagrams"
                 className="linkAndCode"
                 target="_blank"
                 rel="noopener noreferrer"
