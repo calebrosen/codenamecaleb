@@ -238,51 +238,6 @@ function Wasted() {
         )}
       </div>
 
-      <div className="iconsGroup">
-        <div className="iconGroup">
-          <div>
-            <FontAwesomeIcon className="icon" icon={faLock} size="3x" />
-          </div>
-          <span>Secure</span>
-          <p className="iconSubText">Your images are not saved.</p>
-        </div>
-
-        <div className="iconGroup">
-          <div>
-            <FontAwesomeIcon
-              icon={faWandMagicSparkles}
-              className="icon"
-              size="3x"
-            />
-          </div>
-          <span>Magic</span>
-          <p className="iconSubText">Perfect overlay, everytime.</p>
-        </div>
-
-        <div className="iconGroup">
-          <div>
-            <FontAwesomeIcon
-              icon={faBolt}
-              className="icon"
-              size="3x"
-            />
-          </div>
-          <span>Fast</span>
-          <p className="iconSubText">Instantly generate your image.</p>
-        </div>
-
-        <div className="iconGroup">
-          <div>
-            <FontAwesomeIcon
-              icon={faMobileScreen}
-              className="icon"
-              size="3x"
-            />
-          </div>
-          <span>Responsive</span>
-          <p className="iconSubText">Works on any device.</p>
-        </div>
-      </div>
 
       {image && (
         <div className="wasted-image-container">

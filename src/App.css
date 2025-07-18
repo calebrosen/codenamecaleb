@@ -1,5 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
-
+/* @import "tailwindcss"; */
+/* will be converting entire project into tailwind and updating with my modern stack eventually */
 /* this css file is for styles that may be used across multiple pages */
 html, body {
   margin: 0;

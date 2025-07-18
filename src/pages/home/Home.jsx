@@ -20,7 +20,6 @@ const HomePage = () => {
   const [balloonsPopped, setBalloonsPopped] = useState(0);
   const [currentTime, setCurrentTime] = useState("");
   const [RGBColor, setRGBColor] = useState("rgb(189, 17, 17)");
-  const [weather, setWeather] = useState("");
   let spawnTimeout;
 
   const IconGroup = () => {
@@ -373,7 +372,7 @@ const HomePage = () => {
                 </li>
                 <li>
                   <span className="homeListItemsStack">PHP</span>{" "}
-                  <Star amount={4} />
+                  <Star amount={5} />
                 </li>
               </ul>
             </div>
