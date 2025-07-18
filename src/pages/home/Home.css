@@ -3,7 +3,7 @@
   height: calc(var(--vh, 1vh) * 100);
 }
 
-.fsBackground {
+/* .fsBackground {
   z-index: 0;
   background-size: 5.2rem 5.2rem;
   background-color: rgb(20, 20, 20);
@@ -34,7 +34,7 @@
     rgba(23, 23, 23, 1) 100%
   );
   z-index: -1;
-}
+} */
 
 .mainContentDivIntro {
   /* Spreading out items vertically */
@@ -52,7 +52,7 @@
   display: inline;
 }
 
-.main-content {
+/* .main-content {
   display: grid;
   grid-template-columns: 78% 22%;
   grid-template-rows: subgrid;
@@ -61,7 +61,7 @@
   margin-top: 4.5%;
   max-height: 5px !important;
   align-items: start;
-}
+} */
 
 .mainContentHome {
   grid-column: 1 / 2;
@@ -163,10 +163,6 @@
   min-height: 2.75rem;
   font-size: 1.2vw;
   text-align: center;
-}
-
-.portfolioBackground {
-  position: relative;
 }
 
 svg {
@@ -341,31 +337,12 @@ svg {
   text-decoration: none;
 }
 
-.homeMyStack {
-  padding: 0.6rem 0 0 0;
-}
 
-.homeListItemsStack {
-  color: rgb(219, 219, 219);
-}
-
-.homeMyStackInner {
-  padding: 0.1rem 0 0 0.5rem;
-}
-
-h5.aboutMeH5 {
-  font-weight: 700;
-  font-size: 0.9vw;
-  color: rgb(219, 219, 219);
-}
 
 .sidePanelLowerPart {
   font-size: 0.9rem
 }
 
-.aboutMeSidePanel {
-  color: rgb(219, 219, 219);
-}
 
 .homeIcons {
   display: flex;
@@ -412,7 +389,6 @@ h5.aboutMeH5 {
   align-items: left;
   gap: 0.75rem;
   padding: 0.35rem;
-
 }
 
 .checkbox-wrapper-22 .switch {

@@ -1,6 +1,6 @@
 import AnalogClock from "analog-clock-react";
 import { motion } from "framer-motion";
-import React, { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { BsTwitterX } from "react-icons/bs";
 import { FaDiscord, FaGithub, FaLinkedin, FaStar } from "react-icons/fa";
 import { FiArrowUpRight } from "react-icons/fi";
@@ -9,17 +9,17 @@ import Swal from "sweetalert2";
 import "sweetalert2/dist/sweetalert2.min.css";
 import Avatar from "../../img/home/avatar/Avatar.png";
 import "./Home.css";
+import AboutMe from "./AboutMe.jsx";
+import ColorBlock from "./ColorBlock.jsx";
 
 const HomePage = () => {
-  const [themeColor, setThemeColor] = useState("red");
+  const [themeColor, setThemeColor] = useState({"color":"red","rgb":"rgb(189, 17, 17)"});
   const [boxShadowClass, setBoxShadowClass] = useState("red");
-  const [starsColor, setStarsColor] = useState("red");
   const [balloonGame, setBalloonGame] = useState(false);
   const [balloonGameOnOrOff, setBalloonGameOnOrOff] = useState("Off");
   const [balloonSpeed, setBalloonSpeed] = useState(4);
   const [balloonsPopped, setBalloonsPopped] = useState(0);
   const [currentTime, setCurrentTime] = useState("");
-  const [RGBColor, setRGBColor] = useState("rgb(189, 17, 17)");
   let spawnTimeout;
 
   const IconGroup = () => {
@@ -43,7 +43,7 @@ const HomePage = () => {
 
     return (
       /* Icons content (inside of the main content box) */
-      <div className="homeIcons">
+      <div className="flex justify-start py-4">
         {/* Github */}
         <a
           href="https://www.github.com/calebrosen"
@@ -97,64 +97,6 @@ const HomePage = () => {
   // COLOR
   // SECTION
 
-  useEffect(() => {
-    ChangeThemeColor("red", "rgb(189, 17, 17)");
-  }, []);
-
-  const ChangeThemeColor = (color, rgb) => {
-    setThemeColor(color);
-    setRGBColor(rgb);
-
-    const classNames = require("classnames");
-
-    // box shadows
-    const boxShadowClasses = classNames(
-      "homeIndividualIcon",
-      "hoverEffectHomePage",
-      color + "BoxShadow"
-    );
-    setBoxShadowClass(boxShadowClasses);
-
-    // stars
-    setStarsColor(rgb);
-
-    // borders (on hover)
-    // using native JS instead of defining many className objects
-    const elementWithBorderHoverColorClasses = document.querySelectorAll(
-      ".greenHoverBorderEffectHome, .blueHoverBorderEffectHome, .yellowHoverBorderEffectHome, .pinkHoverBorderEffectHome, .redHoverBorderEffectHome"
-    );
-
-    // looping
-    elementWithBorderHoverColorClasses.forEach((element) => {
-      const classList = Array.from(element.classList);
-
-      // Looping through classes and removing the hover ones
-      classList.forEach((className) => {
-        if (className.endsWith("HoverBorderEffectHome")) {
-          element.classList.remove(className);
-          element.classList.add(color + "HoverBorderEffectHome");
-        }
-      });
-    });
-  };
-
-  // END
-  // OF
-  // CHANGING
-  // THEME
-  // COLOR
-  // SECTION
-
-  const Star = ({ amount }) => {
-    // Looping through number passed and returning stars of that amount
-    return (
-      <>
-        {Array.from({ length: amount }, (_, index) => (
-          <FaStar key={index} style={{verticalAlign: 'baseline'}} color={starsColor} size={10} />
-        ))}
-      </>
-    );
-  };
 
   // This function is the content of the time block
   const LocalTime = () => {
@@ -180,7 +122,6 @@ const HomePage = () => {
       return () => clearInterval(intervalId);
     }, [updateTime]); // Depend on updateTime function
 
-    let handColor = { RGBColor };
 
     const clockOptions = {
       width: "3vw",
@@ -190,18 +131,15 @@ const HomePage = () => {
       centerColor: "#2f2e2e",
       centerBorderColor: "#d7d3d3",
       handColors: {
-        second: handColor.RGBColor,
+        second: themeColor.rgb,
         minute: "#1a1919",
         hour: "#1a1919",
       },
     };
 
-    // You can call updateTime here if needed
-    // updateTime();
-
     return (
-      <div className="clockFlexGroup">
-        <span className="clockSpan">
+      <div className="flex-[0.66666666] flex justify-between items-center gap-8">
+        <span>
           Local Time:
           <br />
           {currentTime} EST
@@ -280,12 +218,12 @@ const HomePage = () => {
   function popBalloon(balloon, moveInterval) {
     clearInterval(moveInterval);
 
-    // Changing to explosion
+    // changing to explosion
     balloon.textContent = "💥";
     balloon.style.filter = "none";
 
     setTimeout(() => {
-      balloon.remove(); // Remove the balloon after a short delay
+      balloon.remove(); // removing the balloon after a short delay
     }, 100);
 
     setBalloonsPopped((prevCount) => prevCount + 1);
@@ -295,7 +233,7 @@ const HomePage = () => {
     let speed = e.target.value;
     setBalloonSpeed(speed);
 
-    //Resetting game to apply speed change
+    //resetting game to apply speed change
     if (balloonGame) {
       setBalloonGame(false);
       setTimeout(function () {
@@ -316,21 +254,14 @@ const HomePage = () => {
 
   const BalloonGameOnOrOffText = () => {
     return (
-      <span
-        className='balloonGameOnOrOff'
-      >
-        {balloonGameOnOrOff}&nbsp;
-      </span>
+      <span className="balloonGameOnOrOff">{balloonGameOnOrOff}&nbsp;</span>
     );
   };
 
   const BalloonGameCounter = () => {
     return (
       <div id="balloonCounter" className="balloonCounter">
-        <span
-          className='balloonCounterSpan'>
-          {balloonsPopped} 🎈
-        </span>
+        <span className="balloonCounterSpan">{balloonsPopped} 🎈</span>
       </div>
     );
   };
@@ -338,62 +269,36 @@ const HomePage = () => {
   // END BALLOON GAME
 
 
-  // About me content
-  const AboutMeContent = () => {
-    return (
-      <div>
-        <h5 className="aboutMeH5">About me</h5>
-        <div className="aboutMeSidePanel">
-          I'm a full stack developer with a strong desire to learn and improve
-          everyday.
-          <div className="homeMyStack">
-            My stack:
-            <div className="homeMyStackInner">
-              <ul>
-                <li>
-                  <span className="homeListItemsStack">JavaScript</span>{" "}
-                  <Star amount={5} />
-                </li>
-                <li>
-                  <span className="homeListItemsStack">React</span>{" "}
-                  <Star amount={5} />
-                </li>
-                <li>
-                  <span className="homeListItemsStack">MySQL</span>{" "}
-                  <Star amount={5} />
-                </li>
-                <li>
-                  <span className="homeListItemsStack">NodeJS</span>{" "}
-                  <Star amount={4} />
-                </li>
-                <li>
-                  <span className="homeListItemsStack">CSS</span>{" "}
-                  <Star amount={4} />
-                </li>
-                <li>
-                  <span className="homeListItemsStack">PHP</span>{" "}
-                  <Star amount={5} />
-                </li>
-              </ul>
-            </div>
-          </div>
-          <p className="sidePanelLowerPart">
-            Beyond coding, I love to cook, work out, and watch anime.
-          </p>
-          <p className="sidePanelLowerPart">
-            I'm always learning and eager to work with new technologies.
-            Currently, it's on my roadmap to learn Angular and C#/.NET.
-          </p>
-        </div>
-      </div>
-    );
-  };
-  
+
   return (
-    <div className="homePageContainer">
-      <div className="fsBackground"></div>
-        <div className="main-content">
-          {/* Main content section */}
+    <div className="relative h-screen">
+      <div className="fixed inset-0 z-0 pointer-events-none">
+        <div
+          className="absolute inset-0"
+          style={{
+            backgroundColor: "rgb(20, 20, 20)",
+            backgroundSize: "5.2rem 5.2rem",
+            backgroundImage: `
+            linear-gradient(to right, rgba(44, 43, 43, 1) 1px, transparent 0),
+            linear-gradient(to bottom, rgb(44, 43, 43) 1px, transparent 0)
+          `,
+          }}
+        />
+      </div>
+
+      <div className="fixed inset-0 z-[-1] pointer-events-none">
+        <div
+          className="absolute inset-0"
+          style={{
+            background:
+              "linear-gradient(180deg, rgba(20,20,20,0.8) 1%, rgba(20,20,20,0.96) 40%, rgba(23,23,23,1) 100%)",
+          }}
+        />
+      </div>
+
+      {/* Foreground Content */}
+      <div className="relative z-10">
+        <div className="grid [grid-template-columns:78%_22%] [grid-template-rows:subgrid] gap-4 mt-[4.5%] mx-[20%] max-h-[5px] !important items-start">
           <motion.div
             initial={{ scale: 0.8, y: 500 }}
             animate={{ scale: 1, y: 0 }}
@@ -404,36 +309,31 @@ const HomePage = () => {
               duration: 0.5,
             }}
           >
-            <div className="mainContentHome redHoverBorderEffectHome">
-              {/* Inside of main content box */}
+            <div className="col-start-1 col-end-2 row-start-1 px-4 py-[0.9rem] border-[#2f2f2f] border-1 text-[#dbdbdb] text-[1.15vw] bg-[rgba(53,53,53,0.192)] shadow-[rgba(0,0,0,0.4)_0px_4px_7px,rgba(0,0,0,0.3)_0px_9px_15px_-5px,rgba(0,0,0,0.2)_0px_-3px_0px] backdrop-blur-[7.5px] rounded-[10px] font-medium redHoverBorderEffectHome">
               <div className="row">
-                <div className="col-xs-12 col-sm-12 col-md-8 col-lg-8 col-xl-8 mainContentDivIntro">
+                <div className="w-full md:col-span-8 lg:col-span-8 xl:col-span-8 flex flex-col justify-between flex-1 my-[0.3rem]">
                   <h4>
                     Hi, I'm
-                    <span style={{ fontWeight: "bold", color: "#fff" }}>
-                      &nbsp;Caleb
-                    </span>
-                    , a software developer.
+                    <span className="font-bold text-white">&nbsp;Caleb</span>, a
+                    software developer.
                   </h4>
-                  <h4 id="desktopOnlyH4Home">
+                  <h4 id="sm:display-none">
                     Feel free to reach out about any projects you may have in
                     mind, or just to say hello.
                   </h4>
                   <IconGroup />
                 </div>
-                <div className="col-xs-12 col-sm-12 col-md-4 col-lg-4 col-xl-4 avatarSection">
+                <div className="col-xs-12 col-sm-12 col-md-4 col-lg-4 col-xl-4 relative">
                   <img
                     src={Avatar}
-                    className="homePageAvatar"
+                    className="w-[95%]"
                     alt="An avatar of Caleb smiling wearing a white button-up shirt"
-                  ></img>
+                  />
                 </div>
               </div>
             </div>
           </motion.div>
 
-          {/* MOBILE ONLY ABOUT ME */}
-          {/* MOBILE ONLY ABOUT ME */}
           {/* MOBILE ONLY ABOUT ME */}
           <motion.div
             initial={{ scale: 0.6, y: 700 }}
@@ -445,14 +345,11 @@ const HomePage = () => {
               duration: 0.5,
               delay: 0.2,
             }}
-            className="sideContentHome redHoverBorderEffectHome"
+            className="max-h-full min-h-full h-fit text-[0.78vw] border border-[#2f2f2f] col-start-2 col-end-3 row-start-1 row-span-2 pt-[0.825rem] pr-4 pb-[0.2rem] pl-4 text-[#dbdbdb] bg-[rgba(53,53,53,0.192)] shadow-[rgba(0,0,0,0.4)_0px_4px_7px,rgba(0,0,0,0.3)_0px_9px_15px_-5px,rgba(0,0,0,0.2)_0px_-3px_0px] backdrop-blur-[7.5px] rounded-[10px] redHoverBorderEffectHome"
             id="mobileHomeAboutMe"
           >
-            <AboutMeContent />
+            <AboutMe themeColor={themeColor} />
           </motion.div>
-          {/* END OF MOBILE ONLY ABOUT ME */}
-          {/* END OF MOBILE ONLY ABOUT ME */}
-          {/* END OF MOBILE ONLY ABOUT ME */}
 
           <motion.div
             initial={{ scale: 0.6, y: 700 }}
@@ -465,12 +362,14 @@ const HomePage = () => {
               delay: 0.1,
             }}
           >
-            <div className="triGridColumn" id="balloonGameBlock">
-              {/* Tall Block for Balloon Game */}
-              <div className="tallHomeBlock redHoverBorderEffectHome">
-                <div className="balloonGame">
-                  <div className="balloonGameElement">Balloon Game 🎮</div>
-                  <div className="balloonGameElement">
+            <div
+              className="grid grid-cols-3 grid-rows-[auto_auto] gap-y-0 gap-x-4 text-[#dbdbdb]"
+              id="balloonGameBlock"
+            >
+              <div className="col-start-1 row-start-1 row-span-2 min-h-full px-[0.9rem] py-[0.6rem] bg-[rgba(53,53,53,0.192)] shadow-[rgba(0,0,0,0.4)_0px_4px_7px,rgba(0,0,0,0.3)_0px_9px_15px_-5px,rgba(0,0,0,0.2)_0px_-3px_0px] backdrop-blur-[7.5px] rounded-[10px] border-1 border-[#2f2f2f] redHoverBorderEffectHome">
+                <div className="flex flex-col text-left justify-start items-start gap-[0.75rem] p-[0.35rem]">
+                  <div className="text-left">Balloon Game 🎮</div>
+                  <div className="text-left">
                     Speed{" "}
                     <input
                       type="range"
@@ -478,12 +377,10 @@ const HomePage = () => {
                       max="14"
                       defaultValue="7"
                       onChange={ChangeBalloonSpeed}
-                      style={{
-                        accentColor: RGBColor,
-                      }}
+                      style={{ accentColor: themeColor }}
                     />
                   </div>
-                  <div className="balloonGameFlexOnOffAndCounter">
+                  <div className="flex justify-start gap-8">
                     <div>
                       <BalloonGameOnOrOffText />
                       <span className="checkbox-wrapper-22">
@@ -505,139 +402,37 @@ const HomePage = () => {
                 </div>
               </div>
 
-              {/* Portfolio Block */}
-              
-              <a href="/portfolio" className="anchorNoDecoration">
-                <div
-                  className="triBlockHome portfolioBackground redHoverBorderEffectHome"
-                  id="portfolioBlock"
-                >
-
-                    <div className="portfolioBlockHome">
-                      Portfolio&nbsp;
-                        <FiArrowUpRight color={RGBColor}/>
-                    </div>
+              <a href="/portfolio" className="no-underline">
+                <div className="flex-[0.33333333333] min-h-[2.75vw] h-[65%] px-[0.9rem] py-[0.6rem] bg-[rgba(53,53,53,0.192)] shadow-[rgba(0,0,0,0.4)_0px_4px_7px,rgba(0,0,0,0.3)_0px_9px_15px_-5px,rgba(0,0,0,0.2)_0px_-3px_0px] backdrop-blur-[7.5px] rounded-[10px] border-1 border-[#2f2f2f] relative z-[5] transition-all duration-1000 ease-in-out flex items-center text-[1.25vw] portfolioBackground redHoverBorderEffectHome">
+                  <div className="flex justify-between items-center w-full">
+                    <span>Portfolio</span>
+                    <FiArrowUpRight color={themeColor} />
+                  </div>
                 </div>
               </a>
-              {/* Color Block with animated color circles */}
+
+              <ColorBlock
+                themeColor={themeColor}
+                setThemeColor={setThemeColor}
+                setBoxShadowClass={setBoxShadowClass}
+              />
+
               <div
-                className="triBlockHome redHoverBorderEffectHome"
-                id="colorBlock"
+                className="col-start-2 col-end-[-1] row-start-2 grid gap-4"
+                style={{ gridTemplateColumns: "7.75fr 2.25fr" }}
               >
-                <div className="colorBlockHome">
-                  <motion.div
-                    animate={{
-                      scale: [1, 1.18, 0.3, 1],
-                      rotate: [0, 0, 180, 180, 0],
-                    }}
-                    transition={{
-                      duration: 2,
-                      ease: "easeInOut",
-                      times: [0, 0.2, 0.5, 0.8, 1],
-                    }}
-                  >
-                    <div
-                      className="circle redBG hoverEffectHomePage"
-                      onClick={() =>
-                        ChangeThemeColor("red", "rgb(189, 17, 17)")
-                      }
-                    ></div>
-                  </motion.div>
-
-                  <motion.div
-                    animate={{
-                      scale: [1, 1.18, 0.3, 1],
-                      rotate: [0, 0, 180, 180, 0],
-                    }}
-                    transition={{
-                      duration: 2,
-                      ease: "easeInOut",
-                      times: [0, 0.2, 0.5, 0.8, 1],
-                    }}
-                  >
-                    <div
-                      className="circle yellowBG hoverEffectHomePage"
-                      onClick={() =>
-                        ChangeThemeColor("yellow", "rgb(212, 177, 21)")
-                      }
-                    ></div>
-                  </motion.div>
-
-                  <motion.div
-                    animate={{
-                      scale: [1, 1.18, 0.3, 1],
-                      rotate: [0, 0, 180, 180, 0],
-                    }}
-                    transition={{
-                      duration: 2,
-                      ease: "easeInOut",
-                      times: [0, 0.2, 0.5, 0.8, 1],
-                    }}
-                  >
-                    <div
-                      className="circle greenBG hoverEffectHomePage"
-                      onClick={() =>
-                        ChangeThemeColor("green", "rgb(36, 163, 19)")
-                      }
-                    ></div>
-                  </motion.div>
-
-                  <motion.div
-                    animate={{
-                      scale: [1, 1.18, 0.3, 1],
-                      rotate: [0, 0, 180, 180, 0],
-                    }}
-                    transition={{
-                      duration: 2,
-                      ease: "easeInOut",
-                      times: [0, 0.2, 0.5, 0.8, 1],
-                    }}
-                  >
-                    <div
-                      className="circle blueBG hoverEffectHomePage"
-                      onClick={() =>
-                        ChangeThemeColor("blue", "rgb(9, 176, 226)")
-                      }
-                    ></div>
-                  </motion.div>
-
-                  <motion.div
-                    animate={{
-                      scale: [1, 1.18, 0.3, 1],
-                      rotate: [0, 0, 180, 180, 0],
-                    }}
-                    transition={{
-                      duration: 2,
-                      ease: "easeInOut",
-                      times: [0, 0.2, 0.5, 0.8, 1],
-                    }}
-                  >
-                    <div
-                      className="circle pinkBG hoverEffectHomePage"
-                      onClick={() =>
-                        ChangeThemeColor("pink", "rgb(212, 13, 238)")
-                      }
-                    ></div>
-                  </motion.div>
-                </div>
-              </div>
-
-              {/* Bottom Grid */}
-              <div className="bottomGrid">
-                {/* Bottom Grid Long */}
-                <div className="bottomGridLong redHoverBorderEffectHome">
-                  <div className="homeBottomInterior">
+                <div className="col-start-1 px-[0.9rem] border-1 border-[#2f2f2f] bg-[rgba(53,53,53,0.192)] shadow-[rgba(0,0,0,0.4)_0px_4px_7px,rgba(0,0,0,0.3)_0px_9px_15px_-5px,rgba(0,0,0,0.2)_0px_-3px_0px] backdrop-blur-[7.5px] rounded-[10px] redHoverBorderEffectHome">
+                  <div className="flex justify-around items-center h-full min-h-[2.75rem] text-[1.2vw] text-center">
                     <LocalTime />
                   </div>
                 </div>
-
-                <div className="bottomGridShort redHoverBorderEffectHome">
-                  <div className="madeWithReact">
+                <div className="col-start-2 px-[0.9rem] py-[0.2rem] text-[0.8vw] border-1 border-[#2f2f2f] bg-[rgba(53,53,53,0.192)] shadow-[rgba(0,0,0,0.4)_0px_4px_7px,rgba(0,0,0,0.3)_0px_9px_15px_-5px,rgba(0,0,0,0.2)_0px_-3px_0px] backdrop-blur-[7.5px] rounded-[10px] redHoverBorderEffectHome">
+                  <div className="flex justify-around items-center h-full min-h-[2.75rem] text-[0.8vw] text-center">
                     <div>
                       Built with{" "}
                       <span
                         style={{
-                          color: RGBColor,
+                          color: themeColor,
                           fontSize: "0.9vw",
                           fontWeight: "700",
                         }}
@@ -662,13 +457,14 @@ const HomePage = () => {
               duration: 0.5,
               delay: 0.2,
             }}
-            className="sideContentHome redHoverBorderEffectHome"
+            className="max-h-full min-h-full h-fit text-[0.78vw] border-1 border-[#2f2f2f] col-start-2 col-end-3 row-start-1 row-span-2 pt-[0.825rem] pr-4 pb-[0.2rem] pl-4 text-[#dbdbdb] bg-[rgba(53,53,53,0.192)] shadow-[rgba(0,0,0,0.4)_0px_4px_7px,rgba(0,0,0,0.3)_0px_9px_15px_-5px,rgba(0,0,0,0.2)_0px_-3px_0px] backdrop-blur-[7.5px] rounded-[10px] redHoverBorderEffectHome"
             id="sideHome"
           >
-            {/* Side content section */}
-            <AboutMeContent />
+            <AboutMe themeColor={themeColor} />
           </motion.div>
+          
         </div>
+      </div>
     </div>
   );
 };

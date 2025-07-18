@@ -28,6 +28,7 @@ const Portfolio = () => {
 
       <p className='portfolioH1Wrapper'>
         <h1 className="portfolioH1">Portfolio and Projects</h1>
+        <h4 className="portfolioH1">This portfolio barely scratches the surface of my work.<br />For a more updated and maintained list, view my <a href="https://www.github.com/calebrosen" target="_blank">github.</a></h4>
       </p>
 
 
