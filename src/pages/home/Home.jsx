@@ -2,7 +2,7 @@ import AnalogClock from "analog-clock-react";
 import { motion } from "framer-motion";
 import { useCallback, useEffect, useState } from "react";
 import { BsTwitterX } from "react-icons/bs";
-import { FaDiscord, FaGithub, FaLinkedin, FaStar } from "react-icons/fa";
+import { FaDiscord, FaGithub, FaLinkedin } from "react-icons/fa";
 import { FiArrowUpRight } from "react-icons/fi";
 import { MdOutlineEmail } from "react-icons/md";
 import Swal from "sweetalert2";
@@ -10,7 +10,8 @@ import "sweetalert2/dist/sweetalert2.min.css";
 import Avatar from "../../img/home/avatar/Avatar.png";
 import "./Home.css";
 import AboutMe from "./AboutMe.jsx";
-import ColorBlock from "./ColorBlock.jsx";
+import TimeBlock from "../../components/home/TimeBlock.jsx";
+import ColorBlock from "../../components/home/ColorBlock.jsx";
 
 const HomePage = () => {
   const [themeColor, setThemeColor] = useState({"color":"red","rgb":"rgb(189, 17, 17)"});
@@ -19,7 +20,6 @@ const HomePage = () => {
   const [balloonGameOnOrOff, setBalloonGameOnOrOff] = useState("Off");
   const [balloonSpeed, setBalloonSpeed] = useState(4);
   const [balloonsPopped, setBalloonsPopped] = useState(0);
-  const [currentTime, setCurrentTime] = useState("");
   let spawnTimeout;
 
   const IconGroup = () => {
@@ -88,65 +88,6 @@ const HomePage = () => {
             <FaLinkedin size={35} />
           </div>
         </a>
-      </div>
-    );
-  };
-
-  // CHANGING
-  // THEME
-  // COLOR
-  // SECTION
-
-
-  // This function is the content of the time block
-  const LocalTime = () => {
-    const updateTime = useCallback(() => {
-      const newTime = new Date().toLocaleTimeString([], {
-        hour: "2-digit",
-        minute: "2-digit",
-        hour12: true,
-      });
-
-      // Only update state if the time has changed
-      if (newTime !== currentTime) {
-        setCurrentTime(newTime);
-      }
-    }, [currentTime]); // Use currentTime as a dependency
-
-    useEffect(() => {
-      const intervalId = setInterval(updateTime, 1000);
-
-      // Initial call to set the time immediately
-      updateTime();
-
-      return () => clearInterval(intervalId);
-    }, [updateTime]); // Depend on updateTime function
-
-
-    const clockOptions = {
-      width: "3vw",
-      border: true,
-      borderColor: "#2e2e2e",
-      baseColor: "#d7d3d3",
-      centerColor: "#2f2e2e",
-      centerBorderColor: "#d7d3d3",
-      handColors: {
-        second: themeColor.rgb,
-        minute: "#1a1919",
-        hour: "#1a1919",
-      },
-    };
-
-    return (
-      <div className="flex-[0.66666666] flex justify-between items-center gap-8">
-        <span>
-          Local Time:
-          <br />
-          {currentTime} EST
-        </span>
-        <span>
-          <AnalogClock {...clockOptions} />
-        </span>
       </div>
     );
   };
@@ -377,7 +318,7 @@ const HomePage = () => {
                       max="14"
                       defaultValue="7"
                       onChange={ChangeBalloonSpeed}
-                      style={{ accentColor: themeColor }}
+                      style={{ accentColor: themeColor.rgb }}
                     />
                   </div>
                   <div className="flex justify-start gap-8">
@@ -403,10 +344,10 @@ const HomePage = () => {
               </div>
 
               <a href="/portfolio" className="no-underline">
-                <div className="flex-[0.33333333333] min-h-[2.75vw] h-[65%] px-[0.9rem] py-[0.6rem] bg-[rgba(53,53,53,0.192)] shadow-[rgba(0,0,0,0.4)_0px_4px_7px,rgba(0,0,0,0.3)_0px_9px_15px_-5px,rgba(0,0,0,0.2)_0px_-3px_0px] backdrop-blur-[7.5px] rounded-[10px] border-1 border-[#2f2f2f] relative z-[5] transition-all duration-1000 ease-in-out flex items-center text-[1.25vw] portfolioBackground redHoverBorderEffectHome">
+                <div className="flex-[0.33333333333] min-h-[2.75vw] h-[65%] px-[0.9rem] py-[0.6rem] bg-[rgba(53,53,53,0.192)] shadow-[rgba(0,0,0,0.4)_0px_4px_7px,rgba(0,0,0,0.3)_0px_9px_15px_-5px,rgba(0,0,0,0.2)_0px_-3px_0px] backdrop-blur-[7.5px] rounded-[10px] border-1 border-[#2f2f2f] relative z-[5] transition-all duration-100 ease-in-out flex items-center text-[1.25vw] portfolioBackground redHoverBorderEffectHome">
                   <div className="flex justify-between items-center w-full">
                     <span>Portfolio</span>
-                    <FiArrowUpRight color={themeColor} />
+                    <FiArrowUpRight color={themeColor.rgb} />
                   </div>
                 </div>
               </a>
@@ -423,7 +364,10 @@ const HomePage = () => {
               >
                 <div className="col-start-1 px-[0.9rem] border-1 border-[#2f2f2f] bg-[rgba(53,53,53,0.192)] shadow-[rgba(0,0,0,0.4)_0px_4px_7px,rgba(0,0,0,0.3)_0px_9px_15px_-5px,rgba(0,0,0,0.2)_0px_-3px_0px] backdrop-blur-[7.5px] rounded-[10px] redHoverBorderEffectHome">
                   <div className="flex justify-around items-center h-full min-h-[2.75rem] text-[1.2vw] text-center">
-                    <LocalTime />
+                      <TimeBlock
+    themeColor={themeColor}
+  />
+
                   </div>
                 </div>
                 <div className="col-start-2 px-[0.9rem] py-[0.2rem] text-[0.8vw] border-1 border-[#2f2f2f] bg-[rgba(53,53,53,0.192)] shadow-[rgba(0,0,0,0.4)_0px_4px_7px,rgba(0,0,0,0.3)_0px_9px_15px_-5px,rgba(0,0,0,0.2)_0px_-3px_0px] backdrop-blur-[7.5px] rounded-[10px] redHoverBorderEffectHome">
@@ -432,7 +376,7 @@ const HomePage = () => {
                       Built with{" "}
                       <span
                         style={{
-                          color: themeColor,
+                          color: themeColor.rgb,
                           fontSize: "0.9vw",
                           fontWeight: "700",
                         }}
