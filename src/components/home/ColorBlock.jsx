@@ -2,7 +2,7 @@ import { motion } from "framer-motion";
 import { useEffect } from "react";
 import classNames from "classnames";
 
-const ColorBlock = ({ themeColor, setThemeColor, setBoxShadowClass }) => {
+const ColorBlock = ({ setThemeColor }) => {
   useEffect(() => {
     ChangeThemeColor("red", "rgb(189, 17, 17)");
   }, []);
@@ -10,14 +10,6 @@ const ColorBlock = ({ themeColor, setThemeColor, setBoxShadowClass }) => {
   const ChangeThemeColor = (color, rgb) => {
     // Update themeColor state with an object
     setThemeColor({ color, rgb });
-
-    // box shadows
-    const boxShadowClasses = classNames(
-      "homeIndividualIcon",
-      "hoverEffectHomePage",
-      color + "BoxShadow"
-    );
-    setBoxShadowClass(boxShadowClasses);
 
     // borders (on hover)
     const elements = document.querySelectorAll(

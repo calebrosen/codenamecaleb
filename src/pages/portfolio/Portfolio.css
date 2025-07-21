@@ -33,7 +33,6 @@
       rgba(23, 23, 23, 1) 100%
     );
     z-index: -1;
-
 }
 
 .homeIconTopLeft {
@@ -105,7 +104,7 @@ a {
 .vertical-timeline-element-icon {
     box-shadow: none !important;
 }
-
+/* 
 .portfolioIconImg {
     width: 60px;
     transform: scale(1.215);
@@ -116,37 +115,7 @@ a {
     background-color: rgb(219, 219, 219);
     margin-bottom: 15px;
     z-index: -55555;
-}
-
-.portfolioH1Wrapper {
-    text-align: center;
-    color: rgb(219, 219, 219);
-    letter-spacing: 0.3rem;
-    padding: 0.2rem 0 1.3rem 0;
-    font-variant: small-caps;
-}
-
-h1.portfolioH1 {
-    font-size: 4rem;
-}
-
-.linkAndCode {
-    padding: 0.10rem 0.35rem 0.21rem 0.35rem;
-    margin-top: 0.25rem;
-    border-radius: 20px;
-    background-color: rgb(189, 17, 17);
-    color: white;
-    text-align: center;
-    font-weight: bold;
-    display: inline-block;
-    transition: 0.2s ease;
-  }
-
-  .linkAndCode:hover > div {
-    transform: translateY(-1.75px) scale(1.01);
-  }
-
-
+} */
 
 .linkAndCodeContainer {
     display: flex;

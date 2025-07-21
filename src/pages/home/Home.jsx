@@ -1,215 +1,24 @@
-import AnalogClock from "analog-clock-react";
 import { motion } from "framer-motion";
-import { useCallback, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { BsTwitterX } from "react-icons/bs";
 import { FaDiscord, FaGithub, FaLinkedin } from "react-icons/fa";
 import { FiArrowUpRight } from "react-icons/fi";
 import { MdOutlineEmail } from "react-icons/md";
 import Swal from "sweetalert2";
 import "sweetalert2/dist/sweetalert2.min.css";
-import Avatar from "../../img/home/avatar/Avatar.png";
+
 import "./Home.css";
-import AboutMe from "./AboutMe.jsx";
+import AboutMe from "../../components/home/AboutMe.jsx";
 import TimeBlock from "../../components/home/TimeBlock.jsx";
 import ColorBlock from "../../components/home/ColorBlock.jsx";
+import BalloonGame from "../../components/home/BalloonGame/BalloonGame.jsx";
+import CalebBlock from "../../components/home/CalebBlock.jsx";
 
 const HomePage = () => {
-  const [themeColor, setThemeColor] = useState({"color":"red","rgb":"rgb(189, 17, 17)"});
-  const [boxShadowClass, setBoxShadowClass] = useState("red");
-  const [balloonGame, setBalloonGame] = useState(false);
-  const [balloonGameOnOrOff, setBalloonGameOnOrOff] = useState("Off");
-  const [balloonSpeed, setBalloonSpeed] = useState(4);
-  const [balloonsPopped, setBalloonsPopped] = useState(0);
-  let spawnTimeout;
-
-  const IconGroup = () => {
-    /* This is for the Icons Group of the Main Content box */
-
-    const copyDiscUserNameToClipboard = () => {
-      /* Since you cannot go to a discord username with a link, I am copying my discord username to the clipboard */
-      const textToCopy = "im.caleb";
-      navigator.clipboard.writeText(textToCopy).then(() => {
-        Swal.fire({
-          title: "Copied username!",
-          icon: "success",
-          timer: 2000,
-          showConfirmButton: false,
-          toast: true,
-          background: "rgba(20, 20, 20, 1.0)",
-          color: "#f9f9f9",
-        });
-      });
-    };
-
-    return (
-      /* Icons content (inside of the main content box) */
-      <div className="flex justify-start py-4">
-        {/* Github */}
-        <a
-          href="https://www.github.com/calebrosen"
-          target="_blank"
-          rel="noreferrer"
-        >
-          <div className={boxShadowClass}>
-            <FaGithub size={35} />
-          </div>
-        </a>
-
-        {/* Discord */}
-        <div className={boxShadowClass}>
-          <FaDiscord size={35} onClick={copyDiscUserNameToClipboard} />
-        </div>
-
-        {/* X/Twitter */}
-        <a
-          href="https://www.x.com/caleberosen"
-          target="_blank"
-          rel="noreferrer"
-        >
-          <div className={boxShadowClass}>
-            <BsTwitterX size={35} />
-          </div>
-        </a>
-
-        {/* Email */}
-        <a href="mailto:calebethanrosen@gmail.com" rel="noreferrer">
-          <div className={boxShadowClass}>
-            <MdOutlineEmail size={35} />
-          </div>
-        </a>
-
-        {/* Linkedin */}
-        <a
-          href="https://www.linkedin.com/in/caleb-rosen-390b7a178"
-          target="_blank"
-          rel="noreferrer"
-        >
-          <div className={boxShadowClass}>
-            <FaLinkedin size={35} />
-          </div>
-        </a>
-      </div>
-    );
-  };
-
-  // START
-  // BALLOON
-  // GAME
-
-  useEffect(() => {
-    if (balloonGame) {
-      spawnBalloon();
-    } else {
-      clearTimeout(spawnTimeout);
-    }
-
-    return () => clearTimeout(spawnTimeout);
-  }, [balloonGame]);
-
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, []);
-
-  function spawnBalloon() {
-    if (balloonGame) {
-      const balloon = document.createElement("div");
-      balloon.textContent = "🎈";
-      balloon.style.position = "absolute";
-      balloon.style.fontSize = "6.5rem";
-      // Random horizontal position
-      balloon.style.left = `${Math.random() * (window.innerWidth - 90)}px`;
-      balloon.style.bottom = "0px";
-      // Random color
-      balloon.style.filter = `hue-rotate(${Math.random() * 360}deg)`;
-      balloon.style.zIndex = "9999";
-      balloon.style.cursor = "pointer";
-      document.body.appendChild(balloon);
-
-      // Start moving the balloon
-      let moveInterval = moveBalloon(balloon);
-
-      balloon.addEventListener("click", function () {
-        popBalloon(balloon, moveInterval);
-      });
-      balloon.addEventListener("touchstart", function (event) {
-        event.preventDefault();
-        popBalloon(balloon, moveInterval);
-      });
-
-      // Set the timeout to spawn the next balloon
-      spawnTimeout = setTimeout(spawnBalloon, Math.random() * 400 + 400); // Random delay for spawning
-    }
-  }
-
-  function moveBalloon(balloon) {
-    let moveInterval = setInterval(() => {
-      let currentBottom = parseInt(balloon.style.bottom, 10);
-      let speed = { balloonSpeed };
-      currentBottom += parseInt(speed.balloonSpeed); // Move up
-      balloon.style.bottom = `${currentBottom}px`;
-
-      if (currentBottom > window.innerHeight) {
-        clearInterval(moveInterval);
-        balloon.remove(); // Clean up off-screen
-      }
-    }, 20);
-    return moveInterval;
-  }
-
-  function popBalloon(balloon, moveInterval) {
-    clearInterval(moveInterval);
-
-    // changing to explosion
-    balloon.textContent = "💥";
-    balloon.style.filter = "none";
-
-    setTimeout(() => {
-      balloon.remove(); // removing the balloon after a short delay
-    }, 100);
-
-    setBalloonsPopped((prevCount) => prevCount + 1);
-  }
-
-  const ChangeBalloonSpeed = (e) => {
-    let speed = e.target.value;
-    setBalloonSpeed(speed);
-
-    //resetting game to apply speed change
-    if (balloonGame) {
-      setBalloonGame(false);
-      setTimeout(function () {
-        setBalloonGame(true);
-      }, 100);
-    }
-  };
-
-  const enableDisableBalloonGame = (e) => {
-    const value = e.target.checked;
-    setBalloonGame(value);
-    if (value) {
-      setBalloonGameOnOrOff("On");
-    } else {
-      setBalloonGameOnOrOff("Off");
-    }
-  };
-
-  const BalloonGameOnOrOffText = () => {
-    return (
-      <span className="balloonGameOnOrOff">{balloonGameOnOrOff}&nbsp;</span>
-    );
-  };
-
-  const BalloonGameCounter = () => {
-    return (
-      <div id="balloonCounter" className="balloonCounter">
-        <span className="balloonCounterSpan">{balloonsPopped} 🎈</span>
-      </div>
-    );
-  };
-
-  // END BALLOON GAME
-
-
+  const [themeColor, setThemeColor] = useState({
+    color: "red",
+    rgb: "rgb(189, 17, 17)",
+  });
 
   return (
     <div className="relative h-screen">
@@ -250,29 +59,7 @@ const HomePage = () => {
               duration: 0.5,
             }}
           >
-            <div className="col-start-1 col-end-2 row-start-1 px-4 py-[0.9rem] border-[#2f2f2f] border-1 text-[#dbdbdb] text-[1.15vw] bg-[rgba(53,53,53,0.192)] shadow-[rgba(0,0,0,0.4)_0px_4px_7px,rgba(0,0,0,0.3)_0px_9px_15px_-5px,rgba(0,0,0,0.2)_0px_-3px_0px] backdrop-blur-[7.5px] rounded-[10px] font-medium redHoverBorderEffectHome">
-              <div className="row">
-                <div className="w-full md:col-span-8 lg:col-span-8 xl:col-span-8 flex flex-col justify-between flex-1 my-[0.3rem]">
-                  <h4>
-                    Hi, I'm
-                    <span className="font-bold text-white">&nbsp;Caleb</span>, a
-                    software developer.
-                  </h4>
-                  <h4 id="sm:display-none">
-                    Feel free to reach out about any projects you may have in
-                    mind, or just to say hello.
-                  </h4>
-                  <IconGroup />
-                </div>
-                <div className="col-xs-12 col-sm-12 col-md-4 col-lg-4 col-xl-4 relative">
-                  <img
-                    src={Avatar}
-                    className="w-[95%]"
-                    alt="An avatar of Caleb smiling wearing a white button-up shirt"
-                  />
-                </div>
-              </div>
-            </div>
+            <CalebBlock themeColor={themeColor} />
           </motion.div>
 
           {/* MOBILE ONLY ABOUT ME */}
@@ -303,46 +90,8 @@ const HomePage = () => {
               delay: 0.1,
             }}
           >
-            <div
-              className="grid grid-cols-3 grid-rows-[auto_auto] gap-y-0 gap-x-4 text-[#dbdbdb]"
-              id="balloonGameBlock"
-            >
-              <div className="col-start-1 row-start-1 row-span-2 min-h-full px-[0.9rem] py-[0.6rem] bg-[rgba(53,53,53,0.192)] shadow-[rgba(0,0,0,0.4)_0px_4px_7px,rgba(0,0,0,0.3)_0px_9px_15px_-5px,rgba(0,0,0,0.2)_0px_-3px_0px] backdrop-blur-[7.5px] rounded-[10px] border-1 border-[#2f2f2f] redHoverBorderEffectHome">
-                <div className="flex flex-col text-left justify-start items-start gap-[0.75rem] p-[0.35rem]">
-                  <div className="text-left">Balloon Game 🎮</div>
-                  <div className="text-left">
-                    Speed{" "}
-                    <input
-                      type="range"
-                      min="1"
-                      max="14"
-                      defaultValue="7"
-                      onChange={ChangeBalloonSpeed}
-                      style={{ accentColor: themeColor.rgb }}
-                    />
-                  </div>
-                  <div className="flex justify-start gap-8">
-                    <div>
-                      <BalloonGameOnOrOffText />
-                      <span className="checkbox-wrapper-22">
-                        <label className="switch" htmlFor="checkbox">
-                          <input
-                            type="checkbox"
-                            id="checkbox"
-                            onClick={enableDisableBalloonGame}
-                          />
-                          <div
-                            className="slider round"
-                            style={{ display: "inline-block" }}
-                          ></div>
-                        </label>
-                      </span>
-                    </div>
-                    <BalloonGameCounter />
-                  </div>
-                </div>
-              </div>
-
+            <div className="grid grid-cols-3 grid-rows-[auto_auto] gap-y-0 gap-x-4 text-[#dbdbdb]">
+              <BalloonGame themeColor={themeColor} />
               <a href="/portfolio" className="no-underline">
                 <div className="flex-[0.33333333333] min-h-[2.75vw] h-[65%] px-[0.9rem] py-[0.6rem] bg-[rgba(53,53,53,0.192)] shadow-[rgba(0,0,0,0.4)_0px_4px_7px,rgba(0,0,0,0.3)_0px_9px_15px_-5px,rgba(0,0,0,0.2)_0px_-3px_0px] backdrop-blur-[7.5px] rounded-[10px] border-1 border-[#2f2f2f] relative z-[5] transition-all duration-100 ease-in-out flex items-center text-[1.25vw] portfolioBackground redHoverBorderEffectHome">
                   <div className="flex justify-between items-center w-full">
@@ -355,7 +104,6 @@ const HomePage = () => {
               <ColorBlock
                 themeColor={themeColor}
                 setThemeColor={setThemeColor}
-                setBoxShadowClass={setBoxShadowClass}
               />
 
               <div
@@ -364,10 +112,7 @@ const HomePage = () => {
               >
                 <div className="col-start-1 px-[0.9rem] border-1 border-[#2f2f2f] bg-[rgba(53,53,53,0.192)] shadow-[rgba(0,0,0,0.4)_0px_4px_7px,rgba(0,0,0,0.3)_0px_9px_15px_-5px,rgba(0,0,0,0.2)_0px_-3px_0px] backdrop-blur-[7.5px] rounded-[10px] redHoverBorderEffectHome">
                   <div className="flex justify-around items-center h-full min-h-[2.75rem] text-[1.2vw] text-center">
-                      <TimeBlock
-    themeColor={themeColor}
-  />
-
+                    <TimeBlock themeColor={themeColor} />
                   </div>
                 </div>
                 <div className="col-start-2 px-[0.9rem] py-[0.2rem] text-[0.8vw] border-1 border-[#2f2f2f] bg-[rgba(53,53,53,0.192)] shadow-[rgba(0,0,0,0.4)_0px_4px_7px,rgba(0,0,0,0.3)_0px_9px_15px_-5px,rgba(0,0,0,0.2)_0px_-3px_0px] backdrop-blur-[7.5px] rounded-[10px] redHoverBorderEffectHome">
@@ -402,11 +147,9 @@ const HomePage = () => {
               delay: 0.2,
             }}
             className="max-h-full min-h-full h-fit text-[0.78vw] border-1 border-[#2f2f2f] col-start-2 col-end-3 row-start-1 row-span-2 pt-[0.825rem] pr-4 pb-[0.2rem] pl-4 text-[#dbdbdb] bg-[rgba(53,53,53,0.192)] shadow-[rgba(0,0,0,0.4)_0px_4px_7px,rgba(0,0,0,0.3)_0px_9px_15px_-5px,rgba(0,0,0,0.2)_0px_-3px_0px] backdrop-blur-[7.5px] rounded-[10px] redHoverBorderEffectHome"
-            id="sideHome"
           >
             <AboutMe themeColor={themeColor} />
           </motion.div>
-          
         </div>
       </div>
     </div>
