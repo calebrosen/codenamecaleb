@@ -1,18 +1,14 @@
 import { motion } from "framer-motion";
-import { useEffect, useState } from "react";
-import { BsTwitterX } from "react-icons/bs";
-import { FaDiscord, FaGithub, FaLinkedin } from "react-icons/fa";
+import { useState } from "react";
 import { FiArrowUpRight } from "react-icons/fi";
-import { MdOutlineEmail } from "react-icons/md";
-import Swal from "sweetalert2";
+
 import "sweetalert2/dist/sweetalert2.min.css";
 
-import "./Home.css";
-import AboutMe from "../../components/home/AboutMe.jsx";
-import TimeBlock from "../../components/home/TimeBlock.jsx";
-import ColorBlock from "../../components/home/ColorBlock.jsx";
-import BalloonGame from "../../components/home/BalloonGame/BalloonGame.jsx";
-import CalebBlock from "../../components/home/CalebBlock.jsx";
+import AboutMe from "../../components/home/blocks/AboutMe.jsx";
+import TimeBlock from "../../components/home/blocks/TimeBlock.jsx";
+import ColorBlock from "../../components/home/blocks/ColorBlock.jsx";
+import BalloonGame from "../../components/home/balloonGame/BalloonGame.jsx";
+import CalebBlock from "../../components/home/blocks/CalebBlock.jsx";
 
 const HomePage = () => {
   const [themeColor, setThemeColor] = useState({
@@ -46,9 +42,8 @@ const HomePage = () => {
         />
       </div>
 
-      {/* Foreground Content */}
       <div className="relative z-10">
-        <div className="grid [grid-template-columns:78%_22%] [grid-template-rows:subgrid] gap-4 mt-[4.5%] mx-[20%] max-h-[5px] !important items-start">
+        <div className="p-3 lg:p-0 lg:grid lg:[grid-template-columns:78%_22%] lg:[grid-template-rows:subgrid] lg:gap-4 lg:mt-[4.5%] lg:mx-[20%] lg:max-h-[5px] lg:items-start">
           <motion.div
             initial={{ scale: 0.8, y: 500 }}
             animate={{ scale: 1, y: 0 }}
@@ -62,7 +57,7 @@ const HomePage = () => {
             <CalebBlock themeColor={themeColor} />
           </motion.div>
 
-          {/* MOBILE ONLY ABOUT ME */}
+
           <motion.div
             initial={{ scale: 0.6, y: 700 }}
             animate={{ scale: 1, y: 0 }}
@@ -73,8 +68,7 @@ const HomePage = () => {
               duration: 0.5,
               delay: 0.2,
             }}
-            className="max-h-full min-h-full h-fit text-[0.78vw] border border-[#2f2f2f] col-start-2 col-end-3 row-start-1 row-span-2 pt-[0.825rem] pr-4 pb-[0.2rem] pl-4 text-[#dbdbdb] bg-[rgba(53,53,53,0.192)] shadow-[rgba(0,0,0,0.4)_0px_4px_7px,rgba(0,0,0,0.3)_0px_9px_15px_-5px,rgba(0,0,0,0.2)_0px_-3px_0px] backdrop-blur-[7.5px] rounded-[10px] redHoverBorderEffectHome"
-            id="mobileHomeAboutMe"
+            className="lg:max-h-full lg:min-h-full lg:h-fit lg:text-[0.78vw] mt-4 lg:m-0 mt-4 border-1 border-[#2f2f2f] lg:col-start-2 lg:col-end-3 lg:row-start-1 lg:row-span-2 lg:pt-[0.825rem] lg:pr-4 pb-[0.2rem] lg:pl-4 text-[#dbdbdb] bg-[rgba(53,53,53,0.192)] shadow-[rgba(0,0,0,0.4)_0px_4px_7px,rgba(0,0,0,0.3)_0px_9px_15px_-5px,rgba(0,0,0,0.2)_0px_-3px_0px] backdrop-blur-[7.5px] rounded-[10px] redHoverBorderEffectHome"
           >
             <AboutMe themeColor={themeColor} />
           </motion.div>
@@ -134,21 +128,6 @@ const HomePage = () => {
                 </div>
               </div>
             </div>
-          </motion.div>
-
-          <motion.div
-            initial={{ scale: 0.6, y: 700 }}
-            animate={{ scale: 1, y: 0 }}
-            transition={{
-              type: "spring",
-              stiffness: 70,
-              damping: 12,
-              duration: 0.5,
-              delay: 0.2,
-            }}
-            className="max-h-full min-h-full h-fit text-[0.78vw] border-1 border-[#2f2f2f] col-start-2 col-end-3 row-start-1 row-span-2 pt-[0.825rem] pr-4 pb-[0.2rem] pl-4 text-[#dbdbdb] bg-[rgba(53,53,53,0.192)] shadow-[rgba(0,0,0,0.4)_0px_4px_7px,rgba(0,0,0,0.3)_0px_9px_15px_-5px,rgba(0,0,0,0.2)_0px_-3px_0px] backdrop-blur-[7.5px] rounded-[10px] redHoverBorderEffectHome"
-          >
-            <AboutMe themeColor={themeColor} />
           </motion.div>
         </div>
       </div>

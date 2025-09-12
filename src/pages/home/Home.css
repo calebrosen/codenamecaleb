@@ -1,176 +1,6 @@
-.homePageContainer {
-  position: relative;
-  height: calc(var(--vh, 1vh) * 100);
-}
-
-/* .fsBackground {
-  z-index: 0;
-  background-size: 5.2rem 5.2rem;
-  background-color: rgb(20, 20, 20);
-  background-image: linear-gradient(
-      to right,
-      rgb(230, 230, 230) 1px,
-      transparent 0
-    ),
-    linear-gradient(to bottom, rgb(230, 230, 230) 1px, transparent 0);
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-}
-
-.fsBackground::after {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: linear-gradient(
-    180deg,
-    rgba(20, 20, 20, 0.8) 1%,
-    rgba(20, 20, 20, 0.96) 40%,
-    rgba(23, 23, 23, 1) 100%
-  );
-  z-index: -1;
-} */
-
-.mainContentDivIntro {
-  /* Spreading out items vertically */
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between; 
-  flex: 1;
-  margin: 0.3 0;
-}
-
-.homePageAvatar {
-  width: 100%;
-  height: auto;
-  border-radius: 3px;
-  display: inline;
-}
-
-/* .main-content {
-  display: grid;
-  grid-template-columns: 78% 22%;
-  grid-template-rows: subgrid;
-  gap: 1rem;
-  margin: 0 20%;
-  margin-top: 4.5%;
-  max-height: 5px !important;
-  align-items: start;
-} */
-
-.mainContentHome {
-  grid-column: 1 / 2;
-  grid-row: 1;
-  padding: 0.9rem 1rem;
-  border: 1px solid #2f2f2f;
-  color: rgb(219, 219, 219);
-  font-size: 1.15vw;
-  background: rgba(53, 53, 53, 0.192);
-  box-shadow: rgba(0, 0, 0, 0.4) 0px 4px 7px,
-    rgba(0, 0, 0, 0.3) 0px 9px 15px -5px, rgba(0, 0, 0, 0.2) 0px -3px 0px;
-  backdrop-filter: blur(7.5px);
-  border-radius: 10px;
-  font-weight: 500;
-}
-
-.triGridColumn {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr); /* Three equal columns */
-  grid-template-rows: auto auto; /* Two rows */
-  gap: 0 1rem;
-  color: rgb(219, 219, 219);
-}
-
-.bottomGrid {
-  grid-column: 2 / -1;
-  grid-row: 2;
-  gap: 1rem;
-  display: grid;
-  grid-template-columns: 7.75fr 2.25fr;
-}
-
-.bottomGridLong {
-   /* First column in bottom grid */
-  grid-column: 1;
-  padding: 0 0.9rem;
-  border: 1px solid #2f2f2f;
-  background: rgba(53, 53, 53, 0.192);
-  box-shadow: rgba(0, 0, 0, 0.4) 0px 4px 7px,
-    rgba(0, 0, 0, 0.3) 0px 9px 15px -5px, rgba(0, 0, 0, 0.2) 0px -3px 0px;
-  backdrop-filter: blur(7.5px);
-  border-radius: 10px;
-}
-
-.bottomGridShort {
-  /* Second column in bottom grid */
-  grid-column: 2;
-  padding: 0.2rem 0.9rem;
-  font-size: 0.8vw;
-  border: 1px solid #2f2f2f;
-  background: rgba(53, 53, 53, 0.192);
-  box-shadow: rgba(0, 0, 0, 0.4) 0px 4px 7px,
-    rgba(0, 0, 0, 0.3) 0px 9px 15px -5px, rgba(0, 0, 0, 0.2) 0px -3px 0px;
-  backdrop-filter: blur(7.5px);
-  border-radius: 10px;
-}
-
-.madeWithReact {
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-  height: 100%;
-  min-height: 2.75rem;
-  font-size: 0.8vw;
-  text-align: center;
-}
-
-.triBlockHome {
-  flex: 0.33333333333;
-  min-height: 3.1vw;
-  padding: 0.6rem 0.9rem;
-  background: rgba(53, 53, 53, 0.192);
-  box-shadow: rgba(0, 0, 0, 0.4) 0px 4px 7px,
-    rgba(0, 0, 0, 0.3) 0px 9px 15px -5px, rgba(0, 0, 0, 0.2) 0px -3px 0px;
-  backdrop-filter: blur(7.5px);
-  border-radius: 10px;
-  height: 65%;
-  border: 1px solid #2f2f2f;
-}
-
-.tallHomeBlock {
-  grid-column: 1;
-  grid-row: 1 / span 2;
-  padding: 0.6rem 0.9rem;
-  min-height: 100%;
-  background: rgba(53, 53, 53, 0.192);
-  box-shadow: rgba(0, 0, 0, 0.4) 0px 4px 7px,
-    rgba(0, 0, 0, 0.3) 0px 9px 15px -5px, rgba(0, 0, 0, 0.2) 0px -3px 0px;
-  backdrop-filter: blur(7.5px);
-  border-radius: 10px;
-  border: 1px solid #2f2f2f;
-}
-
-.homeBottomInterior {
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-  height: 100%;
-  min-height: 2.75rem;
-  font-size: 1.2vw;
-  text-align: center;
-}
 
 svg {
   transition: 0.25s ease-in-out;
-}
-
-#portfolioBlock:hover .portfolioBlockHome svg {
-  transform: scale(1.15) translateX(5px);
 }
 
 /* Background image for this block */
@@ -485,10 +315,6 @@ svg {
   gap: 2rem;
 }
 
-#mobileHomeAboutMe {
-  display: none;
-}
-
 .balloonGameOnOrOff {
   color: rgb(219, 219, 219);
   margin-right: 0.5rem;
@@ -589,14 +415,6 @@ svg {
 
   #desktopOnlyH4Home, #sideHome {
     display: none;
-  }
-
-  #mobileHomeAboutMe {
-    margin-top: 1rem;
-    display: block;
-    font-size: 1rem;
-    text-align: left;
-    justify-content: left;
   }
 
   h5.aboutMeH5 {
@@ -735,14 +553,6 @@ svg {
 
   #sideHome {
     display: none;
-  }
-
-  #mobileHomeAboutMe {
-    margin-top: 1rem;
-    display: block;
-    font-size: 1rem;
-    text-align: left;
-    justify-content: left;
   }
 
   h5.aboutMeH5 {

@@ -1,8 +1,6 @@
-import { useEffect, useState } from "react";
 import IconGroup from "./IconGroup";
 import "sweetalert2/dist/sweetalert2.min.css";
-import "../../pages/home/Home.css";
-import Avatar from "../../img/home/avatar/Avatar.png";
+import Avatar from "../../../img/home/avatar/Avatar.png";
 
 function CalebBlock({ themeColor }) {
   /* this is for the Icons Group of the Main Content box */

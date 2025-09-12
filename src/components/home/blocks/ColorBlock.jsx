@@ -1,6 +1,5 @@
 import { motion } from "framer-motion";
 import { useEffect } from "react";
-import classNames from "classnames";
 
 const ColorBlock = ({ setThemeColor }) => {
   useEffect(() => {

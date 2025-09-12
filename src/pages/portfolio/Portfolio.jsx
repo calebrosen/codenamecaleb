@@ -13,7 +13,7 @@ import GoogleReviews from "../../img/portfolio/googleReview.png";
 import iosNotes from "../../img/portfolio/iosNotes.png";
 import Printer from "../../img/portfolio/printer.png";
 import Wasted from "../../img/portfolio/wasted.png";
-import ColorBlock from "../../components/home/ColorBlock";
+import ColorBlock from "../../components/home/blocks/ColorBlock";
 import "./Portfolio.css";
 // definitely: displays, distributor inventory,
 // maybe: invoice,
@@ -56,8 +56,8 @@ const Portfolio = () => {
               and has the ability to do nearly everything that the real IOS
               notes app does.
             </p>
-            <div className="languagesUsed">JavaScript • React • CSS • HTML</div>
-            <div className="linkAndCodeContainer">
+            <div className="pt-[0.4rem] color-red-500 text-[1.25rem]">JavaScript • React • CSS • HTML</div>
+            <div className="flex gap-8 justify-start pt-[0.15rem] pb-[0.15rem]">
               <a
                 href="https://github.com/calebrosen/IOS-Notes-App-In-React"
                 className={`${linkAndCode}`}
@@ -91,10 +91,10 @@ const Portfolio = () => {
               and then uses all of that information to calculate what log sets
               they can fit in their fireplace.
             </p>
-            <div className="languagesUsed">
+            <div className="pt-[0.4rem] color-red-500 text-[1.25rem]">
               JavaScript • PHP • SQL • CSS • HTML
             </div>
-            <div className="linkAndCodeContainer">
+            <div className="flex gap-8 justify-start pt-[0.15rem] pb-[0.15rem]">
               <a
                 href="https://www.realfyrestore.com/index.php?route=information/sizeselector"
                 className={`${linkAndCode}`}
@@ -126,7 +126,7 @@ const Portfolio = () => {
               transfer files to another website. All you have to do is call the
               function with the file path.
             </p>
-            <div className="languagesUsed">NodeJS</div>
+            <div className="pt-[0.4rem] color-red-500 text-[1.25rem]">NodeJS</div>
             <div className="linkAndCodeContainer">
               <a
                 href="https://github.com/calebrosen/Node-JS-File-Copier"
@@ -157,8 +157,8 @@ const Portfolio = () => {
               A customer facing tool that allows selection of their grill model, and displays all
               of the parts for that model overlaid on top of an image of the grill model they selected.
             </p>
-            <div className="languagesUsed">PHP • Javascript • React • SQL</div>
-            <div className="linkAndCodeContainer">
+            <div className="pt-[0.4rem] color-red-500 text-[1.25rem]">PHP • Javascript • React • SQL</div>
+            <div className="flex gap-8 justify-start pt-[0.15rem] pb-[0.15rem]">
               <a
                 href="https://www.firemagicstore.com/parts-diagrams"
                 className={`${linkAndCode}`}
@@ -193,8 +193,8 @@ const Portfolio = () => {
               formatted to a certain structure, merged into a master file, and
               then uploaded to Zoho Creator.
             </p>
-            <div className="languagesUsed">Python </div>
-            <div className="linkAndCodeContainer">
+            <div className="pt-[0.4rem] color-red-500 text-[1.25rem]">Python </div>
+            <div className="flex gap-8 justify-start pt-[0.15rem] pb-[0.15rem]">
               <a
                 href="https://github.com/calebrosen/distributors-inventory"
                 className={`${linkAndCode}`}
@@ -227,10 +227,10 @@ const Portfolio = () => {
               An easy to use image generator that simply puts the GTA V 'Wasted'
               effect over any image uploaded.
             </p>
-            <div className="languagesUsed">
-              JavaScript • React • CSS • HTML{" "}
+            <div className="pt-[0.4rem] color-red-500 text-[1.25rem]">
+              JavaScript • React • CSS • HTML
             </div>
-            <div className="linkAndCodeContainer">
+            <div className="flex gap-8 justify-start pt-[0.15rem] pb-[0.15rem]">
               <a
                 href="https://github.com/calebrosen/codenamecaleb/tree/main/src/pages/wasted"
                 className={`${linkAndCode}`}
@@ -273,8 +273,8 @@ const Portfolio = () => {
               A customer facing carousel that dynamically pulls Google reviews
               from Google's places API and displays them in a carousel.
             </p>
-            <div className="languagesUsed">JavaScript • CSS • HTML </div>
-            <div className="linkAndCodeContainer">
+            <div className="pt-[0.4rem] color-red-500 text-[1.25rem]">JavaScript • CSS • HTML </div>
+            <div className="flex gap-8 justify-start pt-[0.15rem] pb-[0.15rem]">
               <a
                 href="https://github.com/calebrosen/google-reviews"
                 className={`${linkAndCode}`}
@@ -299,8 +299,6 @@ const Portfolio = () => {
           </VerticalTimelineElement>
 
 
-
-
           {/* Display cards */}
           <VerticalTimelineElement
             className="vertical-timeline-element--work"
@@ -320,15 +318,15 @@ const Portfolio = () => {
               format them into printable cards with product information, price,
               and a scannable QR code.
             </p>
-            <div className="languagesUsed">JavaScript • PHP • CSS • HTML </div>
-            <div className="linkAndCodeContainer">
+            <div className="pt-[0.4rem] color-red-500 text-[1.25rem]">JavaScript • PHP • CSS • HTML </div>
+            <div className="flex gap-8 justify-start pt-[0.15rem] pb-[0.15rem]">
               <a
                 href="https://github.com/calebrosen/IRG-Displays"
                 className={`${linkAndCode}`}
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                <div className="linkAndCode">
+                <div className={`${linkAndCode}`}>
                   Code <FontAwesomeIcon icon={faCode} />
                 </div>
               </a>

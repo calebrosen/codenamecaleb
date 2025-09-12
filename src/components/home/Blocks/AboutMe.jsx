@@ -20,7 +20,7 @@ function AboutMe({ themeColor }) {
 
   return (
     <div>
-      <h5 className="font-semibold text-[0.9vw] text-neutral-100">About me</h5>
+      <h5 className="font-semibold lg:text-[0.9vw] text-neutral-100">About me</h5>
       <div>
         I'm a full stack developer with a strong desire to learn and improve
         everyday.

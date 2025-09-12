@@ -3,7 +3,6 @@ import { FaDiscord, FaGithub, FaLinkedin } from "react-icons/fa";
 import { MdOutlineEmail } from "react-icons/md";
 import Swal from "sweetalert2";
 import "sweetalert2/dist/sweetalert2.min.css";
-import "../../pages/home/Home.css";
 
 function IconGroup({ themeColor }) {
   const rawRgb = themeColor.rgb.replace(/[^\d,]/g, "");
